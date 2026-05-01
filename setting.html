@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile — Secondify</title>
+    <link rel="stylesheet" href="setting.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <a href="dashboard.html" class="sidebar-logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+            </div>
+            Secondify
+        </a>
+
+        <nav class="sidebar-nav">
+            <a href="javascript:void(0)" class="nav-item" data-page="edit-profil">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+                Edit Profil
+            </a>
+            <a href="javascript:void(0)" class="nav-item" data-page="alamat">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Alamat Saya
+            </a>
+            <a href="javascript:void(0)" class="nav-item" data-page="keamanan">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                Keamanan Akun
+            </a>
+            <a href="javascript:void(0)" class="nav-item" data-page="notifikasi">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                </svg>
+                Notifikasi
+            </a>
+            <a href="javascript:void(0)" class="nav-item" data-page="privasi">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 8v4M12 16h.01"/>
+                </svg>
+                Privasi
+            </a>
+            <a href="javascript:void(0)" class="nav-item" data-page="bantuan">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                Bantuan
+            </a>
+        </nav>
+
+        <a href="dashboard.html" class="sidebar-logout">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            Keluar
+        </a>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <!-- ══ EDIT PROFIL ══ -->
+        <section class="page active" id="page-edit-profil">
+            <div class="page-header">
+                <h1>Edit Profil</h1>
+                <p>Kelola informasi profil dan akunmu</p>
+            </div>
+
+            <div class="page-grid">
+                <div class="content-area">
+                    <!-- Informasi Profil -->
+                    <div class="card">
+                        <h2 class="card-title">Informasi Profil</h2>
+
+                        <div class="avatar-row">
+                            <div class="avatar-circle">A</div>
+                            <div class="avatar-info">
+                                <button class="btn-ubah-foto">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M6.343 17.657A8 8 0 1 0 17.657 6.343 8 8 0 0 0 6.343 17.657z"/></svg>
+                                    Ubah Foto
+                                </button>
+                                <p class="avatar-hint">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="12" height="12"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                    PNG, JPG maks. 2MB
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Nama Lengkap</label>
+                                <div class="input-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    <input type="text" value="Alyssa Putri" placeholder="Nama lengkap">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Username</label>
+                                <div class="input-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    <input type="text" value="alyssa.putri" placeholder="Username">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <div class="input-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                    <input type="email" value="alyssa@gmail.com" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Nomor WhatsApp</label>
+                                <div class="input-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    <input type="tel" value="0812-3456-7890" placeholder="Nomor WhatsApp">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Jenis Kelamin</label>
+                                <div class="input-wrap select-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+                                    <select>
+                                        <option>Perempuan</option>
+                                        <option>Laki-laki</option>
+                                        <option>Tidak ingin menyebutkan</option>
+                                    </select>
+                                    <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Lahir</label>
+                                <div class="input-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                    <input type="date" value="2000-05-15">
+                                </div>
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Bio</label>
+                                <div class="input-wrap textarea-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    <textarea placeholder="Ceritakan sedikit tentang dirimu...">Lover of preloved items &amp; sustainable living 🌿</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn-simpan">Simpan Perubahan</button>
+                    </div>
+                </div>
+
+                <!-- Sidebar kanan -->
+                <div class="side-cards">
+                    <div class="card info-akun-card">
+                        <h2 class="card-title">Informasi Akun</h2>
+                        <div class="info-row">
+                            <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                            <span>Member sejak</span>
+                            <strong>Januari 2024</strong>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                            <span>Peran</span>
+                            <strong>Member</strong>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+                            <span>Total Transaksi</span>
+                            <strong>12 transaksi</strong>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                            <span>Rating</span>
+                            <strong>4.9 / 5.0</strong>
+                        </div>
+                    </div>
+
+                    <div class="card tips-card">
+                        <h2 class="card-title">Tips</h2>
+                        <ul class="tips-list">
+                            <li>
+                                <div class="tip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg></div>
+                                Gunakan foto profil yang jelas dan ramah
+                            </li>
+                            <li>
+                                <div class="tip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg></div>
+                                Isi bio untuk meningkatkan kepercayaan pembeli
+                            </li>
+                            <li>
+                                <div class="tip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg></div>
+                                Informasi yang lengkap dapat meningkatkan transaksi
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ ALAMAT ══ -->
+        <section class="page" id="page-alamat">
+            <div class="page-header">
+                <h1>Alamat Saya</h1>
+                <p>Kelola alamat pengiriman dan penjemputanmu</p>
+            </div>
+            <div class="content-area-full">
+                <div class="card">
+                    <div class="alamat-header-row">
+                        <h2 class="card-title">Daftar Alamat</h2>
+                        <button class="btn-add">+ Tambah Alamat</button>
+                    </div>
+
+                    <div class="alamat-item utama">
+                        <div class="alamat-badge">Utama</div>
+                        <div class="alamat-detail">
+                            <p class="alamat-name">Alyssa Putri · 0812-3456-7890</p>
+                            <p class="alamat-text">Jl. Raden Intan No. 45, Kel. Enggal, Kec. Enggal, Bandar Lampung, Lampung 35118</p>
+                        </div>
+                        <div class="alamat-actions">
+                            <button class="btn-link">Ubah</button>
+                            <button class="btn-link danger">Hapus</button>
+                        </div>
+                    </div>
+
+                    <div class="alamat-item">
+                        <div class="alamat-badge secondary">Kantor</div>
+                        <div class="alamat-detail">
+                            <p class="alamat-name">Alyssa Putri · 0812-3456-7890</p>
+                            <p class="alamat-text">Jl. Gajah Mada No. 12, Kel. Durian Payung, Kec. Tanjung Karang, Bandar Lampung 35117</p>
+                        </div>
+                        <div class="alamat-actions">
+                            <button class="btn-link">Ubah</button>
+                            <button class="btn-link danger">Hapus</button>
+                            <button class="btn-link">Jadikan Utama</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ KEAMANAN AKUN ══ -->
+        <section class="page" id="page-keamanan">
+            <div class="page-header">
+                <h1>Keamanan Akun</h1>
+                <p>Jaga keamanan akunmu agar tetap terlindungi</p>
+            </div>
+            <div class="page-grid">
+                <div class="content-area">
+                    <div class="card">
+                        <h2 class="card-title">Ubah Password</h2>
+                        <div class="form-grid single">
+                            <div class="form-group full-width">
+                                <label>Password Saat Ini</label>
+                                <div class="input-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                    <input type="password" placeholder="Masukkan password lama">
+                                </div>
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Password Baru</label>
+                                <div class="input-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                    <input type="password" placeholder="Minimal 8 karakter">
+                                </div>
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Konfirmasi Password Baru</label>
+                                <div class="input-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                    <input type="password" placeholder="Ulangi password baru">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-simpan">Ubah Password</button>
+                    </div>
+
+                    <div class="card mt-16">
+                        <h2 class="card-title">Verifikasi Dua Langkah</h2>
+                        <div class="toggle-row">
+                            <div>
+                                <p class="toggle-label">Aktifkan 2FA via WhatsApp</p>
+                                <p class="toggle-desc">Kode OTP dikirim ke nomor WhatsApp terdaftar setiap login</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="toggle-row">
+                            <div>
+                                <p class="toggle-label">Aktifkan 2FA via Email</p>
+                                <p class="toggle-desc">Kode OTP dikirim ke email terdaftar setiap login</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="side-cards">
+                    <div class="card tips-card">
+                        <h2 class="card-title">Tips Keamanan</h2>
+                        <ul class="tips-list">
+                            <li><div class="tip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>Gunakan password yang kuat dan unik</li>
+                            <li><div class="tip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>Aktifkan verifikasi dua langkah</li>
+                            <li><div class="tip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>Jangan bagikan password ke siapapun</li>
+                            <li><div class="tip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>Ganti password secara berkala</li>
+                        </ul>
+                    </div>
+                    <div class="card danger-zone-card">
+                        <h2 class="card-title danger-title">Zona Bahaya</h2>
+                        <p class="danger-desc">Tindakan berikut bersifat permanen dan tidak dapat dibatalkan.</p>
+                        <button class="btn-danger">Hapus Akun</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ NOTIFIKASI ══ -->
+        <section class="page" id="page-notifikasi">
+            <div class="page-header">
+                <h1>Notifikasi</h1>
+                <p>Atur preferensi notifikasi yang kamu terima</p>
+            </div>
+            <div class="content-area-full">
+                <div class="card">
+                    <h2 class="card-title">Notifikasi Transaksi</h2>
+                    <div class="toggle-row">
+                        <div>
+                            <p class="toggle-label">Pesanan masuk</p>
+                            <p class="toggle-desc">Notifikasi saat ada pembeli yang memesan barangmu</p>
+                        </div>
+                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div>
+                            <p class="toggle-label">Status pengiriman</p>
+                            <p class="toggle-desc">Update ketika status pengiriman berubah</p>
+                        </div>
+                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div>
+                            <p class="toggle-label">Pembayaran diterima</p>
+                            <p class="toggle-desc">Notifikasi ketika pembayaran berhasil masuk</p>
+                        </div>
+                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div>
+                            <p class="toggle-label">Ulasan baru</p>
+                            <p class="toggle-desc">Notifikasi saat pembeli meninggalkan ulasan</p>
+                        </div>
+                        <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+                    </div>
+                </div>
+
+                <div class="card mt-16">
+                    <h2 class="card-title">Notifikasi Pemasaran</h2>
+                    <div class="toggle-row">
+                        <div>
+                            <p class="toggle-label">Promo & diskon</p>
+                            <p class="toggle-desc">Info promo dan penawaran spesial dari Secondify</p>
+                        </div>
+                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div>
+                            <p class="toggle-label">Rekomendasi barang</p>
+                            <p class="toggle-desc">Barang yang mungkin kamu suka berdasarkan riwayat</p>
+                        </div>
+                        <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div>
+                            <p class="toggle-label">Newsletter Secondify</p>
+                            <p class="toggle-desc">Berita terbaru seputar marketplace Bandar Lampung</p>
+                        </div>
+                        <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+                    </div>
+                </div>
+
+                <div class="card mt-16">
+                    <h2 class="card-title">Saluran Notifikasi</h2>
+                    <div class="toggle-row">
+                        <div>
+                            <p class="toggle-label">Notifikasi Email</p>
+                            <p class="toggle-desc">Kirim notifikasi ke alyssa@gmail.com</p>
+                        </div>
+                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div>
+                            <p class="toggle-label">Notifikasi WhatsApp</p>
+                            <p class="toggle-desc">Kirim notifikasi ke 0812-3456-7890</p>
+                        </div>
+                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div>
+                            <p class="toggle-label">Notifikasi Browser</p>
+                            <p class="toggle-desc">Tampilkan notifikasi push di browser</p>
+                        </div>
+                        <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ PRIVASI ══ -->
+        <section class="page" id="page-privasi">
+            <div class="page-header">
+                <h1>Privasi</h1>
+                <p>Kontrol siapa yang dapat melihat informasimu</p>
+            </div>
+            <div class="content-area-full">
+                <div class="card">
+                    <h2 class="card-title">Visibilitas Profil</h2>
+                    <div class="toggle-row">
+                        <div>
+                            <p class="toggle-label">Tampilkan nomor WhatsApp</p>
+                            <p class="toggle-desc">Nomor WA bisa dilihat oleh pembeli yang tertarik</p>
+                        </div>
+                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div>
+                            <p class="toggle-label">Tampilkan email</p>
+                            <p class="toggle-desc">Email dapat dilihat oleh pengguna lain</p>
+                        </div>
+                        <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div>
+                            <p class="toggle-label">Tampilkan tanggal lahir</p>
+                            <p class="toggle-desc">Tanggal lahir ditampilkan di profil publikmu</p>
+                        </div>
+                        <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div>
+                            <p class="toggle-label">Tampilkan riwayat transaksi</p>
+                            <p class="toggle-desc">Total transaksi dapat dilihat oleh pengguna lain</p>
+                        </div>
+                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                    </div>
+                </div>
+
+                <div class="card mt-16">
+                    <h2 class="card-title">Data & Aktivitas</h2>
+                    <div class="toggle-row">
+                        <div>
+                            <p class="toggle-label">Izinkan pelacakan aktivitas</p>
+                            <p class="toggle-desc">Untuk meningkatkan rekomendasi barang bagimu</p>
+                        </div>
+                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div>
+                            <p class="toggle-label">Berbagi data anonim</p>
+                            <p class="toggle-desc">Membantu Secondify meningkatkan layanan</p>
+                        </div>
+                        <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+                    </div>
+                </div>
+
+                <div class="card mt-16">
+                    <h2 class="card-title">Unduh Data Saya</h2>
+                    <p class="section-desc">Kamu dapat mengunduh salinan seluruh data akunmu kapan saja.</p>
+                    <button class="btn-outline mt-12">Minta Unduhan Data</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ BANTUAN ══ -->
+        <section class="page" id="page-bantuan">
+            <div class="page-header">
+                <h1>Bantuan</h1>
+                <p>Temukan jawaban atau hubungi tim kami</p>
+            </div>
+            <div class="page-grid">
+                <div class="content-area">
+                    <div class="card">
+                        <h2 class="card-title">Pertanyaan Umum (FAQ)</h2>
+                        <div class="faq-list">
+                            <details class="faq-item">
+                                <summary>Bagaimana cara menjual barang di Secondify?</summary>
+                                <p>Klik tombol "Jual Barang" di dashboard, isi detail produk seperti nama, harga, kondisi, dan foto. Setelah diverifikasi, barangmu akan tampil di marketplace.</p>
+                            </details>
+                            <details class="faq-item">
+                                <summary>Metode pembayaran apa yang tersedia?</summary>
+                                <p>Secondify mendukung transfer bank, dompet digital (GoPay, OVO, DANA), dan pembayaran tunai untuk transaksi tatap muka di Bandar Lampung.</p>
+                            </details>
+                            <details class="faq-item">
+                                <summary>Bagaimana jika barang yang diterima tidak sesuai?</summary>
+                                <p>Laporkan dalam 1×24 jam setelah barang diterima melalui menu "Laporkan Masalah" di halaman transaksi. Tim kami akan memediasi.</p>
+                            </details>
+                            <details class="faq-item">
+                                <summary>Apakah ada biaya untuk berjualan di Secondify?</summary>
+                                <p>Daftar dan pasang iklan gratis! Secondify mengambil komisi kecil hanya setelah transaksi berhasil dilakukan.</p>
+                            </details>
+                            <details class="faq-item">
+                                <summary>Bagaimana cara meningkatkan rating penjual?</summary>
+                                <p>Respons pembeli dengan cepat, kirim barang sesuai deskripsi, dan pastikan kondisi barang sesuai yang dijanjikan untuk mendapatkan ulasan positif.</p>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="card mt-16">
+                        <h2 class="card-title">Kirim Pesan ke Tim Kami</h2>
+                        <div class="form-grid single">
+                            <div class="form-group full-width">
+                                <label>Topik</label>
+                                <div class="input-wrap select-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                                    <select>
+                                        <option>Masalah Transaksi</option>
+                                        <option>Akun & Keamanan</option>
+                                        <option>Pengiriman</option>
+                                        <option>Pengembalian Barang</option>
+                                        <option>Lainnya</option>
+                                    </select>
+                                    <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                                </div>
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Pesan</label>
+                                <div class="input-wrap textarea-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                    <textarea placeholder="Jelaskan masalah atau pertanyaanmu..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-simpan">Kirim Pesan</button>
+                    </div>
+                </div>
+
+                <div class="side-cards">
+                    <div class="card tips-card">
+                        <h2 class="card-title">Hubungi Kami</h2>
+                        <ul class="kontak-list">
+                            <li>
+                                <div class="kontak-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                </div>
+                                <div>
+                                    <p class="kontak-label">Email</p>
+                                    <p class="kontak-value">support@secondify.id</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="kontak-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.93 12 19.79 19.79 0 0 1 1.86 3.38 2 2 0 0 1 3.84 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="kontak-label">WhatsApp</p>
+                                    <p class="kontak-value">0811-7222-333</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="kontak-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                </div>
+                                <div>
+                                    <p class="kontak-label">Jam Operasional</p>
+                                    <p class="kontak-value">Sen–Jum, 08.00–17.00</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script src="pengaturan.js"></script>
+</body>
+</html>
