@@ -7,13 +7,7 @@ kategoriItems.forEach(item => {
         item.classList.add("active");
 
         const selected = item.dataset.kategori;
-        console.log("Kategori dipilih:", selected);
-
-        // Update judul rekomendasi sesuai kategori
-        const rekTitle = document.querySelector(".rek-count");
-        if (rekTitle) {
-            rekTitle.textContent = "0 barang";
-        }
+        window.location.href = `kategori.html?kat=${encodeURIComponent(selected)}`;
     });
 });
 
@@ -30,8 +24,7 @@ searchInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         const query = e.target.value.trim();
         if (query) {
-            console.log("Submit pencarian:", query);
-            // Tambahkan logika pencarian / redirect di sini
+            window.location.href = `kategori.html?kat=semua&q=${encodeURIComponent(query)}`;
         }
     }
 });
