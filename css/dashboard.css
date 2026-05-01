@@ -26,34 +26,9 @@ body {
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 800;
-    font-size: 18px;
-    color: #6c5ce7;
-    text-decoration: none;
+    width: 120px;
 }
 
-.logo-icon {
-    width: 32px;
-    height: 32px;
-    background: #6c5ce7;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo-icon svg {
-    width: 18px;
-    height: 18px;
-    stroke: white;
-    fill: none;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
 
 .search-box {
     position: relative;
@@ -75,7 +50,7 @@ body {
 }
 
 .search-box input:focus {
-    border-color: #6c5ce7;
+    border-color: #886BC6;
     box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
     background: #fff;
 }
@@ -105,7 +80,7 @@ body {
 
 .nav-icon-btn:hover {
     background: #f0eeff;
-    color: #6c5ce7;
+    color: #886BC6;
 }
 
 .nav-icon-btn svg {
@@ -137,7 +112,7 @@ body {
 .avatar {
     width: 34px;
     height: 34px;
-    background: #6c5ce7;
+    background: #886BC6;
     color: white;
     display: flex;
     justify-content: center;
@@ -195,7 +170,7 @@ body {
     margin: 24px 30px;
     padding: 44px 50px;
     border-radius: 24px;
-    background: linear-gradient(130deg, #7c6ff7 0%, #9b8df9 50%, #b5a9fc 100%);
+    background: linear-gradient(130deg, #886BC6 0%, #9987c1 50%, #D3C3FB 100%);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -271,7 +246,7 @@ body {
 
 .btn-primary {
     background: white;
-    color: #6c5ce7;
+    color: #886BC6;
     border: none;
     padding: 11px 24px;
     border-radius: 22px;
@@ -340,7 +315,7 @@ body {
 .section-accent {
     width: 4px;
     height: 20px;
-    background: #6c5ce7;
+    background: #886BC6;
     border-radius: 4px;
 }
 
@@ -392,15 +367,15 @@ body {
 
 .kategori-item:hover {
     border-color: #b5a9fc;
-    color: #6c5ce7;
+    color: #886BC6;
     transform: translateY(-2px);
     box-shadow: 0 4px 14px rgba(108,92,231,0.1);
 }
 
 .kategori-item.active {
     background: #f3f0ff;
-    color: #6c5ce7;
-    border: 2px solid #6c5ce7;
+    color: #886BC6;
+    border: 2px solid #886BC6;
     box-shadow: 0 4px 14px rgba(108,92,231,0.15);
 }
 
@@ -415,13 +390,13 @@ body {
 }
 
 .kategori-item.active .kat-icon {
-    background: #6c5ce7;
+    background: #886BC6;
 }
 
 .kat-icon svg {
     width: 20px;
     height: 20px;
-    stroke: #6c5ce7;
+    stroke: #886BC6;
     fill: none;
     stroke-width: 1.8;
 }
@@ -487,7 +462,7 @@ body {
     left: 12px;
     width: 16px;
     height: 16px;
-    stroke: #6c5ce7;
+    stroke: #886BC6;
     pointer-events: none;
 }
 
@@ -507,7 +482,7 @@ body {
 }
 
 .sort-wrapper select:focus {
-    border-color: #6c5ce7;
+    border-color: #886BC6;
 }
 
 .sort-arrow {
@@ -530,7 +505,7 @@ body {
 .empty-icon {
     width: 64px;
     height: 64px;
-    background: #6c5ce7;
+    background: #886BC6;
     border-radius: 50%;
     display: flex;
     align-items: center;

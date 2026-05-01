@@ -23,7 +23,7 @@ body {
 .sidebar {
     width: 220px;
     flex-shrink: 0;
-    background: linear-gradient(160deg, #7c6ff7 0%, #9b8df9 60%, #b5a9fc 100%);
+    background: linear-gradient(160deg, #886BC6 0%, #9980cf 60%, #D3C3FB 100%);
     display: flex;
     flex-direction: column;
     padding: 24px 16px;
@@ -94,13 +94,13 @@ body {
 
 .nav-item.active {
     background: white;
-    color: #6c5ce7;
+    color: #886BC6;
     font-weight: 700;
     box-shadow: 0 4px 14px rgba(0,0,0,0.12);
 }
 
 .nav-item.active svg {
-    stroke: #6c5ce7;
+    stroke: #886BC6;
 }
 
 .sidebar-logout {
@@ -215,7 +215,7 @@ body {
 .avatar-circle {
     width: 64px;
     height: 64px;
-    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    background: linear-gradient(135deg, #886BC6, #D3C3FB);
     color: white;
     font-size: 26px;
     font-weight: 800;
@@ -238,7 +238,7 @@ body {
     align-items: center;
     gap: 7px;
     background: #f3f0ff;
-    color: #6c5ce7;
+    color: #886BC6;
     border: none;
     padding: 8px 16px;
     border-radius: 20px;
@@ -326,7 +326,7 @@ label {
 .input-wrap input:focus,
 .input-wrap select:focus,
 .input-wrap textarea:focus {
-    border-color: #6c5ce7;
+    border-color: #886BC6;
     box-shadow: 0 0 0 3px rgba(108,92,231,0.1);
     background: white;
 }
@@ -363,7 +363,7 @@ label {
     margin-top: 22px;
     width: 100%;
     padding: 13px;
-    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    background: linear-gradient(135deg, #886BC6, #D3C3FB);
     color: white;
     border: none;
     border-radius: 14px;
@@ -383,8 +383,8 @@ label {
 .btn-outline {
     padding: 10px 20px;
     background: white;
-    color: #6c5ce7;
-    border: 2px solid #6c5ce7;
+    color: #886BC6;
+    border: 2px solid #886BC6;
     border-radius: 12px;
     font-size: 14px;
     font-weight: 700;
@@ -401,7 +401,7 @@ label {
 
 .btn-add {
     background: #f3f0ff;
-    color: #6c5ce7;
+    color: #886BC6;
     border: none;
     padding: 9px 18px;
     border-radius: 12px;
@@ -420,7 +420,7 @@ label {
     cursor: pointer;
     font-size: 13px;
     font-weight: 600;
-    color: #6c5ce7;
+    color: #886BC6;
     padding: 0;
     font-family: 'Plus Jakarta Sans', sans-serif;
     transition: opacity 0.2s;
@@ -484,7 +484,7 @@ label {
 .info-icon svg {
     width: 14px;
     height: 14px;
-    stroke: #6c5ce7;
+    stroke: #886BC6;
 }
 
 /* ─── TIPS ───────────────────────────────── */
@@ -519,7 +519,7 @@ label {
 .tip-icon svg {
     width: 12px;
     height: 12px;
-    stroke: #6c5ce7;
+    stroke: #886BC6;
 }
 
 /* ─── DANGER ZONE ────────────────────────── */
@@ -594,7 +594,7 @@ label {
 }
 
 .toggle input:checked + .toggle-slider {
-    background: #6c5ce7;
+    background: #886BC6;
 }
 
 .toggle input:checked + .toggle-slider::before {
@@ -627,7 +627,7 @@ label {
     font-size: 11px;
     font-weight: 700;
     background: #f3f0ff;
-    color: #6c5ce7;
+    color: #886BC6;
     white-space: nowrap;
     flex-shrink: 0;
     margin-top: 2px;
@@ -695,7 +695,7 @@ label {
     content: '+';
     font-size: 20px;
     font-weight: 400;
-    color: #6c5ce7;
+    color: #886BC6;
     transition: transform 0.2s;
     flex-shrink: 0;
 }
@@ -704,7 +704,7 @@ label {
     content: '−';
 }
 
-.faq-item[open] summary { color: #6c5ce7; }
+.faq-item[open] summary { color: #886BC6; }
 
 .faq-item p {
     font-size: 13px;
@@ -741,7 +741,7 @@ label {
 .kontak-icon svg {
     width: 16px;
     height: 16px;
-    stroke: #6c5ce7;
+    stroke: #886BC6;
 }
 
 .kontak-label {
