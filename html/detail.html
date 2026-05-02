@@ -78,8 +78,12 @@
 
         <!-- RIGHT: Info -->
         <div class="info-section">
+            <!-- Top: name, price, location -->
             <div class="info-top">
-                <div class="product-name" id="productName">Memuat...</div>
+                <div class="info-top-header">
+                    <div class="product-name" id="productName">Memuat...</div>
+                    <span class="kondisi-pill" id="kondisiPill"></span>
+                </div>
                 <div class="product-price" id="productPrice">Rp —</div>
                 <div class="product-location-row">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -101,19 +105,19 @@
                         <span class="detail-val" id="dKategori">—</span>
                     </div>
                     <div class="detail-row">
-                        <span class="detail-key">Kondisi</span>
-                        <span class="detail-val" id="dKondisi">—</span>
-                    </div>
-                    <div class="detail-row">
                         <span class="detail-key">Merek</span>
                         <span class="detail-val" id="dMerek">—</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-key">Kondisi</span>
+                        <span class="detail-val" id="dKondisi">—</span>
                     </div>
                     <div class="detail-row">
                         <span class="detail-key">Lokasi</span>
                         <span class="detail-val" id="dLokasi">—</span>
                     </div>
                     <div class="detail-row">
-                        <span class="detail-key">Terjual</span>
+                        <span class="detail-key">Status</span>
                         <span class="detail-val" id="dTerjual">—</span>
                     </div>
                 </div>
@@ -192,6 +196,9 @@
     <footer class="footer">
         © 2026 Secondify — Marketplace barang bekas Bandar Lampung.
     </footer>
+
+    <!-- Toast notification -->
+    <div class="toast" id="toast"></div>
 
     <script src="../js/detail.js"></script>
 </body>

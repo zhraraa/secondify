@@ -9,6 +9,7 @@ const allProducts = [
         kategori: "elektronik",
         subKategori: "Headphone",
         merek: "sony",
+        merekLabel: "Sony",
         lokasi: "Langkapura",
         deskripsi: "Headphone wireless Sony WH-1000XM4 dengan noise cancelling terdepan di kelasnya. Dibeli 2023, jarang dipakai. Lengkap dengan box, kabel, dan pouch original.",
         terjual: false,
@@ -23,6 +24,7 @@ const allProducts = [
         kategori: "elektronik",
         subKategori: "Aksesoris Komputer",
         merek: "lainnya",
+        merekLabel: "Lainnya",
         lokasi: "Kedaton",
         deskripsi: "Mechanical keyboard Rexus full-size, switch red, kondisi masih sangat baik. Ada beberapa keycap yang sedikit pudar tapi semua tombol berfungsi normal.",
         terjual: false,
@@ -37,6 +39,7 @@ const allProducts = [
         kategori: "elektronik",
         subKategori: "Laptop",
         merek: "apple",
+        merekLabel: "Apple",
         lokasi: "Tanjung Karang Barat",
         deskripsi: "MacBook Air M1 2020, RAM 8GB SSD 256GB, Space Gray. Kondisi mulus seperti baru, baterai masih 95%. Lengkap dengan charger original.",
         terjual: false,
@@ -51,6 +54,7 @@ const allProducts = [
         kategori: "handphone",
         subKategori: "Smartphone",
         merek: "apple",
+        merekLabel: "Apple",
         lokasi: "Kedaton",
         deskripsi: "iPhone 11 64GB Black, kondisi normal pakai, baterai 82%. Ada lecet halus di sisi bodi, layar mulus. Tanpa dus, dengan charger.",
         terjual: false,
@@ -65,6 +69,7 @@ const allProducts = [
         kategori: "handphone",
         subKategori: "Smartphone",
         merek: "samsung",
+        merekLabel: "Samsung",
         lokasi: "Sukarame",
         deskripsi: "Samsung Galaxy A52 8/128GB Awesome Black, kondisi baik. Baterai masih tahan seharian. Lengkap dengan charger dan dus.",
         terjual: false,
@@ -79,6 +84,7 @@ const allProducts = [
         kategori: "handphone",
         subKategori: "Smartphone",
         merek: "apple",
+        merekLabel: "Apple",
         lokasi: "Way Halim",
         deskripsi: "iPhone 17 Pro Max 256GB Desert Titanium, baru pakai 2 bulan. Kondisi mulus, masih garansi resmi sampai 2026. Lengkap semua aksesori.",
         terjual: false,
@@ -93,6 +99,7 @@ const allProducts = [
         kategori: "handphone",
         subKategori: "Smartphone",
         merek: "xiaomi",
+        merekLabel: "Xiaomi",
         lokasi: "Kedaton",
         deskripsi: "Xiaomi Redmi Note 10 4/64GB Onyx Gray. Kondisi normal, ada sedikit lecet di belakang. Baterai masih oke. Tanpa dus.",
         terjual: false,
@@ -107,6 +114,7 @@ const allProducts = [
         kategori: "sepatu",
         subKategori: "Sneakers",
         merek: "lainnya",
+        merekLabel: "Lainnya",
         lokasi: "Rajabasa",
         deskripsi: "Adidas Samba OG size 42, warna putih hitam. Baru dipakai 3x, kondisi sangat mulus. Lengkap dengan dus dan lace cadangan.",
         terjual: false,
@@ -121,6 +129,7 @@ const allProducts = [
         kategori: "pakaian",
         subKategori: "Kebaya",
         merek: "lainnya",
+        merekLabel: "Lainnya",
         lokasi: "Sukarame",
         deskripsi: "Kebaya pashmina biru tua dengan bordir halus. Ukuran M-L, kondisi sangat baik hanya dipakai sekali. Cocok untuk wisuda atau acara formal.",
         terjual: false,
@@ -135,6 +144,7 @@ const allProducts = [
         kategori: "kamera",
         subKategori: "Mirrorless",
         merek: "lainnya",
+        merekLabel: "Lainnya",
         lokasi: "Langkapura",
         deskripsi: "Canon EOS M50 Mark II body only, shutter count ±8000. Kondisi mulus, semua fungsi normal termasuk flip screen dan Wi-Fi. Lengkap dengan charger dan battery.",
         terjual: false,
@@ -149,6 +159,7 @@ const allProducts = [
         kategori: "elektronik",
         subKategori: "Tablet",
         merek: "apple",
+        merekLabel: "Apple",
         lokasi: "Tanjung Karang Barat",
         deskripsi: "iPad Gen 8 32GB Silver WiFi. Kondisi normal, ada lecet tipis di sudut bodi, layar masih jernih. Baterai 88%. Tanpa dus, dengan charger.",
         terjual: false,
@@ -163,6 +174,7 @@ const allProducts = [
         kategori: "kamera",
         subKategori: "Action Camera",
         merek: "lainnya",
+        merekLabel: "Lainnya",
         lokasi: "Rajabasa",
         deskripsi: "GoPro Hero 9 Black, kondisi mulus. Lengkap dengan 2 baterai, charger, mount aksesoris, dan dus original. Rekaman hingga 5K.",
         terjual: false,
@@ -177,6 +189,7 @@ const allProducts = [
         kategori: "mainan",
         subKategori: "Gaming",
         merek: "lainnya",
+        merekLabel: "Lainnya",
         lokasi: "Labuhan Ratu",
         deskripsi: "Nintendo Switch V2 neon blue/red. Kondisi baik, layar mulus, baterai tahan lama. Joy-con masih responsif. Tanpa game card, dengan charger.",
         terjual: false,
@@ -191,6 +204,7 @@ const allProducts = [
         kategori: "handphone",
         subKategori: "Smartphone",
         merek: "xiaomi",
+        merekLabel: "Xiaomi",
         lokasi: "Way Halim",
         deskripsi: "Xiaomi Redmi Note 10S 6/128GB Ocean Blue. Kondisi normal, baterai masih oke. Lengkap charger, tanpa dus.",
         terjual: false,
@@ -205,6 +219,7 @@ const allProducts = [
         kategori: "kamera",
         subKategori: "Action Camera",
         merek: "lainnya",
+        merekLabel: "Lainnya",
         lokasi: "Kedaton",
         deskripsi: "GoPro Hero 8 Black, kondisi normal pakai. Lengkap dengan 1 baterai dan charger. Layar belakang masih jernih.",
         terjual: false,
@@ -219,6 +234,7 @@ const allProducts = [
         kategori: "pakaian",
         subKategori: "Hijab",
         merek: "lainnya",
+        merekLabel: "Lainnya",
         lokasi: "Labuhan Ratu",
         deskripsi: "Pashmina motif bunga warna pink pastel, bahan sifon. Kondisi sangat baik, hanya dipakai 1x. Ukuran 180x75cm.",
         terjual: false,
@@ -252,6 +268,8 @@ const kategoriMeta = {
 // ─── STATE ────────────────────────────────────────────────────────────────────
 let currentKategori = "semua";
 let filteredProducts = [];
+let currentPage = 1;
+const ITEMS_PER_PAGE = 10;
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 function init() {
@@ -268,6 +286,8 @@ function init() {
     }
 
     updatePageMeta();
+    buildMerekFilter();
+    updateKondisiCounts();
     renderProducts();
     bindEvents();
 }
@@ -282,17 +302,80 @@ function updatePageMeta() {
     document.getElementById("inlineSearch").placeholder = `Cari di ${meta.title}...`;
 }
 
+// Build merek filter dynamically based on products in current category
+function buildMerekFilter() {
+    const baseProducts = currentKategori === "semua"
+        ? allProducts
+        : allProducts.filter(p => p.kategori === currentKategori);
+
+    // Count by merek
+    const merekCount = {};
+    baseProducts.forEach(p => {
+        if (!merekCount[p.merek]) {
+            merekCount[p.merek] = { label: p.merekLabel, count: 0 };
+        }
+        merekCount[p.merek].count++;
+    });
+
+    const merekList = document.getElementById("merekList");
+    const merekGroup = document.getElementById("merekGroup");
+
+    if (Object.keys(merekCount).length === 0) {
+        merekGroup.style.display = "none";
+        return;
+    }
+
+    merekGroup.style.display = "";
+
+    // Sort: put 'lainnya' last
+    const sorted = Object.entries(merekCount).sort((a, b) => {
+        if (a[0] === "lainnya") return 1;
+        if (b[0] === "lainnya") return -1;
+        return b[1].count - a[1].count;
+    });
+
+    merekList.innerHTML = sorted.map(([key, data]) => `
+        <label>
+            <input type="checkbox" value="${key}" class="cb-merek"> ${data.label}
+            <span class="count-badge">(${data.count})</span>
+        </label>
+    `).join("");
+}
+
+// Update kondisi counts based on category
+function updateKondisiCounts() {
+    const baseProducts = currentKategori === "semua"
+        ? allProducts
+        : allProducts.filter(p => p.kategori === currentKategori);
+
+    const counts = { baru: 0, "seperti-baru": 0, bekas: 0 };
+    baseProducts.forEach(p => {
+        if (counts[p.kondisi] !== undefined) counts[p.kondisi]++;
+    });
+
+    const baruEl = document.getElementById("cnt-baru");
+    const sbnEl = document.getElementById("cnt-seperti-baru");
+    const bekasEl = document.getElementById("cnt-bekas");
+    if (baruEl) baruEl.textContent = `(${counts["baru"]})`;
+    if (sbnEl) sbnEl.textContent = `(${counts["seperti-baru"]})`;
+    if (bekasEl) bekasEl.textContent = `(${counts["bekas"]})`;
+}
+
 function renderProducts() {
     const grid = document.getElementById("productGrid");
     const sortVal = document.getElementById("sortSelect").value;
     const searchVal = document.getElementById("inlineSearch").value.trim().toLowerCase();
-    const checkedKondisi = [...document.querySelectorAll('input[type="checkbox"][value]')]
-        .filter(cb => cb.checked && ["baru","seperti-baru","bekas"].includes(cb.value))
+
+    const checkedKondisi = [...document.querySelectorAll('.cb-kondisi')]
+        .filter(cb => cb.checked)
         .map(cb => cb.value);
-    const checkedMerek = [...document.querySelectorAll('input[type="checkbox"][value]')]
-        .filter(cb => cb.checked && !["baru","seperti-baru","bekas"].includes(cb.value))
+
+    const checkedMerek = [...document.querySelectorAll('.cb-merek')]
+        .filter(cb => cb.checked)
         .map(cb => cb.value);
+
     const lokasiVal = document.getElementById("lokasiFilter").value;
+    const maxHarga = parseInt(document.getElementById("priceRange").value);
 
     let products = currentKategori === "semua"
         ? [...allProducts]
@@ -309,6 +392,8 @@ function renderProducts() {
     if (lokasiVal) {
         products = products.filter(p => p.lokasi === lokasiVal);
     }
+
+    products = products.filter(p => p.harga <= maxHarga);
 
     if (searchVal) {
         products = products.filter(p => p.nama.toLowerCase().includes(searchVal));
@@ -336,10 +421,18 @@ function renderProducts() {
                 <h4>Belum ada barang apapun</h4>
                 <p>Belum ada barang di kategori ini. Coba cek kembali nanti!</p>
             </div>`;
+        renderPagination(0);
         return;
     }
 
-    grid.innerHTML = products.map(p => cardHTML(p)).join("");
+    // Pagination: reset to page 1 on filter/search change
+    const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
+    if (currentPage > totalPages) currentPage = 1;
+
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const pageProducts = products.slice(start, start + ITEMS_PER_PAGE);
+
+    grid.innerHTML = pageProducts.map(p => cardHTML(p)).join("");
 
     grid.querySelectorAll(".wishlist-btn").forEach(btn => {
         btn.addEventListener("click", e => {
@@ -348,6 +441,102 @@ function renderProducts() {
             btn.classList.toggle("active");
         });
     });
+
+    renderPagination(totalPages);
+}
+
+function renderPagination(totalPages) {
+    const pag = document.getElementById("pagination");
+
+    // Hide pagination if 1 page or less
+    if (totalPages <= 1) {
+        pag.innerHTML = "";
+        return;
+    }
+
+    let html = "";
+
+    // Prev button
+    html += `<button class="page-btn arrow" ${currentPage === 1 ? "disabled" : ""} id="pagePrev">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>`;
+
+    // Page numbers with smart ellipsis
+    const pages = getPageNumbers(currentPage, totalPages);
+    pages.forEach(p => {
+        if (p === "...") {
+            html += `<span class="page-dots">...</span>`;
+        } else {
+            html += `<button class="page-btn ${p === currentPage ? "active" : ""}" data-page="${p}">${p}</button>`;
+        }
+    });
+
+    // Next button
+    html += `<button class="page-btn arrow" ${currentPage === totalPages ? "disabled" : ""} id="pageNext">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>`;
+
+    pag.innerHTML = html;
+
+    // Bind pagination events
+    pag.querySelectorAll("[data-page]").forEach(btn => {
+        btn.addEventListener("click", () => {
+            currentPage = parseInt(btn.dataset.page);
+            renderProducts();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    });
+
+    const prevBtn = document.getElementById("pagePrev");
+    const nextBtn = document.getElementById("pageNext");
+
+    if (prevBtn) {
+        prevBtn.addEventListener("click", () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderProducts();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener("click", () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderProducts();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        });
+    }
+}
+
+function getPageNumbers(current, total) {
+    if (total <= 7) {
+        return Array.from({ length: total }, (_, i) => i + 1);
+    }
+
+    const pages = [];
+
+    if (current <= 4) {
+        for (let i = 1; i <= 5; i++) pages.push(i);
+        pages.push("...");
+        pages.push(total);
+    } else if (current >= total - 3) {
+        pages.push(1);
+        pages.push("...");
+        for (let i = total - 4; i <= total; i++) pages.push(i);
+    } else {
+        pages.push(1);
+        pages.push("...");
+        pages.push(current - 1);
+        pages.push(current);
+        pages.push(current + 1);
+        pages.push("...");
+        pages.push(total);
+    }
+
+    return pages;
 }
 
 function cardHTML(p) {
@@ -388,16 +577,27 @@ function cardHTML(p) {
 }
 
 function bindEvents() {
-    document.getElementById("sortSelect").addEventListener("change", renderProducts);
-    document.getElementById("inlineSearch").addEventListener("input", renderProducts);
-    document.getElementById("filterApply").addEventListener("click", renderProducts);
+    document.getElementById("sortSelect").addEventListener("change", () => {
+        currentPage = 1;
+        renderProducts();
+    });
+    document.getElementById("inlineSearch").addEventListener("input", () => {
+        currentPage = 1;
+        renderProducts();
+    });
+    document.getElementById("filterApply").addEventListener("click", () => {
+        currentPage = 1;
+        renderProducts();
+    });
 
     document.getElementById("filterReset").addEventListener("click", () => {
-        document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        document.querySelectorAll('.cb-kondisi').forEach(cb => cb.checked = false);
+        document.querySelectorAll('.cb-merek').forEach(cb => cb.checked = false);
         document.getElementById("lokasiFilter").value = "";
-        document.getElementById("priceRange").value = 10000000;
+        document.getElementById("priceRange").value = 20000000;
         document.getElementById("priceMin").value = "";
         document.getElementById("priceMax").value = "";
+        currentPage = 1;
         renderProducts();
     });
 

@@ -79,16 +79,16 @@
             <div class="filter-group">
                 <div class="filter-group-title">Kondisi Barang</div>
                 <label>
-                    <input type="checkbox" value="baru"> Baru
-                    <span class="count-badge">(12)</span>
+                    <input type="checkbox" value="baru" class="cb-kondisi"> Baru
+                    <span class="count-badge" id="cnt-baru">(0)</span>
                 </label>
                 <label>
-                    <input type="checkbox" value="seperti-baru"> Seperti Baru
-                    <span class="count-badge">(34)</span>
+                    <input type="checkbox" value="seperti-baru" class="cb-kondisi"> Seperti Baru
+                    <span class="count-badge" id="cnt-seperti-baru">(0)</span>
                 </label>
                 <label>
-                    <input type="checkbox" value="bekas"> Bekas
-                    <span class="count-badge">(78)</span>
+                    <input type="checkbox" value="bekas" class="cb-kondisi"> Bekas
+                    <span class="count-badge" id="cnt-bekas">(0)</span>
                 </label>
             </div>
 
@@ -97,11 +97,11 @@
             <!-- Harga -->
             <div class="filter-group">
                 <div class="filter-group-title">Rentang Harga</div>
-                <input type="range" class="price-slider" id="priceRange" min="0" max="10000000" value="10000000" step="50000">
+                <input type="range" class="price-slider" id="priceRange" min="0" max="20000000" value="20000000" step="50000">
                 <div class="price-inputs">
-                    <input type="text" id="priceMin" placeholder="Rp 0">
+                    <input type="text" id="priceMin" placeholder="Rp 0" readonly>
                     <span>–</span>
-                    <input type="text" id="priceMax" placeholder="Rp 10.000.000">
+                    <input type="text" id="priceMax" placeholder="Rp 20.000.000" readonly>
                 </div>
             </div>
 
@@ -110,44 +110,32 @@
             <!-- Lokasi -->
             <div class="filter-group">
                 <div class="filter-group-title">Lokasi (Kecamatan)</div>
-                <select class="filter-select" id="lokasiFilter">
-                    <option value="">Semua Kecamatan</option>
-                    <option>Kedaton</option>
-                    <option>Rajabasa</option>
-                    <option>Sukarame</option>
-                    <option>Langkapura</option>
-                    <option>Tanjung Karang Barat</option>
-                    <option>Tanjung Karang Timur</option>
-                    <option>Labuhan Ratu</option>
-                    <option>Way Halim</option>
-                </select>
+                <div class="select-wrapper">
+                    <select class="filter-select" id="lokasiFilter">
+                        <option value="">Semua Kecamatan</option>
+                        <option>Kedaton</option>
+                        <option>Rajabasa</option>
+                        <option>Sukarame</option>
+                        <option>Langkapura</option>
+                        <option>Tanjung Karang Barat</option>
+                        <option>Tanjung Karang Timur</option>
+                        <option>Labuhan Ratu</option>
+                        <option>Way Halim</option>
+                    </select>
+                    <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                </div>
             </div>
 
             <div class="filter-divider"></div>
 
-            <!-- Merek -->
-            <div class="filter-group">
+            <!-- Merek (dinamis) -->
+            <div class="filter-group" id="merekGroup">
                 <div class="filter-group-title">Merek</div>
-                <label>
-                    <input type="checkbox" value="samsung"> Samsung
-                    <span class="count-badge">(20)</span>
-                </label>
-                <label>
-                    <input type="checkbox" value="apple"> Apple
-                    <span class="count-badge">(18)</span>
-                </label>
-                <label>
-                    <input type="checkbox" value="xiaomi"> Xiaomi
-                    <span class="count-badge">(15)</span>
-                </label>
-                <label>
-                    <input type="checkbox" value="sony"> Sony
-                    <span class="count-badge">(12)</span>
-                </label>
-                <label>
-                    <input type="checkbox" value="lainnya"> Lainnya
-                    <span class="count-badge">(33)</span>
-                </label>
+                <div id="merekList">
+                    <!-- injected by JS based on available brands in category -->
+                </div>
             </div>
 
             <button class="filter-apply-btn" id="filterApply">Terapkan Filter</button>
@@ -167,7 +155,7 @@
                 </div>
 
                 <div class="content-right-controls">
-                    <span class="result-count"><strong id="resultCount">5</strong> barang ditemukan</span>
+                    <span class="result-count"><strong id="resultCount">0</strong> barang ditemukan</span>
 
                     <div class="sort-wrapper">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -193,19 +181,7 @@
             </div>
 
             <!-- PAGINATION -->
-            <div class="pagination" id="pagination">
-                <button class="page-btn arrow">
-                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-                </button>
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-                <span style="color:#ccc;font-size:13px">...</span>
-                <button class="page-btn">13</button>
-                <button class="page-btn arrow">
-                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                </button>
-            </div>
+            <div class="pagination" id="pagination"></div>
 
         </main>
     </div>
