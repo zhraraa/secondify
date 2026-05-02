@@ -3,9 +3,7 @@ const navItems = document.querySelectorAll('.nav-item');
 const pages = document.querySelectorAll('.page');
 
 function showPage(pageId) {
-    // Sembunyikan semua page
     pages.forEach(p => p.classList.remove('active'));
-    // Hapus active dari semua nav item
     navItems.forEach(n => n.classList.remove('active'));
 
     const targetPage = document.getElementById('page-' + pageId);
@@ -14,10 +12,8 @@ function showPage(pageId) {
     if (targetPage) targetPage.classList.add('active');
     if (targetNav) targetNav.classList.add('active');
 
-    // Simpan ke hash supaya bisa refresh
     history.replaceState(null, '', '#' + pageId);
 
-    // Scroll ke atas
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -28,7 +24,6 @@ navItems.forEach(item => {
     });
 });
 
-// Baca hash dari URL (misal pengaturan.html#keamanan)
 const hash = window.location.hash.replace('#', '');
 const validPages = ['edit-profil', 'alamat', 'keamanan', 'notifikasi', 'privasi', 'bantuan'];
 if (hash && validPages.includes(hash)) {
@@ -58,14 +53,12 @@ function showToast(msg) {
     setTimeout(() => toast.remove(), 3000);
 }
 
-// Simpan buttons
 document.querySelectorAll('.btn-simpan').forEach(btn => {
     btn.addEventListener('click', () => {
         showToast('✓ Perubahan berhasil disimpan!');
     });
 });
 
-// CSS animasi toast
 const style = document.createElement('style');
 style.textContent = `@keyframes slideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }`;
 document.head.appendChild(style);
