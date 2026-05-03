@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel — Secondify</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/adminDashboard.css">
+</head>
+<body>
+
+<!-- ── SIDEBAR ── -->
+<aside class="sidebar">
+    <a href="dashboard.html" class="sidebar-brand" style="text-decoration:none;">
+        <div class="brand-icon">
+            <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+        <div>
+            <div class="brand-text">Secondify</div>
+        </div>
+        <span class="brand-badge">ADMIN</span>
+    </a>
+
+    <div class="sidebar-label">Menu Utama</div>
+
+    <nav class="sidebar-nav">
+        <button class="nav-item active" data-page="dashboard">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+            Dashboard
+        </button>
+        <button class="nav-item" data-page="verifikasi">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><path d="M20.618 5.984A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622C17.176 19.29 21 14.591 21 9a12.02 12.02 0 0 0-.382-3.016z"/></svg>
+            Verifikasi Penjual
+            <span class="badge-count">3</span>
+        </button>
+        <button class="nav-item" data-page="user">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Manajemen User
+        </button>
+        <button class="nav-item" data-page="moderasi">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Moderasi & Laporan
+            <span class="badge-count">5</span>
+        </button>
+
+        <div style="height:1px;background:#f0f0f5;margin:12px 0;"></div>
+        <div class="sidebar-label" style="padding:0 0 6px;">Pengaturan</div>
+
+        <button class="nav-item" onclick="showToast('Fitur ini belum tersedia')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+            Pengaturan Sistem
+        </button>
+
+        <button class="nav-item" onclick="showToast('Fitur ini belum tersedia')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            Laporan & Analitik
+        </button>
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="sidebar-user">
+            <div class="sidebar-avatar">Y</div>
+            <div class="sidebar-user-info">
+                <div class="sidebar-user-name">Yusuf</div>
+                <div class="sidebar-user-role">Super Admin</div>
+            </div>
+        </div>
+        <a href="dashboard.html" class="sidebar-logout">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Kembali ke Marketplace
+        </a>
+    </div>
+</aside>
+
+<!-- ── MAIN WRAP ── -->
+<div class="main-wrap">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div>
+            <div class="topbar-title" id="topbar-title">Dashboard Admin</div>
+            <div class="topbar-breadcrumb">Admin / <span id="topbar-breadcrumb">Dashboard</span></div>
+        </div>
+        <div class="topbar-right">
+            <button class="topbar-notif" onclick="showToast('Tidak ada notifikasi baru')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                <div class="notif-dot"></div>
+            </button>
+            <div class="sidebar-user" style="padding:6px 10px;margin:0;">
+                <div class="sidebar-avatar" style="width:30px;height:30px;font-size:11px;">Y</div>
+                <div class="sidebar-user-info">
+                    <div class="sidebar-user-name">Yusuf</div>
+                    <div class="sidebar-user-role">Super Admin</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════ -->
+    <!-- PAGE: DASHBOARD                 -->
+    <!-- ════════════════════════════════ -->
+    <section class="page active" id="page-dashboard">
+
+        <div class="section-header">
+            <div>
+                <div class="section-title">Selamat datang, Yusuf 👋</div>
+                <div class="section-sub">Berikut ringkasan aktivitas Secondify hari ini.</div>
+            </div>
+            <button class="btn-action primary" onclick="showToast('Laporan diunduh!')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:14px;height:14px;display:inline;margin-right:6px;vertical-align:middle;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Unduh Laporan
+            </button>
+        </div>
+
+        <!-- STAT CARDS -->
+        <div class="stats-grid">
+            <div class="stat-card purple">
+                <div class="stat-icon purple">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div class="stat-value">1,284</div>
+                <div class="stat-label">Total Pengguna</div>
+                <div class="stat-trend up">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                    +12% dari bulan lalu
+                </div>
+            </div>
+            <div class="stat-card green">
+                <div class="stat-icon green">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                </div>
+                <div class="stat-value">348</div>
+                <div class="stat-label">Barang Aktif</div>
+                <div class="stat-trend up">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                    +8% dari bulan lalu
+                </div>
+            </div>
+            <div class="stat-card orange">
+                <div class="stat-icon orange">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><path d="M20.618 5.984A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622C17.176 19.29 21 14.591 21 9a12.02 12.02 0 0 0-.382-3.016z"/></svg>
+                </div>
+                <div class="stat-value">3</div>
+                <div class="stat-label">Pengajuan Penjual</div>
+                <div class="stat-trend down">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+                    Menunggu review
+                </div>
+            </div>
+            <div class="stat-card red">
+                <div class="stat-icon red">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div class="stat-value">5</div>
+                <div class="stat-label">Laporan Aktif</div>
+                <div class="stat-trend down">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+                    Perlu ditangani
+                </div>
+            </div>
+        </div>
+
+        <!-- CHARTS ROW -->
+        <div class="two-col mb-20">
+            <!-- Distribusi User -->
+            <div class="card">
+                <div class="card-head">
+                    <div>
+                        <h3>Distribusi Pengguna</h3>
+                        <p>Berdasarkan peran akun</p>
+                    </div>
+                </div>
+                <div class="chart-wrap">
+                    <div class="donut">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <!-- Track -->
+                            <circle cx="60" cy="60" r="46" fill="none" stroke="#f0f0f5" stroke-width="16"/>
+                            <!-- Buyers 68% -->
+                            <circle cx="60" cy="60" r="46" fill="none" stroke="#886BC6" stroke-width="16" stroke-dasharray="196.4 93.6" stroke-dashoffset="0"/>
+                            <!-- Sellers 22% -->
+                            <circle cx="60" cy="60" r="46" fill="none" stroke="#D3C3FB" stroke-width="16" stroke-dasharray="63.5 226.5" stroke-dashoffset="-196.4"/>
+                            <!-- Inactive 10% -->
+                            <circle cx="60" cy="60" r="46" fill="none" stroke="#f0f0f5" stroke-width="16" stroke-dasharray="28.9 261.1" stroke-dashoffset="-259.9"/>
+                        </svg>
+                        <div class="donut-center">
+                            <div class="donut-val">1284</div>
+                            <div class="donut-lbl">Total</div>
+                        </div>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background:#886BC6"></div>
+                            <span class="legend-label">Pembeli</span>
+                            <span class="legend-val">874</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background:#D3C3FB"></div>
+                            <span class="legend-label">Penjual</span>
+                            <span class="legend-val">282</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background:#f0f0f5"></div>
+                            <span class="legend-label">Tidak Aktif</span>
+                            <span class="legend-val">128</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kategori Barang -->
+            <div class="card">
+                <div class="card-head">
+                    <div>
+                        <h3>Barang per Kategori</h3>
+                        <p>Top 5 kategori terpopuler</p>
+                    </div>
+                </div>
+                <div class="bar-chart">
+                    <div class="bar-group">
+                        <div class="bar-head"><span>Elektronik</span><span>94 barang</span></div>
+                        <div class="bar-track"><div class="bar-fill" style="width:94%;background:linear-gradient(to right,#886BC6,#D3C3FB);"></div></div>
+                    </div>
+                    <div class="bar-group">
+                        <div class="bar-head"><span>Pakaian</span><span>78 barang</span></div>
+                        <div class="bar-track"><div class="bar-fill" style="width:78%;background:linear-gradient(to right,#27ae60,#2ecc71);"></div></div>
+                    </div>
+                    <div class="bar-group">
+                        <div class="bar-head"><span>Handphone</span><span>65 barang</span></div>
+                        <div class="bar-track"><div class="bar-fill" style="width:65%;background:linear-gradient(to right,#3b82f6,#60a5fa);"></div></div>
+                    </div>
+                    <div class="bar-group">
+                        <div class="bar-head"><span>Buku</span><span>52 barang</span></div>
+                        <div class="bar-track"><div class="bar-fill" style="width:52%;background:linear-gradient(to right,#e67e22,#f39c12);"></div></div>
+                    </div>
+                    <div class="bar-group">
+                        <div class="bar-head"><span>Tas</span><span>38 barang</span></div>
+                        <div class="bar-track"><div class="bar-fill" style="width:38%;background:linear-gradient(to right,#e74c3c,#ff6b6b);"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RECENT ACTIVITY -->
+        <div class="card">
+            <div class="card-head">
+                <div><h3>Aktivitas Terkini</h3><p>Update sistem dalam 24 jam terakhir</p></div>
+                <button class="btn-action view" onclick="showToast('Melihat semua aktivitas...')">Lihat Semua</button>
+            </div>
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="act-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div>
+                    <div class="act-info">
+                        <div class="act-title">Penjual baru diverifikasi — <strong>Toko Rizky</strong></div>
+                        <div class="act-sub">Diverifikasi oleh Admin · Bandar Lampung</div>
+                    </div>
+                    <div class="act-time">5 mnt lalu</div>
+                </div>
+                <div class="activity-item">
+                    <div class="act-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                    <div class="act-info">
+                        <div class="act-title">Laporan baru masuk — <strong>Barang tidak sesuai deskripsi</strong></div>
+                        <div class="act-sub">Dilaporkan oleh: dinda.belanja</div>
+                    </div>
+                    <div class="act-time">32 mnt lalu</div>
+                </div>
+                <div class="activity-item">
+                    <div class="act-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                    <div class="act-info">
+                        <div class="act-title">Pengguna baru daftar — <strong>maya.preloved</strong></div>
+                        <div class="act-sub">Email: maya@gmail.com · Rajabasa</div>
+                    </div>
+                    <div class="act-time">1 jam lalu</div>
+                </div>
+                <div class="activity-item">
+                    <div class="act-icon red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+                    <div class="act-info">
+                        <div class="act-title">Barang diturunkan — <strong>iPhone 13 Pro palsu</strong></div>
+                        <div class="act-sub">Konten melanggar kebijakan platform</div>
+                    </div>
+                    <div class="act-time">2 jam lalu</div>
+                </div>
+                <div class="activity-item">
+                    <div class="act-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+                    <div class="act-info">
+                        <div class="act-title">Barang terjual — <strong>Sepatu Nike Air Max bekas</strong></div>
+                        <div class="act-sub">Toko Sepatu Keren → @andi.sneakers</div>
+                    </div>
+                    <div class="act-time">3 jam lalu</div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ════════════════════════════════ -->
+    <!-- PAGE: VERIFIKASI PENJUAL        -->
+    <!-- ════════════════════════════════ -->
+    <section class="page" id="page-verifikasi">
+
+        <div class="section-header">
+            <div>
+                <div class="section-title">Verifikasi Penjual</div>
+                <div class="section-sub">Review dan setujui pengajuan penjual baru</div>
+            </div>
+            <span class="badge orange" style="font-size:13px;padding:6px 14px;">3 Menunggu Review</span>
+        </div>
+
+        <!-- TABS -->
+        <div class="tab-nav" id="verif-tabs">
+            <button class="tab-btn active" data-tab="menunggu" onclick="switchVerifTab(this,'menunggu')">Menunggu (3)</button>
+            <button class="tab-btn" data-tab="disetujui" onclick="switchVerifTab(this,'disetujui')">Disetujui (28)</button>
+            <button class="tab-btn" data-tab="ditolak" onclick="switchVerifTab(this,'ditolak')">Ditolak (4)</button>
+        </div>
+
+        <!-- TAB: MENUNGGU -->
+        <div id="verif-menunggu">
+            <div class="card mb-20">
+                <div class="card-head">
+                    <div><h3>Pengajuan Menunggu Review</h3><p>Klik "Review" untuk melihat detail KTP dan memutuskan</p></div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Pemohon</th>
+                            <th>Nama Toko</th>
+                            <th>Tanggal Daftar</th>
+                            <th>Kategori Barang</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar-sm">F</div>
+                                    <div>
+                                        <div class="user-name-sm">Fatimah Zahra</div>
+                                        <div class="user-email-sm">fatimah@gmail.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><strong>Toko Fati Preloved</strong></td>
+                            <td>3 Mei 2026</td>
+                            <td>Pakaian, Tas</td>
+                            <td><span class="badge orange"><span class="badge-dot"></span>Menunggu</span></td>
+                            <td>
+                                <div class="action-row">
+                                    <button class="btn-action view" onclick="openVerifModal('Fatimah Zahra','fatimah@gmail.com','Toko Fati Preloved','Pakaian, Tas','3 Mei 2026')">Review</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar-sm" style="background:linear-gradient(135deg,#27ae60,#2ecc71);">B</div>
+                                    <div>
+                                        <div class="user-name-sm">Bagas Pratama</div>
+                                        <div class="user-email-sm">bagas@gmail.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><strong>Bagas Tech Store</strong></td>
+                            <td>2 Mei 2026</td>
+                            <td>Elektronik, Handphone</td>
+                            <td><span class="badge orange"><span class="badge-dot"></span>Menunggu</span></td>
+                            <td>
+                                <div class="action-row">
+                                    <button class="btn-action view" onclick="openVerifModal('Bagas Pratama','bagas@gmail.com','Bagas Tech Store','Elektronik, Handphone','2 Mei 2026')">Review</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar-sm" style="background:linear-gradient(135deg,#e67e22,#f39c12);">N</div>
+                                    <div>
+                                        <div class="user-name-sm">Nadia Cantika</div>
+                                        <div class="user-email-sm">nadia@gmail.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><strong>Nadia's Wardrobe</strong></td>
+                            <td>1 Mei 2026</td>
+                            <td>Pakaian, Aksesoris</td>
+                            <td><span class="badge orange"><span class="badge-dot"></span>Menunggu</span></td>
+                            <td>
+                                <div class="action-row">
+                                    <button class="btn-action view" onclick="openVerifModal('Nadia Cantika','nadia@gmail.com','Nadia\'s Wardrobe','Pakaian, Aksesoris','1 Mei 2026')">Review</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB: DISETUJUI -->
+        <div id="verif-disetujui" style="display:none;">
+            <div class="card mb-20">
+                <div class="card-head"><div><h3>Penjual Terverifikasi</h3><p>28 penjual aktif di Secondify</p></div></div>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Penjual</th><th>Nama Toko</th><th>Disetujui</th><th>Total Barang</th><th>Rating</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><div class="user-cell"><div class="user-avatar-sm">R</div><div><div class="user-name-sm">Rara Cantik</div><div class="user-email-sm">@raracantik123</div></div></div></td>
+                            <td><strong>Toko Rara</strong></td>
+                            <td>Jan 2026</td>
+                            <td>12 barang</td>
+                            <td>⭐ 4.8</td>
+                            <td><span class="badge green"><span class="badge-dot"></span>Aktif</span></td>
+                        </tr>
+                        <tr>
+                            <td><div class="user-cell"><div class="user-avatar-sm" style="background:linear-gradient(135deg,#3b82f6,#60a5fa);">R</div><div><div class="user-name-sm">Rizky Fadillah</div><div class="user-email-sm">@rizky.store</div></div></div></td>
+                            <td><strong>Toko Rizky</strong></td>
+                            <td>Mar 2026</td>
+                            <td>8 barang</td>
+                            <td>⭐ 4.9</td>
+                            <td><span class="badge green"><span class="badge-dot"></span>Aktif</span></td>
+                        </tr>
+                        <tr>
+                            <td><div class="user-cell"><div class="user-avatar-sm" style="background:linear-gradient(135deg,#27ae60,#2ecc71);">A</div><div><div class="user-name-sm">Andi Wijaya</div><div class="user-email-sm">@andi.sneakers</div></div></div></td>
+                            <td><strong>Sneakers Andi</strong></td>
+                            <td>Feb 2026</td>
+                            <td>24 barang</td>
+                            <td>⭐ 4.7</td>
+                            <td><span class="badge green"><span class="badge-dot"></span>Aktif</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <span>Menampilkan 3 dari 28 penjual</span>
+                    <div class="page-btns">
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn">›</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: DITOLAK -->
+        <div id="verif-ditolak" style="display:none;">
+            <div class="card mb-20">
+                <div class="card-head"><div><h3>Pengajuan Ditolak</h3><p>4 pengajuan tidak memenuhi syarat</p></div></div>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Pemohon</th><th>Nama Toko</th><th>Tanggal</th><th>Alasan Penolakan</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><div class="user-cell"><div class="user-avatar-sm" style="background:#ddd;color:#888;">D</div><div><div class="user-name-sm">Dodi Santoso</div><div class="user-email-sm">dodi@gmail.com</div></div></div></td>
+                            <td>Toko Dodi</td>
+                            <td>15 Apr 2026</td>
+                            <td>KTP tidak terbaca / blur</td>
+                            <td><span class="badge red"><span class="badge-dot"></span>Ditolak</span></td>
+                        </tr>
+                        <tr>
+                            <td><div class="user-cell"><div class="user-avatar-sm" style="background:#ddd;color:#888;">S</div><div><div class="user-name-sm">Sinta Dewi</div><div class="user-email-sm">sinta@gmail.com</div></div></div></td>
+                            <td>Sinta Shop</td>
+                            <td>10 Apr 2026</td>
+                            <td>Data tidak sesuai / mencurigakan</td>
+                            <td><span class="badge red"><span class="badge-dot"></span>Ditolak</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ════════════════════════════════ -->
+    <!-- PAGE: MANAJEMEN USER            -->
+    <!-- ════════════════════════════════ -->
+    <section class="page" id="page-user">
+
+        <div class="section-header">
+            <div>
+                <div class="section-title">Manajemen User</div>
+                <div class="section-sub">Kelola akun pembeli dan penjual di platform</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="table-toolbar">
+                <div class="search-input-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" placeholder="Cari nama, email, atau username..." id="userSearch" oninput="filterUsers()">
+                </div>
+                <select class="filter-select" id="roleFilter" onchange="filterUsers()">
+                    <option value="">Semua Peran</option>
+                    <option value="Pembeli">Pembeli</option>
+                    <option value="Penjual">Penjual</option>
+                </select>
+                <select class="filter-select" id="statusFilter" onchange="filterUsers()">
+                    <option value="">Semua Status</option>
+                    <option value="Aktif">Aktif</option>
+                    <option value="Dibekukan">Dibekukan</option>
+                </select>
+                <div style="margin-left:auto;font-size:12px;color:#aaa;" id="user-count">Menampilkan 7 pengguna</div>
+            </div>
+
+            <table class="data-table" id="userTable">
+                <thead>
+                    <tr>
+                        <th>Pengguna</th>
+                        <th>Username</th>
+                        <th>Peran</th>
+                        <th>Bergabung</th>
+                        <th>Transaksi</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="userTbody">
+                    <tr data-role="Penjual" data-status="Aktif">
+                        <td><div class="user-cell"><div class="user-avatar-sm">R</div><div><div class="user-name-sm">Rara Cantik</div><div class="user-email-sm">rara@gmail.com</div></div></div></td>
+                        <td>@raracantik123</td>
+                        <td><span class="badge purple">Penjual</span></td>
+                        <td>Jan 2026</td>
+                        <td>18 transaksi</td>
+                        <td><span class="badge green"><span class="badge-dot"></span>Aktif</span></td>
+                        <td><div class="action-row"><button class="btn-action view" onclick="showToast('Melihat profil Rara Cantik')">Detail</button><button class="btn-action warn" onclick="showToast('Peringatan dikirim ke Rara Cantik')">Peringatkan</button></div></td>
+                    </tr>
+                    <tr data-role="Pembeli" data-status="Aktif">
+                        <td><div class="user-cell"><div class="user-avatar-sm" style="background:linear-gradient(135deg,#3b82f6,#60a5fa);">A</div><div><div class="user-name-sm">Alyssa Putri</div><div class="user-email-sm">alyssa@gmail.com</div></div></div></td>
+                        <td>@alyssa.putri</td>
+                        <td><span class="badge blue">Pembeli</span></td>
+                        <td>Jan 2026</td>
+                        <td>12 transaksi</td>
+                        <td><span class="badge green"><span class="badge-dot"></span>Aktif</span></td>
+                        <td><div class="action-row"><button class="btn-action view" onclick="showToast('Melihat profil Alyssa Putri')">Detail</button><button class="btn-action warn" onclick="showToast('Peringatan dikirim ke Alyssa Putri')">Peringatkan</button></div></td>
+                    </tr>
+                    <tr data-role="Penjual" data-status="Aktif">
+                        <td><div class="user-cell"><div class="user-avatar-sm" style="background:linear-gradient(135deg,#27ae60,#2ecc71);">A</div><div><div class="user-name-sm">Andi Wijaya</div><div class="user-email-sm">andi@gmail.com</div></div></div></td>
+                        <td>@andi.sneakers</td>
+                        <td><span class="badge purple">Penjual</span></td>
+                        <td>Feb 2026</td>
+                        <td>34 transaksi</td>
+                        <td><span class="badge green"><span class="badge-dot"></span>Aktif</span></td>
+                        <td><div class="action-row"><button class="btn-action view" onclick="showToast('Melihat profil Andi Wijaya')">Detail</button><button class="btn-action warn" onclick="showToast('Peringatan dikirim ke Andi Wijaya')">Peringatkan</button></div></td>
+                    </tr>
+                    <tr data-role="Pembeli" data-status="Dibekukan">
+                        <td><div class="user-cell"><div class="user-avatar-sm" style="background:#ccc;color:#888;">D</div><div><div class="user-name-sm">Dodi Santoso</div><div class="user-email-sm">dodi@gmail.com</div></div></div></td>
+                        <td>@dodi.s</td>
+                        <td><span class="badge blue">Pembeli</span></td>
+                        <td>Mar 2026</td>
+                        <td>2 transaksi</td>
+                        <td><span class="badge red"><span class="badge-dot"></span>Dibekukan</span></td>
+                        <td><div class="action-row"><button class="btn-action view" onclick="showToast('Melihat profil Dodi Santoso')">Detail</button><button class="btn-action approve" onclick="showToast('Akun Dodi Santoso diaktifkan kembali!')">Aktifkan</button></div></td>
+                    </tr>
+                    <tr data-role="Pembeli" data-status="Aktif">
+                        <td><div class="user-cell"><div class="user-avatar-sm" style="background:linear-gradient(135deg,#e74c3c,#ff6b6b);">M</div><div><div class="user-name-sm">Maya Sari</div><div class="user-email-sm">maya@gmail.com</div></div></div></td>
+                        <td>@maya.preloved</td>
+                        <td><span class="badge blue">Pembeli</span></td>
+                        <td>Mei 2026</td>
+                        <td>1 transaksi</td>
+                        <td><span class="badge green"><span class="badge-dot"></span>Aktif</span></td>
+                        <td><div class="action-row"><button class="btn-action view" onclick="showToast('Melihat profil Maya Sari')">Detail</button><button class="btn-action warn" onclick="showToast('Peringatan dikirim ke Maya Sari')">Peringatkan</button></div></td>
+                    </tr>
+                    <tr data-role="Penjual" data-status="Aktif">
+                        <td><div class="user-cell"><div class="user-avatar-sm" style="background:linear-gradient(135deg,#886BC6,#D3C3FB);">R</div><div><div class="user-name-sm">Rizky Fadillah</div><div class="user-email-sm">rizky@gmail.com</div></div></div></td>
+                        <td>@rizky.store</td>
+                        <td><span class="badge purple">Penjual</span></td>
+                        <td>Mar 2026</td>
+                        <td>22 transaksi</td>
+                        <td><span class="badge green"><span class="badge-dot"></span>Aktif</span></td>
+                        <td><div class="action-row"><button class="btn-action view" onclick="showToast('Melihat profil Rizky Fadillah')">Detail</button><button class="btn-action danger" onclick="showToast('Akun Rizky Fadillah dibekukan!')">Bekukan</button></div></td>
+                    </tr>
+                    <tr data-role="Pembeli" data-status="Aktif">
+                        <td><div class="user-cell"><div class="user-avatar-sm" style="background:linear-gradient(135deg,#f39c12,#f1c40f);">D</div><div><div class="user-name-sm">Dinda Belanja</div><div class="user-email-sm">dinda@gmail.com</div></div></div></td>
+                        <td>@dinda.belanja</td>
+                        <td><span class="badge blue">Pembeli</span></td>
+                        <td>Apr 2026</td>
+                        <td>7 transaksi</td>
+                        <td><span class="badge green"><span class="badge-dot"></span>Aktif</span></td>
+                        <td><div class="action-row"><button class="btn-action view" onclick="showToast('Melihat profil Dinda Belanja')">Detail</button><button class="btn-action warn" onclick="showToast('Peringatan dikirim ke Dinda Belanja')">Peringatkan</button></div></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="pagination">
+                <span>Menampilkan 7 dari 1,284 pengguna</span>
+                <div class="page-btns">
+                    <button class="page-btn">‹</button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">...</button>
+                    <button class="page-btn">128</button>
+                    <button class="page-btn">›</button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ════════════════════════════════ -->
+    <!-- PAGE: MODERASI & LAPORAN        -->
+    <!-- ════════════════════════════════ -->
+    <section class="page" id="page-moderasi">
+
+        <div class="section-header">
+            <div>
+                <div class="section-title">Moderasi & Laporan</div>
+                <div class="section-sub">Tinjau barang yang dilaporkan dan kelola konten platform</div>
+            </div>
+            <span class="badge red" style="font-size:13px;padding:6px 14px;">5 Laporan Aktif</span>
+        </div>
+
+        <!-- TABS -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchModTab(this,'laporan')">Laporan Masuk (5)</button>
+            <button class="tab-btn" onclick="switchModTab(this,'barang')">Kelola Barang</button>
+            <button class="tab-btn" onclick="switchModTab(this,'selesai')">Selesai (12)</button>
+        </div>
+
+        <!-- LAPORAN -->
+        <div id="mod-laporan">
+
+            <div class="report-card">
+                <div class="report-head">
+                    <div>
+                        <div class="report-id">#RPT-001 · 04 Mei 2026, 09:14</div>
+                        <div class="report-title">Barang tidak sesuai deskripsi</div>
+                        <div class="report-meta">Dilaporkan oleh: <strong>dinda.belanja</strong> · Terlapor: <strong>rizky.store</strong></div>
+                    </div>
+                    <span class="badge red"><span class="badge-dot"></span>Baru</span>
+                </div>
+                <div class="report-product">
+                    <div style="width:36px;height:36px;background:#f0eeff;border-radius:6px;display:flex;align-items:center;justify-content:center;">📦</div>
+                    <div>
+                        <div class="report-product-name">iPhone 14 128GB Bekas</div>
+                        <div class="report-product-by">Oleh: Toko Rizky · Rp 5.200.000</div>
+                    </div>
+                </div>
+                <div class="report-body">"Barang yang diterima kondisinya beda banget sama foto. Layarnya ada garis dan baterai cepet habis. Penjual bilang kondisi bagus tapi kenyataannya ngga."</div>
+                <div class="action-row">
+                    <button class="btn-action view" onclick="showToast('Membuka detail laporan #RPT-001')">Lihat Detail</button>
+                    <button class="btn-action warn" onclick="showToast('Peringatan dikirim ke rizky.store')">Beri Peringatan</button>
+                    <button class="btn-action danger" onclick="showToast('Barang iPhone 14 diturunkan!')">Turunkan Barang</button>
+                    <button class="btn-action approve" onclick="showToast('Laporan #RPT-001 ditandai selesai')">Tandai Selesai</button>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <div class="report-head">
+                    <div>
+                        <div class="report-id">#RPT-002 · 03 Mei 2026, 14:30</div>
+                        <div class="report-title">Penjual tidak responsif / ghosting</div>
+                        <div class="report-meta">Dilaporkan oleh: <strong>maya.preloved</strong> · Terlapor: <strong>toko.elektronik99</strong></div>
+                    </div>
+                    <span class="badge orange"><span class="badge-dot"></span>Proses</span>
+                </div>
+                <div class="report-product">
+                    <div style="width:36px;height:36px;background:#fff3e6;border-radius:6px;display:flex;align-items:center;justify-content:center;">💻</div>
+                    <div>
+                        <div class="report-product-name">Laptop Asus VivoBook 15</div>
+                        <div class="report-product-by">Oleh: toko.elektronik99 · Rp 4.500.000</div>
+                    </div>
+                </div>
+                <div class="report-body">"Udah deal COD, tapi penjual tiba-tiba ga bisa dihubungi. Chat dibaca tapi ga dibalas. Minta tolong admin untuk bantu."</div>
+                <div class="action-row">
+                    <button class="btn-action view" onclick="showToast('Membuka detail laporan #RPT-002')">Lihat Detail</button>
+                    <button class="btn-action warn" onclick="showToast('Peringatan dikirim ke toko.elektronik99')">Beri Peringatan</button>
+                    <button class="btn-action danger" onclick="showToast('Akun toko.elektronik99 dibekukan sementara!')">Bekukan Akun</button>
+                    <button class="btn-action approve" onclick="showToast('Laporan #RPT-002 ditandai selesai')">Tandai Selesai</button>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <div class="report-head">
+                    <div>
+                        <div class="report-id">#RPT-003 · 02 Mei 2026, 08:55</div>
+                        <div class="report-title">Barang diduga palsu / replika</div>
+                        <div class="report-meta">Dilaporkan oleh: <strong>andi.sneakers</strong> · Terlapor: <strong>barang.murah.bdl</strong></div>
+                    </div>
+                    <span class="badge red"><span class="badge-dot"></span>Baru</span>
+                </div>
+                <div class="report-product">
+                    <div style="width:36px;height:36px;background:#ffeaea;border-radius:6px;display:flex;align-items:center;justify-content:center;">👟</div>
+                    <div>
+                        <div class="report-product-name">Nike Air Jordan 1 Retro High</div>
+                        <div class="report-product-by">Oleh: barang.murah.bdl · Rp 350.000</div>
+                    </div>
+                </div>
+                <div class="report-body">"Harganya tidak masuk akal untuk sepatu original. Fotonya juga terlihat seperti barang KW. Perlu dicek keasliannya."</div>
+                <div class="action-row">
+                    <button class="btn-action view" onclick="showToast('Membuka detail laporan #RPT-003')">Lihat Detail</button>
+                    <button class="btn-action danger" onclick="showToast('Barang Nike Air Jordan diturunkan!')">Turunkan Barang</button>
+                    <button class="btn-action approve" onclick="showToast('Laporan #RPT-003 ditandai selesai')">Tandai Selesai</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- KELOLA BARANG -->
+        <div id="mod-barang" style="display:none;">
+            <div class="card">
+                <div class="table-toolbar">
+                    <div class="search-input-wrap">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" placeholder="Cari nama barang atau penjual...">
+                    </div>
+                    <select class="filter-select">
+                        <option>Semua Status</option>
+                        <option>Aktif</option>
+                        <option>Diturunkan</option>
+                        <option>Terjual</option>
+                    </select>
+                    <select class="filter-select">
+                        <option>Semua Kategori</option>
+                        <option>Elektronik</option>
+                        <option>Pakaian</option>
+                        <option>Sepatu</option>
+                    </select>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Barang</th><th>Penjual</th><th>Kategori</th><th>Harga</th><th>Tgl Upload</th><th>Status</th><th>Aksi</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>iPhone 14 128GB Bekas</strong></td>
+                            <td>Toko Rizky</td>
+                            <td>Handphone</td>
+                            <td>Rp 5.200.000</td>
+                            <td>1 Mei 2026</td>
+                            <td><span class="badge orange"><span class="badge-dot"></span>Dilaporkan</span></td>
+                            <td><div class="action-row"><button class="btn-action view" onclick="showToast('Membuka detail barang')">Detail</button><button class="btn-action danger" onclick="showToast('Barang diturunkan!')">Turunkan</button></div></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sunscreen OMG 30ml</strong></td>
+                            <td>Toko Rara</td>
+                            <td>Kesehatan</td>
+                            <td>Rp 50.000</td>
+                            <td>20 Apr 2026</td>
+                            <td><span class="badge green"><span class="badge-dot"></span>Aktif</span></td>
+                            <td><div class="action-row"><button class="btn-action view" onclick="showToast('Membuka detail barang')">Detail</button><button class="btn-action warn" onclick="showToast('Barang ditandai untuk review')">Review</button></div></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nike Air Jordan 1 Retro</strong></td>
+                            <td>barang.murah.bdl</td>
+                            <td>Sepatu</td>
+                            <td>Rp 350.000</td>
+                            <td>2 Mei 2026</td>
+                            <td><span class="badge red"><span class="badge-dot"></span>Diturunkan</span></td>
+                            <td><div class="action-row"><button class="btn-action view" onclick="showToast('Membuka detail barang')">Detail</button><button class="btn-action approve" onclick="showToast('Barang diaktifkan kembali!')">Aktifkan</button></div></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Laptop Asus VivoBook 15</strong></td>
+                            <td>toko.elektronik99</td>
+                            <td>Elektronik</td>
+                            <td>Rp 4.500.000</td>
+                            <td>28 Apr 2026</td>
+                            <td><span class="badge orange"><span class="badge-dot"></span>Dilaporkan</span></td>
+                            <td><div class="action-row"><button class="btn-action view" onclick="showToast('Membuka detail barang')">Detail</button><button class="btn-action danger" onclick="showToast('Barang diturunkan!')">Turunkan</button></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <span>Menampilkan 4 dari 348 barang</span>
+                    <div class="page-btns"><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button><button class="page-btn">›</button></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SELESAI -->
+        <div id="mod-selesai" style="display:none;">
+            <div class="card">
+                <div class="card-head"><div><h3>Laporan Selesai</h3><p>12 laporan telah ditangani</p></div></div>
+                <table class="data-table">
+                    <thead><tr><th>ID</th><th>Judul</th><th>Pelapor</th><th>Terlapor</th><th>Ditangani</th><th>Hasil</th></tr></thead>
+                    <tbody>
+                        <tr><td>#RPT-000</td><td>Barang tidak dikirim</td><td>sari.belanja</td><td>toko.abal</td><td>28 Apr 2026</td><td><span class="badge green">Akun Dibekukan</span></td></tr>
+                        <tr><td>#RPT-098</td><td>Foto produk menyesatkan</td><td>user.lama</td><td>foto.palsu</td><td>25 Apr 2026</td><td><span class="badge orange">Peringatan</span></td></tr>
+                        <tr><td>#RPT-097</td><td>Spam iklan duplikat</td><td>pembeli.aktif</td><td>spammer.bdl</td><td>20 Apr 2026</td><td><span class="badge red">Barang Diturunkan</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </section>
+
+</div><!-- /main-wrap -->
+
+
+<!-- ── MODAL VERIFIKASI PENJUAL ── -->
+<div class="modal-overlay" id="verifModal">
+    <div class="modal">
+        <div class="modal-head">
+            <h3>Review Pengajuan Penjual</h3>
+            <button class="modal-close" onclick="closeVerifModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="info-row-modal"><span class="lbl">Nama Pemohon</span><span class="val" id="m-nama">—</span></div>
+            <div class="info-row-modal"><span class="lbl">Email</span><span class="val" id="m-email">—</span></div>
+            <div class="info-row-modal"><span class="lbl">Nama Toko</span><span class="val" id="m-toko">—</span></div>
+            <div class="info-row-modal"><span class="lbl">Kategori Barang</span><span class="val" id="m-kategori">—</span></div>
+            <div class="info-row-modal"><span class="lbl">Tanggal Daftar</span><span class="val" id="m-tgl">—</span></div>
+
+            <div class="section-divider"></div>
+
+            <div style="font-size:12px;font-weight:700;color:#888;margin-bottom:8px;">FOTO KTP / KTM</div>
+            <div class="ktp-img" style="display:flex;align-items:center;justify-content:center;gap:8px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:24px;height:24px;"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="10" x2="9" y2="10"/><line x1="11" y1="10" x2="17" y2="10"/><line x1="7" y1="14" x2="17" y2="14"/></svg>
+                <span style="font-size:13px;">Preview KTP tersedia di sistem</span>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div style="font-size:12px;font-weight:700;color:#888;margin-bottom:8px;">CATATAN ADMIN</div>
+            <textarea placeholder="Tulis catatan untuk keputusan ini (opsional)..." style="width:100%;padding:10px;border:1.5px solid #e8e8f0;border-radius:8px;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;resize:none;height:70px;outline:none;color:#333;"></textarea>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-action reject" onclick="rejectApplicant()">Tolak Pengajuan</button>
+            <button class="btn-action approve" onclick="approveApplicant()">Setujui & Verifikasi</button>
+        </div>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+    // ── NAV ──
+    const navItems = document.querySelectorAll('.nav-item[data-page]');
+    const pages = document.querySelectorAll('.page');
+
+    const pageTitles = {
+        dashboard: { title: 'Dashboard Admin', breadcrumb: 'Dashboard' },
+        verifikasi: { title: 'Verifikasi Penjual', breadcrumb: 'Verifikasi Penjual' },
+        user: { title: 'Manajemen User', breadcrumb: 'Manajemen User' },
+        moderasi: { title: 'Moderasi & Laporan', breadcrumb: 'Moderasi & Laporan' },
+    };
+
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const pageId = item.dataset.page;
+            navItems.forEach(n => n.classList.remove('active'));
+            item.classList.add('active');
+            pages.forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + pageId)?.classList.add('active');
+            const info = pageTitles[pageId] || { title: pageId, breadcrumb: pageId };
+            document.getElementById('topbar-title').textContent = info.title;
+            document.getElementById('topbar-breadcrumb').textContent = info.breadcrumb;
+        });
+    });
+
+    // ── TABS ──
+    function switchVerifTab(btn, tab) {
+        document.querySelectorAll('#verif-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        ['menunggu','disetujui','ditolak'].forEach(t => {
+            document.getElementById('verif-' + t).style.display = t === tab ? '' : 'none';
+        });
+    }
+
+    function switchModTab(btn, tab) {
+        btn.parentElement.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        ['laporan','barang','selesai'].forEach(t => {
+            document.getElementById('mod-' + t).style.display = t === tab ? '' : 'none';
+        });
+    }
+
+    // ── MODAL VERIFIKASI ──
+    function openVerifModal(nama, email, toko, kategori, tgl) {
+        document.getElementById('m-nama').textContent = nama;
+        document.getElementById('m-email').textContent = email;
+        document.getElementById('m-toko').textContent = toko;
+        document.getElementById('m-kategori').textContent = kategori;
+        document.getElementById('m-tgl').textContent = tgl;
+        document.getElementById('verifModal').classList.add('open');
+    }
+
+    function closeVerifModal() {
+        document.getElementById('verifModal').classList.remove('open');
+    }
+
+    function approveApplicant() {
+        closeVerifModal();
+        showToast('✅ Pengajuan disetujui! Penjual berhasil diverifikasi.');
+    }
+
+    function rejectApplicant() {
+        closeVerifModal();
+        showToast('❌ Pengajuan ditolak dan notifikasi dikirim.');
+    }
+
+    // Close modal when clicking overlay
+    document.getElementById('verifModal').addEventListener('click', function(e) {
+        if (e.target === this) closeVerifModal();
+    });
+
+    // ── FILTER USER TABLE ──
+    function filterUsers() {
+        const search = document.getElementById('userSearch').value.toLowerCase();
+        const role = document.getElementById('roleFilter').value;
+        const status = document.getElementById('statusFilter').value;
+        const rows = document.querySelectorAll('#userTbody tr');
+        let count = 0;
+
+        rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            const rowRole = row.dataset.role;
+            const rowStatus = row.dataset.status;
+            const matchSearch = !search || text.includes(search);
+            const matchRole = !role || rowRole === role;
+            const matchStatus = !status || rowStatus === status;
+            const show = matchSearch && matchRole && matchStatus;
+            row.style.display = show ? '' : 'none';
+            if (show) count++;
+        });
+
+        document.getElementById('user-count').textContent = `Menampilkan ${count} pengguna`;
+    }
+
+    // ── TOAST ──
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2800);
+    }
+</script>
+
+</body>
+</html>
