@@ -1,0 +1,337 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins";
+}
+
+body {
+    background-color: #f6f2ff;
+}
+
+/* ─── NAVBAR ─────────────────────────────────── */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 40px;
+    background: #fff;
+    border-bottom: 1px solid #ebebf0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    width: 120px;
+}
+
+
+.search-box {
+    position: relative;
+    flex: 1;
+    max-width: 480px;
+    margin: 0 30px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 18px;
+    border-radius: 24px;
+    border: 1.5px solid #e8e8f0;
+    background: #f8f8fc;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-box input:focus {
+    border-color: #886BC6;
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+    background: #fff;
+}
+
+.search-box input::placeholder {
+    color: #aaa;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.nav-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    border-radius: 50%;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav-icon-btn:hover {
+    background: #f0eeff;
+    color: #886BC6;
+}
+
+.nav-icon-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.nav-divider {
+    width: 1px;
+    height: 22px;
+    background: #e0e0e8;
+}
+
+.msgButton{
+    border: 0;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    border-radius: 50%;
+    color: #555;
+    transition: background 0.2s, color 0.2s;
+}
+
+.msgButton:hover{
+    background: #f0eeff;
+    color: #886BC6;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 12px;
+}
+
+.user:hover {
+    background: #f3f0ff;
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    background: #886BC6;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info .user-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #222;
+    line-height: 1.2;
+}
+
+.user-info .user-role {
+    font-size: 11px;
+    color: #999;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+.logout-btn:hover {
+    background: #fff0f0;
+    color: #e74c3c;
+}
+
+.logout-btn svg {
+    width: 15px;
+    height: 15px;
+}
+
+/* ---------------------------------------------- */
+
+section {
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+}
+
+.title span:nth-child(1) {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.title span:nth-child(2) {
+    font-size: 14px;
+    color: gray;
+}
+
+.btn-tambah {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #886BC6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.btn-tambah .icon {
+    width: 16px;
+    height: 16px;
+}
+
+.kelola-barang {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.opsi {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.opsi button {
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 5px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.opsi button.active{
+    background-color: #f6f2ff;
+    border: gray;
+    box-shadow: 0px 2px 3px #dbdbdb;
+}
+
+.list-barang {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.barang-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid #d3c3fb;
+}
+
+.detail-barang {
+    display: flex;
+    gap: 20px;
+}
+
+.detail-barang img {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #d3c3fb;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.info-barang{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info-barang span:nth-child(1) {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.info-barang .harga {
+    font-weight: 800;
+    color: #886BC6;
+}
+
+.lokasi {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    color: gray;
+}
+
+.lokasi .icon {
+    width: 14px;
+    height: 14px;
+}
+
+.lokasi span {
+    font-size: 12px;
+}
+
+.opsi-menu {
+    width: 35px;
+    height: 35px;
+    border: none;
+    padding: 10px;
+    background-color: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.opsi-menu:hover {
+    background-color: #f0eeff;
+}

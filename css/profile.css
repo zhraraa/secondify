@@ -1,0 +1,464 @@
+/* ─── NAVBAR ─────────────────────────────────── */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 40px;
+    background: #fff;
+    border-bottom: 1px solid #ebebf0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    width: 120px;
+}
+
+
+.search-box {
+    position: relative;
+    flex: 1;
+    max-width: 480px;
+    margin: 0 30px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 18px;
+    border-radius: 24px;
+    border: 1.5px solid #e8e8f0;
+    background: #f8f8fc;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-box input:focus {
+    border-color: #886BC6;
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+    background: #fff;
+}
+
+.search-box input::placeholder {
+    color: #aaa;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.nav-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    border-radius: 50%;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav-icon-btn:hover {
+    background: #f0eeff;
+    color: #886BC6;
+}
+
+.nav-icon-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.nav-divider {
+    width: 1px;
+    height: 22px;
+    background: #e0e0e8;
+}
+
+.msgButton{
+    border: 0;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    border-radius: 50%;
+    color: #555;
+    transition: background 0.2s, color 0.2s;
+}
+
+.msgButton:hover{
+    background: #f0eeff;
+    color: #886BC6;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 12px;
+    transition: background 0.2s;
+}
+
+.user:hover {
+    background: #f3f0ff;
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    background: #886BC6;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info .user-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #222;
+    line-height: 1.2;
+}
+
+.user-info .user-role {
+    font-size: 11px;
+    color: #999;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+.logout-btn:hover {
+    background: #fff0f0;
+    color: #e74c3c;
+}
+
+.logout-btn svg {
+    width: 15px;
+    height: 15px;
+}
+
+/* card profile ------------------^^*/
+body{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.nama-profile{
+    font-size: 18px;
+}
+.username{
+    color: rgb(0, 0, 0, 0.7);
+}
+
+
+.dataLokasi{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.dataLokasi p{
+    font-size: 14px;
+}
+
+.cardProfile{
+    background-color: white;
+    box-shadow: 0 0 3px rgb(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.bgProfile{
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(130deg, #D3C3FB 0%, #886BC6 50%, #D3C3FB 100%);
+    border-radius: 10px;
+}
+
+.bgProfile img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profilePic{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 5px solid white;
+    border-radius: 15px;
+    position: absolute;
+    top: 100px;
+    left: 70px;
+}
+
+.dataProfile {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.icon {
+    width: 14px;
+}
+
+p{
+    font-size: 14px;
+}
+
+.buttonArea{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    height: fit-content;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.isiProfile{
+    display: flex;
+    flex-direction: column;
+    padding-left: 55px;
+    padding-top: 65px;
+    width: 600px;
+}
+
+.profile-button{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnToko{
+    background-color: #886BC6;
+    color: #ffffff;
+    padding: 5px 20px;
+    border: 0;
+    border-radius: 10px;
+    width: 50%;
+}
+
+
+
+
+.btnEdit{
+    padding: 5px 20px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: white;
+    width: 50%;
+}
+
+.infoToko{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.ratingToko{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.ratingToko :nth-child(3){
+    font-weight: 300;
+}
+
+.ratingToko :nth-child(2){
+    font-weight: 600;
+}
+
+.barangAktif{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.barangAktif :nth-child(1){
+    font-weight: 500;
+}
+
+.totalJual{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+/* card barang jualan----------------^^ */
+.cardJualan{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    padding-top: 20px;
+}
+
+.navJualan{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    background-color: white;
+    width: fit-content;
+    padding: 8px 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 3px rgb(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.navJualan button{
+    border: 0;
+    background-color: transparent;
+    border-radius: 8px;
+    position: relative; 
+    z-index: 1; 
+    cursor: pointer;
+}
+
+.backgroundGeser{
+    position: absolute;
+    top: 8px;
+    height: 60%;
+    background-color: #f8f8fc;
+    border-radius: 8px;
+    box-shadow: 0 0 3px rgb(0, 0, 0, 0.4); 
+    transition: all 0.3s ease-in-out;
+    z-index: 0;
+}
+
+.rowButton{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    padding: 0px 10px;
+}
+
+
+.cardBarang{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 0.5px solid rgb(0, 0, 0, 0.4);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 3px rgb(0, 0, 0, 0.4);
+}
+
+.detailBarang{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 20px;
+}
+
+.harga{
+    font-weight: 500;
+    color: #886BC6;
+}
+
+/* ULASAN RAWRRRRR---------------^^ */
+.hidden{
+    display: none !important;
+}
+
+.cardUlasan{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px;
+    gap: 10px;
+    border-bottom: 1px solid black;
+}
+
+.rowUlasan{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.rowUlasan img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.namaUlasan{
+    display: flex;
+    flex-direction: column;
+}
+
+.namaUlasan :nth-child(1){
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.namaUlasan :nth-child(2){
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.produkUlasan{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: rgba(162, 83, 177, 0.2);
+    border: 1px solid #886BC6;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.rowProduk{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.rowProduk img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 2px solid #886BC6;
+}

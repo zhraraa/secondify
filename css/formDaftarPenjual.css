@@ -1,0 +1,353 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins";
+}
+
+body {
+    background-color: #f6f2ff;
+}
+
+/* ─── NAVBAR ─────────────────────────────────── */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 40px;
+    background: #fff;
+    border-bottom: 1px solid #ebebf0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    width: 120px;
+}
+
+
+.search-box {
+    position: relative;
+    flex: 1;
+    max-width: 480px;
+    margin: 0 30px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 18px;
+    border-radius: 24px;
+    border: 1.5px solid #e8e8f0;
+    background: #f8f8fc;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-box input:focus {
+    border-color: #886BC6;
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+    background: #fff;
+}
+
+.search-box input::placeholder {
+    color: #aaa;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.nav-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    border-radius: 50%;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav-icon-btn:hover {
+    background: #f0eeff;
+    color: #886BC6;
+}
+
+.nav-icon-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.nav-divider {
+    width: 1px;
+    height: 22px;
+    background: #e0e0e8;
+}
+
+.msgButton{
+    border: 0;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    border-radius: 50%;
+    color: #555;
+    transition: background 0.2s, color 0.2s;
+}
+
+.msgButton:hover{
+    background: #f0eeff;
+    color: #886BC6;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 12px;
+}
+
+.user:hover {
+    background: #f3f0ff;
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    background: #886BC6;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info .user-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #222;
+    line-height: 1.2;
+}
+
+.user-info .user-role {
+    font-size: 11px;
+    color: #999;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+.logout-btn:hover {
+    background: #fff0f0;
+    color: #e74c3c;
+}
+
+.logout-btn svg {
+    width: 15px;
+    height: 15px;
+}
+
+/* ------------------------------------------------------------------------------ */
+
+section {
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    max-width: 650px;
+}
+
+.tombol-kembali {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.tombol-kembali:hover {
+    color: #886BC6;
+}
+
+.tombol-kembali .text {
+    font-size: 14px;
+}
+
+.tombol-kembali .icon {
+    width: 16px;
+}
+
+.container-form {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header {
+    display: flex;
+    gap: 15px;
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 15px;
+}
+
+.header-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-title span {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+}
+
+.header-title p {
+    font-size: 13px;
+    color: #666;
+}
+
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+form .input-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+}
+
+form .input-group input, form .input-group textarea {
+    padding: 10px 16px;
+    border: 1.5px solid #e8e8e8;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.upload-file {
+    border: 1px dashed #d3c3fb;
+    border-radius: 8px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-file:hover {
+    border-color: #886BC6;
+    background: #f8f4ff;
+}
+
+.upload-file .icon {
+    width: 40px;
+    height: 40px;
+    background-color: #f8f4ff;
+    color: #886BC6;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.upload-file div {
+    display: flex;
+    flex-direction: column;
+}
+
+.upload-file span {
+    font-size: 13px;
+}
+
+.upload-file span:nth-child(2) {
+    font-size: 11px;
+    color: gray;
+    margin-top: 2px;
+}
+
+.input-checkbox{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.input-checkbox input{
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.input-checkbox .syarat-ketentuan {
+    color: #886BC6;
+    font-weight: 600;
+}
+
+.submit-button {
+    background: linear-gradient(to bottom right, #886BC6, #d3c3fb);
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    justify-content: center;
+    text-align: center;
+}
+
+.submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px #cbcbcb;
+}
