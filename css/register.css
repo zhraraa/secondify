@@ -1,0 +1,49 @@
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #f4f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* BOX */
+.register-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.register-box h2 {
+    margin-bottom: 20px;
+}
+
+/* INPUT */
+.register-box input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+/* BUTTON */
+.register-box button {
+    width: 100%;
+    padding: 10px;
+    background: #886BC6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* MESSAGE */
+#message {
+    margin-top: 10px;
+    font-size: 14px;
+}
