@@ -23,7 +23,7 @@ body {
 }
 
 .logo {
-    width: 120px;
+    width: 130px;
 }
 
 
@@ -220,7 +220,7 @@ section {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
 }
 
 .header {
@@ -251,7 +251,7 @@ section {
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 25px;
 }
 
 form .input-group {
@@ -322,9 +322,13 @@ form .input-group input, form .input-group textarea {
     align-items: center;
 }
 
+.input-checkbox label{
+    font-size: 14px;
+}
+
 .input-checkbox input{
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     cursor: pointer;
 }
 

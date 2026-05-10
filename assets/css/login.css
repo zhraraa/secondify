@@ -71,13 +71,21 @@ h1{
     color: rgba(0, 0, 0, 0.7);
 }
 
+.loginSalah {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: red;
+    font-size: 0.8rem;
+}
+
 .bwahForm {
     display: flex;
     flex-direction: row;
     width: 100%;
     align-items: center;
     justify-content: space-between;
-
+    padding: 10px 0;
 }
 
 

@@ -1,18 +1,23 @@
+<?php
+require_once '../../../koneksi/koneksi.php';
+require_once '../../config/config.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/profile.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/user/profile.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <!-- NAVBAR -->
     <nav class="navbar">
         
-        <img src="../img/logo.png" alt="" class="logo">
+        <img src="<?= SECONDIFY; ?>/assets/images/logo/logo.png" alt="" class="logo">
 
         <div class="search-box">
             <input type="text" placeholder="Mau cari barang apa hari ini?" id="searchInput">
@@ -40,7 +45,7 @@
 
             <div class="nav-divider"></div>
 
-            <a href="setting.html" class="user" title="Profil">
+            <a href="<?= SECONDIFY ?>/apps/views/user/profile.php" class="user" title="Profil">
                 <div class="avatar">A</div>
                 <div class="user-info">
                     <span class="user-name">Annisa</span>
@@ -64,18 +69,17 @@
             <!-- card profile atas -->
             <div class="cardProfile">
                 <div class="bgProfile">
-                    <!-- <img src="../img/profile.jpg" alt=""> -->
                 </div>
                     <div class="isiProfile">
-                        <img src="../img/profile.jpg" alt="" class="profilePic">
+                        <img src="<?= SECONDIFY; ?>/assets/images/profile.jpg" alt="" class="profilePic">
                         <div class="buttonArea">
-                            <a href="formDaftarPenjual.html" class="btnToko">
+                            <a href="<?= SECONDIFY ?>/apps/views/user/formDaftarPenjual.php" class="btnToko">
                                 <div  class="profile-button">
                                     <i data-lucide="store" class="icon"></i>
                                     <p>Buka Toko</p>
                                 </div>
                             </a>
-                            <a href="setting.html" class="btnEdit">
+                            <a href="<?= SECONDIFY ?>/apps/views/user/setting.php" class="btnEdit">
                                 <div class="profile-button">
                                     <i data-lucide="pencil" class="icon"></i>
                                     <p>Edit Profile</p>
@@ -136,28 +140,28 @@
                 <!-- daftar produk -->
                 <div class="cardJualan" id="wadahProduk">
                     <div class="cardBarang">
-                        <img src="../img/produk.png" alt="">
+                        <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="">
                         <div class="detailBarang">
                             <p>Sunscreen OMG</p>
                             <p class="harga">Rp 50.000</p>
                         </div>
                     </div>
                     <div class="cardBarang">
-                        <img src="../img/produk.png" alt="">
+                        <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="">
                         <div class="detailBarang">
                             <p>Sunscreen OMG</p>
                             <p class="harga">Rp 50.000</p>
                         </div>
                     </div>
                     <div class="cardBarang">
-                        <img src="../img/produk.png" alt="">
+                        <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="">
                         <div class="detailBarang">
                             <p>Sunscreen OMG</p>
                             <p class="harga">Rp 50.000</p>
                         </div>
                     </div>
                     <div class="cardBarang">
-                        <img src="../img/produk.png" alt="">
+                        <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png"" alt="">
                         <div class="detailBarang">
                             <p>Sunscreen OMG</p>
                             <p class="harga">Rp 50.000</p>
@@ -168,7 +172,7 @@
                 <div class="hidden" id="wadahUlasan">
                     <div class="cardUlasan">
                         <div class="rowUlasan">
-                            <img src="../img/profile.jpg" alt="" class="ppUlasan">
+                            <img src="<?= SECONDIFY; ?>/assets/images/profile.jpg" alt="" class="ppUlasan">
                             <div class="namaUlasan">
                                 <span>Rara</span>
                                 <span>12 April 2026</span>
@@ -184,7 +188,7 @@
                         <div class="produkUlasan">
                             <span>Produk dibeli:</span>
                             <div class="rowProduk">
-                                <img src="../img/produk.png" alt="">
+                                <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="">
                                 <span>Vaseline Gluta-Hya</span>
                             </div>
                         </div>
@@ -194,7 +198,7 @@
                     </div>
                     <div class="cardUlasan">
                         <div class="rowUlasan">
-                            <img src="../img/profile.jpg" alt="" class="ppUlasan">
+                            <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="" class="ppUlasan">
                             <div class="namaUlasan">
                                 <span>Rara</span>
                                 <span>12 April 2026</span>
@@ -210,7 +214,7 @@
                         <div class="produkUlasan">
                             <span>Produk dibeli:</span>
                             <div class="rowProduk">
-                                <img src="../img/produk.png" alt="">
+                                <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="">
                                 <span>Vaseline Gluta-Hya</span>
                             </div>
                         </div>
@@ -223,7 +227,7 @@
             </div>
         </div>
     </section>
-    <script src="../js/script.js"></script>
-    <script src="../js/profile.js"></script>
+    <script src="<?= SECONDIFY; ?>/assets/js/global.js"></script>
+    <script src="<?= SECONDIFY; ?>/assets/js/user/profile.js"></script>
 </body>
 </html>

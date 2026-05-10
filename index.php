@@ -1,3 +1,9 @@
+<?php
+require_once 'koneksi/koneksi.php';
+require_once 'apps/config/config.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,8 +11,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/login.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
@@ -26,42 +32,51 @@
                     <h1>Selamat Datang Kembali</h1>
                     <p>Masuk untuk melihat update belanja terbaru di Bandar Lampung</p>
                 </div>
-                <form action="">
+                <form action="<?= SECONDIFY; ?>/apps/controllers/auth/login.php" method="POST">
                     <div class="input-email">
-                        <label for="">Email</label>
+                        <label>Email</label>
                         <div>
                             <i data-lucide="mail" style="width: 14px; color:rgba(0, 0, 0, 0.7); position: absolute; margin-left: 8px; align-self: center;"></i> 
-                            <input type="email" class="input-form" placeholder="nama@gmail.com" style="padding-left: 30px;">
+                            <input name="email" type="email" class="input-form" placeholder="nama@gmail.com" style="padding-left: 30px;">
                         </div>
                     </div>
                     <div class="input-password">
                         <label for="">Password</label>
                         <div style="display: flex; flex-direction: row; align-items: center;">
                             <i data-lucide="lock" style="width: 14px; color:rgba(0, 0, 0, 0.7); position: absolute; margin-left: 8px; align-self: center;"></i> 
-                            <input type="password" class="input-form" placeholder="Masukkan password" style="padding-left: 30px;">
+                            <input name="password" type="password" class="input-form" placeholder="Masukkan password" style="padding-left: 30px;">
                             <i data-lucide="eye" style="width: 16px; height: 16px; color:rgba(0, 0, 0, 0.7); position: absolute; margin-left: 380px; align-self: center; "></i> 
                         </div>
                     </div>
-                </form>
-                <div class="bwahForm">
-                    <div class="ingatSaya">
-                        <input type="checkbox" class="remember">
-                        <label for="remember">Ingat saya</label>
+                    
+                    <?php if (isset($_GET['error']) && $_GET['error'] == "loginError") : ?>
+                        <div class="loginSalah" style="width: 100%;">
+                            <i data-lucide="alert-circle" style="width: 1.25rem; height: 1.25rem; color: red;"></i>
+                            <span>Email atau Password salah</span>
+                        </div>
+                    <?php endif; ?>
+
+
+                    <div class="bwahForm">
+                        <div class="ingatSaya">
+                            <input type="checkbox" class="remember">
+                            <label for="remember">Ingat saya</label>
+                        </div>
+                        <a href="" class="lupaPw">Lupa password?</a>
                     </div>
-                    <a href="" class="lupaPw">Lupa password?</a>
-                </div>
-                <a href="dashboard.html" style="width: 100%;">
-                    <button class="buttonMasuk">Masuk</button>
-                </a>
+                    <button class="buttonMasuk" type="submit" name="masuk">Masuk</button>
+                    
+                </form>
+
                 <div class="to-regist">
                     <p>Belum punya akun?</p>
-                    <a href="">Daftar sekarang</a>
+                    <a href="<?= SECONDIFY; ?>/apps/views/auth/register.php">Daftar sekarang</a>
                 </div>
             </div>
 
         </div>
     </div>
-    <script src="../js/script.js">
+    <script src="<?= SECONDIFY; ?>/assets/js/global.js">
         
     </script>
 </body>

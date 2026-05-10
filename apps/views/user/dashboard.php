@@ -1,17 +1,22 @@
+<?php
+require_once '../../../koneksi/koneksi.php';
+require_once '../../config/config.php';
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beranda — Secondify</title>
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/user/dashboard.css">
 </head>
 <body>
 
     <!-- NAVBAR -->
     <nav class="navbar">
         
-        <img src="../img/logo.png" alt="" class="logo">
+        <img src="<?= SECONDIFY ?>/assets/images/logo/logo.png" alt="" class="logo">
 
         <div class="search-box">
             <input type="text" placeholder="Mau cari barang apa hari ini?" id="searchInput">
@@ -35,7 +40,7 @@
 
             <div class="nav-divider"></div>
 
-            <a href="profile.html" class="user" title="Profil">
+            <a href="<?= SECONDIFY; ?>/apps/views/user/profile.php" class="user" title="Profil">
                 <div class="avatar">A</div>
                 <div class="user-info">
                     <span class="user-name">alyssa</span>
@@ -274,6 +279,6 @@
         © 2026 Secondify — Marketplace barang bekas Bandar Lampung.
     </footer>
 
-    <script src="../js/dashboard.js"></script>
+    <script src="<?= SECONDIFY ?>/assets/js/user/dashboard.js"></script>
 </body>
 </html>

@@ -1,18 +1,25 @@
+<?php
+require_once '../../../koneksi/koneksi.php';
+require_once '../../config/config.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/formJualBarang.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/penjual/formJualBarang.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <!-- NAVBAR -->
     <nav class="navbar">
-        
-        <img src="../img/logo.png" alt="" class="logo">
+            
+    <a href="<?= SECONDIFY ?>/apps/views/user/dashboard.php" class="sidebar-logo">
+        <img src="<?= SECONDIFY; ?>/assets/images/logo/logo.png" alt="" class="logo">
+    </a>
 
         <div class="search-box">
             <input type="text" placeholder="Mau cari barang apa hari ini?" id="searchInput">
@@ -40,7 +47,7 @@
 
             <div class="nav-divider"></div>
 
-            <a href="setting.html" class="user" title="Profil">
+            <a href="<?= SECONDIFY ?>/apps/views/user/profile.php" class="user" title="Profil">
                 <div class="avatar">A</div>
                 <div class="user-info">
                     <span class="user-name">Annisa</span>
@@ -144,12 +151,12 @@
                     </div>
                     <div class="rowButton">
                         <button class="buttonBatal">Batal</button>
-                        <a href="dashboard.html" class="buttonPosting">Posting Barang</a>
+                        <a href="<?= SECONDIFY ?>/apps/views/user/dashboard.php" class="buttonPosting">Posting Barang</a>
                     </div>
                 </form>
             </div>
         </div>
     </section>
-    <script src="../js/script.js"></script>
+    <script src="<?= SECONDIFY; ?>/assets/js/global.js"></script>
 </body>
 </html>

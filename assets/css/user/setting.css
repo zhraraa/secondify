@@ -45,20 +45,8 @@ body {
     padding: 0 6px;
 }
 
-.logo-icon {
-    width: 34px;
-    height: 34px;
-    background: rgba(255,255,255,0.25);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.logo-icon svg {
-    width: 18px;
-    height: 18px;
+.logo {
+    width: 130px;
 }
 
 .sidebar-nav {
