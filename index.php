@@ -20,7 +20,7 @@ require_once 'apps/config/config.php';
     <div>
         <div class="card">
             <div class="left-area">
-                <img src="../img/logo3.png" alt="">
+                <img src="<?= SECONDIFY; ?>/assets/images/logo/logo3.png" alt="">
                 <div class="textTengah">
                     <h1>Jual Beli Barang Bekas, dekat & mudah.</h1>
                     <p>Marketplace barang bekas Bandar Lampung, temukan barang berkualitas dengan harga ramah.</p>
@@ -62,7 +62,7 @@ require_once 'apps/config/config.php';
                             <input type="checkbox" class="remember">
                             <label for="remember">Ingat saya</label>
                         </div>
-                        <a href="" class="lupaPw">Lupa password?</a>
+                        <a href="javascript:void(0)" class="lupaPw">Lupa password?</a>
                     </div>
                     <button class="buttonMasuk" type="submit" name="masuk">Masuk</button>
                     

@@ -78,7 +78,7 @@ require_once '../../config/config.php';
                     <span>Isi informasi barang dengan lengkap agar cepat laku.</span>
                 </div>
                 
-                <form action="">
+                <form action="<?= SECONDIFY ?>/apps/views/user/dashboard.php" method="POST">
                     <div class="inputGambar">
                         <p class="judulUpload">Foto Barang</p>
                         <label class="kotakUpload" for="upload-foto">

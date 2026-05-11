@@ -68,6 +68,6 @@ require_once '../../config/config.php';
 
 </div>
 
-<script src="../js/register.js"></script>
+<script src="<?= SECONDIFY; ?>/assets/js/user/register.js"></script>
 </body>
 </html>

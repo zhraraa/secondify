@@ -1,3 +1,7 @@
+<?php
+require_once '../../config/config.php';
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -5,13 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel — Secondify</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/adminDashboard.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/admin/adminDashboard.css">
 </head>
 <body>
 
 <!-- ── SIDEBAR ── -->
 <aside class="sidebar">
-    <a href="dashboard.html" class="sidebar-brand" style="text-decoration:none;">
+    <a href="<?= SECONDIFY; ?>/apps/views/admin/adminDashboard.php" class="sidebar-brand" style="text-decoration:none;">
         <div class="brand-icon">
             <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         </div>
@@ -65,7 +69,7 @@
                 <div class="sidebar-user-role">Super Admin</div>
             </div>
         </div>
-        <a href="dashboard.html" class="sidebar-logout">
+        <a href="<?= SECONDIFY; ?>/apps/views/user/dashboard.php" class="sidebar-logout">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
             Kembali ke Marketplace
         </a>
@@ -830,7 +834,7 @@
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<script src="../js/adminDashboard.js"></script>
+<script src="<?= SECONDIFY; ?>/assets/js/admin/adminDashboard.js"></script>
 
 </body>
 </html>

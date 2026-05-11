@@ -1,4 +1,7 @@
 // ── Kategori: klik aktif ──────────────────────────
+const SECONDIFY_BASE = `${window.location.origin}${window.location.pathname.split("/apps/")[0]}`;
+const kategoriUrl = (params = "") => `${SECONDIFY_BASE}/apps/views/user/kategori.php${params}`;
+
 const kategoriItems = document.querySelectorAll(".kategori-item");
 
 kategoriItems.forEach(item => {
@@ -7,7 +10,7 @@ kategoriItems.forEach(item => {
         item.classList.add("active");
 
         const selected = item.dataset.kategori;
-        window.location.href = `kategori.html?kat=${encodeURIComponent(selected)}`;
+        window.location.href = kategoriUrl(`?kat=${encodeURIComponent(selected)}`);
     });
 });
 
@@ -24,7 +27,7 @@ searchInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         const query = e.target.value.trim();
         if (query) {
-            window.location.href = `kategori.html?kat=semua&q=${encodeURIComponent(query)}`;
+            window.location.href = kategoriUrl(`?kat=semua&q=${encodeURIComponent(query)}`);
         }
     }
 });

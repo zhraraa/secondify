@@ -1,55 +1,61 @@
+<?php
+require_once '../../config/config.php';
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Produk — Secondify</title>
-    <link rel="stylesheet" href="../css/detail.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/user/detail.css">
 </head>
 <body>
 
     <!-- NAVBAR -->
     <nav class="navbar">
-        <img src="../img/logo.png" alt="Secondify" class="logo">
+        <a href="<?= SECONDIFY; ?>/apps/views/user/dashboard.php" style="text-decoration: none;">
+            <img src="<?= SECONDIFY; ?>/assets/images/logo/logo.png" alt="Secondify" class="logo">
+        </a>
 
         <div class="search-box">
             <input type="text" placeholder="Mau cari barang apa hari ini?" id="searchInput">
         </div>
 
         <div class="nav-right">
-            <button class="nav-icon-btn" title="Wishlist">
+            <a href="<?= SECONDIFY; ?>/apps/views/user/favorit.php" class="nav-icon-btn" title="Wishlist" style="text-decoration: none; color: inherit;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                 </svg>
-            </button>
-            <button class="nav-icon-btn" title="Notifikasi">
+            </a>
+            <a href="<?= SECONDIFY; ?>/apps/views/user/chat.php" class="nav-icon-btn" title="Notifikasi" style="text-decoration: none; color: inherit;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                     <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
                     <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
                 </svg>
-            </button>
+            </a>
             <div class="nav-divider"></div>
-            <a href="setting.html" class="user" title="Profil">
+            <a href="<?= SECONDIFY; ?>/apps/views/user/profile.php" class="user" title="Profil">
                 <div class="avatar">A</div>
                 <div class="user-info">
                     <span class="user-name">alyssa</span>
                     <span class="user-role">Member</span>
                 </div>
             </a>
-            <button class="logout-btn" title="Keluar">
+            <a href="<?= SECONDIFY; ?>/index.php" class="logout-btn" title="Keluar" style="text-decoration: none; color: inherit;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
                     <polyline points="16 17 21 12 16 7"/>
                     <line x1="21" y1="12" x2="9" y2="12"/>
                 </svg>
                 Keluar
-            </button>
+            </a>
         </div>
     </nav>
 
     <!-- BREADCRUMB -->
     <div class="breadcrumb">
-        <a href="dashboard.html">Beranda</a>
+        <a href="<?= SECONDIFY; ?>/apps/views/user/dashboard.php">Beranda</a>
         <span class="sep">›</span>
         <a href="#" id="bcKategori">Kategori</a>
         <span class="sep">›</span>
@@ -64,7 +70,7 @@
         <!-- LEFT: Gallery -->
         <div class="gallery-section">
             <div class="main-image-wrap">
-                <img src="" alt="" id="mainImage" class="main-image">
+                <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="" id="mainImage" class="main-image">
                 <span class="kondisi-badge" id="kondisiBadge"></span>
                 <button class="wishlist-fab" id="wishlistFab" title="Simpan ke Wishlist">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -200,6 +206,6 @@
     <!-- Toast notification -->
     <div class="toast" id="toast"></div>
 
-    <script src="../js/detail.js"></script>
+    <script src="<?= SECONDIFY; ?>/assets/js/user/detail.js?v=20260511-3"></script>
 </body>
 </html>

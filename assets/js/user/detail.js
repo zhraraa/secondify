@@ -1,4 +1,13 @@
 // ─── SHARED PRODUCT DATA (sama dengan kategori.js) ───────────────────────────
+const SECONDIFY_BASE = `${window.location.origin}${window.location.pathname.split("/apps/")[0]}`;
+const IMAGE_VERSION = "20260511-2";
+const detailUrl = (product) => `${SECONDIFY_BASE}/apps/views/user/detail.php?id=${encodeURIComponent(product.id)}`;
+const kategoriUrl = (params = "") => `${SECONDIFY_BASE}/apps/views/user/kategori.php${params}`;
+const imageUrl = (src) => {
+    if (!src || src.startsWith("http") || src.startsWith("/")) return src;
+    return `${SECONDIFY_BASE}/assets/images/${src.replace(/^(\.\.\/)?img\//, "")}?v=${IMAGE_VERSION}`;
+};
+
 const allProducts = [
     {
         id: 1,
@@ -12,13 +21,13 @@ const allProducts = [
         lokasi: "Langkapura",
         deskripsi: "Headphone wireless Sony WH-1000XM4 dengan noise cancelling terdepan di kelasnya. Dibeli 2023, jarang dipakai. Lengkap dengan box, kabel, dan pouch original.",
         terjual: false,
-        gambar: "../img/barang/headphone.jpg",
+        gambar: "barang/headphone.jpg",
         gambarList: [
-            "../img/barang/headphone.jpg",
+            "barang/headphone.jpg",
             "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=600&h=600&fit=crop",
             "https://images.unsplash.com/photo-1601370552761-d129028bd833?w=600&h=600&fit=crop",
         ],
-        slug: "detail.html?id=1"
+        slug: "detail.php?id=1"
     },
     {
         id: 2,
@@ -32,12 +41,12 @@ const allProducts = [
         lokasi: "Kedaton",
         deskripsi: "Mechanical keyboard Rexus full-size, switch red, kondisi masih sangat baik. Ada beberapa keycap yang sedikit pudar tapi semua tombol berfungsi normal.",
         terjual: false,
-        gambar: "../img/barang/keyboard.jpg",
+        gambar: "barang/keyboard.jpg",
         gambarList: [
-            "../img/barang/keyboard.jpg",
+            "barang/keyboard.jpg",
             "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=600&h=600&fit=crop",
         ],
-        slug: "detail.html?id=2"
+        slug: "detail.php?id=2"
     },
     {
         id: 3,
@@ -56,7 +65,7 @@ const allProducts = [
             "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=600&fit=crop",
             "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=600&h=600&fit=crop",
         ],
-        slug: "detail.html?id=3"
+        slug: "detail.php?id=3"
     },
     {
         id: 4,
@@ -74,7 +83,7 @@ const allProducts = [
         gambarList: [
             "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=600&h=600&fit=crop",
         ],
-        slug: "detail.html?id=4"
+        slug: "detail.php?id=4"
     },
     {
         id: 5,
@@ -92,7 +101,7 @@ const allProducts = [
         gambarList: [
             "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=600&h=600&fit=crop",
         ],
-        slug: "detail.html?id=5"
+        slug: "detail.php?id=5"
     },
     {
         id: 6,
@@ -106,11 +115,11 @@ const allProducts = [
         lokasi: "Way Halim",
         deskripsi: "iPhone 17 Pro Max 256GB Desert Titanium, baru pakai 2 bulan. Kondisi mulus, masih garansi resmi sampai 2026. Lengkap semua aksesori.",
         terjual: false,
-        gambar: "../img/barang/ip17pm.jpg",
+        gambar: "barang/ip17pm.jpg",
         gambarList: [
-            "../img/barang/ip17pm.jpg",
+            "barang/ip17pm.jpg",
         ],
-        slug: "detail.html?id=6"
+        slug: "detail.php?id=6"
     },
     {
         id: 7,
@@ -128,7 +137,7 @@ const allProducts = [
         gambarList: [
             "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&h=600&fit=crop",
         ],
-        slug: "detail.html?id=7"
+        slug: "detail.php?id=7"
     },
     {
         id: 8,
@@ -142,11 +151,11 @@ const allProducts = [
         lokasi: "Rajabasa",
         deskripsi: "Adidas Samba OG size 42, warna putih hitam. Baru dipakai 3x, kondisi sangat mulus. Lengkap dengan dus dan lace cadangan.",
         terjual: false,
-        gambar: "../img/barang/adidassamba.jpg",
+        gambar: "barang/adidassamba.jpg",
         gambarList: [
-            "../img/barang/adidassamba.jpg",
+            "barang/adidassamba.jpg",
         ],
-        slug: "detail.html?id=8"
+        slug: "detail.php?id=8"
     },
     {
         id: 9,
@@ -160,11 +169,11 @@ const allProducts = [
         lokasi: "Sukarame",
         deskripsi: "Kebaya pashmina biru tua dengan bordir halus. Ukuran M-L, kondisi sangat baik hanya dipakai sekali. Cocok untuk wisuda atau acara formal.",
         terjual: false,
-        gambar: "../img/barang/bluekebaya.jpg",
+        gambar: "barang/bluekebaya.jpg",
         gambarList: [
-            "../img/barang/bluekebaya.jpg",
+            "barang/bluekebaya.jpg",
         ],
-        slug: "detail.html?id=9"
+        slug: "detail.php?id=9"
     },
     {
         id: 10,
@@ -178,12 +187,12 @@ const allProducts = [
         lokasi: "Langkapura",
         deskripsi: "Canon EOS M50 Mark II body only, shutter count ±8000. Kondisi mulus, semua fungsi normal termasuk flip screen dan Wi-Fi. Lengkap dengan charger dan battery.",
         terjual: false,
-        gambar: "../img/barang/camera.jpg",
+        gambar: "barang/camera.jpg",
         gambarList: [
-            "../img/barang/camera.jpg",
+            "barang/camera.jpg",
             "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=600&h=600&fit=crop",
         ],
-        slug: "detail.html?id=10"
+        slug: "detail.php?id=10"
     },
     {
         id: 11,
@@ -201,7 +210,7 @@ const allProducts = [
         gambarList: [
             "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&h=600&fit=crop",
         ],
-        slug: "detail.html?id=11"
+        slug: "detail.php?id=11"
     },
     {
         id: 12,
@@ -219,7 +228,7 @@ const allProducts = [
         gambarList: [
             "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&h=600&fit=crop",
         ],
-        slug: "detail.html?id=12"
+        slug: "detail.php?id=12"
     },
     {
         id: 13,
@@ -237,7 +246,7 @@ const allProducts = [
         gambarList: [
             "https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?w=600&h=600&fit=crop",
         ],
-        slug: "detail.html?id=13"
+        slug: "detail.php?id=13"
     },
     {
         id: 14,
@@ -255,7 +264,7 @@ const allProducts = [
         gambarList: [
             "https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=600&h=600&fit=crop",
         ],
-        slug: "detail.html?id=14"
+        slug: "detail.php?id=14"
     },
     {
         id: 15,
@@ -273,7 +282,7 @@ const allProducts = [
         gambarList: [
             "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&h=600&fit=crop",
         ],
-        slug: "detail.html?id=15"
+        slug: "detail.php?id=15"
     },
     {
         id: 16,
@@ -287,13 +296,184 @@ const allProducts = [
         lokasi: "Labuhan Ratu",
         deskripsi: "Pashmina motif bunga warna pink pastel, bahan sifon. Kondisi sangat baik, hanya dipakai 1x. Ukuran 180x75cm.",
         terjual: false,
-        gambar: "../img/barang/pashmina.jpg",
+        gambar: "barang/pashmina.jpg",
         gambarList: [
-            "../img/barang/pashmina.jpg",
+            "barang/pashmina.jpg",
         ],
-        slug: "detail.html?id=16"
+        slug: "detail.php?id=16"
     },
 ];
+
+allProducts.push(
+    {
+        id: 17,
+        nama: "OMG Bright Booster Set",
+        harga: 50000,
+        kondisi: "bekas",
+        kategori: "kesehatan",
+        subKategori: "Skincare",
+        merek: "omg",
+        merekLabel: "OMG",
+        lokasi: "Kedaton",
+        deskripsi: "Paket OMG Bright Booster berisi sunscreen dan face wash. Kondisi masih layak pakai.",
+        terjual: false,
+        gambar: "barang/produk.png",
+        gambarList: [
+            "barang/produk.png",
+        ],
+        slug: "detail.php?id=17"
+    },
+    {
+        id: 18,
+        nama: "Novel Laut Bercerita",
+        harga: 65000,
+        kondisi: "bekas",
+        kategori: "buku",
+        subKategori: "Novel",
+        merek: "lainnya",
+        merekLabel: "Lainnya",
+        lokasi: "Rajabasa",
+        deskripsi: "Novel bekas kondisi rapi, halaman lengkap dan masih nyaman dibaca.",
+        terjual: false,
+        gambar: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600&h=600&fit=crop",
+        slug: "detail.php?id=18"
+    },
+    {
+        id: 19,
+        nama: "Meja Belajar Minimalis",
+        harga: 350000,
+        kondisi: "bekas",
+        kategori: "perabot",
+        subKategori: "Meja",
+        merek: "lainnya",
+        merekLabel: "Lainnya",
+        lokasi: "Sukarame",
+        deskripsi: "Meja belajar minimalis, kokoh dan cocok untuk kamar kos atau ruang kerja kecil.",
+        terjual: false,
+        gambar: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=600&h=600&fit=crop",
+        slug: "detail.php?id=19"
+    },
+    {
+        id: 20,
+        nama: "Raket Badminton Yonex",
+        harga: 275000,
+        kondisi: "bekas",
+        kategori: "olahraga",
+        subKategori: "Badminton",
+        merek: "yonex",
+        merekLabel: "Yonex",
+        lokasi: "Way Halim",
+        deskripsi: "Raket badminton ringan, senar masih kencang dan grip nyaman.",
+        terjual: false,
+        gambar: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=600&h=600&fit=crop",
+        slug: "detail.php?id=20"
+    },
+    {
+        id: 21,
+        nama: "Stroller Bayi Lipat",
+        harga: 450000,
+        kondisi: "bekas",
+        kategori: "anak",
+        subKategori: "Perlengkapan Bayi",
+        merek: "lainnya",
+        merekLabel: "Lainnya",
+        lokasi: "Labuhan Ratu",
+        deskripsi: "Stroller bayi lipat, roda masih lancar dan kain mudah dibersihkan.",
+        terjual: false,
+        gambar: "https://images.unsplash.com/photo-1591348278999-ee1d0c06ed7b?w=600&h=600&fit=crop",
+        slug: "detail.php?id=21"
+    },
+    {
+        id: 22,
+        nama: "Helm Half Face",
+        harga: 180000,
+        kondisi: "bekas",
+        kategori: "kendaraan",
+        subKategori: "Aksesoris Motor",
+        merek: "lainnya",
+        merekLabel: "Lainnya",
+        lokasi: "Kedaton",
+        deskripsi: "Helm half face kondisi baik, kaca bening dan busa masih nyaman.",
+        terjual: false,
+        gambar: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600&h=600&fit=crop",
+        slug: "detail.php?id=22"
+    },
+    {
+        id: 23,
+        nama: "Panci Stainless",
+        harga: 95000,
+        kondisi: "bekas",
+        kategori: "dapur",
+        subKategori: "Peralatan Masak",
+        merek: "lainnya",
+        merekLabel: "Lainnya",
+        lokasi: "Tanjung Karang Barat",
+        deskripsi: "Panci stainless ukuran sedang, cocok untuk kebutuhan dapur harian.",
+        terjual: false,
+        gambar: "https://images.unsplash.com/photo-1584990347449-a11165d1e2ae?w=600&h=600&fit=crop",
+        slug: "detail.php?id=23"
+    },
+    {
+        id: 24,
+        nama: "Tas Ransel Kuliah",
+        harga: 120000,
+        kondisi: "bekas",
+        kategori: "tas",
+        subKategori: "Ransel",
+        merek: "lainnya",
+        merekLabel: "Lainnya",
+        lokasi: "Langkapura",
+        deskripsi: "Tas ransel bekas, muat laptop dan buku, resleting masih aman.",
+        terjual: false,
+        gambar: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&h=600&fit=crop",
+        slug: "detail.php?id=24"
+    },
+    {
+        id: 25,
+        nama: "Paket Alat Tulis",
+        harga: 35000,
+        kondisi: "bekas",
+        kategori: "alat-tulis",
+        subKategori: "Stationery",
+        merek: "lainnya",
+        merekLabel: "Lainnya",
+        lokasi: "Rajabasa",
+        deskripsi: "Paket alat tulis berisi pulpen, pensil, dan sticky notes.",
+        terjual: false,
+        gambar: "https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?w=600&h=600&fit=crop",
+        slug: "detail.php?id=25"
+    },
+    {
+        id: 26,
+        nama: "Mini Figure Koleksi",
+        harga: 150000,
+        kondisi: "seperti-baru",
+        kategori: "koleksi",
+        subKategori: "Figure",
+        merek: "lainnya",
+        merekLabel: "Lainnya",
+        lokasi: "Sukarame",
+        deskripsi: "Mini figure koleksi pajangan, kondisi bersih dan masih lengkap.",
+        terjual: false,
+        gambar: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600&h=600&fit=crop",
+        slug: "detail.php?id=26"
+    },
+    {
+        id: 27,
+        nama: "Lampu Meja Serbaguna",
+        harga: 75000,
+        kondisi: "bekas",
+        kategori: "lainnya",
+        subKategori: "Perlengkapan Rumah",
+        merek: "lainnya",
+        merekLabel: "Lainnya",
+        lokasi: "Way Halim",
+        deskripsi: "Lampu meja serbaguna, cahaya masih terang dan cocok untuk belajar.",
+        terjual: false,
+        gambar: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&h=600&fit=crop",
+        slug: "detail.php?id=27"
+    }
+);
 
 // Kategori label map
 const kategoriLabel = {
@@ -304,10 +484,15 @@ const kategoriLabel = {
     sepatu: "Sepatu",
     kamera: "Kamera",
     mainan: "Mainan",
+    anak: "Anak",
     olahraga: "Olahraga",
     tas: "Tas",
     perabot: "Perabot",
+    kendaraan: "Kendaraan",
     dapur: "Dapur",
+    "alat-tulis": "Alat Tulis",
+    koleksi: "Koleksi",
+    kesehatan: "Kesehatan",
     lainnya: "Lainnya",
 };
 
@@ -339,7 +524,7 @@ function showNotFound() {
         <div class="not-found" style="width:100%; padding: 80px 40px; text-align:center;">
             <h3>Produk tidak ditemukan</h3>
             <p>Barang yang kamu cari tidak ada atau sudah dihapus.</p>
-            <a href="kategori.html?kat=semua">← Kembali ke Kategori</a>
+            <a href="${kategoriUrl("?kat=semua")}">← Kembali ke Kategori</a>
         </div>`;
     document.querySelector(".related-section").style.display = "none";
 }
@@ -350,14 +535,14 @@ function renderProduct(p) {
 
     // Breadcrumb
     document.getElementById("bcKategori").textContent = kategoriLabel[p.kategori] || p.kategori;
-    document.getElementById("bcKategori").href = `kategori.html?kat=${p.kategori}`;
+    document.getElementById("bcKategori").href = kategoriUrl(`?kat=${p.kategori}`);
     document.getElementById("bcSubKategori").textContent = p.subKategori;
     document.getElementById("bcNama").textContent = p.nama;
 
     // Main image
     const images = p.gambarList && p.gambarList.length > 0 ? p.gambarList : [p.gambar];
     const mainImg = document.getElementById("mainImage");
-    mainImg.src = images[0];
+    mainImg.src = imageUrl(images[0]);
     mainImg.alt = p.nama;
     mainImg.onerror = function() {
         this.src = "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&h=600&fit=crop";
@@ -374,7 +559,7 @@ function renderProduct(p) {
     if (images.length > 1) {
         thumbsEl.innerHTML = images.map((img, i) => `
             <div class="thumb ${i === 0 ? "active" : ""}" data-index="${i}">
-                <img src="${img}" alt="${p.nama} ${i+1}"
+                <img src="${imageUrl(img)}" alt="${p.nama} ${i+1}"
                     onerror="this.src='https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=200&h=200&fit=crop'">
             </div>
         `).join("");
@@ -382,7 +567,7 @@ function renderProduct(p) {
         thumbsEl.querySelectorAll(".thumb").forEach(thumb => {
             thumb.addEventListener("click", () => {
                 const idx = parseInt(thumb.dataset.index);
-                mainImg.src = images[idx];
+                mainImg.src = imageUrl(images[idx]);
                 thumbsEl.querySelectorAll(".thumb").forEach(t => t.classList.remove("active"));
                 thumb.classList.add("active");
             });
@@ -414,7 +599,7 @@ function renderProduct(p) {
     document.getElementById("productDesc").textContent = p.deskripsi;
 
     // "Lihat Semua" link
-    document.getElementById("lihatSemua").href = `kategori.html?kat=${p.kategori}`;
+    document.getElementById("lihatSemua").href = kategoriUrl(`?kat=${p.kategori}`);
 }
 
 function renderRelated(currentProduct) {
@@ -433,9 +618,9 @@ function renderRelated(currentProduct) {
     const badgeLabelMap = { "baru": "Baru", "seperti-baru": "Seperti Baru", "bekas": "Bekas" };
 
     grid.innerHTML = related.map(p => `
-        <a class="product-card" href="${p.slug}">
+        <a class="product-card" href="${detailUrl(p)}">
             <div class="card-img-wrap">
-                <img src="${p.gambar}" alt="${p.nama}" loading="lazy"
+                <img src="${imageUrl(p.gambar)}" alt="${p.nama}" loading="lazy"
                     onerror="this.src='https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop'">
                 <span class="card-badge ${badgeMap[p.kondisi]}">${badgeLabelMap[p.kondisi]}</span>
                 <button class="wishlist-btn" title="Simpan ke Wishlist">
@@ -496,7 +681,7 @@ function bindEvents(product) {
     const navSearch = document.getElementById("searchInput");
     navSearch.addEventListener("keydown", e => {
         if (e.key === "Enter" && e.target.value.trim()) {
-            window.location.href = `kategori.html?kat=semua&q=${encodeURIComponent(e.target.value.trim())}`;
+            window.location.href = kategoriUrl(`?kat=semua&q=${encodeURIComponent(e.target.value.trim())}`);
         }
     });
 }
