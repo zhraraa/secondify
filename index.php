@@ -10,7 +10,7 @@ require_once 'apps/config/config.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Secondify - Login</title>
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/login.css">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -62,7 +62,7 @@ require_once 'apps/config/config.php';
                             <input type="checkbox" class="remember">
                             <label for="remember">Ingat saya</label>
                         </div>
-                        <a href="javascript:void(0)" class="lupaPw">Lupa password?</a>
+                        <a href="#" class="lupaPw">Lupa password?</a>
                     </div>
                     <button class="buttonMasuk" type="submit" name="masuk">Masuk</button>
                     

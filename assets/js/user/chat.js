@@ -27,8 +27,7 @@ function sendMessage() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const searchInput = document.getElementById("searchInput");
-    const msgInput = document.getElementById("msgInput");
+    
 
     if (searchInput) {
         searchInput.addEventListener("keydown", event => {

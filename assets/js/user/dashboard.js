@@ -16,7 +16,7 @@ kategoriItems.forEach(item => {
 
 
 // ── Search ────────────────────────────────────────
-const searchInput = document.getElementById("searchInput");
+
 
 searchInput.addEventListener("keyup", (e) => {
     const query = e.target.value.trim();
