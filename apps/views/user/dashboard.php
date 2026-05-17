@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once '../../controllers/auth/auth_check.php';
 require_once '../../../koneksi/koneksi.php';
 require_once '../../config/config.php';
+require_once '../../controllers/auth/auth_check.php';
 ?>
 
 <!DOCTYPE html>
@@ -27,8 +27,7 @@ require_once '../../config/config.php';
             <h1>Temukan barang bekas berkualitas di sekitarmu!</h1>
             <p>Belanja hemat, jual cepat — semua ada di Secondify, marketplace warga Bandar Lampung.</p>
             <div class="hero-btn">
-                <a href="<?= SECONDIFY; ?>/apps/views/user/kategori.php" class="btn-primary" style="text-decoration: none; color: inherit; display: inline-flex; align-items: center; justify-content: center;">Mulai Belanja</a>
-                <a href="<?= SECONDIFY; ?>/apps/views/user/kategori.php" class="btn-secondary" style="text-decoration: none; color: inherit;">Pelajari →</a>
+                <a href="<?= SECONDIFY; ?>/apps/views/user/kategori.php" class="btn-primary">Pelajari →</a>
             </div>
         </div>
         <div class="hero-right">
@@ -222,17 +221,7 @@ require_once '../../config/config.php';
             </div>
         </div>
 
-        <div class="empty-state">
-            <div class="empty-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                    <line x1="3" y1="6" x2="21" y2="6"/>
-                    <path d="M16 10a4 4 0 0 1-8 0"/>
-                </svg>
-            </div>
-            <h4>Belum ada barang ditemukan</h4>
-            <p>Coba ubah kata kunci pencarian atau pilih kategori lain.</p>
-        </div>
+        <div class="recommendation-grid" id="recommendationGrid"></div>
     </section>
 
     <footer class="footer">

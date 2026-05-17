@@ -1,6 +1,166 @@
 <?php
+session_start();
 require_once '../../../koneksi/koneksi.php';
 require_once '../../config/config.php';
+
+if ($_SESSION['status'] != "login") {
+    header("Location: " . SECONDIFY . "index.php?error=harusLogin");
+    exit();
+}
+
+$id_user = $_SESSION['id_user'];
+
+$queryUser = mysqli_query($conn, "
+SELECT * FROM users 
+WHERE id_user = '$id_user'
+");
+
+$queryAlamat = mysqli_query($conn, "
+SELECT * FROM alamat
+WHERE id_user = '$id_user'
+ORDER BY is_utama DESC
+");
+
+$user = mysqli_fetch_assoc($queryUser);
+$alamats = mysqli_fetch_all($queryAlamat, MYSQLI_ASSOC);
+
+if(isset($_POST['simpan_profil'])){
+
+    $nama = $_POST['nama_lengkap'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $no_hp = $_POST['no_hp'];
+    $jenis_kelamin = $_POST['jenis_kelamin'];
+    $tanggal_lahir = $_POST['tanggal_lahir'];
+    $bio = $_POST['bio'];
+
+    mysqli_query($conn, "
+    UPDATE users SET
+    nama_lengkap = '$nama',
+    username = '$username',
+    email = '$email',
+    no_hp = '$no_hp',
+    jenis_kelamin = '$jenis_kelamin',
+    tanggal_lahir = '$tanggal_lahir',
+    bio = '$bio'
+    WHERE id_user = '$id_user'
+    ");
+
+    header("Location: setting.php?success=editProfil");
+    exit();
+}
+if (isset($_POST['tambah_alamat'])) {
+    $id_user        = $_SESSION['id_user'];
+    $label          = htmlspecialchars($_POST['label_alamat']);
+    $nama_penerima  = htmlspecialchars($_POST['nama_penerima']);
+    $no_hp_penerima = htmlspecialchars($_POST['no_hp_penerima']);
+    $alamat         = htmlspecialchars($_POST['alamat_lengkap']);
+    $kota           = htmlspecialchars($_POST['kota']);
+    $provinsi       = htmlspecialchars($_POST['provinsi']);
+    $kode_pos       = htmlspecialchars($_POST['kode_pos']);
+
+    $cek = mysqli_query($conn, "SELECT COUNT(*) as total FROM alamat WHERE id_user = '$id_user'");
+    $row = mysqli_fetch_assoc($cek);
+    $is_utama = ($row['total'] == 0) ? 1 : 0;
+
+    mysqli_query($conn, "
+        INSERT INTO alamat (id_user, label_alamat, nama_penerima, no_hp_penerima, alamat_lengkap, kota, provinsi, kode_pos, is_utama)
+        VALUES ('$id_user', '$label', '$nama_penerima', '$no_hp_penerima', '$alamat', '$kota', '$provinsi', '$kode_pos', '$is_utama')
+    ");
+
+    header("Location: setting.php?success=tambahAlamat#alamat");
+    exit();
+}
+
+if (isset($_POST['ubah_alamat'])) {
+    $id_alamat      = (int) $_POST['id_alamat'];
+    $label          = htmlspecialchars($_POST['label_alamat']);
+    $nama_penerima  = htmlspecialchars($_POST['nama_penerima']);
+    $no_hp_penerima = htmlspecialchars($_POST['no_hp_penerima']);
+    $alamat         = htmlspecialchars($_POST['alamat_lengkap']);
+    $kota           = htmlspecialchars($_POST['kota']);
+    $provinsi       = htmlspecialchars($_POST['provinsi']);
+    $kode_pos       = htmlspecialchars($_POST['kode_pos']);
+
+    mysqli_query($conn, "
+        UPDATE alamat SET
+            label_alamat = '$label',
+            nama_penerima = '$nama_penerima',
+            no_hp_penerima = '$no_hp_penerima',
+            alamat_lengkap = '$alamat',
+            kota = '$kota',
+            provinsi = '$provinsi',
+            kode_pos = '$kode_pos'
+        WHERE id_alamat = '$id_alamat'
+        AND id_user = '$id_user'
+    ");
+
+    header("Location: setting.php?success=ubahAlamat#alamat");
+    exit();
+}
+
+if (isset($_POST['hapus_alamat'])) {
+    $id_alamat = (int) $_POST['id_alamat'];
+
+    $queryTarget = mysqli_query($conn, "
+        SELECT is_utama
+        FROM alamat
+        WHERE id_alamat = '$id_alamat'
+        AND id_user = '$id_user'
+        LIMIT 1
+    ");
+    $targetAlamat = mysqli_fetch_assoc($queryTarget);
+
+    mysqli_query($conn, "
+        DELETE FROM alamat
+        WHERE id_alamat = '$id_alamat'
+        AND id_user = '$id_user'
+    ");
+
+    if ($targetAlamat && (int) $targetAlamat['is_utama'] === 1) {
+        $queryPengganti = mysqli_query($conn, "
+            SELECT id_alamat
+            FROM alamat
+            WHERE id_user = '$id_user'
+            ORDER BY created_at ASC, id_alamat ASC
+            LIMIT 1
+        ");
+        $pengganti = mysqli_fetch_assoc($queryPengganti);
+
+        if ($pengganti) {
+            $id_pengganti = (int) $pengganti['id_alamat'];
+            mysqli_query($conn, "
+                UPDATE alamat
+                SET is_utama = 1
+                WHERE id_alamat = '$id_pengganti'
+                AND id_user = '$id_user'
+            ");
+        }
+    }
+
+    header("Location: setting.php?success=hapusAlamat#alamat");
+    exit();
+}
+
+if (isset($_POST['jadikan_utama'])) {
+    $id_alamat = (int) $_POST['id_alamat'];
+
+    mysqli_query($conn, "
+        UPDATE alamat
+        SET is_utama = 0
+        WHERE id_user = '$id_user'
+    ");
+
+    mysqli_query($conn, "
+        UPDATE alamat
+        SET is_utama = 1
+        WHERE id_alamat = '$id_alamat'
+        AND id_user = '$id_user'
+    ");
+
+    header("Location: setting.php?success=utamaAlamat#alamat");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +168,7 @@ require_once '../../config/config.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile — Secondify</title>
+    <title>Setting — Secondify</title>
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/user/setting.css">
 </head>
 <body>
@@ -90,10 +250,13 @@ require_once '../../config/config.php';
                 <div class="content-area">
                     <!-- Informasi Profil -->
                     <div class="card">
+                        <form action="" method="POST">
                         <h2 class="card-title">Informasi Profil</h2>
 
                         <div class="avatar-row">
-                            <div class="avatar-circle">A</div>
+                            <div class="avatar-circle">
+                                <?= strtoupper(substr($user['nama_lengkap'], 0, 1)); ?>
+                            </div>
                             <div class="avatar-info">
                                 <button class="btn-ubah-foto">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M6.343 17.657A8 8 0 1 0 17.657 6.343 8 8 0 0 0 6.343 17.657z"/></svg>
@@ -111,38 +274,54 @@ require_once '../../config/config.php';
                                 <label>Nama Lengkap</label>
                                 <div class="input-wrap">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                                    <input type="text" value="Alyssa Putri" placeholder="Nama lengkap">
+                                    <input 
+                                        type="text"
+                                        name="nama_lengkap"
+                                        value="<?= $user['nama_lengkap']; ?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Username</label>
                                 <div class="input-wrap">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                                    <input type="text" value="alyssa.putri" placeholder="Username">
+                                    <input 
+                                        type="text"
+                                        name="username"
+                                        value="<?= $user['username']; ?>"
+                                        placeholder="Username">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
                                 <div class="input-wrap">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                                    <input type="email" value="alyssa@gmail.com" placeholder="Email">
+                                    <input 
+                                        type="email"
+                                        name="email"
+                                        value="<?= $user['email']; ?>"
+                                        placeholder="Email">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Nomor WhatsApp</label>
+                                <label>Nomor Telpon</label>
                                 <div class="input-wrap">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                                    <input type="tel" value="0812-3456-7890" placeholder="Nomor WhatsApp">
+                                    <input 
+                                        type="tel"
+                                        name="no_hp"
+                                        value="<?= $user['no_hp']; ?>"
+                                        placeholder="Nomor Telpon">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Jenis Kelamin</label>
                                 <div class="input-wrap select-wrap">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-                                    <select>
-                                        <option>Perempuan</option>
-                                        <option>Laki-laki</option>
-                                        <option>Tidak ingin menyebutkan</option>
+                                    <select name="jenis_kelamin">
+                                        <option value="Laki-laki" <?= $user['jenis_kelamin'] === 'Laki-laki' ? 'selected' : '' ?>>Laki-laki</option>
+                                        <option value="Perempuan" <?= $user['jenis_kelamin'] === 'Perempuan' ? 'selected' : '' ?>>Perempuan</option>
+                                        <option value="Non-biner" <?= $user['jenis_kelamin'] === 'Non-biner' ? 'selected' : '' ?>>Non-biner</option>
+                                        <option value="Tidak ingin menyebutkan" <?= $user['jenis_kelamin'] === 'Tidak ingin menyebutkan' ? 'selected' : '' ?>>Tidak ingin menyebutkan</option>
                                     </select>
                                     <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
                                 </div>
@@ -151,19 +330,28 @@ require_once '../../config/config.php';
                                 <label>Tanggal Lahir</label>
                                 <div class="input-wrap">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                                    <input type="date" value="2000-05-15">
+                                    <input 
+                                        type="date"
+                                        name="tanggal_lahir"
+                                        value="<?= $user['tanggal_lahir']; ?>">
                                 </div>
                             </div>
                             <div class="form-group full-width">
                                 <label>Bio</label>
                                 <div class="input-wrap textarea-wrap">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                                    <textarea placeholder="Ceritakan sedikit tentang dirimu...">Lover of preloved items &amp; sustainable living 🌿</textarea>
+                                    <textarea 
+                                        name="bio"
+                                        placeholder="Ceritakan sedikit tentang dirimu..."><?= $user['bio']; ?></textarea>
                                 </div>
                             </div>
                         </div>
 
-                        <button class="btn-simpan">Simpan Perubahan</button>
+                        <button 
+                            type="submit"
+                            name="simpan_profil"
+                            class="btn-simpan">Simpan Perubahan</button>
+                        </form>
                     </div>
                 </div>
 
@@ -220,36 +408,63 @@ require_once '../../config/config.php';
                 <h1>Alamat Saya</h1>
                 <p>Kelola alamat pengiriman dan penjemputanmu</p>
             </div>
+
             <div class="content-area-full">
                 <div class="card">
                     <div class="alamat-header-row">
                         <h2 class="card-title">Daftar Alamat</h2>
-                        <button class="btn-add">+ Tambah Alamat</button>
+                        <button type="button" class="btn-add" id="btnTambahAlamat">+ Tambah Alamat</button>
                     </div>
 
-                    <div class="alamat-item utama">
-                        <div class="alamat-badge">Utama</div>
-                        <div class="alamat-detail">
-                            <p class="alamat-name">Alyssa Putri · 0812-3456-7890</p>
-                            <p class="alamat-text">Jl. Raden Intan No. 45, Kel. Enggal, Kec. Enggal, Bandar Lampung, Lampung 35118</p>
+                    <div id="daftar-alamat">
+                    <?php if(empty($alamats)) : ?>
+                        <p style="color:#aaa; font-size:13px; text-align:center; padding:20px 0;">
+                            Belum ada alamat tersimpan.
+                        </p>
+                    <?php else : ?>
+                        <?php foreach($alamats as $alamat) : ?>
+                        <div class="alamat-item <?= $alamat['is_utama'] ? 'utama' : '' ?>">
+                            <div class="alamat-badge <?= !$alamat['is_utama'] ? 'secondary' : '' ?>">
+                                <?= $alamat['is_utama'] ? 'Utama' : htmlspecialchars($alamat['label_alamat']); ?>
+                            </div>
+                            <div class="alamat-detail">
+                                <p class="alamat-name">
+                                    <?= htmlspecialchars($alamat['nama_penerima']); ?> · <?= htmlspecialchars($alamat['no_hp_penerima']); ?>
+                                </p>
+                                <p class="alamat-text">
+                                    <?= htmlspecialchars($alamat['alamat_lengkap']); ?>,
+                                    <?= htmlspecialchars($alamat['kota']); ?>,
+                                    <?= htmlspecialchars($alamat['provinsi']); ?>
+                                    <?= htmlspecialchars($alamat['kode_pos']); ?>
+                                </p>
+                            </div>
+                            <div class="alamat-actions">
+                                <button
+                                    type="button"
+                                    class="btn-link btn-ubah-alamat"
+                                    data-id="<?= $alamat['id_alamat']; ?>"
+                                    data-label="<?= htmlspecialchars($alamat['label_alamat'], ENT_QUOTES); ?>"
+                                    data-nama="<?= htmlspecialchars($alamat['nama_penerima'], ENT_QUOTES); ?>"
+                                    data-no-hp="<?= htmlspecialchars($alamat['no_hp_penerima'], ENT_QUOTES); ?>"
+                                    data-alamat="<?= htmlspecialchars($alamat['alamat_lengkap'], ENT_QUOTES); ?>"
+                                    data-kota="<?= htmlspecialchars($alamat['kota'], ENT_QUOTES); ?>"
+                                    data-provinsi="<?= htmlspecialchars($alamat['provinsi'], ENT_QUOTES); ?>"
+                                    data-kode-pos="<?= htmlspecialchars($alamat['kode_pos'], ENT_QUOTES); ?>"
+                                >Ubah</button>
+                                <form action="setting.php" method="POST" onsubmit="return confirm('Hapus alamat ini?');">
+                                    <input type="hidden" name="id_alamat" value="<?= $alamat['id_alamat']; ?>">
+                                    <button type="submit" name="hapus_alamat" class="btn-link danger">Hapus</button>
+                                </form>
+                                <?php if(!$alamat['is_utama']) : ?>
+                                    <form action="setting.php" method="POST">
+                                        <input type="hidden" name="id_alamat" value="<?= $alamat['id_alamat']; ?>">
+                                        <button type="submit" name="jadikan_utama" class="btn-link">Jadikan Utama</button>
+                                    </form>
+                                <?php endif; ?>
+                            </div>
                         </div>
-                        <div class="alamat-actions">
-                            <button class="btn-link">Ubah</button>
-                            <button class="btn-link danger">Hapus</button>
-                        </div>
-                    </div>
-
-                    <div class="alamat-item">
-                        <div class="alamat-badge secondary">Kantor</div>
-                        <div class="alamat-detail">
-                            <p class="alamat-name">Alyssa Putri · 0812-3456-7890</p>
-                            <p class="alamat-text">Jl. Gajah Mada No. 12, Kel. Durian Payung, Kec. Tanjung Karang, Bandar Lampung 35117</p>
-                        </div>
-                        <div class="alamat-actions">
-                            <button class="btn-link">Ubah</button>
-                            <button class="btn-link danger">Hapus</button>
-                            <button class="btn-link">Jadikan Utama</button>
-                        </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -591,8 +806,130 @@ require_once '../../config/config.php';
         </section>
 
     </main>
+    <!-- MODAL TAMBAH ALAMAT -->
+        <div id="modalAlamat" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:1000; align-items:center; justify-content:center;">
+            <div style="background:white; border-radius:18px; padding:28px; width:100%; max-width:480px; margin:0 16px; box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+                <h2 style="font-size:16px; font-weight:800; margin-bottom:20px; color:#1a1a2e;">Tambah Alamat Baru</h2>
+                <form action="setting.php" method="POST" style="display:flex; flex-direction:column; gap:14px;">
+                    <div class="form-group">
+                        <label>Label Alamat</label>
+                        <div class="input-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <input type="text" name="label_alamat" placeholder="Rumah / Kantor / dll" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Penerima</label>
+                        <div class="input-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            <input type="text" name="nama_penerima" placeholder="Nama lengkap penerima" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>No. HP</label>
+                        <div class="input-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            <input type="tel" name="no_hp_penerima" placeholder="08xxxxxxxxxx" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Alamat Lengkap</label>
+                        <div class="input-wrap textarea-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <textarea name="alamat_lengkap" placeholder="Nama jalan, nomor rumah, RT/RW..." required></textarea>
+                        </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <div class="form-group">
+                            <label>Kota</label>
+                            <div class="input-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                                <input type="text" name="kota" placeholder="Bandar Lampung" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Provinsi</label>
+                            <div class="input-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                                <input type="text" name="provinsi" placeholder="Lampung" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Kode Pos</label>
+                        <div class="input-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2"/></svg>
+                            <input type="text" name="kode_pos" placeholder="35111" required>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:10px; margin-top:6px;">
+                        <button type="button" id="btnBatalAlamat" style="flex:1; padding:12px; background:#f4f4f8; border:none; border-radius:12px; font-size:14px; font-weight:700; cursor:pointer; font-family:'Plus Jakarta Sans',sans-serif;">Batal</button>
+                        <button type="submit" name="tambah_alamat" style="flex:2; padding:12px; background:linear-gradient(135deg,#886BC6,#D3C3FB); color:white; border:none; border-radius:12px; font-size:14px; font-weight:700; cursor:pointer; font-family:'Plus Jakarta Sans',sans-serif;">Simpan Alamat</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- MODAL UBAH ALAMAT -->
+        <div id="modalUbahAlamat" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:1000; align-items:center; justify-content:center;">
+            <div style="background:white; border-radius:18px; padding:28px; width:100%; max-width:480px; margin:0 16px; box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+                <h2 style="font-size:16px; font-weight:800; margin-bottom:20px; color:#1a1a2e;">Ubah Alamat</h2>
+                <form action="setting.php" method="POST" style="display:flex; flex-direction:column; gap:14px;">
+                    <input type="hidden" name="id_alamat" id="editIdAlamat">
+                    <div class="form-group">
+                        <label>Label Alamat</label>
+                        <div class="input-wrap">
+                            <input type="text" name="label_alamat" id="editLabelAlamat" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Penerima</label>
+                        <div class="input-wrap">
+                            <input type="text" name="nama_penerima" id="editNamaPenerima" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>No. HP</label>
+                        <div class="input-wrap">
+                            <input type="tel" name="no_hp_penerima" id="editNoHpPenerima" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Alamat Lengkap</label>
+                        <div class="input-wrap textarea-wrap">
+                            <textarea name="alamat_lengkap" id="editAlamatLengkap" required></textarea>
+                        </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <div class="form-group">
+                            <label>Kota</label>
+                            <div class="input-wrap">
+                                <input type="text" name="kota" id="editKota" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Provinsi</label>
+                            <div class="input-wrap">
+                                <input type="text" name="provinsi" id="editProvinsi" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Kode Pos</label>
+                        <div class="input-wrap">
+                            <input type="text" name="kode_pos" id="editKodePos" required>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:10px; margin-top:6px;">
+                        <button type="button" id="btnBatalUbahAlamat" style="flex:1; padding:12px; background:#f4f4f8; border:none; border-radius:12px; font-size:14px; font-weight:700; cursor:pointer; font-family:'Plus Jakarta Sans',sans-serif;">Batal</button>
+                        <button type="submit" name="ubah_alamat" style="flex:2; padding:12px; background:linear-gradient(135deg,#886BC6,#D3C3FB); color:white; border:none; border-radius:12px; font-size:14px; font-weight:700; cursor:pointer; font-family:'Plus Jakarta Sans',sans-serif;">Simpan Perubahan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
 </div>
 
-<script src="<?= SECONDIFY; ?>/assets/js/user/setting.js"></script>
+<script src="<?= SECONDIFY; ?>/assets/js/user/setting.js?v=20260518-2"></script>
 </body>
 </html>
