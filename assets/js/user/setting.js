@@ -24,7 +24,7 @@ navItems.forEach(item => {
 });
 
 const hash       = window.location.hash.replace('#', '');
-const validPages = ['edit-profil', 'alamat', 'keamanan', 'notifikasi', 'privasi', 'bantuan'];
+const validPages = ['edit-profil', 'alamat', 'keamanan', 'privasi', 'bantuan'];
 showPage(hash && validPages.includes(hash) ? hash : 'edit-profil');
 
 // ── Toast notifikasi ──────────────────────────────
@@ -77,8 +77,38 @@ function initSettingPage() {
         showToast('Alamat utama berhasil diperbarui!');
         history.replaceState(null, '', window.location.pathname + '#alamat');
     }
+    if (urlParams.get('success') === 'savePrivacy') {
+        showToast('Pengaturan privasi berhasil disimpan!');
+        history.replaceState(null, '', window.location.pathname + '#privasi');
+    }
+    if (urlParams.get('success') === 'kirimBantuan') {
+        showToast('Pesan bantuan berhasil dikirim!');
+        history.replaceState(null, '', window.location.pathname + '#bantuan');
+    }
     if (urlParams.get('error')) {
         showToast('✗ Terjadi kesalahan, coba lagi.', 'error');
+    }
+
+    const formUbahPassword = document.getElementById('formUbahPassword');
+    const passwordBaru = document.getElementById('passwordBaru');
+    const passwordBaruError = document.getElementById('passwordBaruError');
+
+    if (formUbahPassword && passwordBaru && passwordBaruError) {
+        const validasiPasswordBaru = () => {
+            const kurangDariDelapan = passwordBaru.value.length > 0 && passwordBaru.value.length < 8;
+            passwordBaruError.classList.toggle('show', kurangDariDelapan);
+            return !kurangDariDelapan;
+        };
+
+        passwordBaru.addEventListener('input', validasiPasswordBaru);
+
+        formUbahPassword.addEventListener('submit', (e) => {
+            if (!validasiPasswordBaru()) {
+                e.preventDefault();
+                showToast('Password Harus Minimal 8 Karakter', 'error');
+                passwordBaru.focus();
+            }
+        });
     }
 
     // Modal Tambah Alamat

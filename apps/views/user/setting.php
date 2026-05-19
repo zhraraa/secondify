@@ -161,6 +161,120 @@ if (isset($_POST['jadikan_utama'])) {
     header("Location: setting.php?success=utamaAlamat#alamat");
     exit();
 }
+
+if(isset($_POST['ubah_password'])){
+
+    $password_lama = $_POST['password_lama'];
+    $password_baru = $_POST['password_baru'];
+    $konfirmasi = $_POST['konfirmasi_password'];
+
+    $queryPassword = mysqli_query($conn, "
+    SELECT password
+    FROM users
+    WHERE id_user = '$id_user'
+    ");
+
+    $dataPassword = mysqli_fetch_assoc($queryPassword);
+
+    if(password_verify($password_lama, $dataPassword['password'])){
+
+        if($password_baru == $konfirmasi){
+
+            if(strlen($password_baru) >= 8){
+                $hashPassword = password_hash($password_baru, PASSWORD_DEFAULT);
+                mysqli_query($conn, "
+                UPDATE users SET
+                password = '$hashPassword'
+                WHERE id_user = '$id_user'
+                ");
+                echo "
+                <script>
+                    alert('Password berhasil diubah!');
+                    window.location='setting.php#keamanan';
+                </script>
+                ";
+            } else {
+                echo "
+                <script>
+                    alert('Password Harus Minimal 8 Karakter');
+                </script>
+                ";
+            }
+        } else {
+            echo "
+            <script>
+                alert('Konfirmasi password tidak cocok!');
+            </script>
+            ";
+        }
+    } else {
+        echo "
+        <script>
+            alert('Password lama salah!');
+        </script>
+        ";
+    }
+}
+
+if(isset($_POST['save_privacy'])){
+
+    $show_whatsapp = isset($_POST['show_whatsapp']) ? 1 : 0;
+    $show_email = isset($_POST['show_email']) ? 1 : 0;
+    $show_tanggal_lahir = isset($_POST['show_tanggal_lahir']) ? 1 : 0;
+    $show_transaksi = isset($_POST['show_transaksi']) ? 1 : 0;
+
+    $allow_tracking = isset($_POST['allow_tracking']) ? 1 : 0;
+    $anonymous_data = isset($_POST['anonymous_data']) ? 1 : 0;
+
+    mysqli_query($conn, "
+    UPDATE users SET
+
+    show_whatsapp = '$show_whatsapp',
+    show_email = '$show_email',
+    show_tanggal_lahir = '$show_tanggal_lahir',
+    show_transaksi = '$show_transaksi',
+
+    allow_tracking = '$allow_tracking',
+    anonymous_data = '$anonymous_data'
+
+    WHERE id_user = '$id_user'
+    ");
+
+    header("Location: setting.php?success=savePrivacy#privasi");
+    exit();
+}
+
+if(isset($_POST['kirim_bantuan'])){
+
+    $topik = mysqli_real_escape_string(
+        $conn,
+        $_POST['topik']
+    );
+
+    $pesan = mysqli_real_escape_string(
+        $conn,
+        $_POST['pesan']
+    );
+
+    mysqli_query($conn, "
+    INSERT INTO bantuan (
+
+        id_user,
+        topik,
+        pesan
+
+    ) VALUES (
+
+        '$id_user',
+        '$topik',
+        '$pesan'
+
+    )
+    ");
+
+    header("Location: setting.php?success=kirimBantuan#bantuan");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -201,13 +315,6 @@ if (isset($_POST['jadikan_utama'])) {
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                 </svg>
                 Keamanan Akun
-            </a>
-            <a href="javascript:void(0)" class="nav-item" data-page="notifikasi">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-                </svg>
-                Notifikasi
             </a>
             <a href="javascript:void(0)" class="nav-item" data-page="privasi">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -479,63 +586,55 @@ if (isset($_POST['jadikan_utama'])) {
             <div class="page-grid">
                 <div class="content-area">
                     <div class="card">
+                        <form action="" method="POST" id="formUbahPassword">
                         <h2 class="card-title">Ubah Password</h2>
                         <div class="form-grid single">
                             <div class="form-group full-width">
                                 <label>Password Saat Ini</label>
                                 <div class="input-wrap">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                                    <input type="password" placeholder="Masukkan password lama">
+                                    <input 
+                                        type="password"
+                                        name="password_lama"
+                                        placeholder="Masukkan password lama"
+                                        required>
                                 </div>
                             </div>
                             <div class="form-group full-width">
                                 <label>Password Baru</label>
                                 <div class="input-wrap">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                                    <input type="password" placeholder="Minimal 8 karakter">
+                                    <input 
+                                        type="password"
+                                        name="password_baru"
+                                        id="passwordBaru"
+                                        placeholder="Minimal 8 karakter"
+                                        required>
                                 </div>
+                                <p class="form-error" id="passwordBaruError">Password Harus Minimal 8 Karakter</p>
                             </div>
                             <div class="form-group full-width">
                                 <label>Konfirmasi Password Baru</label>
                                 <div class="input-wrap">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                                    <input type="password" placeholder="Ulangi password baru">
+                                    <input 
+                                        type="password"
+                                        name="konfirmasi_password"
+                                        placeholder="Ulangi password baru"
+                                        required>
                                 </div>
                             </div>
                         </div>
-                        <button class="btn-simpan">Ubah Password</button>
+                        <button type="submit" name="ubah_password" class="btn-simpan">Ubah Password</button>
                     </div>
+                                </form>
 
-                    <div class="card mt-16">
-                        <h2 class="card-title">Verifikasi Dua Langkah</h2>
-                        <div class="toggle-row">
-                            <div>
-                                <p class="toggle-label">Aktifkan 2FA via WhatsApp</p>
-                                <p class="toggle-desc">Kode OTP dikirim ke nomor WhatsApp terdaftar setiap login</p>
-                            </div>
-                            <label class="toggle">
-                                <input type="checkbox">
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="toggle-row">
-                            <div>
-                                <p class="toggle-label">Aktifkan 2FA via Email</p>
-                                <p class="toggle-desc">Kode OTP dikirim ke email terdaftar setiap login</p>
-                            </div>
-                            <label class="toggle">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                    </div>
                 </div>
                 <div class="side-cards">
                     <div class="card tips-card">
                         <h2 class="card-title">Tips Keamanan</h2>
                         <ul class="tips-list">
                             <li><div class="tip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>Gunakan password yang kuat dan unik</li>
-                            <li><div class="tip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>Aktifkan verifikasi dua langkah</li>
                             <li><div class="tip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>Jangan bagikan password ke siapapun</li>
                             <li><div class="tip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>Ganti password secara berkala</li>
                         </ul>
@@ -549,97 +648,6 @@ if (isset($_POST['jadikan_utama'])) {
             </div>
         </section>
 
-        <!-- ══ NOTIFIKASI ══ -->
-        <section class="page" id="page-notifikasi">
-            <div class="page-header">
-                <h1>Notifikasi</h1>
-                <p>Atur preferensi notifikasi yang kamu terima</p>
-            </div>
-            <div class="content-area-full">
-                <div class="card">
-                    <h2 class="card-title">Notifikasi Transaksi</h2>
-                    <div class="toggle-row">
-                        <div>
-                            <p class="toggle-label">Pesanan masuk</p>
-                            <p class="toggle-desc">Notifikasi saat ada pembeli yang memesan barangmu</p>
-                        </div>
-                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
-                    </div>
-                    <div class="toggle-row">
-                        <div>
-                            <p class="toggle-label">Status pengiriman</p>
-                            <p class="toggle-desc">Update ketika status pengiriman berubah</p>
-                        </div>
-                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
-                    </div>
-                    <div class="toggle-row">
-                        <div>
-                            <p class="toggle-label">Pembayaran diterima</p>
-                            <p class="toggle-desc">Notifikasi ketika pembayaran berhasil masuk</p>
-                        </div>
-                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
-                    </div>
-                    <div class="toggle-row">
-                        <div>
-                            <p class="toggle-label">Ulasan baru</p>
-                            <p class="toggle-desc">Notifikasi saat pembeli meninggalkan ulasan</p>
-                        </div>
-                        <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
-                    </div>
-                </div>
-
-                <div class="card mt-16">
-                    <h2 class="card-title">Notifikasi Pemasaran</h2>
-                    <div class="toggle-row">
-                        <div>
-                            <p class="toggle-label">Promo & diskon</p>
-                            <p class="toggle-desc">Info promo dan penawaran spesial dari Secondify</p>
-                        </div>
-                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
-                    </div>
-                    <div class="toggle-row">
-                        <div>
-                            <p class="toggle-label">Rekomendasi barang</p>
-                            <p class="toggle-desc">Barang yang mungkin kamu suka berdasarkan riwayat</p>
-                        </div>
-                        <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
-                    </div>
-                    <div class="toggle-row">
-                        <div>
-                            <p class="toggle-label">Newsletter Secondify</p>
-                            <p class="toggle-desc">Berita terbaru seputar marketplace Bandar Lampung</p>
-                        </div>
-                        <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
-                    </div>
-                </div>
-
-                <div class="card mt-16">
-                    <h2 class="card-title">Saluran Notifikasi</h2>
-                    <div class="toggle-row">
-                        <div>
-                            <p class="toggle-label">Notifikasi Email</p>
-                            <p class="toggle-desc">Kirim notifikasi ke alyssa@gmail.com</p>
-                        </div>
-                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
-                    </div>
-                    <div class="toggle-row">
-                        <div>
-                            <p class="toggle-label">Notifikasi WhatsApp</p>
-                            <p class="toggle-desc">Kirim notifikasi ke 0812-3456-7890</p>
-                        </div>
-                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
-                    </div>
-                    <div class="toggle-row">
-                        <div>
-                            <p class="toggle-label">Notifikasi Browser</p>
-                            <p class="toggle-desc">Tampilkan notifikasi push di browser</p>
-                        </div>
-                        <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- ══ PRIVASI ══ -->
         <section class="page" id="page-privasi">
             <div class="page-header">
@@ -647,61 +655,121 @@ if (isset($_POST['jadikan_utama'])) {
                 <p>Kontrol siapa yang dapat melihat informasimu</p>
             </div>
             <div class="content-area-full">
-                <div class="card">
-                    <h2 class="card-title">Visibilitas Profil</h2>
-                    <div class="toggle-row">
-                        <div>
-                            <p class="toggle-label">Tampilkan nomor WhatsApp</p>
-                            <p class="toggle-desc">Nomor WA bisa dilihat oleh pembeli yang tertarik</p>
+                <form method="POST">
+                    <div class="card">
+                        <h2 class="card-title">Visibilitas Profil</h2>
+                        <div class="toggle-row">
+                            <div>
+                                <p class="toggle-label">Tampilkan nomor WhatsApp</p>
+                                <p class="toggle-desc">
+                                    Nomor WA bisa dilihat oleh pembeli yang tertarik
+                                </p>
+                            </div>
+                            <label class="toggle">
+                                <input 
+                                type="checkbox"
+                                name="show_whatsapp"
+                                <?= $user['show_whatsapp'] ? 'checked' : ''; ?>
+                                >
+                                <span class="toggle-slider"></span>
+                            </label>
                         </div>
-                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
-                    </div>
-                    <div class="toggle-row">
-                        <div>
-                            <p class="toggle-label">Tampilkan email</p>
-                            <p class="toggle-desc">Email dapat dilihat oleh pengguna lain</p>
+                        <div class="toggle-row">
+                            <div>
+                                <p class="toggle-label">Tampilkan email</p>
+                                <p class="toggle-desc">
+                                    Email dapat dilihat oleh pengguna lain
+                                </p>
+                            </div>
+                            <label class="toggle">
+                                <input 
+                                type="checkbox"
+                                name="show_email"
+                                <?= $user['show_email'] ? 'checked' : ''; ?>
+                                >
+                                <span class="toggle-slider"></span>
+                            </label>
                         </div>
-                        <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
-                    </div>
-                    <div class="toggle-row">
-                        <div>
-                            <p class="toggle-label">Tampilkan tanggal lahir</p>
-                            <p class="toggle-desc">Tanggal lahir ditampilkan di profil publikmu</p>
+                        <div class="toggle-row">
+                            <div>
+                                <p class="toggle-label">Tampilkan tanggal lahir</p>
+                                <p class="toggle-desc">
+                                    Tanggal lahir ditampilkan di profil publikmu
+                                </p>
+                            </div>
+                            <label class="toggle">
+                                <input 
+                                type="checkbox"
+                                name="show_tanggal_lahir"
+                                <?= $user['show_tanggal_lahir'] ? 'checked' : ''; ?>
+                                >
+                                <span class="toggle-slider"></span>
+                            </label>
                         </div>
-                        <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
-                    </div>
-                    <div class="toggle-row">
-                        <div>
-                            <p class="toggle-label">Tampilkan riwayat transaksi</p>
-                            <p class="toggle-desc">Total transaksi dapat dilihat oleh pengguna lain</p>
+                        <div class="toggle-row">
+                            <div>
+                                <p class="toggle-label">Tampilkan riwayat transaksi</p>
+                                <p class="toggle-desc">
+                                    Total transaksi dapat dilihat oleh pengguna lain
+                                </p>
+                            </div>
+                            <label class="toggle">
+                                <input 
+                                type="checkbox"
+                                name="show_transaksi"
+                                <?= $user['show_transaksi'] ? 'checked' : ''; ?>
+                                >
+                                <span class="toggle-slider"></span>
+                            </label>
                         </div>
-                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
                     </div>
-                </div>
+                    <div class="card mt-16">
+                        <h2 class="card-title">Data & Aktivitas</h2>
+                        <div class="toggle-row">
+                            <div>
+                                <p class="toggle-label">
+                                    Izinkan pelacakan aktivitas
+                                </p>
+                                <p class="toggle-desc">
+                                    Untuk meningkatkan rekomendasi barang bagimu
+                                </p>
+                            </div>
+                            <label class="toggle">
+                                <input 
+                                type="checkbox"
+                                name="allow_tracking"
+                                <?= $user['allow_tracking'] ? 'checked' : ''; ?>
+                                >
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="toggle-row">
+                            <div>
+                                <p class="toggle-label">
+                                    Berbagi data anonim
+                                </p>
+                                <p class="toggle-desc">
+                                    Membantu Secondify meningkatkan layanan
+                                </p>
+                            </div>
+                            <label class="toggle">
+                                <input 
+                                type="checkbox"
+                                name="anonymous_data"
+                                <?= $user['anonymous_data'] ? 'checked' : ''; ?>
+                                >
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <button 
+                        type="submit"
+                        name="save_privacy"
+                        class="btn-simpan mt-16">
+                        Simpan Pengaturan
+                    </button>
+                </form>
 
-                <div class="card mt-16">
-                    <h2 class="card-title">Data & Aktivitas</h2>
-                    <div class="toggle-row">
-                        <div>
-                            <p class="toggle-label">Izinkan pelacakan aktivitas</p>
-                            <p class="toggle-desc">Untuk meningkatkan rekomendasi barang bagimu</p>
-                        </div>
-                        <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
-                    </div>
-                    <div class="toggle-row">
-                        <div>
-                            <p class="toggle-label">Berbagi data anonim</p>
-                            <p class="toggle-desc">Membantu Secondify meningkatkan layanan</p>
-                        </div>
-                        <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
-                    </div>
-                </div>
-
-                <div class="card mt-16">
-                    <h2 class="card-title">Unduh Data Saya</h2>
-                    <p class="section-desc">Kamu dapat mengunduh salinan seluruh data akunmu kapan saja.</p>
-                    <button class="btn-outline mt-12">Minta Unduhan Data</button>
-                </div>
             </div>
         </section>
 
@@ -738,7 +806,7 @@ if (isset($_POST['jadikan_utama'])) {
                             </details>
                         </div>
                     </div>
-
+                    <form method="POST">
                     <div class="card mt-16">
                         <h2 class="card-title">Kirim Pesan ke Tim Kami</h2>
                         <div class="form-grid single">
@@ -746,12 +814,12 @@ if (isset($_POST['jadikan_utama'])) {
                                 <label>Topik</label>
                                 <div class="input-wrap select-wrap">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                                    <select>
-                                        <option>Masalah Transaksi</option>
-                                        <option>Akun & Keamanan</option>
-                                        <option>Pengiriman</option>
-                                        <option>Pengembalian Barang</option>
-                                        <option>Lainnya</option>
+                                    <select name="topik" required>
+                                        <option value="Masalah Transaksi">Masalah Transaksi</option>
+                                        <option value="Akun & Keamanan">Akun & Keamanan</option>
+                                        <option value="Pengiriman">Pengiriman</option>
+                                        <option value="Pengembalian Barang">Pengembalian Barang</option>
+                                        <option value="Lainnya">Lainnya</option>
                                     </select>
                                     <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
                                 </div>
@@ -760,11 +828,12 @@ if (isset($_POST['jadikan_utama'])) {
                                 <label>Pesan</label>
                                 <div class="input-wrap textarea-wrap">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                                    <textarea placeholder="Jelaskan masalah atau pertanyaanmu..."></textarea>
+                                    <textarea name="pesan" placeholder="Jelaskan masalah atau pertanyaanmu..." required></textarea>
                                 </div>
                             </div>
                         </div>
-                        <button class="btn-simpan">Kirim Pesan</button>
+                        <button type="submit" name="kirim_bantuan"class="btn-simpan">Kirim Pesan</button>
+                        </form>
                     </div>
                 </div>
 
@@ -815,7 +884,7 @@ if (isset($_POST['jadikan_utama'])) {
                         <label>Label Alamat</label>
                         <div class="input-wrap">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            <input type="text" name="label_alamat" placeholder="Rumah / Kantor / dll" required>
+                            <input type="text" name="label_alamat" placeholder="Rumah / Kantor" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -829,7 +898,7 @@ if (isset($_POST['jadikan_utama'])) {
                         <label>No. HP</label>
                         <div class="input-wrap">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                            <input type="tel" name="no_hp_penerima" placeholder="08xxxxxxxxxx" required>
+                            <input type="tel" name="no_hp_penerima" placeholder="No HP Penerima" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -844,14 +913,14 @@ if (isset($_POST['jadikan_utama'])) {
                             <label>Kota</label>
                             <div class="input-wrap">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-                                <input type="text" name="kota" placeholder="Bandar Lampung" required>
+                                <input type="text" name="kota" placeholder="Kota" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Provinsi</label>
                             <div class="input-wrap">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-                                <input type="text" name="provinsi" placeholder="Lampung" required>
+                                <input type="text" name="provinsi" placeholder="Provinsi" required>
                             </div>
                         </div>
                     </div>
@@ -859,7 +928,7 @@ if (isset($_POST['jadikan_utama'])) {
                         <label>Kode Pos</label>
                         <div class="input-wrap">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2"/></svg>
-                            <input type="text" name="kode_pos" placeholder="35111" required>
+                            <input type="text" name="kode_pos" placeholder="Kode Pos" required>
                         </div>
                     </div>
                     <div style="display:flex; gap:10px; margin-top:6px;">
@@ -930,6 +999,6 @@ if (isset($_POST['jadikan_utama'])) {
 
 </div>
 
-<script src="<?= SECONDIFY; ?>/assets/js/user/setting.js?v=20260518-2"></script>
+<script src="<?= SECONDIFY; ?>/assets/js/user/setting.js?v=20260518-3"></script>
 </body>
 </html>

@@ -275,6 +275,18 @@ body {
     grid-column: 1 / -1;
 }
 
+.form-error {
+    display: none;
+    margin: 0;
+    color: #e74c3c;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.form-error.show {
+    display: block;
+}
+
 label {
     font-size: 13px;
     font-weight: 600;
