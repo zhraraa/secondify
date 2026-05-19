@@ -1,8 +1,3 @@
-<?php
-require_once '../../../koneksi/koneksi.php';
-require_once '../../config/config.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -8,27 +8,35 @@ if(isset($_POST['masuk'])){
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
-    $cek_user = $conn -> prepare("SELECT id_user, password, role, nama_lengkap FROM users WHERE email = ?");
-    $cek_user -> bind_param("s", $email);
-    $cek_user -> execute(); 
+    $cek_user = getDataUserbyEmail($conn, $email);
+    $id_user = $cek_user['id_user'];
+    $nama_lengkap = $cek_user['nama_lengkap'];
+    $role = $cek_user['role'];
+    $hashed_password = $cek_user['password'];
+    
 
-    $cek_user -> store_result();
-    if($cek_user -> num_rows > 0){
-        $cek_user -> bind_result($id_user, $hashed_password, $role, $nama_lengkap);
-        $cek_user -> fetch();
+    if(count($cek_user) > 0){
         if(password_verify($password, $hashed_password)){
             $_SESSION['id_user'] = $id_user;
             $_SESSION['nama_lengkap'] = $nama_lengkap;
             $_SESSION['role'] = $role;
             $_SESSION['status'] = "login";
+            // if waktu udah lewat dari 1 jam maka status = belumLogin, else status = login
 
-            if($role == 'admin'){
-                header("Location: " . SECONDIFY . "/apps/views/admin/adminDashboard.php");
-                exit();
+            if($_SESSION['status'] === 'login'){
+                if($role == 'admin' && $password == $hashed_password ){
+                    header("Location: " . SECONDIFY . "/apps/views/admin/adminDashboard.php");
+                    exit();
+                } else {
+                    header("Location: " . SECONDIFY . "/apps/views/user/dashboard.php");            
+                    exit();
+                }
             } else {
-                header("Location: " . SECONDIFY . "/apps/views/user/dashboard.php");            
+                header("Location: " . SECONDIFY . "/index.php");
+                exit();
             }
-            exit();    
+
+                
         } else{
             header("Location: " . SECONDIFY . "/index.php?error=loginError");
             exit();

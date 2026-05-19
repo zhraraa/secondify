@@ -9,16 +9,11 @@ $id_user = $_SESSION['id_user'];
 // Menangkap pesan dari URL jika ada (setelah proses redirect)
 $pesan = $_GET['pesan'] ?? "";
 
-$cek_status_query = "SELECT status FROM seller_application WHERE id_user = ?";
-$cek_status_stmt = $conn -> prepare($cek_status_query);
-$cek_status_stmt -> bind_param("i", $id_user);
-$cek_status_stmt -> execute();
-$hasil = $cek_status_stmt -> get_result();
+$dataPengajuanPenjual = getPengajuanPenjual($conn, $id_user);
 
 $status = "";
-if($hasil -> num_rows > 0){
-    $row = $hasil -> fetch_assoc();
-    $status = $row['status'];
+if($dataPengajuanPenjual){
+    $status = $dataPengajuanPenjual['status'];
 }
 
 if(isset($_POST['kirim_pengajuan'])){
