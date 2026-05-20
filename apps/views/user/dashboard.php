@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../../../koneksi/koneksi.php';
 require_once '../../config/config.php';
 require_once '../../controllers/auth/auth_check.php';

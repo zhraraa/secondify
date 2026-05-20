@@ -1,9 +1,8 @@
 <?php
-session_start();
-
 require_once '../auth/auth_check.php';
 require_once '../../../koneksi/koneksi.php';
 require_once '../../config/config.php';
+require_once '../../models/sellerApplicationModel.php';
 
 $id_user = $_SESSION['id_user'];
 // Menangkap pesan dari URL jika ada (setelah proses redirect)
@@ -11,6 +10,7 @@ $pesan = $_GET['pesan'] ?? "";
 
 $dataPengajuanPenjual = getPengajuanPenjual($conn, $id_user);
 
+// buat deklarasi status biar di formpenjual.php bisa dicek statusnya
 $status = "";
 if($dataPengajuanPenjual){
     $status = $dataPengajuanPenjual['status'];

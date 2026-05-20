@@ -1,15 +1,3 @@
-<?php
-session_start();
-require_once '../../controllers/auth/auth_check.php';
-require_once '../../../koneksi/koneksi.php';
-require_once '../../config/config.php';
-
-$id_user = $_SESSION['id_user'];
-$data = mysqli_query($conn, "SELECT * FROM users WHERE id_user = $id_user");
-$row = mysqli_fetch_assoc($data);
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,11 +46,18 @@ $row = mysqli_fetch_assoc($data);
                         </div>
                         <div class="dataProfile">
                             <div class="usn">
-                                <h4 class="nama-profile">
-                                    <?= $row['nama_lengkap'] ?>
-                                </h4>
+                                <?php if($dataUser['is_penjual'] == 1):?>
+                                    <h4 class="nama-profile">
+                                        <?= $dataUser['nama_toko'] ?>
+                                    </h4>
+                                <?php else: ?>
+                                    <h4 class="nama-profile">
+                                        <?= $dataUser['nama_lengkap'] ?>
+                                    </h4>
+                                <?php endif; ?>
+                                
                                 <p class="username">
-                                    <?= "@" . $row['username'] ?>
+                                    <?= "@" . $dataUser['username'] ?>
                                 </p>
                             </div>
                             <div class="infoToko">

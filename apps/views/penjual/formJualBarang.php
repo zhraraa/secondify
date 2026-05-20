@@ -35,7 +35,7 @@ require_once '../../config/config.php';
                     <div class="inputGambar">
                         <p class="judulUpload">Foto Barang</p>
                         <label class="kotakUpload" for="upload-foto">
-                            <input type="file" id="upload-foto" class="hiddenInput" accept="image/*">
+                            <input type="file" id="upload-foto" class="hiddenInput" accept="image/*" name="gambarBarang" required >
                             <i data-lucide="image-plus"></i>
                             <span>Tambah</span>
                         </label>
@@ -52,10 +52,10 @@ require_once '../../config/config.php';
                         <div class="kondisiBarang">
                             <label for="">Kondisi</label>
                             <select name="kondisiBarang" id="kondisiBarang">
-                                <option value="">Pilih kondisi</option>
-                                <option value="">Bekas</option>
-                                <option value="">Baru</option>
-                                <option value="">Seperti Baru</option>
+                                <option value="default">Pilih kondisi</option>
+                                <option value="bekas">Bekas</option>
+                                <option value="baru">Baru</option>
+                                <option value="sepertiBaru">Seperti Baru</option>
                             </select>
                         </div>
                     </div>
@@ -104,7 +104,7 @@ require_once '../../config/config.php';
                     </div>
                     <div class="rowButton">
                         <button class="buttonBatal">Batal</button>
-                        <a href="<?= SECONDIFY ?>/apps/views/user/dashboard.php" class="buttonPosting">Posting Barang</a>
+                        <button type="submit" name="posting" class="buttonPosting">Posting Barang</button>
                     </div>
                 </form>
             </div>

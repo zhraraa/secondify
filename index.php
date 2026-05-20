@@ -1,6 +1,17 @@
 <?php
 require_once 'koneksi/koneksi.php';
 require_once 'apps/config/config.php';
+
+if (isset($_SESSION['status']) && $_SESSION['status'] === 'login') {
+    if($_SESSION['role'] == 'admin'){
+        header("Location: " . SECONDIFY . "/apps/views/admin/adminDashboard.php");
+        exit();
+    } else {
+        header("Location: " . SECONDIFY . "/apps/views/user/dashboard.php");            
+        exit();
+    }
+}
+
 ?>
 
 
@@ -37,14 +48,14 @@ require_once 'apps/config/config.php';
                         <label>Email</label>
                         <div>
                             <i data-lucide="mail" style="width: 14px; color:rgba(0, 0, 0, 0.7); position: absolute; margin-left: 8px; align-self: center;"></i> 
-                            <input name="email" type="email" class="input-form" placeholder="nama@gmail.com" style="padding-left: 30px;">
+                            <input name="email" type="email" class="input-form" placeholder="nama@gmail.com" style="padding-left: 30px;" required>
                         </div>
                     </div>
                     <div class="input-password">
                         <label for="">Password</label>
                         <div style="display: flex; flex-direction: row; align-items: center;">
                             <i data-lucide="lock" style="width: 14px; color:rgba(0, 0, 0, 0.7); position: absolute; margin-left: 8px; align-self: center;"></i> 
-                            <input name="password" type="password" class="input-form" placeholder="Masukkan password" style="padding-left: 30px;">
+                            <input name="password" type="password" class="input-form" placeholder="Masukkan password" style="padding-left: 30px;" required>
                             <i data-lucide="eye" style="width: 16px; height: 16px; color:rgba(0, 0, 0, 0.7); position: absolute; margin-left: 380px; align-self: center; "></i> 
                         </div>
                     </div>

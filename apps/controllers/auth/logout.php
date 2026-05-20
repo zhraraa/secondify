@@ -7,6 +7,6 @@ session_unset();
 session_destroy();
 
 // 3. Balikin user ke halaman utama atau login
-header("Location: " . SECONDIFY . "/index.php"); 
+header("Location: /secondify/index.php"); 
 exit();
 ?>
