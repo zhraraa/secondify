@@ -63,7 +63,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] === 'login') {
                     <?php if (isset($_GET['error']) && $_GET['error'] == "loginError") : ?>
                         <div class="loginSalah" style="width: 100%;">
                             <i data-lucide="alert-circle" style="width: 1.25rem; height: 1.25rem; color: red;"></i>
-                            <span>Email atau Password salah</span>
+                            <span class="pesanError">Email atau Password salah</span>
                         </div>
                     <?php endif; ?>
 

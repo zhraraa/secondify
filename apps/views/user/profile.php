@@ -1,3 +1,7 @@
+<?php
+/** @var array $dataUser */
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,14 +26,14 @@
                 </div>
                     <div class="isiProfile">
                         <?php 
-                        $profile = $row['profile_pict'];
+                        $profile = $dataUser['profile_pict'];
                         if($profile == NULL || $profile == ""){
                             $tampilkanProfile = "default.png";
                         } else {
                             $tampilkanProfile = $profile;
                         }
                         ?>
-                        <img src="<?= SECONDIFY; ?>/assets/images/<?= $profile ?>" alt="" class="profilePic">
+                        <img src="<?= SECONDIFY; ?>/assets/images/<?= $tampilkanProfile ?>" alt="" class="profilePic">
                         <div class="buttonArea">
                             <a href="<?= SECONDIFY ?>/apps/controllers/user/daftarPenjualController.php" class="btnToko">
                                 <div  class="profile-button">

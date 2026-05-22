@@ -16,10 +16,6 @@ if(isset($_POST['masuk'])){
         $role = $cek_user['role'];
         $hashed_password = $cek_user['password'];        
     
-
-    
-
-    
         if(password_verify($password, $hashed_password)){
             $_SESSION['id_user'] = $id_user;
             $_SESSION['nama_lengkap'] = $nama_lengkap;

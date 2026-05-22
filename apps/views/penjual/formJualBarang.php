@@ -8,7 +8,7 @@ require_once '../../config/config.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Secondify - Jual Barang</title>
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/penjual/formJualBarang.css">
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/layouts/navbar.css">
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
@@ -36,22 +36,25 @@ require_once '../../config/config.php';
                         <p class="judulUpload">Foto Barang</p>
                         <label class="kotakUpload" for="upload-foto">
                             <input type="file" id="upload-foto" class="hiddenInput" accept="image/*" name="gambarBarang" required >
-                            <i data-lucide="image-plus"></i>
-                            <span>Tambah</span>
+                            <i data-lucide="image-plus" id="image-plus"></i>
+                            <span id="textUploadGambar">Tambah</span>
                         </label>
                     </div>
                     <div class="namaBarang">
                         <label for="">Nama Barang</label>
-                        <input type="text" name="namaBarang" id="namaBarang" placeholder="Masukkan nama barang">
+                        <input type="text" name="namaBarang" id="namaBarang" placeholder="Masukkan nama barang" maxlength="50" required>
                     </div>
                     <div class="rowInput">
                         <div class="hargaBarang">
                             <label for="">Harga</label>
-                            <input type="number" name="hargaBarang" id="hargaBarang" placeholder="Masukkan harga barang">
+                            <input type="number" name="hargaBarang" id="hargaBarang" placeholder="Masukkan harga barang" required>
+                            <?php if(isset($_GET['error']) && $_GET['error'] == 'hargaNegatif') { ?>
+                                <p class="pesanError">Harga tidak boleh nol atau negatif.</p>
+                            <?php } ?>
                         </div>
                         <div class="kondisiBarang">
                             <label for="">Kondisi</label>
-                            <select name="kondisiBarang" id="kondisiBarang">
+                            <select name="kondisiBarang" id="kondisiBarang" required>
                                 <option value="default">Pilih kondisi</option>
                                 <option value="bekas">Bekas</option>
                                 <option value="baru">Baru</option>
@@ -62,7 +65,7 @@ require_once '../../config/config.php';
                     <div class="rowInput2">
                         <div class="kategoriBarang">
                             <label for="">Kategori</label>
-                            <select name="kategoriBarang" id="kategoriBarang">
+                            <select name="kategoriBarang" id="kategoriBarang" required>
                                 <option value="">Pilih kategori</option>
                                 <option value="">Pakaian</option>
                                 <option value="">Elektronik</option>
@@ -73,7 +76,7 @@ require_once '../../config/config.php';
                         </div>
                         <div class="kecamatanBarang">
                             <label for="">Kecamatan</label>
-                            <select name="kecamatanBarang" id="kecamatanBarang">
+                            <select name="kecamatanBarang" id="kecamatanBarang" required>
                                 <option value="">Pilih kecamatan</option>
                                 <option value="">Kedaton</option>
                                 <option value="">Labuhan Ratu</option>
@@ -100,7 +103,7 @@ require_once '../../config/config.php';
                     </div>
                     <div class="deskripsiBarang">
                         <label for="">Deskripsi</label>
-                        <textarea name="deskripsiBarang" id="deskripsiBarang" placeholder="Masukkan deskripsi barang"></textarea>
+                        <textarea name="deskripsiBarang" id="deskripsiBarang" placeholder="Masukkan deskripsi barang" required></textarea>
                     </div>
                     <div class="rowButton">
                         <button class="buttonBatal">Batal</button>
@@ -111,5 +114,6 @@ require_once '../../config/config.php';
         </div>
     </section>
     <script src="<?= SECONDIFY; ?>/assets/js/global.js"></script>
+    <script src="<?= SECONDIFY; ?>/assets/js/user/jualBarang.js"></script>
 </body>
 </html>
