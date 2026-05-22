@@ -22,32 +22,9 @@ require_once '../../config/config.php';
 <div class="container">
     <h2>Barang Favorit ❤️</h2>
 
-    <div class="grid">
-
-        <div class="card">
-            <img src="https://via.placeholder.com/200">
-            <h3>Sepatu Nike Bekas</h3>
-            <p>Rp 350.000</p>
-            <button onclick="removeItem(this)">Hapus</button>
-        </div>
-
-        <div class="card">
-            <img src="https://via.placeholder.com/200">
-            <h3>iPhone 11</h3>
-            <p>Rp 4.000.000</p>
-            <button onclick="removeItem(this)">Hapus</button>
-        </div>
-
-        <div class="card">
-            <img src="https://via.placeholder.com/200">
-            <h3>Tas Wanita</h3>
-            <p>Rp 120.000</p>
-            <button onclick="removeItem(this)">Hapus</button>
-        </div>
-
-    </div>
+    <div class="grid" id="favoriteGrid"></div>
 </div>
 
-<script src="<?= SECONDIFY; ?>/assets/js/user/favorit.js"></script>
+<script src="<?= SECONDIFY; ?>/assets/js/user/favorit.js?v=20260519-1"></script>
 </body>
 </html>

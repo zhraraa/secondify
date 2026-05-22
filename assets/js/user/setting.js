@@ -24,7 +24,7 @@ navItems.forEach(item => {
 });
 
 const hash       = window.location.hash.replace('#', '');
-const validPages = ['edit-profil', 'alamat', 'keamanan', 'privasi', 'bantuan'];
+const validPages = ['edit-profil', 'keamanan', 'privasi', 'bantuan'];
 showPage(hash && validPages.includes(hash) ? hash : 'edit-profil');
 
 // ── Toast notifikasi ──────────────────────────────
@@ -61,22 +61,6 @@ function initSettingPage() {
         showToast('✓ Profil berhasil disimpan!');
         history.replaceState(null, '', window.location.pathname + '#edit-profil');
     }
-    if (urlParams.get('success') === 'tambahAlamat') {
-        showToast('✓ Alamat berhasil ditambahkan!');
-        history.replaceState(null, '', window.location.pathname + '#alamat');
-    }
-    if (urlParams.get('success') === 'ubahAlamat') {
-        showToast('Alamat berhasil diubah!');
-        history.replaceState(null, '', window.location.pathname + '#alamat');
-    }
-    if (urlParams.get('success') === 'hapusAlamat') {
-        showToast('Alamat berhasil dihapus!');
-        history.replaceState(null, '', window.location.pathname + '#alamat');
-    }
-    if (urlParams.get('success') === 'utamaAlamat') {
-        showToast('Alamat utama berhasil diperbarui!');
-        history.replaceState(null, '', window.location.pathname + '#alamat');
-    }
     if (urlParams.get('success') === 'savePrivacy') {
         showToast('Pengaturan privasi berhasil disimpan!');
         history.replaceState(null, '', window.location.pathname + '#privasi');
@@ -110,62 +94,6 @@ function initSettingPage() {
             }
         });
     }
-
-    // Modal Tambah Alamat
-    const modalAlamat = document.getElementById('modalAlamat');
-    const btnTambah   = document.getElementById('btnTambahAlamat');
-    const btnBatal    = document.getElementById('btnBatalAlamat');
-    const modalUbahAlamat = document.getElementById('modalUbahAlamat');
-    const btnBatalUbahAlamat = document.getElementById('btnBatalUbahAlamat');
-    const editButtons = document.querySelectorAll('.btn-ubah-alamat');
-
-    if (btnTambah && modalAlamat) {
-        btnTambah.addEventListener('click', () => {
-            modalAlamat.style.display = 'flex';
-        });
-    }
-
-    if (btnBatal && modalAlamat) {
-        btnBatal.addEventListener('click', () => {
-            modalAlamat.style.display = 'none';
-        });
-    }
-
-    if (modalAlamat) {
-        modalAlamat.addEventListener('click', (e) => {
-            if (e.target === modalAlamat) modalAlamat.style.display = 'none';
-        });
-    }
-
-    editButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-            if (!modalUbahAlamat) return;
-
-            document.getElementById('editIdAlamat').value = button.dataset.id;
-            document.getElementById('editLabelAlamat').value = button.dataset.label;
-            document.getElementById('editNamaPenerima').value = button.dataset.nama;
-            document.getElementById('editNoHpPenerima').value = button.dataset.noHp;
-            document.getElementById('editAlamatLengkap').value = button.dataset.alamat;
-            document.getElementById('editKota').value = button.dataset.kota;
-            document.getElementById('editProvinsi').value = button.dataset.provinsi;
-            document.getElementById('editKodePos').value = button.dataset.kodePos;
-
-            modalUbahAlamat.style.display = 'flex';
-        });
-    });
-
-    if (btnBatalUbahAlamat && modalUbahAlamat) {
-        btnBatalUbahAlamat.addEventListener('click', () => {
-            modalUbahAlamat.style.display = 'none';
-        });
-    }
-
-    if (modalUbahAlamat) {
-        modalUbahAlamat.addEventListener('click', (e) => {
-            if (e.target === modalUbahAlamat) modalUbahAlamat.style.display = 'none';
-        });
-    }
-
 }
 
 if (document.readyState === 'loading') {

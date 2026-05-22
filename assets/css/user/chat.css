@@ -46,6 +46,28 @@ body {
     background: #f0eeff;
 }
 
+.chat-user .name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
+.chat-user .last-msg {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+    max-width: 190px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.empty-chat {
+    padding: 18px;
+    font-size: 13px;
+    color: #999;
+}
+
 .avatar {
     width: 40px;
     height: 40px;

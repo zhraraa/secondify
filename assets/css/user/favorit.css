@@ -30,6 +30,8 @@ body {
 
 .card img {
     width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
     border-radius: 8px;
 }
 
@@ -41,6 +43,23 @@ body {
 .card p {
     color: #886BC6;
     font-weight: 600;
+}
+
+.favorite-meta {
+    color: #888;
+    font-size: 12px;
+    margin-top: 6px;
+    line-height: 1.4;
+}
+
+.empty-favorite {
+    grid-column: 1 / -1;
+    background: white;
+    border: 1.5px solid #ebeaf0;
+    border-radius: 12px;
+    padding: 28px;
+    color: #777;
+    text-align: center;
 }
 
 .card button {

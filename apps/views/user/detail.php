@@ -8,7 +8,7 @@ require_once '../../config/config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Produk — Secondify</title>
-    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/user/detail.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/user/detail.css?v=20260519-2">
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/layouts/navbar.css">
     <script src="<?= SECONDIFY; ?>/assets/js/layouts/navbar.js" defer></script>
 <body>
@@ -169,6 +169,45 @@ require_once '../../config/config.php';
     <!-- Toast notification -->
     <div class="toast" id="toast"></div>
 
-    <script src="<?= SECONDIFY; ?>/assets/js/user/detail.js?v=20260511-3"></script>
+    <div class="report-overlay" id="reportOverlay" aria-hidden="true">
+        <div class="report-modal" role="dialog" aria-modal="true" aria-labelledby="reportTitle">
+            <button class="report-close" id="reportClose" type="button" aria-label="Tutup laporan">&times;</button>
+            <div class="report-modal-title" id="reportTitle">Laporkan Barang</div>
+            <div class="report-product-name" id="reportProductName">Produk</div>
+            <div class="report-form">
+                <div class="report-field">
+                    <label for="reportReason">Alasan laporan</label>
+                    <div class="report-input-wrap report-select-wrap">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 8v4M12 16h.01"/>
+                        </svg>
+                        <select id="reportReason">
+                            <option value="Barang tidak sesuai deskripsi">Barang tidak sesuai deskripsi</option>
+                            <option value="Barang mencurigakan / palsu">Barang mencurigakan / palsu</option>
+                            <option value="Penjual tidak responsif">Penjual tidak responsif</option>
+                            <option value="Konten tidak pantas">Konten tidak pantas</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="report-field">
+                    <label for="reportDetail">Detail laporan</label>
+                    <div class="report-input-wrap report-textarea-wrap">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        <textarea id="reportDetail" rows="4" placeholder="Tulis detail laporan barang ini..."></textarea>
+                    </div>
+                </div>
+                <div class="report-actions">
+                    <button class="report-cancel" id="reportCancel" type="button">Batal</button>
+                    <button class="report-submit" id="reportSubmit" type="button">Kirim Laporan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="<?= SECONDIFY; ?>/assets/js/user/detail.js?v=20260519-1"></script>
 </body>
 </html>

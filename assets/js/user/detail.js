@@ -3,10 +3,75 @@ const SECONDIFY_BASE = `${window.location.origin}${window.location.pathname.spli
 const IMAGE_VERSION = "20260511-2";
 const detailUrl = (product) => `${SECONDIFY_BASE}/apps/views/user/detail.php?id=${encodeURIComponent(product.id)}`;
 const kategoriUrl = (params = "") => `${SECONDIFY_BASE}/apps/views/user/kategori.php${params}`;
+const chatUrl = (sellerName, message = "") => {
+    const params = new URLSearchParams({ seller: sellerName });
+    if (message) params.set("message", message);
+    return `${SECONDIFY_BASE}/apps/views/user/chat.php?${params.toString()}`;
+};
 const imageUrl = (src) => {
     if (!src || src.startsWith("http") || src.startsWith("/")) return src;
     return `${SECONDIFY_BASE}/assets/images/${src.replace(/^(\.\.\/)?img\//, "")}?v=${IMAGE_VERSION}`;
 };
+
+const sellerNames = {
+    1: "sony.second",
+    2: "rexus.corner",
+    3: "applehub.bdl",
+    4: "Toko Rizky",
+    5: "galaxy.store",
+    6: "applehub.bdl",
+    7: "xiaomi.lampung",
+    8: "samba.archive",
+    9: "rafi.collections",
+    10: "kamera.langkapura",
+    16: "rafi.collections",
+};
+
+const getSellerName = (product) => product.penjual || sellerNames[product.id] || "secondify.seller";
+const getSellerInitial = (sellerName) => sellerName.trim().charAt(0).toUpperCase() || "S";
+
+function getWishlist() {
+    try {
+        return JSON.parse(localStorage.getItem("secondifyWishlist")) || [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function saveWishlist(items) {
+    localStorage.setItem("secondifyWishlist", JSON.stringify(items));
+}
+
+function isWishlisted(productId) {
+    return getWishlist().some(item => Number(item.id) === Number(productId));
+}
+
+function wishlistPayload(product) {
+    return {
+        id: product.id,
+        nama: product.nama,
+        harga: product.harga,
+        lokasi: product.lokasi,
+        kondisi: product.kondisi,
+        kategori: product.kategori,
+        gambar: product.gambar,
+        seller: getSellerName(product),
+        detailUrl: detailUrl(product),
+    };
+}
+
+function toggleWishlist(product) {
+    const items = getWishlist();
+    const exists = items.some(item => Number(item.id) === Number(product.id));
+
+    if (exists) {
+        saveWishlist(items.filter(item => Number(item.id) !== Number(product.id)));
+        return false;
+    }
+
+    saveWishlist([wishlistPayload(product), ...items]);
+    return true;
+}
 
 const allProducts = [
     {
@@ -598,6 +663,11 @@ function renderProduct(p) {
     // Desc
     document.getElementById("productDesc").textContent = p.deskripsi;
 
+    // Seller
+    const sellerName = getSellerName(p);
+    document.querySelector(".seller-avatar").textContent = getSellerInitial(sellerName);
+    document.querySelector(".seller-name").textContent = sellerName;
+
     // "Lihat Semua" link
     document.getElementById("lihatSemua").href = kategoriUrl(`?kat=${p.kategori}`);
 }
@@ -623,7 +693,7 @@ function renderRelated(currentProduct) {
                 <img src="${imageUrl(p.gambar)}" alt="${p.nama}" loading="lazy"
                     onerror="this.src='https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop'">
                 <span class="card-badge ${badgeMap[p.kondisi]}">${badgeLabelMap[p.kondisi]}</span>
-                <button class="wishlist-btn" title="Simpan ke Wishlist">
+                <button class="wishlist-btn ${isWishlisted(p.id) ? "active" : ""}" data-id="${p.id}" title="Simpan ke Wishlist">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                     </svg>
@@ -647,7 +717,11 @@ function renderRelated(currentProduct) {
         btn.addEventListener("click", e => {
             e.preventDefault();
             e.stopPropagation();
-            btn.classList.toggle("active");
+            const product = related.find(item => Number(item.id) === Number(btn.dataset.id));
+            if (!product) return;
+            const added = toggleWishlist(product);
+            btn.classList.toggle("active", added);
+            showToast(added ? "Ditambahkan ke Favorit" : "Dihapus dari Favorit");
         });
     });
 }
@@ -655,6 +729,7 @@ function renderRelated(currentProduct) {
 function bindEvents(product) {
     // Wishlist FAB
     const fab = document.getElementById("wishlistFab");
+    fab.classList.toggle("active", isWishlisted(product.id));
     fab.addEventListener("click", () => {
         fab.classList.toggle("active");
         showToast(fab.classList.contains("active")
@@ -683,6 +758,73 @@ function bindEvents(product) {
         if (e.key === "Enter" && e.target.value.trim()) {
             window.location.href = kategoriUrl(`?kat=semua&q=${encodeURIComponent(e.target.value.trim())}`);
         }
+    });
+
+    fab.addEventListener("click", event => {
+        event.stopImmediatePropagation();
+        const added = toggleWishlist(product);
+        fab.classList.toggle("active", added);
+        showToast(added ? "Ditambahkan ke Favorit" : "Dihapus dari Favorit");
+    }, true);
+
+    document.getElementById("btnChat").addEventListener("click", event => {
+        event.stopImmediatePropagation();
+        window.location.href = chatUrl(getSellerName(product), "Pembeli mengajukan COD");
+    }, true);
+
+    document.querySelector(".seller-chat-btn").addEventListener("click", event => {
+        event.stopImmediatePropagation();
+        window.location.href = chatUrl(getSellerName(product));
+    }, true);
+
+    bindReportModal(product);
+}
+
+function bindReportModal(product) {
+    const overlay = document.getElementById("reportOverlay");
+    const openBtn = document.getElementById("btnReport");
+    const closeBtn = document.getElementById("reportClose");
+    const cancelBtn = document.getElementById("reportCancel");
+    const submitBtn = document.getElementById("reportSubmit");
+    const productName = document.getElementById("reportProductName");
+    const reason = document.getElementById("reportReason");
+    const detail = document.getElementById("reportDetail");
+
+    const openModal = event => {
+        if (event) event.stopImmediatePropagation();
+        productName.textContent = product.nama;
+        overlay.classList.add("show");
+        overlay.setAttribute("aria-hidden", "false");
+        detail.focus();
+    };
+
+    const closeModal = () => {
+        overlay.classList.remove("show");
+        overlay.setAttribute("aria-hidden", "true");
+    };
+
+    openBtn.addEventListener("click", openModal, true);
+    closeBtn.addEventListener("click", closeModal);
+    cancelBtn.addEventListener("click", closeModal);
+    overlay.addEventListener("click", event => {
+        if (event.target === overlay) closeModal();
+    });
+
+    submitBtn.addEventListener("click", () => {
+        const reports = JSON.parse(localStorage.getItem("secondifyReports") || "[]");
+        reports.unshift({
+            id: `RPT-${Date.now()}`,
+            productId: product.id,
+            productName: product.nama,
+            seller: getSellerName(product),
+            reason: reason.value,
+            detail: detail.value.trim(),
+            createdAt: new Date().toISOString(),
+        });
+        localStorage.setItem("secondifyReports", JSON.stringify(reports));
+        detail.value = "";
+        closeModal();
+        showToast("Laporan barang berhasil dikirim");
     });
 }
 
