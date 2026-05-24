@@ -1,6 +1,5 @@
 <?php
-require_once '../../../koneksi/koneksi.php';
-require_once '../../config/config.php';
+/** @var array $dataProduk */
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +28,7 @@ require_once '../../config/config.php';
                 <span>Kelola daftar barang dagang saya</span>
             </div>
 
-            <a href="<?= SECONDIFY ?>/apps/views/penjual/formJualBarang.php" class="btn-tambah">
+            <a href="<?= SECONDIFY ?>/apps/controllers/penjual/jualBarangController.php" class="btn-tambah">
                 <i data-lucide="plus" class="icon"></i>
                 Tambah Barang
             </a>
@@ -42,41 +41,25 @@ require_once '../../config/config.php';
             </div>
 
             <div class="list-barang">
-                <div class="barang-item">
-                    <div class="detail-barang">
-                        <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="barang">
-                        
-                        <div class="info-barang">
-                            <span>Sunscreen OMG</span>
-                            <span class="harga">Rp 100.000.000</span>
+                <?php foreach($dataProduk as $data) : ?>
+                    <div class="barang-item">
+                        <div class="detail-barang">
+                            <img src="<?= SECONDIFY; ?>/assets/images/produk/<?= $data['foto_barang'] ?>" alt="barang">
                             
-                            <div class="lokasi">
-                                <i data-lucide="map-pin" class="icon"></i>
-                                <span>Seputih Raman</span>
+                            <div class="info-barang">
+                                <span><?= $data['nama_barang'] ?></span>
+                                <span class="harga">Rp <?= $data['harga'] ?></span>
+                                
+                                <div class="lokasi">
+                                    <i data-lucide="map-pin" class="icon"></i>
+                                    <span><?= $data['lokasi'] ?></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <i data-lucide="ellipsis-vertical" class="opsi-menu"></i>
-                </div>
-                
-                <div class="barang-item">
-                    <div class="detail-barang">
-                        <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="barang">
                         
-                        <div class="info-barang">
-                            <span>Sunscreen OMG</span>
-                            <span class="harga">Rp 100.000.000</span>
-                            
-                            <div class="lokasi">
-                                <i data-lucide="map-pin" class="icon"></i>
-                                <span>Seputih Raman</span>
-                            </div>
-                        </div>
+                        <i data-lucide="ellipsis-vertical" class="opsi-menu"></i>
                     </div>
-                    
-                    <i data-lucide="ellipsis-vertical" class="opsi-menu"></i>
-                </div>
+                <?php endforeach ?>
             </div>
         </div>
     </section>

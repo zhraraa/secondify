@@ -31,7 +31,7 @@ require_once '../../config/config.php';
                     <span>Isi informasi barang dengan lengkap agar cepat laku.</span>
                 </div>
                 
-                <form action="<?= SECONDIFY ?>/apps/views/user/dashboard.php" method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     <div class="inputGambar">
                         <p class="judulUpload">Foto Barang</p>
                         <label class="kotakUpload" for="upload-foto">
@@ -55,10 +55,10 @@ require_once '../../config/config.php';
                         <div class="kondisiBarang">
                             <label for="">Kondisi</label>
                             <select name="kondisiBarang" id="kondisiBarang" required>
-                                <option value="default">Pilih kondisi</option>
+                                <option value="">Pilih kondisi</option>
                                 <option value="bekas">Bekas</option>
                                 <option value="baru">Baru</option>
-                                <option value="sepertiBaru">Seperti Baru</option>
+                                <option value="seperti baru">Seperti Baru</option>
                             </select>
                         </div>
                     </div>
@@ -67,37 +67,37 @@ require_once '../../config/config.php';
                             <label for="">Kategori</label>
                             <select name="kategoriBarang" id="kategoriBarang" required>
                                 <option value="">Pilih kategori</option>
-                                <option value="">Pakaian</option>
-                                <option value="">Elektronik</option>
-                                <option value="">Sepatu</option>
-                                <option value="">Aksesoris</option>
-                                <option value="">Lainnya</option>
+                                <option value="1">Pakaian</option>
+                                <option value="7">Elektronik</option>
+                                <option value="3">Sepatu</option>
+                                <option value="9">Aksesoris</option>
+                                <option value="2">Lainnya</option>
                             </select>
                         </div>
                         <div class="kecamatanBarang">
                             <label for="">Kecamatan</label>
                             <select name="kecamatanBarang" id="kecamatanBarang" required>
                                 <option value="">Pilih kecamatan</option>
-                                <option value="">Kedaton</option>
-                                <option value="">Labuhan Ratu</option>
-                                <option value="">Bumi Waras</option>
-                                <option value="">Enggal</option>
-                                <option value="">Kedamaian</option>
-                                <option value="">Kemiling</option>
-                                <option value="">Langkapura</option>
-                                <option value="">Panjang</option>
-                                <option value="">Rajabasa</option>
-                                <option value="">Sukabumi</option>
-                                <option value="">Sukarame</option>
-                                <option value="">Tanjung Senang</option>
-                                <option value="">Tanjung Karang Barat</option>
-                                <option value="">Tanjung Karang Pusat</option>
-                                <option value="">Tanjung Karang Timur</option>
-                                <option value="">Teluk Betung Barat</option>
-                                <option value="">Teluk Betung Selatan</option>
-                                <option value="">Teluk Betung Timur</option>
-                                <option value="">Teluk Betung Utara</option>
-                                <option value="">Way Halim</option>
+                                <option value="Kedaton">Kedaton</option>
+                                <option value="Labuhan Ratu">Labuhan Ratu</option>
+                                <option value="Bumi Waras">Bumi Waras</option>
+                                <option value="Enggal">Enggal</option>
+                                <option value="Kedamaian">Kedamaian</option>
+                                <option value="Kemiling">Kemiling</option>
+                                <option value="Langkapura">Langkapura</option>
+                                <option value="Panjang">Panjang</option>
+                                <option value="Rajabasa">Rajabasa</option>
+                                <option value="Sukabumi">Sukabumi</option>
+                                <option value="Sukarame">Sukarame</option>
+                                <option value="Tanjung Senang">Tanjung Senang</option>
+                                <option value="Tanjung Karang Barat">Tanjung Karang Barat</option>
+                                <option value="Tanjung Karang Pusat">Tanjung Karang Pusat</option>
+                                <option value="Tanjung Karang Timur">Tanjung Karang Timur</option>
+                                <option value="Teluk Betung Barat">Teluk Betung Barat</option>
+                                <option value="Teluk Betung Selatan">Teluk Betung Selatan</option>
+                                <option value="Teluk Betung Timur">Teluk Betung Timur</option>
+                                <option value="Teluk Betung Utara">Teluk Betung Utara</option>
+                                <option value="Way Halim">Way Halim</option>
                             </select>
                         </div>
                     </div>

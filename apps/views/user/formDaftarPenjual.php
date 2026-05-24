@@ -50,7 +50,7 @@
 
                         <h2>Selamat! Toko Disetujui</h2>
                         <p>Pendaftaran kamu telah disetujui. Sekarang kamu sudah bisa mulai berjualan di Secondify.</p>
-                        <a href="<?= SECONDIFY ?>/apps/views/penjual/kelolaBarang.php" class="submit-button">Mulai Berjualan</a>
+                        <a href="<?= SECONDIFY ?>/apps/controllers/penjual/kelolaBarang.php" class="submit-button">Mulai Berjualan</a>
                     </div>
                 <?php
                 else:
