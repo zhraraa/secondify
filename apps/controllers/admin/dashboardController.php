@@ -12,7 +12,7 @@ function getDashboardStats() {
     $queryUser = mysqli_query($conn, "SELECT COUNT(*) as total FROM users");
     $stats['totalUser'] = mysqli_fetch_assoc($queryUser)['total'];
 
-    $queryBarang = mysqli_query($conn, "SELECT COUNT(*) as total FROM products WHERE status = 'available'");
+    $queryBarang = mysqli_query($conn, "SELECT COUNT(*) as total FROM produk WHERE status = 'available'");
     $stats['totalBarang'] = mysqli_fetch_assoc($queryBarang)['total'];
 
     $querySeller = mysqli_query($conn, "SELECT COUNT(*) as total FROM seller_application WHERE status = 'pending'");
@@ -46,7 +46,7 @@ function getDashboardStats() {
     // data grafik bar kategori barang start
     $sqlKategori = "SELECT k.nama_kategori, COUNT(p.id_produk) as jumlah 
                     FROM kategori k 
-                    LEFT JOIN products p ON k.id_kategori = p.id_kategori 
+                    LEFT JOIN produk p ON k.id_kategori = p.id_kategori 
                     GROUP BY k.id_kategori 
                     ORDER BY jumlah DESC 
                     LIMIT 5";

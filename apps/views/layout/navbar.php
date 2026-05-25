@@ -1,17 +1,13 @@
 <?php
+/** @var array $dataUser */
+
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Pastikan koneksi database tersedia, karena tidak semua file memanggil koneksi.php
 require_once __DIR__ . '/../../../koneksi/koneksi.php';
 
-if (isset($_SESSION['id_user'])) {
-    $id_user = $_SESSION['id_user'];
-    $query = "SELECT * FROM users WHERE id_user = $id_user";
-    $result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_assoc($result);
-}
 ?>
 
 
@@ -64,13 +60,18 @@ if (isset($_SESSION['id_user'])) {
             </div>
             <div class="user-info">
                 <span class="user-name">
-                    <?php
-                        $nama = $row['nama_lengkap'];
-                        echo htmlspecialchars($nama);
-                    ?>
+                    <?php if($dataUser['is_penjual'] == 1):?>
+                        <span class="user-name">
+                            <?= $dataUser['nama_toko'] ?>
+                        </span>
+                    <?php else: ?>
+                        <span class="user-name">
+                            <?= $dataUser['nama_lengkap'] ?>
+                        </span>
+                    <?php endif; ?>
                 </span>
                 <?php 
-                if(isset($row['is_penjual']) && $row['is_penjual'] == 1){
+                if(isset($dataUser['is_penjual']) && $dataUser['is_penjual'] == 1){
                     echo "<span class=\"user-role\">Penjual</span>";
                 } else {
                     echo "<span class=\"user-role\">Member</span>";

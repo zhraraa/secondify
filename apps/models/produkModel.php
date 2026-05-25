@@ -15,7 +15,20 @@ function getDataProdukById($conn, $id_user){
 function postProduk($conn, $id_user, $kategori, $namaBarang, $deskripsi, $harga, $lokasi, $kondisi, $nama_file_baru){
     $query = $conn -> prepare("INSERT INTO produk (id_user, id_kategori, nama_barang, deskripsi, harga, lokasi, kondisi, foto_barang) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     $query -> bind_param("iississs", $id_user, $kategori, $namaBarang, $deskripsi, $harga, $lokasi, $kondisi, $nama_file_baru);
-    return $query -> execute();
+    $post = $query -> execute();
+    return $post;
+}
+
+function totalProduk($conn, $id_user){
+    $query = $conn -> prepare(  "SELECT COUNT(*) AS total
+                                FROM produk
+                                WHERE id_user = ?");
+    $query -> bind_param("i", $id_user);
+    $query -> execute();
+    $total = $query -> get_result();
+    $totalProduk = $total -> fetch_assoc();
+    
+    return $totalProduk;
 }
 
 ?>

@@ -161,13 +161,7 @@ p{
     gap: 5px;
 }
 
-/* card barang jualan----------------^^ */
-.cardJualan{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 24px;
-    padding-top: 20px;
-}
+
 
 .navJualan{
     display: flex;
@@ -209,6 +203,19 @@ p{
     padding: 0px 10px;
 }
 
+/* card barang jualan----------------^^ */
+.cardJualanH{
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.cardJualanV{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 20px;
+}
 
 .cardBarang{
     display: flex;
@@ -218,16 +225,31 @@ p{
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 0 3px rgb(0, 0, 0, 0.4);
+    height: 250px;
+    width: 200px;
+}
+
+.cardBarang img {
+    height: 150px;
+    width: 200px;
+    border: 1px solid #d3c3fb;
+    border-radius: 8px;
+    object-fit: cover;
 }
 
 .detailBarang{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 10px 20px;
+    padding: 10px;
 }
 
-.harga{
+.profile-namaBarang{
+    text-align: left;
+    width: 100%;
+}
+
+.detailBarang .harga{
     font-weight: 500;
     color: #886BC6;
 }

@@ -37,7 +37,7 @@
         <div class="kelola-barang">
             <div class="opsi">
                 <button class="active">Aktif (2)</button>
-                <button>Tejual (1)</button>
+                <button>Terjual (1)</button>
             </div>
 
             <div class="list-barang">

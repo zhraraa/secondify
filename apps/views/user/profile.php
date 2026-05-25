@@ -1,5 +1,7 @@
 <?php
 /** @var array $dataUser */
+/** @var array $dataProduk */
+/** @var array $totalProduk */
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +74,7 @@
                                 </div>
                                 <span>|</span>
                                 <div class="barangAktif">
-                                    <span>2 </span>
+                                    <span><?= $totalProduk['total'] ?> </span>
                                     <span>barang aktif</span>
                                 </div>
                                 <span>|</span>
@@ -84,11 +86,11 @@
                             <div class="dataLokasi">
                                 <i data-lucide="map-pin" class="icon"></i>
                                 <p>
-                                    <?=$row['lokasi'] . ", Bandar Lampung"?>
+                                    <?=$dataUser['lokasi'] . ", Bandar Lampung"?>
                                 </p>
                             </div>
                             <p class="bio">
-                                <?= $row['bio'] ?>
+                                <?= $dataUser['bio'] ?>
                             </p>
                         </div>
                     </div>
@@ -115,34 +117,20 @@
                     </button>
                 </div>
                 <!-- daftar produk -->
-                <div class="cardJualan" id="wadahProduk">
-                    <div class="cardBarang">
-                        <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="">
-                        <div class="detailBarang">
-                            <p>Sunscreen OMG</p>
-                            <p class="harga">Rp 50.000</p>
+                <div class="cardJualanV" id="wadahProduk"> <!-- ini horizontal -->
+                    <div class="cardJualanH"> <!-- ini vertikal -->
+                        <?php foreach ($dataProduk as $data):  ?>
+                        <div class="cardBarang">
+                            <img src="<?= SECONDIFY; ?>/assets/images/produk/<?= $data['foto_barang'] ?>" alt="barang">
+                            <div class="detailBarang">
+                                <span class="profile-namaBarang"><?= $data['nama_barang'] ?></span>
+                                <p class="harga">
+                                    Rp.
+                                    <?= $data['harga']?>
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="cardBarang">
-                        <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="">
-                        <div class="detailBarang">
-                            <p>Sunscreen OMG</p>
-                            <p class="harga">Rp 50.000</p>
-                        </div>
-                    </div>
-                    <div class="cardBarang">
-                        <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="">
-                        <div class="detailBarang">
-                            <p>Sunscreen OMG</p>
-                            <p class="harga">Rp 50.000</p>
-                        </div>
-                    </div>
-                    <div class="cardBarang">
-                        <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="">
-                        <div class="detailBarang">
-                            <p>Sunscreen OMG</p>
-                            <p class="harga">Rp 50.000</p>
-                        </div>
+                    <?php endforeach;  ?>
                     </div>
                 </div>
                 <!-- ULASAN YA--------------------^^ -->
