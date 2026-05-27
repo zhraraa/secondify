@@ -101,7 +101,7 @@
             <div class="cardToko">
                 <div class="navJualan"> 
 
-                    <div class="backgroundGeser" id="bg-geser"></div>
+                    <div class="backgroundGeser" id="profile-bg-geser"></div>
 
                     <button id="btnProduk" class="buttonJualan active" onclick="gantiHalaman('produk', this)">
                         <div class="rowButton">

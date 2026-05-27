@@ -1,4 +1,4 @@
-function gantiHalaman(pilihan, elemenTombol){
+function gantiHalaman(pilihan, elemenTombol){ //mainin pergantian halamannya
     const produk = document.getElementById('wadahProduk');
     const ulasan = document.getElementById('wadahUlasan');
     const tombolProduk = document.getElementById('btnProduk');
@@ -21,8 +21,8 @@ function gantiHalaman(pilihan, elemenTombol){
     geserSlider(elemenTombol);
 }
 
-function geserSlider(tombol){
-    const geser = document.getElementById('bg-geser');
+function geserSlider(tombol){ //kalo ini animasi geser" buat di button atas nya itu
+    const geser = document.getElementById('profile-bg-geser');
 
     geser.style.width = tombol.offsetWidth + 'px';
     geser.style.left = tombol.offsetLeft + 'px';
