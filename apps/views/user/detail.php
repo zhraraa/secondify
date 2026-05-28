@@ -2,6 +2,7 @@
 /** @var array $dataUser */
 /** @var array $dataProdukMarketplace */
 /** @var array|null $dataProdukDetail */
+/** @var int $idProduk */
 ?>
 
 <!DOCTYPE html>
@@ -212,7 +213,7 @@
 
     <script>
         window.SECONDIFY_PRODUCTS = <?= json_encode($dataProdukMarketplace ?? [], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>;
-        window.SECONDIFY_PRODUCT_ID = <?= isset($_GET['id']) ? (int) $_GET['id'] : 0; ?>;
+        window.SECONDIFY_PRODUCT_ID = <?= (int) ($idProduk ?? 0); ?>;
         window.SECONDIFY_CURRENT_USER_ID = <?= (int) ($dataUser['id_user'] ?? 0); ?>;
     </script>
     <script src="<?= SECONDIFY; ?>/assets/js/user/detail.js?v=20260528-4"></script>

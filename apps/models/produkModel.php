@@ -38,9 +38,15 @@ function updateProduk($conn,$id_produk, $id_user, $kategori, $namaBarang, $deskr
     return $update;
 }
 
-function getAllProdukMarketplace($conn){
-    $query = $conn -> prepare("
-        SELECT
+function getAllProdukMarketplace($conn, $sort = 'terbaru', $limit = null, $search = null){
+    $allowedSort = [
+        'terbaru' => 'produk.tgl_dibuat DESC, produk.id_produk DESC',
+        'termurah' => 'produk.harga ASC, produk.tgl_dibuat DESC',
+        'termahal' => 'produk.harga DESC, produk.tgl_dibuat DESC',
+    ];
+
+    $orderBy = $allowedSort[$sort] ?? $allowedSort['terbaru'];
+    $sql = "SELECT
             produk.id_produk,
             produk.id_user,
             produk.id_kategori,
@@ -59,9 +65,30 @@ function getAllProdukMarketplace($conn){
             users.is_penjual
         FROM produk
         JOIN kategori ON produk.id_kategori = kategori.id_kategori
-        JOIN users ON produk.id_user = users.id_user
-        ORDER BY produk.tgl_dibuat DESC, produk.id_produk DESC
-    ");
+        JOIN users ON produk.id_user = users.id_user";
+
+    $types = '';
+    $params = [];
+
+    if ($search !== null && trim($search) !== '') {
+        $searchTerm = '%' . $search . '%';
+        $sql .= " WHERE produk.nama_barang LIKE ? OR produk.deskripsi LIKE ? OR kategori.nama_kategori LIKE ? OR users.nama_lengkap LIKE ? OR users.username LIKE ? OR users.nama_toko LIKE ?";
+        $types .= 'ssssss';
+        $params = [$searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm];
+    }
+
+    $sql .= " ORDER BY {$orderBy}";
+
+    if ($limit !== null) {
+        $sql .= " LIMIT ?";
+        $types .= 'i';
+        $params[] = $limit;
+    }
+
+    $query = $conn -> prepare($sql);
+    if (!empty($types)) {
+        $query->bind_param($types, ...$params);
+    }
     $query -> execute();
     $dataProduk = $query -> get_result();
     return $dataProduk -> fetch_all(MYSQLI_ASSOC);

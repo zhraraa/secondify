@@ -19,7 +19,7 @@ require_once __DIR__ . '/../../../koneksi/koneksi.php';
     </a>
 
     <div class="search-box">
-        <input type="text" placeholder="Mau cari barang apa hari ini?" id="searchInput">
+        <input type="text" placeholder="Mau cari barang apa hari ini?" id="searchInput" value="<?= htmlspecialchars($_GET['q'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
     </div>
 
     <div class="nav-right">

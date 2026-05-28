@@ -1,26 +1,5 @@
 <?php
 /** @var array $user */
-
-$bulanIndonesia = [
-    1 => 'Januari',
-    2 => 'Februari',
-    3 => 'Maret',
-    4 => 'April',
-    5 => 'Mei',
-    6 => 'Juni',
-    7 => 'Juli',
-    8 => 'Agustus',
-    9 => 'September',
-    10 => 'Oktober',
-    11 => 'November',
-    12 => 'Desember',
-];
-
-$createdAt = !empty($user['created_at']) ? strtotime($user['created_at']) : false;
-$memberSejak = $createdAt ? $bulanIndonesia[(int) date('n', $createdAt)] . ' ' . date('Y', $createdAt) : '-';
-$peranUser = isset($user['is_penjual']) && (int) $user['is_penjual'] === 1 ? 'Penjual' : 'Member';
-$totalTransaksi = (int) ($user['total_transaksi'] ?? 0);
-$ratingUser = number_format((float) ($user['rating'] ?? 0), 1, '.', '');
 ?>
 
 <!DOCTYPE html>
@@ -54,13 +33,6 @@ $ratingUser = number_format((float) ($user['rating'] ?? 0), 1, '.', '');
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                 </svg>
                 Keamanan Akun
-            </a>
-            <a href="javascript:void(0)" class="nav-item" data-page="privasi">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M12 8v4M12 16h.01"/>
-                </svg>
-                Privasi
             </a>
             <a href="javascript:void(0)" class="nav-item" data-page="bantuan">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -101,15 +73,33 @@ $ratingUser = number_format((float) ($user['rating'] ?? 0), 1, '.', '');
 
                         <div class="avatar-row">
                             <div class="avatar-circle">
-                                <?= strtoupper(substr($user['nama_lengkap'], 0, 1)); ?>
+                                <?php if (!empty($user['profile_pict']) && $user['profile_pict'] !== 'default.png'): ?>
+                                    <img src="<?= SECONDIFY ?>/assets/images/<?= $user['profile_pict'] ?>" 
+                                        alt="Foto Profil" class="avatar-img">
+                                <?php else: ?>
+                                    <?= strtoupper(substr($user['nama_lengkap'], 0, 1)) ?>
+                                <?php endif; ?>
                             </div>
                             <div class="avatar-info">
-                                <button class="btn-ubah-foto">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M6.343 17.657A8 8 0 1 0 17.657 6.343 8 8 0 0 0 6.343 17.657z"/></svg>
-                                    Ubah Foto
-                                </button>
+                                <form action="" method="POST" enctype="multipart/form-data" id="formUbahFoto">
+                                    <input type="file" name="foto_profil" id="inputFoto" 
+                                        accept="image/png,image/jpeg" style="display:none">
+                                    <button type="button" class="btn-ubah-foto" id="btnUbahFoto">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                            <circle cx="12" cy="12" r="3"/>
+                                            <path d="M6.343 17.657A8 8 0 1 0 17.657 6.343 8 8 0 0 0 6.343 17.657z"/>
+                                        </svg>
+                                        Ubah Foto
+                                    </button>
+                                    <button type="submit" name="ubah_foto" id="btnSimpanFoto" 
+                                            style="display:none" class="btn-ubah-foto">Simpan Foto</button>
+                                </form>
                                 <p class="avatar-hint">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="12" height="12"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="12" height="12">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <line x1="12" y1="8" x2="12" y2="12"/>
+                                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                    </svg>
                                     PNG, JPG maks. 2MB
                                 </p>
                             </div>
@@ -203,30 +193,6 @@ $ratingUser = number_format((float) ($user['rating'] ?? 0), 1, '.', '');
 
                 <!-- Sidebar kanan -->
                 <div class="side-cards">
-                    <div class="card info-akun-card">
-                        <h2 class="card-title">Informasi Akun</h2>
-                        <div class="info-row">
-                            <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-                            <span>Member sejak</span>
-                            <strong><?= htmlspecialchars($memberSejak); ?></strong>
-                        </div>
-                        <div class="info-row">
-                            <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-                            <span>Peran</span>
-                            <strong><?= htmlspecialchars($peranUser); ?></strong>
-                        </div>
-                        <div class="info-row">
-                            <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-                            <span>Total Transaksi</span>
-                            <strong><?= $totalTransaksi; ?> transaksi</strong>
-                        </div>
-                        <div class="info-row">
-                            <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-                            <span>Rating</span>
-                            <strong><?= $ratingUser; ?> / 5.0</strong>
-                        </div>
-                    </div>
-
                     <div class="card tips-card">
                         <h2 class="card-title">Tips</h2>
                         <ul class="tips-list">
@@ -315,131 +281,6 @@ $ratingUser = number_format((float) ($user['rating'] ?? 0), 1, '.', '');
                         <button class="btn-danger">Hapus Akun</button>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- ══ PRIVASI ══ -->
-        <section class="page" id="page-privasi">
-            <div class="page-header">
-                <h1>Privasi</h1>
-                <p>Kontrol siapa yang dapat melihat informasimu</p>
-            </div>
-            <div class="content-area-full">
-                <form method="POST">
-                    <div class="card">
-                        <h2 class="card-title">Visibilitas Profil</h2>
-                        <div class="toggle-row">
-                            <div>
-                                <p class="toggle-label">Tampilkan nomor WhatsApp</p>
-                                <p class="toggle-desc">
-                                    Nomor WA bisa dilihat oleh pembeli yang tertarik
-                                </p>
-                            </div>
-                            <label class="toggle">
-                                <input 
-                                type="checkbox"
-                                name="show_whatsapp"
-                                <?= $user['show_whatsapp'] ? 'checked' : ''; ?>
-                                >
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="toggle-row">
-                            <div>
-                                <p class="toggle-label">Tampilkan email</p>
-                                <p class="toggle-desc">
-                                    Email dapat dilihat oleh pengguna lain
-                                </p>
-                            </div>
-                            <label class="toggle">
-                                <input 
-                                type="checkbox"
-                                name="show_email"
-                                <?= $user['show_email'] ? 'checked' : ''; ?>
-                                >
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="toggle-row">
-                            <div>
-                                <p class="toggle-label">Tampilkan tanggal lahir</p>
-                                <p class="toggle-desc">
-                                    Tanggal lahir ditampilkan di profil publikmu
-                                </p>
-                            </div>
-                            <label class="toggle">
-                                <input 
-                                type="checkbox"
-                                name="show_tanggal_lahir"
-                                <?= $user['show_tanggal_lahir'] ? 'checked' : ''; ?>
-                                >
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="toggle-row">
-                            <div>
-                                <p class="toggle-label">Tampilkan riwayat transaksi</p>
-                                <p class="toggle-desc">
-                                    Total transaksi dapat dilihat oleh pengguna lain
-                                </p>
-                            </div>
-                            <label class="toggle">
-                                <input 
-                                type="checkbox"
-                                name="show_transaksi"
-                                <?= $user['show_transaksi'] ? 'checked' : ''; ?>
-                                >
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="card mt-16">
-                        <h2 class="card-title">Data & Aktivitas</h2>
-                        <div class="toggle-row">
-                            <div>
-                                <p class="toggle-label">
-                                    Izinkan pelacakan aktivitas
-                                </p>
-                                <p class="toggle-desc">
-                                    Untuk meningkatkan rekomendasi barang bagimu
-                                </p>
-                            </div>
-                            <label class="toggle">
-                                <input 
-                                type="checkbox"
-                                name="allow_tracking"
-                                <?= $user['allow_tracking'] ? 'checked' : ''; ?>
-                                >
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="toggle-row">
-                            <div>
-                                <p class="toggle-label">
-                                    Berbagi data anonim
-                                </p>
-                                <p class="toggle-desc">
-                                    Membantu Secondify meningkatkan layanan
-                                </p>
-                            </div>
-                            <label class="toggle">
-                                <input 
-                                type="checkbox"
-                                name="anonymous_data"
-                                <?= $user['anonymous_data'] ? 'checked' : ''; ?>
-                                >
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <button 
-                        type="submit"
-                        name="save_privacy"
-                        class="btn-simpan mt-16">
-                        Simpan Pengaturan
-                    </button>
-                </form>
-
             </div>
         </section>
 

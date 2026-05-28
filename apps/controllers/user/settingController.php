@@ -6,6 +6,41 @@ require_once '../../models/userModel.php';
 
 $id_user = $_SESSION['id_user'];
 
+if (isset($_POST['ubah_foto'])) {
+    $file = $_FILES['foto_profil'];
+    $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    $maxSize = 2 * 1024 * 1024; 
+
+    if (!in_array($file['type'], $allowedTypes)) {
+        header("Location: " . SECONDIFY . "/apps/controllers/user/settingController.php?error=formatFoto#edit-profil");
+        exit();
+    }
+    if ($file['size'] > $maxSize) {
+        header("Location: " . SECONDIFY . "/apps/controllers/user/settingController.php?error=ukuranFoto#edit-profil");
+        exit();
+    }
+
+    // Hapus foto lama 
+    $userNow = getDataUSer($conn, $id_user);
+    $fotoLama = $userNow['profile_pict'];
+    $pathLama = $_SERVER['DOCUMENT_ROOT'] . '/secondify/assets/images/' . $fotoLama;
+    if ($fotoLama && $fotoLama !== 'default.png' && file_exists($pathLama)) {
+        unlink($pathLama);
+    }
+
+    $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+    $namaFile = 'user_' . $id_user . '_' . time() . '.' . $ext;
+    $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/secondify/assets/images/' . $namaFile;
+
+    if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
+        updateFotoProfil($conn, $id_user, $namaFile);
+        header("Location: " . SECONDIFY . "/apps/controllers/user/settingController.php?success=ubahFoto#edit-profil");
+    } else {
+        header("Location: " . SECONDIFY . "/apps/controllers/user/settingController.php?error=uploadGagal#edit-profil");
+    }
+    exit();
+}
+
 if (isset($_POST['simpan_profil'])) {
     updateProfilUser(
         $conn,
@@ -47,22 +82,6 @@ if (isset($_POST['ubah_password'])) {
 
     updatePasswordUser($conn, $id_user, $password_baru);
     header("Location: " . SECONDIFY . "/apps/controllers/user/settingController.php?success=ubahPassword#keamanan");
-    exit();
-}
-
-if (isset($_POST['save_privacy'])) {
-    updatePrivasiUser(
-        $conn,
-        $id_user,
-        isset($_POST['show_whatsapp']) ? 1 : 0,
-        isset($_POST['show_email']) ? 1 : 0,
-        isset($_POST['show_tanggal_lahir']) ? 1 : 0,
-        isset($_POST['show_transaksi']) ? 1 : 0,
-        isset($_POST['allow_tracking']) ? 1 : 0,
-        isset($_POST['anonymous_data']) ? 1 : 0
-    );
-
-    header("Location: " . SECONDIFY . "/apps/controllers/user/settingController.php?success=savePrivacy#privasi");
     exit();
 }
 

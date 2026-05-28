@@ -215,6 +215,13 @@ body {
     box-shadow: 0 4px 14px rgba(108,92,231,0.3);
 }
 
+.avatar-circle .avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 .avatar-info {
     display: flex;
     flex-direction: column;

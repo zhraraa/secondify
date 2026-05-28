@@ -1,4 +1,14 @@
 <?php
+if (!defined('SECONDIFY')) {
+    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $redirectUrl = str_replace('/apps/views/user/kategori.php', '/apps/controllers/user/kategoriController.php', $path);
+    if (isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING']) {
+        $redirectUrl .= '?' . $_SERVER['QUERY_STRING'];
+    }
+    header('Location: ' . $redirectUrl);
+    exit;
+}
+
 /** @var array $dataUser */
 /** @var array $dataProdukMarketplace */
 ?>
@@ -18,20 +28,22 @@
     <?php include __DIR__ . '/../layout/navbar.php'; ?>
 
 
+    <?php $categoryTitle = htmlspecialchars($currentKategoriName ?? 'Semua'); ?>
+
     <!-- BREADCRUMB -->
     <div class="breadcrumb">
         <a href="<?= SECONDIFY; ?>/apps/controllers/user/dashboardController.php">Beranda</a>
         <span class="sep">›</span>
         <a href="#">Kategori</a>
         <span class="sep">›</span>
-        <span class="current" id="breadcrumbCurrent">Elektronik</span>
+        <span class="current" id="breadcrumbCurrent"><?= $categoryTitle ?></span>
     </div>
 
 
     <!-- PAGE HEADER -->
     <div class="page-header">
-        <h2 id="pageTitle">Elektronik</h2>
-        <p id="pageSubtitle">Temukan berbagai barang elektronik preloved berkualitas</p>
+        <h2 id="pageTitle"><?= $categoryTitle ?></h2>
+        <p id="pageSubtitle"><?= $currentKategori === 'semua' ? 'Jelajahi semua barang preloved yang tersedia' : "Temukan berbagai barang {$categoryTitle} preloved berkualitas" ?></p>
     </div>
 
 
@@ -116,32 +128,22 @@
         <main class="main-content">
 
             <div class="content-top">
-                <div class="search-bar-inline">
+                <span class="result-count"><strong id="resultCount">0</strong> barang ditemukan</span>
+
+                <div class="sort-wrapper">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"/>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="6" y1="12" x2="18" y2="12"/>
+                        <line x1="9" y1="18" x2="15" y2="18"/>
                     </svg>
-                    <input type="text" id="inlineSearch" placeholder="Cari di Elektronik...">
-                </div>
-
-                <div class="content-right-controls">
-                    <span class="result-count"><strong id="resultCount">0</strong> barang ditemukan</span>
-
-                    <div class="sort-wrapper">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="3" y1="6" x2="21" y2="6"/>
-                            <line x1="6" y1="12" x2="18" y2="12"/>
-                            <line x1="9" y1="18" x2="15" y2="18"/>
-                        </svg>
-                        <select id="sortSelect">
-                            <option>Terbaru</option>
-                            <option>Harga Termurah</option>
-                            <option>Harga Termahal</option>
-                        </select>
-                        <svg class="sort-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <polyline points="6 9 12 15 18 9"/>
-                        </svg>
-                    </div>
+                    <select id="sortSelect">
+                        <option>Terbaru</option>
+                        <option>Harga Termurah</option>
+                        <option>Harga Termahal</option>
+                    </select>
+                    <svg class="sort-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
                 </div>
             </div>
 

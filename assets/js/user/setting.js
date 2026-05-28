@@ -24,7 +24,7 @@ navItems.forEach(item => {
 });
 
 const hash       = window.location.hash.replace('#', '');
-const validPages = ['edit-profil', 'keamanan', 'privasi', 'bantuan'];
+const validPages = ['edit-profil', 'keamanan', 'bantuan'];
 showPage(hash && validPages.includes(hash) ? hash : 'edit-profil');
 
 // ── Toast notifikasi ──────────────────────────────
@@ -61,16 +61,53 @@ function initSettingPage() {
         showToast('✓ Profil berhasil disimpan!');
         history.replaceState(null, '', window.location.pathname + '#edit-profil');
     }
-    if (urlParams.get('success') === 'savePrivacy') {
-        showToast('Pengaturan privasi berhasil disimpan!');
-        history.replaceState(null, '', window.location.pathname + '#privasi');
-    }
     if (urlParams.get('success') === 'kirimBantuan') {
         showToast('Pesan bantuan berhasil dikirim!');
         history.replaceState(null, '', window.location.pathname + '#bantuan');
     }
     if (urlParams.get('error')) {
         showToast('✗ Terjadi kesalahan, coba lagi.', 'error');
+    }
+
+    // Ubah foto
+    const btnUbahFoto  = document.getElementById('btnUbahFoto');
+    const inputFoto    = document.getElementById('inputFoto');
+    const btnSimpanFoto = document.getElementById('btnSimpanFoto');
+    const formUbahFoto = document.getElementById('formUbahFoto');
+
+    if (btnUbahFoto && inputFoto) {
+        btnUbahFoto.addEventListener('click', () => inputFoto.click());
+
+        inputFoto.addEventListener('change', () => {
+            const file = inputFoto.files[0];
+            if (!file) return;
+
+            // Preview
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const circle = document.querySelector('.avatar-circle');
+                circle.innerHTML = `<img src="${e.target.result}" class="avatar-img" alt="Preview">`;
+            };
+            reader.readAsDataURL(file);
+
+            btnUbahFoto.style.display = 'none';
+            btnSimpanFoto.style.display = 'inline-flex';
+        });
+    }
+
+    // Toast untuk ubah foto
+    if (urlParams.get('success') === 'ubahFoto') {
+        showToast('✓ Foto profil berhasil diperbarui!');
+        history.replaceState(null, '', window.location.pathname + '#edit-profil');
+    }
+    if (urlParams.get('error') === 'formatFoto') {
+        showToast('✗ Format file harus PNG atau JPG', 'error');
+    }
+    if (urlParams.get('error') === 'ukuranFoto') {
+        showToast('✗ Ukuran file maks. 2MB', 'error');
+    }
+    if (urlParams.get('error') === 'uploadGagal') {
+        showToast('✗ Upload gagal, coba lagi.', 'error');
     }
 
     const formUbahPassword = document.getElementById('formUbahPassword');

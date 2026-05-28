@@ -4,10 +4,29 @@ require_once '../../../koneksi/koneksi.php';
 require_once '../../config/config.php';
 require_once '../../models/userModel.php';
 require_once '../../models/produkModel.php';
+require_once '../../models/kategoriModel.php';
 
 $id_user = $_SESSION['id_user'];
 $dataUser = getDataUSer($conn, $id_user);
-$dataProdukMarketplace = formatProdukUntukJs(getAllProdukMarketplace($conn));
+
+$searchQuery = isset($_GET['q']) ? trim($_GET['q']) : null;
+$currentKategori = isset($_GET['kat']) ? trim($_GET['kat']) : 'semua';
+
+$dataKategori = getAllKategori($conn);
+$validKategoriSlugs = array_map(fn($kategori) => slugKategori($kategori['nama_kategori']), $dataKategori);
+if ($currentKategori !== 'semua' && !in_array($currentKategori, $validKategoriSlugs, true)) {
+    $currentKategori = 'semua';
+}
+
+$currentKategoriName = 'Semua';
+foreach ($dataKategori as $kategori) {
+    if (slugKategori($kategori['nama_kategori']) === $currentKategori) {
+        $currentKategoriName = $kategori['nama_kategori'];
+        break;
+    }
+}
+
+$dataProdukMarketplace = formatProdukUntukJs(getAllProdukMarketplace($conn, 'terbaru', null, $searchQuery));
 
 require_once '../../views/user/kategori.php';
 ?>
