@@ -2,6 +2,7 @@
 /** @var array $dataProduk */
 /** @var array $barangAktif */
 /** @var array $barangTerjual*/
+/** @var array $pembeli*/
 ?>
 
 <!DOCTYPE html>
@@ -217,6 +218,28 @@
                         <div class="rowButton">
                             <button type="button" class="buttonBatal" onclick="tutupModal('modalUbah')">Batal</button>
                             <button type="submit" name="ubah" class="buttonPosting">Simpan Perubahan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="modalStatus" class="kelolaBarang-modalStatus">
+                <div class="kelolaBarang-isiModalStatus">
+                    <h2>Status Produk</h2>
+                    <span>Produk telah terjual? ubah status menjadi terjual agar pembeli bisa memberikan ulasan untuk toko mu.</span>
+                    <form action="<?= SECONDIFY ?>/apps/controllers/penjual/statusTerjualController.php" method="POST">
+                        <input type="hidden" name="id_produk" id="terjualIdProduk">
+                        
+                        <div class="namaBarang">
+                            <label for="usnPembeli">Masukkan Username Pembeli</label>
+                            <input list="daftarPembeli" name="usnPembeli" id="usnPembeli" placeholder="Ketik username pembeli..." required>
+                            
+                            <datalist id="daftarPembeli">
+                            </datalist>
+                        </div>
+                        
+                        <div class="rowButton" style="margin-top: 20px;">
+                            <button type="button" class="buttonBatal" onclick="tutupModal('modalTerjual')">Batal</button>
+                            <button type="submit" name="tandaiTerjual" class="buttonPosting">Simpan Status</button>
                         </div>
                     </form>
                 </div>

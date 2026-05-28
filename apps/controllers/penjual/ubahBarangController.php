@@ -26,5 +26,5 @@ if(isset($_POST['ubah'])){
     }
 }
 
-
+require_once '../../views/penjual/kelolaBarang.php';
 ?>

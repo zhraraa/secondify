@@ -10,14 +10,26 @@ if(isset($_POST['daftar'])){
     $password = password_hash( trim($_POST['password']), PASSWORD_BCRYPT);
     $lokasi = trim($_POST['lokasi']);
     
-    $cek_user = $conn->prepare("SELECT email FROM users WHERE email = ?");
-    $cek_user->bind_param("s", $email);
-    $cek_user->execute();
+    // --- [BARU] 1. Cek apakah email sudah dipakai ---
+    $cek_email = $conn->prepare("SELECT email FROM users WHERE email = ?");
+    $cek_email->bind_param("s", $email);
+    $cek_email->execute();
+    $cek_email->store_result();
 
-    $cek_user->store_result();
-    if($cek_user->num_rows > 0){
+    // --- [BARU] 2. Cek apakah username sudah dipakai ---
+    $cek_username = $conn->prepare("SELECT username FROM users WHERE username = ?");
+    $cek_username->bind_param("s", $username);
+    $cek_username->execute();
+    $cek_username->store_result();
+
+    // --- [DIUBAH] 3. Tentukan pesan errornya secara berurutan ---
+    if($cek_email->num_rows > 0){
         echo "email udh ada, ganti email";
+    } elseif($cek_username->num_rows > 0){
+        // Menambahkan pesan khusus kalau username kembar
+        echo "username udh ada, ganti username"; 
     } else {
+        // --- [TETAP] Kalau aman semua, masukkan data ke database ---
         $query = $conn->prepare("INSERT INTO `users`(`nama_lengkap`, `password`, `email`, `username`, `lokasi`) VALUES (?,?,?,?,?)");
         $query->bind_param("sssss", $nama, $password, $email, $username, $lokasi);
         $query->execute();

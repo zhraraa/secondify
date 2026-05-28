@@ -167,7 +167,7 @@ $tanggalLahirLabel = $tanggalLahir ? date('j', $tanggalLahir) . ' ' . $bulanIndo
                     </button>
                 </div>
                 <!-- daftar produk -->
-                <div class="wadahProduk"> 
+                <div class="wadahProduk" id="wadahProduk"> 
                     <?php foreach ($dataProduk as $data): ?>
                         <a href="<?= SECONDIFY; ?>/apps/controllers/user/detailController.php?id=<?= $data['id_produk'] ?>" class="cardBarang cardBarangLink">
                             <img src="<?= SECONDIFY; ?>/assets/images/produk/<?= htmlspecialchars($data['foto_barang']) ?>" alt="barang">
