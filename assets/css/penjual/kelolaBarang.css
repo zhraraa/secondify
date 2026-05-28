@@ -84,8 +84,8 @@ section {
     font-weight: 500;
     padding: 5px 20px;
     border-radius: 8px;
-    position: relative; 
-    z-index: 1; 
+    position: relative;
+    z-index: 1;
     cursor: pointer;
     transition: color 0.3s ease-in-out;
 }
@@ -105,13 +105,13 @@ section {
     box-shadow: 0px 2px 3px #dbdbdb;
 } */
 
-.backgroundGeser{
+.backgroundGeser {
     position: absolute;
     top: 10px;
     height: calc(100% - 20px);
     background-color: #f6f2ff;
     border-radius: 8px;
-    box-shadow: 0 0 3px rgb(0, 0, 0, 0.4); 
+    box-shadow: 0 0 3px rgb(0, 0, 0, 0.4);
     transition: all 0.3s ease-in-out;
     z-index: 0;
 }
@@ -148,18 +148,18 @@ section {
     gap: 20px;
 }
 
-.kelolaBarang-status{
+.kelolaBarang-status {
     background-color: rgb(200, 255, 173);
     padding: 3px 5px;
     font-size: 10px;
     font-weight: bold;
     border-radius: 8px;
-    border: 1px solid rgb(34, 202, 0); 
+    border: 1px solid rgb(34, 202, 0);
     color: rgb(42, 207, 23);
     width: max-content;
 }
 
-.hidden{
+.hidden {
     display: none !important;
 }
 
@@ -171,7 +171,7 @@ section {
     object-fit: cover;
 }
 
-.info-barang{
+.info-barang {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -225,36 +225,50 @@ section {
 .opsi-menu svg {
     width: 20px;
     height: 20px;
-    color: #555; /* Warna icon abu-abu gelap */
+    color: #555;
+    /* Warna icon abu-abu gelap */
 }
 
 /* ---------------------- STYLING DROPDOWN MENU ----------------------- */
 
 .kelolaBarang-wadahDropdown {
-    position: relative; 
-    display: inline-block; /* Supaya lebarnya menyesuaikan tombol titik tiga aja */
+    position: relative;
+    display: inline-block;
+    /* Supaya lebarnya menyesuaikan tombol titik tiga aja */
 }
 
 /* Kotak Dropdown-nya */
 .kelolaBarang-dropdown {
     position: absolute;
-    top: 100%; /* Jarak dari tombol titik tiga ke bawah */
-    right: 0; /* Rata kanan dengan tombol titik tiga */
+    top: 100%;
+    /* Jarak dari tombol titik tiga ke bawah */
+    right: 0;
+    /* Rata kanan dengan tombol titik tiga */
     background-color: white;
     min-width: 150px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Efek bayangan / floating yang soft */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* Efek bayangan / floating yang soft */
     border: 1px solid #eaeaea;
     display: flex;
     flex-direction: column;
     padding: 8px 0;
-    z-index: 10; /* Biar selalu ada di depan elemen lain */
-    animation: munculDropdown 0.2s ease-out; /* Efek transisi halus */
+    z-index: 10;
+    /* Biar selalu ada di depan elemen lain */
+    animation: munculDropdown 0.2s ease-out;
+    /* Efek transisi halus */
 }
 
 @keyframes munculDropdown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* tombol di dalam dropdown */
@@ -271,8 +285,8 @@ section {
 }
 
 .kelolaBarang-dropdown button:hover {
-    background-color: #f0eeff; 
-    color: #886BC6; 
+    background-color: #f0eeff;
+    color: #886BC6;
 }
 
 .kelolaBarang-dropdown button.btn-hapus:hover {
@@ -289,11 +303,12 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* biar modal selalu di paling depan */
+    z-index: 1000;
+    /* biar modal selalu di paling depan */
 }
 
 .kelolaBarang-isiModalUbah {
@@ -302,15 +317,22 @@ section {
     border-radius: 20px;
     width: 100%;
     max-width: 600px;
-    max-height: 90vh; 
-    overflow-y: auto; 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    animation: modalMuncul 0.3s ease-out; 
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    animation: modalMuncul 0.3s ease-out;
 }
 
 @keyframes modalMuncul {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .kelolaBarang-isiModalUbah h2 {
@@ -323,7 +345,7 @@ section {
 .kelolaBarang-isiModalUbah form {
     display: flex;
     flex-direction: column;
-    gap: 15px; 
+    gap: 15px;
 }
 
 .kelolaBarang-isiModalUbah label {
@@ -340,7 +362,7 @@ section {
 .kelolaBarang-isiModalUbah textarea {
     width: 100%;
     padding: 10px 15px;
-    border: 1px solid #d3c3fb; 
+    border: 1px solid #d3c3fb;
     border-radius: 8px;
     font-size: 14px;
     outline: none;
@@ -351,29 +373,33 @@ section {
 .kelolaBarang-isiModalUbah input:focus,
 .kelolaBarang-isiModalUbah select:focus,
 .kelolaBarang-isiModalUbah textarea:focus {
-    border-color: #886BC6; 
+    border-color: #886BC6;
 }
 
 .kelolaBarang-isiModalUbah textarea {
     height: 100px;
-    resize: vertical; /* user cuma bisa narik textarea ke atas/bawah */
+    resize: vertical;
+    /* user cuma bisa narik textarea ke atas/bawah */
 }
 
 /* ------- BARIS INPUT SEBELAHAN ------ */
-.rowInput, .rowInput2 {
+.rowInput,
+.rowInput2 {
     display: flex;
     gap: 15px;
 }
 
 /* Membuat anak dari rowInput membagi rata lebar 50:50 */
-.rowInput > div, .rowInput2 > div {
-    flex: 1; 
+.rowInput>div,
+.rowInput2>div {
+    flex: 1;
 }
 
 /* ------ STYLING TOMBOL ---- */
 .rowButton {
     display: flex;
-    justify-content: flex-end; /* Posisi tombol di kanan bawah */
+    justify-content: flex-end;
+    /* Posisi tombol di kanan bawah */
     gap: 10px;
     margin-top: 10px;
 }
@@ -437,7 +463,7 @@ section {
     border-radius: 20px;
     width: 100%;
     max-width: 500px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     animation: modalMuncul 0.3s ease-out;
 }
 
@@ -450,7 +476,7 @@ section {
 .kelolaBarang-modalStatus select {
     width: 100%;
     padding: 10px 15px;
-    border: 1px solid #d3c3fb; 
+    border: 1px solid #d3c3fb;
     border-radius: 8px;
     font-size: 14px;
     outline: none;
@@ -463,7 +489,7 @@ section {
     gap: 10px;
 }
 
-.kelolaBarang-modalStatus .opsiPembeli{
+.kelolaBarang-modalStatus .opsiPembeli {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -471,7 +497,38 @@ section {
 
 .kelolaBarang-modalStatus .opsiPembeli datalist,
 .kelolaBarang-modalStatus .opsiPembeli input {
-    border: 1px solid #d3c3fb; 
+    border: 1px solid #d3c3fb;
     border-radius: 8px;
     padding: 10px;
+}
+
+/* Modal Hapus */
+.kelolaBarang-modalHapus {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00000035;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.kelolaBarang-modalHapus.hidden {
+    display: none !important;
+}
+
+.kelolaBarang-isiModalHapus {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    animation: modalMuncul 0.3s ease-out;
 }

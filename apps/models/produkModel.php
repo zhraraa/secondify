@@ -31,11 +31,25 @@ function totalProduk($conn, $id_user){
     return $totalProduk;
 }
 
+function updateStatusProduk($conn, $id_produk) {
+    $query = $conn->prepare("UPDATE `produk` SET `status` = 'sold' WHERE `produk`.`id_produk` = ?;");
+    $query->bind_param("i", $id_produk);
+    $update = $query->execute();
+    return $update;   
+}
+
 function updateProduk($conn,$id_produk, $id_user, $kategori, $namaBarang, $deskripsi, $harga, $lokasi, $kondisi){
     $query = $conn->prepare("UPDATE produk SET id_kategori = ?, nama_barang = ?, deskripsi = ?, harga = ?, lokasi = ?, kondisi = ? WHERE id_produk = ? AND id_user = ?");
     $query->bind_param("ississii", $kategori, $namaBarang, $deskripsi, $harga, $lokasi, $kondisi, $id_produk, $id_user);
     $update = $query -> execute();
     return $update;
+}
+
+function hapusProduk($conn, $id_produk){
+    $query = $conn -> prepare("DELETE FROM produk WHERE `produk`.`id_produk` = ?");
+    $query -> bind_param("i", $id_produk);
+    $hapus = $query -> execute();
+    return $hapus;
 }
 
 function getAllProdukMarketplace($conn, $sort = 'terbaru', $limit = null, $search = null){

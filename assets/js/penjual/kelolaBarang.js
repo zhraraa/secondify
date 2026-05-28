@@ -60,7 +60,13 @@ function bukaModalUbah (elemenTombol){
 
 function bukaModalTandaiTerjual(elemenTombol){
     const idProduk = elemenTombol.dataset.id;
-    window.location.href = `?tandaiSelesai=${idProduk}`
+    window.location.href = `?tandaiTerjual=${idProduk}`
+}
+
+function bukaModalHapus(elemenTombol){
+    const idProduk = elemenTombol.dataset.id;
+    document.getElementById('hapusIdProduk').value = idProduk;
+    document.getElementById('modalHapus').classList.remove('hidden');
 }
 
 function tutupModal(idModal) {
