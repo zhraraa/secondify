@@ -3,6 +3,7 @@
 /** @var array $barangAktif */
 /** @var array $barangTerjual*/
 /** @var array $pembeli*/
+/** @var array $dropdownValue*/
 ?>
 
 <!DOCTYPE html>
@@ -85,7 +86,11 @@
                                         data-kecamatan="<?= $data['lokasi'] ?>">
                                         Ubah Barang
                                     </button>
-                                    <button onclick="bukaModalTerjual(<?= $data['id_produk'];?>)">Tandai Terjual</button>
+                                    <button
+                                        onclick="bukaModalTandaiTerjual(this)"
+                                        data-id="<?= $data['id_produk'] ?>">
+                                        Tandai Terjual
+                                    </button>
                                     <button onclick="bukaModalHapus(<?= $data['id_produk'];?>)">Hapus Barang</button>
                                 </div>
                             </div>
@@ -222,30 +227,36 @@
                     </form>
                 </div>
             </div>
-            <div id="modalStatus" class="kelolaBarang-modalStatus">
-                <div class="kelolaBarang-isiModalStatus">
-                    <h2>Status Produk</h2>
-                    <span>Produk telah terjual? ubah status menjadi terjual agar pembeli bisa memberikan ulasan untuk toko mu.</span>
-                    <form action="<?= SECONDIFY ?>/apps/controllers/penjual/statusTerjualController.php" method="POST">
-                        <input type="hidden" name="id_produk" id="terjualIdProduk">
-                        
-                        <div class="namaBarang">
-                            <label for="usnPembeli">Masukkan Username Pembeli</label>
-                            <input list="daftarPembeli" name="usnPembeli" id="usnPembeli" placeholder="Ketik username pembeli..." required>
-                            
-                            <datalist id="daftarPembeli">
-                            </datalist>
-                        </div>
-                        
-                        <div class="rowButton" style="margin-top: 20px;">
-                            <button type="button" class="buttonBatal" onclick="tutupModal('modalTerjual')">Batal</button>
-                            <button type="submit" name="tandaiTerjual" class="buttonPosting">Simpan Status</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
         </div>
     </section>
+    
+    <div id="modalStatus" class="kelolaBarang-modal <?= isset($_GET['tandaiSelesai']) ? '' : 'hidden' ?>">
+        <div class="kelolaBarang-modalStatus">
+            <h2>Status Produk</h2>
+            <span>Produk telah terjual? ubah status menjadi terjual agar pembeli bisa memberikan ulasan untuk toko mu.</span>
+            <form action="<?= SECONDIFY ?>/apps/controllers/penjual/statusTerjualController.php" method="POST">
+                <input type="hidden" name="id_produk" id="terjualIdProduk">
+                
+                <div class="inputGrup">
+                    <label for="usnPembeli">Masukkan Username Pembeli</label>
+                    <div class=opsiPembeli>
+                        <input list="daftarPembeli" name="usnPembeli" id="usnPembeli" placeholder="Ketik username pembeli..." required> 
+                        <datalist id="daftarPembeli">
+                            <?php foreach($dropdownValue as $data) : ?>
+                                <option value="<?= $data['usename_pembeli'] ?>"><?= $data['pembeli'] ?></option>
+                            <?php endforeach; ?>
+                        </datalist>
+                    </div>  
+                </div>
+                <div class="rowButton" style="margin-top: 20px;">
+                    <button type="button" class="buttonBatal" onclick="history.replaceState({}, '', location.pathname); tutupModal('modalStatus')">Batal</button>
+                    <button type="submit" name="tandaiTerjual" class="buttonPosting">Simpan Status</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
 
     <script src="<?= SECONDIFY; ?>/assets/js/global.js"></script>
     <script src="<?= SECONDIFY; ?>/assets/js/penjual/kelolaBarang.js"></script>

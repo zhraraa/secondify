@@ -58,8 +58,15 @@ function bukaModalUbah (elemenTombol){
     document.getElementById('modalUbah').classList.remove('hidden');
 }
 
+function bukaModalTandaiTerjual(elemenTombol){
+    const idProduk = elemenTombol.dataset.id;
+    window.location.href = `?tandaiSelesai=${idProduk}`
+}
+
 function tutupModal(idModal) {
     const modal = document.getElementById(idModal);
     
     modal.classList.add('hidden');
 }
+
+

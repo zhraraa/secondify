@@ -7,8 +7,12 @@ require_once '../auth/auth_check.php';
 
 $id_user = $_SESSION['id_user'];
 $dataProduk = getDataProdukById($conn, $id_user);
-$id_produk = $dataProduk['id_produk'];
-$dataPembeli = getDataUserPesan($conn, $id_produk, $id_user);
+
+if (isset($_GET['tandaiSelesai'])){
+    $idProduk = (int) $_GET['tandaiSelesai'];
+    
+    $dropdownValue = getDataUserPesan($conn, $idProduk);
+}
 
 $barangAktif = [];
 $barangTerjual = [];
@@ -16,19 +20,9 @@ $barangTerjual = [];
 foreach ($dataProduk as $item){
     if ($item['status'] == 'available' ){
         $barangAktif[] = $item;
-        } else {
-            $barangTerjual[] = $item;
-            }
-            }
-            
-$daftarPembeli = [];
-while($row = $dataPembeli -> fetch_assoc()){
-    $daftarPembeli[] = $row;
-}
-
-$pembeli = [];
-foreach($daftarPembeli as $data){
-    $pembeli[] = $data;
+    } else {
+        $barangTerjual[] = $item;
+    }
 }
 
 // echo '<pre>';

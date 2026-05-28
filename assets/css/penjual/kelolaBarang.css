@@ -282,6 +282,7 @@ section {
 
 
 /* --------------------- modal ubah ------------------ */
+
 .kelolaBarang-modalUbah {
     position: fixed;
     top: 0;
@@ -407,4 +408,70 @@ section {
 
 .buttonPosting:hover {
     background-color: #7155a6;
+}
+
+/* Modal Status */
+.kelolaBarang-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00000035;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.kelolaBarang-modalStatus.hidden {
+    display: none !important;
+}
+
+.kelolaBarang-modalStatus {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    animation: modalMuncul 0.3s ease-out;
+}
+
+.kelolaBarang-modalStatus form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.kelolaBarang-modalStatus select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #d3c3fb; 
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.kelolaBarang-modalStatus .inputGrub {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.kelolaBarang-modalStatus .opsiPembeli{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.kelolaBarang-modalStatus .opsiPembeli datalist,
+.kelolaBarang-modalStatus .opsiPembeli input {
+    border: 1px solid #d3c3fb; 
+    border-radius: 8px;
+    padding: 10px;
 }
