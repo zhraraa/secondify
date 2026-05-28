@@ -52,13 +52,16 @@ const ITEMS_PER_PAGE = 10;
 function init() {
     const params = new URLSearchParams(window.location.search);
     const kat = params.get("kat");
+    console.log("kat dari URL:", kat);
+    console.log("ada di kategoriMeta?", !!kategoriMeta[kat]);
+    console.log("currentKategori sebelum:", currentKategori);
     if (kat && kategoriMeta[kat]) {
         currentKategori = kat;
     }
+    console.log("currentKategori sesudah:", currentKategori);
 
     const q = params.get("q");
     if (q) {
-        document.getElementById("inlineSearch").value = q;
         document.getElementById("searchInput").value = q;
     }
 
@@ -76,7 +79,6 @@ function updatePageMeta() {
     document.getElementById("pageTitle").textContent = meta.title;
     document.getElementById("pageSubtitle").textContent = meta.subtitle;
     document.getElementById("breadcrumbCurrent").textContent = meta.title;
-    document.getElementById("inlineSearch").placeholder = `Cari di ${meta.title}...`;
 }
 
 // Build merek filter dynamically based on products in current category
@@ -141,7 +143,6 @@ function updateKondisiCounts() {
 function renderProducts() {
     const grid = document.getElementById("productGrid");
     const sortVal = document.getElementById("sortSelect").value;
-    const searchVal = document.getElementById("inlineSearch").value.trim().toLowerCase();
 
     const checkedKondisi = [...document.querySelectorAll('.cb-kondisi')]
         .filter(cb => cb.checked)
@@ -171,10 +172,6 @@ function renderProducts() {
     }
 
     products = products.filter(p => p.harga <= maxHarga);
-
-    if (searchVal) {
-        products = products.filter(p => p.nama.toLowerCase().includes(searchVal));
-    }
 
     if (sortVal === "Harga Termurah") {
         products.sort((a, b) => a.harga - b.harga);
@@ -355,10 +352,6 @@ function cardHTML(p) {
 
 function bindEvents() {
     document.getElementById("sortSelect").addEventListener("change", () => {
-        currentPage = 1;
-        renderProducts();
-    });
-    document.getElementById("inlineSearch").addEventListener("input", () => {
         currentPage = 1;
         renderProducts();
     });

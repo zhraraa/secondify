@@ -67,4 +67,10 @@ function simpanBantuanUser($conn, $id_user, $topik, $pesan){
     return $query -> execute();
 }
 
+function updateFotoProfil($conn, $id_user, $nama_file) {
+    $query = $conn->prepare("UPDATE users SET profile_pict = ? WHERE id_user = ?");
+    $query->bind_param("si", $nama_file, $id_user);
+    return $query->execute();
+}
+
 ?>
