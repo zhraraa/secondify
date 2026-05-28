@@ -149,11 +149,14 @@ section {
 }
 
 .kelolaBarang-status{
-   background-color: greenyellow;
-   padding: 3px 5px;
-   font-size: 10px;
-   border-radius: 8px;
-   border: 1px solid darkgreen; 
+    background-color: rgb(200, 255, 173);
+    padding: 3px 5px;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: 1px solid rgb(34, 202, 0); 
+    color: rgb(42, 207, 23);
+    width: max-content;
 }
 
 .hidden{
@@ -161,8 +164,8 @@ section {
 }
 
 .detail-barang img {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     border: 1px solid #d3c3fb;
     border-radius: 8px;
     object-fit: cover;
@@ -174,7 +177,7 @@ section {
     justify-content: space-between;
 }
 
-.info-barang span:nth-child(1) {
+.kelolaBarang-nama {
     font-size: 18px;
     font-weight: 600;
 }
@@ -200,6 +203,7 @@ section {
     font-size: 12px;
 }
 
+/* ------------ STYLING TITIK TIGA---------------- */
 .opsi-menu {
     width: 35px;
     height: 35px;
@@ -216,4 +220,194 @@ section {
 
 .opsi-menu:hover {
     background-color: #f0eeff;
+}
+
+.opsi-menu svg {
+    width: 20px;
+    height: 20px;
+    color: #555; /* Warna icon abu-abu gelap */
+}
+
+/* ---------------------- STYLING DROPDOWN MENU ----------------------- */
+
+.kelolaBarang-wadahDropdown {
+    position: relative; 
+    display: inline-block; /* Supaya lebarnya menyesuaikan tombol titik tiga aja */
+}
+
+/* Kotak Dropdown-nya */
+.kelolaBarang-dropdown {
+    position: absolute;
+    top: 100%; /* Jarak dari tombol titik tiga ke bawah */
+    right: 0; /* Rata kanan dengan tombol titik tiga */
+    background-color: white;
+    min-width: 150px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Efek bayangan / floating yang soft */
+    border: 1px solid #eaeaea;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0;
+    z-index: 10; /* Biar selalu ada di depan elemen lain */
+    animation: munculDropdown 0.2s ease-out; /* Efek transisi halus */
+}
+
+@keyframes munculDropdown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tombol di dalam Dropdown */
+.kelolaBarang-dropdown button {
+    background-color: transparent;
+    border: none;
+    padding: 10px 15px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 500;
+    color: #444;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Efek saat opsi dropdown disorot mouse (Hover) */
+.kelolaBarang-dropdown button:hover {
+    background-color: #f0eeff; /* Ungu super muda ciri khas kodemu */
+    color: #886BC6; /* Warna utama Secondify */
+}
+
+/* Khusus tombol hapus, kita kasih efek merah pas di-hover biar jelas itu aksi berbahaya */
+.kelolaBarang-dropdown button.btn-hapus:hover {
+    background-color: #ffeeee;
+    color: #d93025;
+}
+
+
+/* --------------------- modal ubah ------------------ */
+.kelolaBarang-modalUbah {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Hitam transparan */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* biar modal selalu di paling depan */
+}
+
+.kelolaBarang-isiModalUbah {
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 600px;
+    /* Maksimal tinggi 90% dari layar, sisanya bisa di-scroll supaya form nggak kepotong di layar kecil */
+    max-height: 90vh; 
+    overflow-y: auto; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    animation: modalMuncul 0.3s ease-out; 
+}
+
+@keyframes modalMuncul {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.kelolaBarang-isiModalUbah h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.kelolaBarang-isiModalUbah form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+.kelolaBarang-isiModalUbah label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.kelolaBarang-isiModalUbah input[type="text"],
+.kelolaBarang-isiModalUbah input[type="number"],
+.kelolaBarang-isiModalUbah select,
+.kelolaBarang-isiModalUbah textarea {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #d3c3fb; 
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+}
+
+/* Efek saat input diklik */
+.kelolaBarang-isiModalUbah input:focus,
+.kelolaBarang-isiModalUbah select:focus,
+.kelolaBarang-isiModalUbah textarea:focus {
+    border-color: #886BC6; 
+}
+
+.kelolaBarang-isiModalUbah textarea {
+    height: 100px;
+    resize: vertical; /* user cuma bisa narik textarea ke atas/bawah */
+}
+
+/* ------- BARIS INPUT SEBELAHAN ------ */
+.rowInput, .rowInput2 {
+    display: flex;
+    gap: 15px;
+}
+
+/* Membuat anak dari rowInput membagi rata lebar 50:50 */
+.rowInput > div, .rowInput2 > div {
+    flex: 1; 
+}
+
+/* ------ STYLING TOMBOL ---- */
+.rowButton {
+    display: flex;
+    justify-content: flex-end; /* Posisi tombol di kanan bawah */
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.buttonBatal {
+    background-color: transparent;
+    color: #555;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.buttonBatal:hover {
+    background-color: #f0f0f0;
+}
+
+.buttonPosting {
+    background-color: #886BC6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.buttonPosting:hover {
+    background-color: #7155a6;
 }
