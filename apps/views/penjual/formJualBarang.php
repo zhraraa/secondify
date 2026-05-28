@@ -67,11 +67,23 @@ require_once '../../config/config.php';
                             <label for="">Kategori</label>
                             <select name="kategoriBarang" id="kategoriBarang" required>
                                 <option value="">Pilih kategori</option>
-                                <option value="1">Pakaian</option>
-                                <option value="7">Elektronik</option>
-                                <option value="3">Sepatu</option>
-                                <option value="9">Aksesoris</option>
-                                <option value="2">Lainnya</option>
+                                <option value="1">Elektronik</option>
+                                <option value="2">Pakaian</option>
+                                <option value="3">Buku</option>
+                                <option value="4">Perabot</option>
+                                <option value="5">Olahraga</option>
+                                <option value="6">Mainan</option>
+                                <option value="7">Anak</option>
+                                <option value="8">Handphone</option>
+                                <option value="9">Kendaraan</option>
+                                <option value="10">Dapur</option>
+                                <option value="11">Tas</option>
+                                <option value="12">Sepatu</option>
+                                <option value="13">Kamera</option>
+                                <option value="14">Alat Tulis</option>
+                                <option value="15">Koleksi</option>
+                                <option value="16">Kesehatan</option>
+                                <option value="17">Lainnya</option>
                             </select>
                         </div>
                         <div class="kecamatanBarang">

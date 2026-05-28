@@ -167,21 +167,16 @@ $tanggalLahirLabel = $tanggalLahir ? date('j', $tanggalLahir) . ' ' . $bulanIndo
                     </button>
                 </div>
                 <!-- daftar produk -->
-                <div class="cardJualanV" id="wadahProduk"> <!-- ini horizontal -->
-                    <div class="cardJualanH"> <!-- ini vertikal -->
-                        <?php foreach ($dataProduk as $data):  ?>
+                <div class="wadahProduk"> 
+                    <?php foreach ($dataProduk as $data): ?>
                         <a href="<?= SECONDIFY; ?>/apps/controllers/user/detailController.php?id=<?= $data['id_produk'] ?>" class="cardBarang cardBarangLink">
                             <img src="<?= SECONDIFY; ?>/assets/images/produk/<?= htmlspecialchars($data['foto_barang']) ?>" alt="barang">
                             <div class="detailBarang">
                                 <span class="profile-namaBarang"><?= htmlspecialchars($data['nama_barang']) ?></span>
-                                <p class="harga">
-                                    Rp.
-                                    <?= $data['harga'] ?>
-                                </p>
+                                <p class="harga">Rp <?= number_format($data['harga'], 0, ',', '.') ?></p>
                             </div>
                         </a>
-                    <?php endforeach;  ?>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
                 <!-- ULASAN YA--------------------^^ -->
                 <div class="hidden" id="wadahUlasan">

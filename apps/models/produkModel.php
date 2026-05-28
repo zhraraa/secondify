@@ -31,6 +31,13 @@ function totalProduk($conn, $id_user){
     return $totalProduk;
 }
 
+function updateProduk($conn,$id_produk, $id_user, $kategori, $namaBarang, $deskripsi, $harga, $lokasi, $kondisi){
+    $query = $conn->prepare("UPDATE produk SET id_kategori = ?, nama_barang = ?, deskripsi = ?, harga = ?, lokasi = ?, kondisi = ? WHERE id_produk = ? AND id_user = ?");
+    $query->bind_param("ississii", $kategori, $namaBarang, $deskripsi, $harga, $lokasi, $kondisi, $id_produk, $id_user);
+    $update = $query -> execute();
+    return $update;
+}
+
 function getAllProdukMarketplace($conn){
     $query = $conn -> prepare("
         SELECT

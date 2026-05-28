@@ -227,29 +227,24 @@ p{
 }
 
 /* card barang jualan----------------^^ */
-.cardJualanH{
+.wadahProduk {
     display: flex;
-    flex-direction: row;
-    gap: 24px;
-}
-
-.cardJualanV{
-    display: flex;
-    flex-direction: column;
+    flex-direction: row; 
+    flex-wrap: wrap;
     gap: 24px;
     padding-top: 20px;
 }
 
-.cardBarang{
+.cardBarang {
     display: flex;
     flex-direction: column;
     background-color: white;
-    border: 0.5px solid rgb(0, 0, 0, 0.4);
+    border: 0.5px solid rgba(0, 0, 0, 0.4); 
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 0 3px rgb(0, 0, 0, 0.4);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
     height: 250px;
-    width: 200px;
+    width: 180px;
 }
 
 .cardBarangLink{
@@ -266,7 +261,7 @@ p{
 
 .cardBarang img {
     height: 150px;
-    width: 200px;
+    width: 100%;
     border: 1px solid #d3c3fb;
     border-radius: 8px;
     object-fit: cover;

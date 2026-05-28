@@ -32,3 +32,34 @@ window.onload = function() {
     const aktif = document.getElementById('btnAktif');
     animasiGeser(aktif);
 };
+
+function bukaTutup(id_produk){
+    const dropdown = document.getElementById('dropdown-' + id_produk);
+    dropdown.classList.toggle('hidden');
+}
+
+function bukaModalUbah (elemenTombol){
+    const id = elemenTombol.dataset.id;
+    const nama = elemenTombol.dataset.nama;
+    const harga = elemenTombol.dataset.harga;
+    const kondisi = elemenTombol.dataset.kondisi;
+    const kategori = elemenTombol.dataset.kategori;
+    const kecamatan = elemenTombol.dataset.kecamatan;
+    const deskripsi = elemenTombol.dataset.deskripsi;
+
+    document.getElementById('kelolaBarang-editId').value = id;
+    document.getElementById('kelolaBarang-NamaBarang').value = nama;
+    document.getElementById('kelolaBarang-HargaBarang').value = harga;
+    document.getElementById('kelolaBarang-KondisiBarang').value = kondisi;
+    document.getElementById('kelolaBarang-kategoriBarang').value = kategori;
+    document.getElementById('kelolaBarang-kecamatanBarang').value = kecamatan;
+    document.getElementById('kelolaBarang-DeskripsiBarang').value = deskripsi;
+
+    document.getElementById('modalUbah').classList.remove('hidden');
+}
+
+function tutupModal(idModal) {
+    const modal = document.getElementById(idModal);
+    
+    modal.classList.add('hidden');
+}
