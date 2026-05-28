@@ -28,6 +28,11 @@ function escapeHTML(value) {
         .replace(/'/g, "&#039;");
 }
 
+function detailUrl(item) {
+    const fallback = `${SECONDIFY_BASE}/apps/controllers/user/detailController.php?id=${encodeURIComponent(item.id)}`;
+    return (item.detailUrl || fallback).replace("/apps/views/user/detail.php", "/apps/controllers/user/detailController.php");
+}
+
 function renderWishlist() {
     const items = getWishlist();
     const grid = document.getElementById("favoriteGrid");
@@ -43,7 +48,7 @@ function renderWishlist() {
 
     grid.innerHTML = items.map(item => `
         <div class="card" data-id="${item.id}">
-            <a href="${escapeHTML(item.detailUrl || `${SECONDIFY_BASE}/apps/views/user/detail.php?id=${item.id}`)}">
+            <a href="${escapeHTML(detailUrl(item))}">
                 <img src="${escapeHTML(imageUrl(item.gambar))}" alt="${escapeHTML(item.nama)}">
             </a>
             <h3>${escapeHTML(item.nama)}</h3>

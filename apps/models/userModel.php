@@ -20,4 +20,51 @@ function getDataUserbyEmail($conn, $email){
     return $cek_user;
 }
 
+function updateProfilUser($conn, $id_user, $nama, $username, $email, $no_hp, $jenis_kelamin, $tanggal_lahir, $bio){
+    $query = $conn -> prepare("
+        UPDATE users SET
+            nama_lengkap = ?,
+            username = ?,
+            email = ?,
+            no_hp = ?,
+            jenis_kelamin = ?,
+            tanggal_lahir = ?,
+            bio = ?
+        WHERE id_user = ?
+    ");
+    $query -> bind_param("sssssssi", $nama, $username, $email, $no_hp, $jenis_kelamin, $tanggal_lahir, $bio, $id_user);
+    return $query -> execute();
+}
+
+function updatePasswordUser($conn, $id_user, $password_baru){
+    $hashPassword = password_hash($password_baru, PASSWORD_DEFAULT);
+    $query = $conn -> prepare("UPDATE users SET password = ? WHERE id_user = ?");
+    $query -> bind_param("si", $hashPassword, $id_user);
+    return $query -> execute();
+}
+
+function updatePrivasiUser($conn, $id_user, $show_whatsapp, $show_email, $show_tanggal_lahir, $show_transaksi, $allow_tracking, $anonymous_data){
+    $query = $conn -> prepare("
+        UPDATE users SET
+            show_whatsapp = ?,
+            show_email = ?,
+            show_tanggal_lahir = ?,
+            show_transaksi = ?,
+            allow_tracking = ?,
+            anonymous_data = ?
+        WHERE id_user = ?
+    ");
+    $query -> bind_param("iiiiiii", $show_whatsapp, $show_email, $show_tanggal_lahir, $show_transaksi, $allow_tracking, $anonymous_data, $id_user);
+    return $query -> execute();
+}
+
+function simpanBantuanUser($conn, $id_user, $topik, $pesan){
+    $query = $conn -> prepare("
+        INSERT INTO bantuan (id_user, topik, pesan)
+        VALUES (?, ?, ?)
+    ");
+    $query -> bind_param("iss", $id_user, $topik, $pesan);
+    return $query -> execute();
+}
+
 ?>

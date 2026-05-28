@@ -31,4 +31,114 @@ function totalProduk($conn, $id_user){
     return $totalProduk;
 }
 
+function getAllProdukMarketplace($conn){
+    $query = $conn -> prepare("
+        SELECT
+            produk.id_produk,
+            produk.id_user,
+            produk.id_kategori,
+            produk.nama_barang,
+            produk.deskripsi,
+            produk.harga,
+            produk.lokasi,
+            produk.kondisi,
+            produk.foto_barang,
+            produk.status,
+            produk.tgl_dibuat,
+            kategori.nama_kategori,
+            users.nama_lengkap,
+            users.username,
+            users.nama_toko,
+            users.is_penjual
+        FROM produk
+        JOIN kategori ON produk.id_kategori = kategori.id_kategori
+        JOIN users ON produk.id_user = users.id_user
+        ORDER BY produk.tgl_dibuat DESC, produk.id_produk DESC
+    ");
+    $query -> execute();
+    $dataProduk = $query -> get_result();
+    return $dataProduk -> fetch_all(MYSQLI_ASSOC);
+}
+
+function getProdukMarketplaceById($conn, $id_produk){
+    $query = $conn -> prepare("
+        SELECT
+            produk.id_produk,
+            produk.id_user,
+            produk.id_kategori,
+            produk.nama_barang,
+            produk.deskripsi,
+            produk.harga,
+            produk.lokasi,
+            produk.kondisi,
+            produk.foto_barang,
+            produk.status,
+            produk.tgl_dibuat,
+            kategori.nama_kategori,
+            users.nama_lengkap,
+            users.username,
+            users.nama_toko,
+            users.is_penjual
+        FROM produk
+        JOIN kategori ON produk.id_kategori = kategori.id_kategori
+        JOIN users ON produk.id_user = users.id_user
+        WHERE produk.id_produk = ?
+    ");
+    $query -> bind_param("i", $id_produk);
+    $query -> execute();
+    $dataProduk = $query -> get_result();
+    return $dataProduk -> fetch_assoc();
+}
+
+function resolveFotoProdukPath($fotoBarang){
+    if (empty($fotoBarang)) {
+        return 'produk/produk.png';
+    }
+
+    if (strpos($fotoBarang, '/') !== false || strpos($fotoBarang, '\\') !== false) {
+        $fotoBarang = basename(str_replace('\\', '/', $fotoBarang));
+    }
+
+    $basePath = realpath(__DIR__ . '/../../assets/images');
+
+    if ($basePath && file_exists($basePath . DIRECTORY_SEPARATOR . 'produk' . DIRECTORY_SEPARATOR . $fotoBarang)) {
+        return 'produk/' . $fotoBarang;
+    }
+
+    return 'produk/' . $fotoBarang;
+}
+
+function formatProdukUntukJs($produkList){
+    return array_map(function($produk) {
+        $namaKategori = $produk['nama_kategori'] ?? 'Lainnya';
+        $slugKategori = strtolower(trim(preg_replace('/[^a-z0-9]+/i', '-', $namaKategori), '-'));
+        $kondisi = strtolower(str_replace(' ', '-', $produk['kondisi'] ?? 'bekas'));
+        $namaPenjual = !empty($produk['nama_toko']) ? $produk['nama_toko'] : ($produk['username'] ?: $produk['nama_lengkap']);
+        $fotoProduk = resolveFotoProdukPath($produk['foto_barang'] ?? '');
+
+        return [
+            'id' => (int) $produk['id_produk'],
+            'idUser' => (int) $produk['id_user'],
+            'idKategori' => (int) $produk['id_kategori'],
+            'nama' => $produk['nama_barang'],
+            'harga' => (int) $produk['harga'],
+            'kondisi' => $kondisi,
+            'kategori' => $slugKategori,
+            'kategoriLabel' => $namaKategori,
+            'subKategori' => '',
+            'merek' => 'lainnya',
+            'merekLabel' => 'Lainnya',
+            'lokasi' => $produk['lokasi'],
+            'deskripsi' => $produk['deskripsi'],
+            'terjual' => ($produk['status'] ?? '') !== 'available',
+            'gambar' => $fotoProduk,
+            'gambarList' => [$fotoProduk],
+            'seller' => $namaPenjual,
+            'sellerJoined' => 'Penjual Secondify',
+            'createdAt' => $produk['tgl_dibuat'],
+            'slug' => 'detailController.php?id=' . $produk['id_produk'],
+        ];
+    }, $produkList);
+}
+
 ?>

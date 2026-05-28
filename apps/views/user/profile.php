@@ -2,6 +2,30 @@
 /** @var array $dataUser */
 /** @var array $dataProduk */
 /** @var array $totalProduk */
+
+$ratingUser = number_format((float) ($dataUser['rating'] ?? 0), 1, '.', '');
+$totalTransaksi = (int) ($dataUser['total_transaksi'] ?? 0);
+$showWhatsapp = !empty($dataUser['show_whatsapp']);
+$showEmail = !empty($dataUser['show_email']);
+$showTanggalLahir = !empty($dataUser['show_tanggal_lahir']);
+$showTransaksi = !empty($dataUser['show_transaksi']);
+$showInfoPrivasi = $showWhatsapp || $showEmail || $showTanggalLahir;
+$bulanIndonesia = [
+    1 => 'Januari',
+    2 => 'Februari',
+    3 => 'Maret',
+    4 => 'April',
+    5 => 'Mei',
+    6 => 'Juni',
+    7 => 'Juli',
+    8 => 'Agustus',
+    9 => 'September',
+    10 => 'Oktober',
+    11 => 'November',
+    12 => 'Desember',
+];
+$tanggalLahir = !empty($dataUser['tanggal_lahir']) ? strtotime($dataUser['tanggal_lahir']) : false;
+$tanggalLahirLabel = $tanggalLahir ? date('j', $tanggalLahir) . ' ' . $bulanIndonesia[(int) date('n', $tanggalLahir)] . ' ' . date('Y', $tanggalLahir) : '';
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +67,7 @@
                                     <p>Buka Toko</p>
                                 </div>
                             </a>
-                            <a href="<?= SECONDIFY ?>/apps/views/user/setting.php" class="btnEdit">
+                            <a href="<?= SECONDIFY ?>/apps/controllers/user/settingController.php" class="btnEdit">
                                 <div class="profile-button">
                                     <i data-lucide="pencil" class="icon"></i>
                                     <p>Edit Profile</p>
@@ -69,7 +93,7 @@
                             <div class="infoToko">
                                 <div class="ratingToko">
                                     <i data-lucide="star" class="icon" style="fill: #886BC6; stroke-width: 0; width: 18px;"></i>
-                                    <span>4.8</span>
+                                    <span><?= $ratingUser ?></span>
                                     <span>(2 ulasan)</span>
                                 </div>
                                 <span>|</span>
@@ -77,11 +101,13 @@
                                     <span><?= $totalProduk['total'] ?> </span>
                                     <span>barang aktif</span>
                                 </div>
+                                <?php if ($showTransaksi): ?>
                                 <span>|</span>
                                 <div class="totalJual">
-                                    <span>2 </span>
-                                    <span>Terjual</span>
+                                    <span><?= $totalTransaksi ?> </span>
+                                    <span>transaksi</span>
                                 </div>
+                                <?php endif; ?>
                             </div>
                             <div class="dataLokasi">
                                 <i data-lucide="map-pin" class="icon"></i>
@@ -89,6 +115,30 @@
                                     <?=$dataUser['lokasi'] . ", Bandar Lampung"?>
                                 </p>
                             </div>
+                            <?php if ($showInfoPrivasi): ?>
+                            <div class="profile-public-info">
+                                <?php if ($showWhatsapp && !empty($dataUser['no_hp'])): ?>
+                                <div class="profile-public-item">
+                                    <i data-lucide="phone" class="icon"></i>
+                                    <span><?= htmlspecialchars($dataUser['no_hp']); ?></span>
+                                </div>
+                                <?php endif; ?>
+
+                                <?php if ($showEmail && !empty($dataUser['email'])): ?>
+                                <div class="profile-public-item">
+                                    <i data-lucide="mail" class="icon"></i>
+                                    <span><?= htmlspecialchars($dataUser['email']); ?></span>
+                                </div>
+                                <?php endif; ?>
+
+                                <?php if ($showTanggalLahir && $tanggalLahirLabel !== ''): ?>
+                                <div class="profile-public-item">
+                                    <i data-lucide="calendar" class="icon"></i>
+                                    <span><?= htmlspecialchars($tanggalLahirLabel); ?></span>
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                            <?php endif; ?>
                             <p class="bio">
                                 <?= $dataUser['bio'] ?>
                             </p>
@@ -120,16 +170,16 @@
                 <div class="cardJualanV" id="wadahProduk"> <!-- ini horizontal -->
                     <div class="cardJualanH"> <!-- ini vertikal -->
                         <?php foreach ($dataProduk as $data):  ?>
-                        <div class="cardBarang">
-                            <img src="<?= SECONDIFY; ?>/assets/images/produk/<?= $data['foto_barang'] ?>" alt="barang">
+                        <a href="<?= SECONDIFY; ?>/apps/controllers/user/detailController.php?id=<?= $data['id_produk'] ?>" class="cardBarang cardBarangLink">
+                            <img src="<?= SECONDIFY; ?>/assets/images/produk/<?= htmlspecialchars($data['foto_barang']) ?>" alt="barang">
                             <div class="detailBarang">
-                                <span class="profile-namaBarang"><?= $data['nama_barang'] ?></span>
+                                <span class="profile-namaBarang"><?= htmlspecialchars($data['nama_barang']) ?></span>
                                 <p class="harga">
                                     Rp.
-                                    <?= $data['harga']?>
+                                    <?= $data['harga'] ?>
                                 </p>
                             </div>
-                        </div>
+                        </a>
                     <?php endforeach;  ?>
                     </div>
                 </div>
@@ -153,7 +203,7 @@
                         <div class="produkUlasan">
                             <span>Produk dibeli:</span>
                             <div class="rowProduk">
-                                <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="">
+                            <img src="<?= SECONDIFY; ?>/assets/images/produk/produk.png" alt="">
                                 <span>Vaseline Gluta-Hya</span>
                             </div>
                         </div>
@@ -163,7 +213,7 @@
                     </div>
                     <div class="cardUlasan">
                         <div class="rowUlasan">
-                            <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="" class="ppUlasan">
+                            <img src="<?= SECONDIFY; ?>/assets/images/produk/produk.png" alt="" class="ppUlasan">
                             <div class="namaUlasan">
                                 <span>Rara</span>
                                 <span>12 April 2026</span>
@@ -179,7 +229,7 @@
                         <div class="produkUlasan">
                             <span>Produk dibeli:</span>
                             <div class="rowProduk">
-                                <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="">
+                                <img src="<?= SECONDIFY; ?>/assets/images/produk/produk.png" alt="">
                                 <span>Vaseline Gluta-Hya</span>
                             </div>
                         </div>

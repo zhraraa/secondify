@@ -14,7 +14,7 @@ require_once __DIR__ . '/../../../koneksi/koneksi.php';
 <!-- NAVBAR -->
 <nav class="navbar">
     
-    <a href="<?= SECONDIFY; ?>/apps/views/user/dashboard.php" class="sidebar-logo" style="text-decoration: none;">
+    <a href="<?= SECONDIFY; ?>/apps/controllers/user/dashboardController.php" class="sidebar-logo" style="text-decoration: none;">
         <img src="<?= SECONDIFY; ?>/assets/images/logo/logo.png" alt="" class="logo">
     </a>
 

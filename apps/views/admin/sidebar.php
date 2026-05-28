@@ -86,7 +86,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
                 <div class="sidebar-user-role">Super Admin</div>
             </div>
         </div>
-        <a href="<?= SECONDIFY; ?>/apps/views/user/dashboard.php" class="sidebar-logout">
+        <a href="<?= SECONDIFY; ?>/apps/controllers/user/dashboardController.php" class="sidebar-logout">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
                 <polyline points="16 17 21 12 16 7"/>

@@ -28,7 +28,7 @@ if(isset($_POST['masuk'])){
                     header("Location: " . SECONDIFY . "/apps/views/admin/adminDashboard.php");
                     exit();
                 } else {
-                    header("Location: " . SECONDIFY . "/apps/views/user/dashboard.php");            
+                    header("Location: " . SECONDIFY . "/apps/controllers/user/dashboardController.php");            
                     exit();
                 }
             }    

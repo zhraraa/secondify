@@ -1,5 +1,6 @@
 <?php
-require_once '../../config/config.php';
+/** @var array $dataUser */
+/** @var array $dataProdukMarketplace */
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +20,7 @@ require_once '../../config/config.php';
 
     <!-- BREADCRUMB -->
     <div class="breadcrumb">
-        <a href="<?= SECONDIFY; ?>/apps/views/user/dashboard.php">Beranda</a>
+        <a href="<?= SECONDIFY; ?>/apps/controllers/user/dashboardController.php">Beranda</a>
         <span class="sep">›</span>
         <a href="#">Kategori</a>
         <span class="sep">›</span>
@@ -159,6 +160,9 @@ require_once '../../config/config.php';
         © 2026 Secondify — Marketplace barang bekas Bandar Lampung.
     </footer>
 
-    <script src="<?= SECONDIFY; ?>/assets/js/user/kategori.js?v=20260511-3"></script>
+    <script>
+        window.SECONDIFY_PRODUCTS = <?= json_encode($dataProdukMarketplace ?? [], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>;
+    </script>
+    <script src="<?= SECONDIFY; ?>/assets/js/user/kategori.js?v=20260528-2"></script>
 </body>
 </html>

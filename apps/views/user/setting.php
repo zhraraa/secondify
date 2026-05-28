@@ -1,160 +1,26 @@
 <?php
-session_start();
-require_once '../../../koneksi/koneksi.php';
-require_once '../../config/config.php';
+/** @var array $user */
 
-if ($_SESSION['status'] != "login") {
-    header("Location: " . SECONDIFY . "index.php?error=harusLogin");
-    exit();
-}
+$bulanIndonesia = [
+    1 => 'Januari',
+    2 => 'Februari',
+    3 => 'Maret',
+    4 => 'April',
+    5 => 'Mei',
+    6 => 'Juni',
+    7 => 'Juli',
+    8 => 'Agustus',
+    9 => 'September',
+    10 => 'Oktober',
+    11 => 'November',
+    12 => 'Desember',
+];
 
-$id_user = $_SESSION['id_user'];
-
-$queryUser = mysqli_query($conn, "
-SELECT * FROM users 
-WHERE id_user = '$id_user'
-");
-
-$user = mysqli_fetch_assoc($queryUser);
-
-if(isset($_POST['simpan_profil'])){
-
-    $nama = $_POST['nama_lengkap'];
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $no_hp = $_POST['no_hp'];
-    $jenis_kelamin = $_POST['jenis_kelamin'];
-    $tanggal_lahir = $_POST['tanggal_lahir'];
-    $bio = $_POST['bio'];
-
-    mysqli_query($conn, "
-    UPDATE users SET
-    nama_lengkap = '$nama',
-    username = '$username',
-    email = '$email',
-    no_hp = '$no_hp',
-    jenis_kelamin = '$jenis_kelamin',
-    tanggal_lahir = '$tanggal_lahir',
-    bio = '$bio'
-    WHERE id_user = '$id_user'
-    ");
-
-    header("Location: setting.php?success=editProfil");
-    exit();
-}
-if(isset($_POST['ubah_password'])){
-
-    $password_lama = $_POST['password_lama'];
-    $password_baru = $_POST['password_baru'];
-    $konfirmasi = $_POST['konfirmasi_password'];
-
-    $queryPassword = mysqli_query($conn, "
-    SELECT password
-    FROM users
-    WHERE id_user = '$id_user'
-    ");
-
-    $dataPassword = mysqli_fetch_assoc($queryPassword);
-
-    if(password_verify($password_lama, $dataPassword['password'])){
-
-        if($password_baru == $konfirmasi){
-
-            if(strlen($password_baru) >= 8){
-                $hashPassword = password_hash($password_baru, PASSWORD_DEFAULT);
-                mysqli_query($conn, "
-                UPDATE users SET
-                password = '$hashPassword'
-                WHERE id_user = '$id_user'
-                ");
-                echo "
-                <script>
-                    alert('Password berhasil diubah!');
-                    window.location='setting.php#keamanan';
-                </script>
-                ";
-            } else {
-                echo "
-                <script>
-                    alert('Password Harus Minimal 8 Karakter');
-                </script>
-                ";
-            }
-        } else {
-            echo "
-            <script>
-                alert('Konfirmasi password tidak cocok!');
-            </script>
-            ";
-        }
-    } else {
-        echo "
-        <script>
-            alert('Password lama salah!');
-        </script>
-        ";
-    }
-}
-
-if(isset($_POST['save_privacy'])){
-
-    $show_whatsapp = isset($_POST['show_whatsapp']) ? 1 : 0;
-    $show_email = isset($_POST['show_email']) ? 1 : 0;
-    $show_tanggal_lahir = isset($_POST['show_tanggal_lahir']) ? 1 : 0;
-    $show_transaksi = isset($_POST['show_transaksi']) ? 1 : 0;
-
-    $allow_tracking = isset($_POST['allow_tracking']) ? 1 : 0;
-    $anonymous_data = isset($_POST['anonymous_data']) ? 1 : 0;
-
-    mysqli_query($conn, "
-    UPDATE users SET
-
-    show_whatsapp = '$show_whatsapp',
-    show_email = '$show_email',
-    show_tanggal_lahir = '$show_tanggal_lahir',
-    show_transaksi = '$show_transaksi',
-
-    allow_tracking = '$allow_tracking',
-    anonymous_data = '$anonymous_data'
-
-    WHERE id_user = '$id_user'
-    ");
-
-    header("Location: setting.php?success=savePrivacy#privasi");
-    exit();
-}
-
-if(isset($_POST['kirim_bantuan'])){
-
-    $topik = mysqli_real_escape_string(
-        $conn,
-        $_POST['topik']
-    );
-
-    $pesan = mysqli_real_escape_string(
-        $conn,
-        $_POST['pesan']
-    );
-
-    mysqli_query($conn, "
-    INSERT INTO bantuan (
-
-        id_user,
-        topik,
-        pesan
-
-    ) VALUES (
-
-        '$id_user',
-        '$topik',
-        '$pesan'
-
-    )
-    ");
-
-    header("Location: setting.php?success=kirimBantuan#bantuan");
-    exit();
-}
+$createdAt = !empty($user['created_at']) ? strtotime($user['created_at']) : false;
+$memberSejak = $createdAt ? $bulanIndonesia[(int) date('n', $createdAt)] . ' ' . date('Y', $createdAt) : '-';
+$peranUser = isset($user['is_penjual']) && (int) $user['is_penjual'] === 1 ? 'Penjual' : 'Member';
+$totalTransaksi = (int) ($user['total_transaksi'] ?? 0);
+$ratingUser = number_format((float) ($user['rating'] ?? 0), 1, '.', '');
 ?>
 
 <!DOCTYPE html>
@@ -171,7 +37,7 @@ if(isset($_POST['kirim_bantuan'])){
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
-        <a href="<?= SECONDIFY ?>/apps/views/user/dashboard.php" class="sidebar-logo">
+        <a href="<?= SECONDIFY ?>/apps/controllers/user/dashboardController.php" class="sidebar-logo">
             <img src="<?= SECONDIFY; ?>/assets/images/logo/logo3.png" alt="" class="logo">
         </a>
 
@@ -342,22 +208,22 @@ if(isset($_POST['kirim_bantuan'])){
                         <div class="info-row">
                             <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
                             <span>Member sejak</span>
-                            <strong>Januari 2024</strong>
+                            <strong><?= htmlspecialchars($memberSejak); ?></strong>
                         </div>
                         <div class="info-row">
                             <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
                             <span>Peran</span>
-                            <strong>Member</strong>
+                            <strong><?= htmlspecialchars($peranUser); ?></strong>
                         </div>
                         <div class="info-row">
                             <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
                             <span>Total Transaksi</span>
-                            <strong>12 transaksi</strong>
+                            <strong><?= $totalTransaksi; ?> transaksi</strong>
                         </div>
                         <div class="info-row">
                             <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
                             <span>Rating</span>
-                            <strong>4.9 / 5.0</strong>
+                            <strong><?= $ratingUser; ?> / 5.0</strong>
                         </div>
                     </div>
 

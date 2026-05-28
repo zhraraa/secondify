@@ -50,24 +50,24 @@
                     </div>
                     <?php else :?>
                     <?php foreach($barangAktif as $data) : ?>
-                        <div class="barang-item">
+                        <a href="<?= SECONDIFY; ?>/apps/controllers/user/detailController.php?id=<?= $data['id_produk'] ?>" class="barang-item barang-item-link">
                             <div class="detail-barang">
-                                <img src="<?= SECONDIFY; ?>/assets/images/produk/<?= $data['foto_barang'] ?>" alt="barang">
+                                <img src="<?= SECONDIFY; ?>/assets/images/produk/<?= htmlspecialchars($data['foto_barang']) ?>" alt="barang">
                                 
                                 <div class="info-barang">
-                                    <span class="kelolaBarang-status"><?= $data['status'] ?></span>
-                                    <span><?= $data['nama_barang'] ?></span>
+                                    <span class="kelolaBarang-status"><?= htmlspecialchars($data['status']) ?></span>
+                                    <span><?= htmlspecialchars($data['nama_barang']) ?></span>
                                     <span class="harga">Rp <?= number_format($data['harga'], 0, ',', '.') ?></span>
                                     
                                     <div class="lokasi">
                                         <i data-lucide="map-pin" class="icon"></i>
-                                        <span><?= $data['lokasi'] ?></span>
+                                        <span><?= htmlspecialchars($data['lokasi']) ?></span>
                                     </div>
                                 </div>
                             </div>
                             
                             <i data-lucide="ellipsis-vertical" class="opsi-menu"></i>
-                        </div>
+                        </a>
                         <?php endforeach; ?>
                     <?php endif; ?>
             </div>
@@ -79,23 +79,23 @@
                     </div>
                 <?php else :?>
                     <?php foreach($barangTerjual as $data) : ?>
-                        <div class="barang-item">
+                        <a href="<?= SECONDIFY; ?>/apps/controllers/user/detailController.php?id=<?= $data['id_produk'] ?>" class="barang-item barang-item-link">
                             <div class="detail-barang">
-                                <img src="<?= SECONDIFY; ?>/assets/images/produk/<?= $data['foto_barang'] ?>" alt="barang">
+                                <img src="<?= SECONDIFY; ?>/assets/images/produk/<?= htmlspecialchars($data['foto_barang']) ?>" alt="barang">
                                 
                                 <div class="info-barang">
-                                    <span class="kelolaBarang-status"><?= $data['status'] ?></span>
-                                    <span><?= $data['nama_barang'] ?></span>
+                                    <span class="kelolaBarang-status"><?= htmlspecialchars($data['status']) ?></span>
+                                    <span><?= htmlspecialchars($data['nama_barang']) ?></span>
                                     <span class="harga">Rp <?= number_format($data['harga'], 0, ',', '.') ?></span>
                                     <div class="lokasi">
                                         <i data-lucide="map-pin" class="icon"></i>
-                                        <span><?= $data['lokasi'] ?></span>
+                                        <span><?= htmlspecialchars($data['lokasi']) ?></span>
                                     </div>
                                 </div>
                             </div>
                             
                             <i data-lucide="ellipsis-vertical" class="opsi-menu"></i>
-                        </div>
+                        </a>
                     <?php endforeach ?>
                 <?php endif; ?>
             </div>

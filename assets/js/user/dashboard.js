@@ -1,23 +1,14 @@
 // ── Kategori: klik aktif ──────────────────────────
 const SECONDIFY_BASE = `${window.location.origin}${window.location.pathname.split("/apps/")[0]}`;
-const kategoriUrl = (params = "") => `${SECONDIFY_BASE}/apps/views/user/kategori.php${params}`;
-const detailUrl = (product) => `${SECONDIFY_BASE}/apps/views/user/detail.php?id=${encodeURIComponent(product.id)}`;
+const kategoriUrl = (params = "") => `${SECONDIFY_BASE}/apps/controllers/user/kategoriController.php${params}`;
+const detailUrl = (product) => `${SECONDIFY_BASE}/apps/controllers/user/detailController.php?id=${encodeURIComponent(product.id)}`;
 const IMAGE_VERSION = "20260511-2";
 const imageUrl = (src) => {
     if (!src || src.startsWith("http") || src.startsWith("/")) return src;
     return `${SECONDIFY_BASE}/assets/images/${src}?v=${IMAGE_VERSION}`;
 };
 
-const recommendationProducts = [
-    { id: 1, nama: "Sony WH-1000XM4", harga: 2250000, kondisi: "seperti-baru", lokasi: "Langkapura", gambar: "barang/headphone.jpg" },
-    { id: 6, nama: "iPhone 17 Pro Max", harga: 18500000, kondisi: "seperti-baru", lokasi: "Way Halim", gambar: "barang/ip17pm.jpg" },
-    { id: 8, nama: "Adidas Samba OG", harga: 1100000, kondisi: "seperti-baru", lokasi: "Rajabasa", gambar: "barang/adidassamba.jpg" },
-    { id: 9, nama: "Blue Kebaya Pashmina", harga: 175000, kondisi: "seperti-baru", lokasi: "Sukarame", gambar: "barang/bluekebaya.jpg" },
-    { id: 10, nama: "Canon EOS M50 Mark II", harga: 5800000, kondisi: "bekas", lokasi: "Langkapura", gambar: "barang/camera.jpg" },
-    { id: 18, nama: "Novel Laut Bercerita", harga: 65000, kondisi: "bekas", lokasi: "Rajabasa", gambar: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600&h=600&fit=crop" },
-    { id: 19, nama: "Meja Belajar Minimalis", harga: 350000, kondisi: "bekas", lokasi: "Sukarame", gambar: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=600&h=600&fit=crop" },
-    { id: 20, nama: "Raket Badminton Yonex", harga: 275000, kondisi: "bekas", lokasi: "Way Halim", gambar: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=600&h=600&fit=crop" }
-];
+const recommendationProducts = window.SECONDIFY_PRODUCTS || [];
 
 const kategoriItems = document.querySelectorAll(".kategori-item");
 
@@ -101,3 +92,4 @@ if (sortSelect) {
         renderRecommendations(e.target.value);
     });
 }
+

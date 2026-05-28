@@ -1,5 +1,7 @@
 <?php
-require_once '../../config/config.php';
+/** @var array $dataUser */
+/** @var array $dataProdukMarketplace */
+/** @var array|null $dataProdukDetail */
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +10,7 @@ require_once '../../config/config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Produk — Secondify</title>
-    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/user/detail.css?v=20260519-2">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/user/detail.css?v=20260528-4">
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/layouts/navbar.css">
     <script src="<?= SECONDIFY; ?>/assets/js/layouts/navbar.js" defer></script>
 <body>
@@ -18,7 +20,7 @@ require_once '../../config/config.php';
 
     <!-- BREADCRUMB -->
     <div class="breadcrumb">
-        <a href="<?= SECONDIFY; ?>/apps/views/user/dashboard.php">Beranda</a>
+        <a href="<?= SECONDIFY; ?>/apps/controllers/user/dashboardController.php">Beranda</a>
         <span class="sep">›</span>
         <a href="#" id="bcKategori">Kategori</a>
         <span class="sep">›</span>
@@ -33,7 +35,7 @@ require_once '../../config/config.php';
         <!-- LEFT: Gallery -->
         <div class="gallery-section">
             <div class="main-image-wrap">
-                <img src="<?= SECONDIFY; ?>/assets/images/barang/produk.png" alt="" id="mainImage" class="main-image">
+                <img src="<?= SECONDIFY; ?>/assets/images/produk/produk.png" alt="" id="mainImage" class="main-image">
                 <span class="kondisi-badge" id="kondisiBadge"></span>
                 <button class="wishlist-fab" id="wishlistFab" title="Simpan ke Wishlist">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -208,6 +210,11 @@ require_once '../../config/config.php';
         </div>
     </div>
 
-    <script src="<?= SECONDIFY; ?>/assets/js/user/detail.js?v=20260519-1"></script>
+    <script>
+        window.SECONDIFY_PRODUCTS = <?= json_encode($dataProdukMarketplace ?? [], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>;
+        window.SECONDIFY_PRODUCT_ID = <?= isset($_GET['id']) ? (int) $_GET['id'] : 0; ?>;
+        window.SECONDIFY_CURRENT_USER_ID = <?= (int) ($dataUser['id_user'] ?? 0); ?>;
+    </script>
+    <script src="<?= SECONDIFY; ?>/assets/js/user/detail.js?v=20260528-4"></script>
 </body>
 </html>
