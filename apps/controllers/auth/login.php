@@ -17,6 +17,13 @@ if(isset($_POST['masuk'])){
         $hashed_password = $cek_user['password'];        
     
         if(password_verify($password, $hashed_password)){
+
+            if ($cek_user['status_akun'] === 'dibekukan') {
+                header("Location: " . SECONDIFY . "/index.php?error=accountSuspended");
+                exit();
+            }
+
+
             $_SESSION['id_user'] = $id_user;
             $_SESSION['nama_lengkap'] = $nama_lengkap;
             $_SESSION['role'] = $role;

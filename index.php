@@ -7,7 +7,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] === 'login') {
         header("Location: " . SECONDIFY . "/apps/views/admin/adminDashboard.php");
         exit();
     } else {
-        header("Location: " . SECONDIFY . "/apps/controllers/user/dashboardController.php");            
+        header("Location: " . SECONDIFY . "/apps/views/user/dashboard.php");            
         exit();
     }
 }
@@ -63,7 +63,14 @@ if (isset($_SESSION['status']) && $_SESSION['status'] === 'login') {
                     <?php if (isset($_GET['error']) && $_GET['error'] == "loginError") : ?>
                         <div class="loginSalah" style="width: 100%;">
                             <i data-lucide="alert-circle" style="width: 1.25rem; height: 1.25rem; color: red;"></i>
-                            <span class="pesanError">Email atau Password salah</span>
+                            <span>Email atau Password salah</span>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (isset($_GET['error']) && $_GET['error'] == "accountSuspended") : ?>
+                        <div class="loginSalah" style="width: 100%; background-color: #fdf2f2; border: 1px solid #f8b4b4; padding: 10px; border-radius: 8px; margin-top: 10px; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="alert-triangle" style="width: 1.25rem; height: 1.25rem; color: #e02424;"></i>
+                            <span style="color: #e02424; font-size: 13px; font-weight: 500;">Maaf, akun Anda telah ditangguhkan/dibekukan oleh Admin.</span>
                         </div>
                     <?php endif; ?>
 

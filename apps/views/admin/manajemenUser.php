@@ -1,5 +1,10 @@
 <?php
 require_once '../../config/config.php';
+// Panggil controller user
+require_once '../../controllers/admin/UserController.php';
+
+$allUsers = getAllUsersData();
+$totalTampil = count($allUsers);
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +30,6 @@ require_once '../../config/config.php';
         <div class="topbar-right">
             <button class="topbar-notif" onclick="showToast('Tidak ada notifikasi baru')">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                <div class="notif-dot"></div>
             </button>
             <div class="sidebar-user" style="padding:6px 10px;margin:0;">
                 <div class="sidebar-avatar" style="width:30px;height:30px;font-size:11px;">Y</div>
@@ -62,87 +66,67 @@ require_once '../../config/config.php';
                     <option value="Aktif">Aktif</option>
                     <option value="Dibekukan">Dibekukan</option>
                 </select>
-                <div style="margin-left:auto;font-size:12px;color:#aaa;" id="user-count">Menampilkan 7 pengguna</div>
+                <div style="margin-left:auto;font-size:12px;color:#aaa;" id="user-count">Menampilkan <?= $totalTampil; ?> pengguna</div>
             </div>
 
             <table class="data-table">
                 <thead>
                     <tr>
                         <th>Pengguna</th><th>Username</th><th>Peran</th>
-                        <th>Bergabung</th><th>Transaksi</th><th>Status</th><th>Aksi</th>
-                    </tr>
+                        <th>Transaksi</th><th>Status</th><th>Aksi</th> </tr>
                 </thead>
                 <tbody id="userTbody">
-                    <tr data-role="Penjual" data-status="Aktif">
-                        <td><div class="user-cell"><div class="user-avatar-sm">R</div><div><div class="user-name-sm">Rara Cantik</div><div class="user-email-sm">rara@gmail.com</div></div></div></td>
-                        <td>@raracantik123</td><td><span class="badge purple">Penjual</span></td>
-                        <td>Jan 2026</td><td>18 transaksi</td>
-                        <td><span class="badge green"><span class="badge-dot"></span>Aktif</span></td>
-                        <td><div class="action-row"><button class="btn-action view" onclick="showToast('Melihat profil Rara Cantik')">Detail</button><button class="btn-action warn" onclick="showToast('Peringatan dikirim ke Rara Cantik')">Peringatkan</button></div></td>
-                    </tr>
-                    <tr data-role="Pembeli" data-status="Aktif">
-                        <td><div class="user-cell"><div class="user-avatar-sm" style="background:linear-gradient(135deg,#3b82f6,#60a5fa);">A</div><div><div class="user-name-sm">Alyssa Putri</div><div class="user-email-sm">alyssa@gmail.com</div></div></div></td>
-                        <td>@alyssa.putri</td><td><span class="badge blue">Pembeli</span></td>
-                        <td>Jan 2026</td><td>12 transaksi</td>
-                        <td><span class="badge green"><span class="badge-dot"></span>Aktif</span></td>
-                        <td><div class="action-row"><button class="btn-action view" onclick="showToast('Melihat profil Alyssa Putri')">Detail</button><button class="btn-action warn" onclick="showToast('Peringatan dikirim ke Alyssa Putri')">Peringatkan</button></div></td>
-                    </tr>
-                    <tr data-role="Penjual" data-status="Aktif">
-                        <td><div class="user-cell"><div class="user-avatar-sm" style="background:linear-gradient(135deg,#27ae60,#2ecc71);">A</div><div><div class="user-name-sm">Andi Wijaya</div><div class="user-email-sm">andi@gmail.com</div></div></div></td>
-                        <td>@andi.sneakers</td><td><span class="badge purple">Penjual</span></td>
-                        <td>Feb 2026</td><td>34 transaksi</td>
-                        <td><span class="badge green"><span class="badge-dot"></span>Aktif</span></td>
-                        <td><div class="action-row"><button class="btn-action view" onclick="showToast('Melihat profil Andi Wijaya')">Detail</button><button class="btn-action warn" onclick="showToast('Peringatan dikirim ke Andi Wijaya')">Peringatkan</button></div></td>
-                    </tr>
-                    <tr data-role="Pembeli" data-status="Dibekukan">
-                        <td><div class="user-cell"><div class="user-avatar-sm" style="background:#ccc;color:#888;">D</div><div><div class="user-name-sm">Dodi Santoso</div><div class="user-email-sm">dodi@gmail.com</div></div></div></td>
-                        <td>@dodi.s</td><td><span class="badge blue">Pembeli</span></td>
-                        <td>Mar 2026</td><td>2 transaksi</td>
-                        <td><span class="badge red"><span class="badge-dot"></span>Dibekukan</span></td>
-                        <td><div class="action-row"><button class="btn-action view" onclick="showToast('Melihat profil Dodi Santoso')">Detail</button><button class="btn-action approve" onclick="showToast('Akun Dodi Santoso diaktifkan kembali!')">Aktifkan</button></div></td>
-                    </tr>
-                    <tr data-role="Pembeli" data-status="Aktif">
-                        <td><div class="user-cell"><div class="user-avatar-sm" style="background:linear-gradient(135deg,#e74c3c,#ff6b6b);">M</div><div><div class="user-name-sm">Maya Sari</div><div class="user-email-sm">maya@gmail.com</div></div></div></td>
-                        <td>@maya.preloved</td><td><span class="badge blue">Pembeli</span></td>
-                        <td>Mei 2026</td><td>1 transaksi</td>
-                        <td><span class="badge green"><span class="badge-dot"></span>Aktif</span></td>
-                        <td><div class="action-row"><button class="btn-action view" onclick="showToast('Melihat profil Maya Sari')">Detail</button><button class="btn-action warn" onclick="showToast('Peringatan dikirim ke Maya Sari')">Peringatkan</button></div></td>
-                    </tr>
-                    <tr data-role="Penjual" data-status="Aktif">
-                        <td><div class="user-cell"><div class="user-avatar-sm" style="background:linear-gradient(135deg,#886BC6,#D3C3FB);">R</div><div><div class="user-name-sm">Rizky Fadillah</div><div class="user-email-sm">rizky@gmail.com</div></div></div></td>
-                        <td>@rizky.store</td><td><span class="badge purple">Penjual</span></td>
-                        <td>Mar 2026</td><td>22 transaksi</td>
-                        <td><span class="badge green"><span class="badge-dot"></span>Aktif</span></td>
-                        <td><div class="action-row"><button class="btn-action view" onclick="showToast('Melihat profil Rizky Fadillah')">Detail</button><button class="btn-action danger" onclick="showToast('Akun Rizky Fadillah dibekukan!')">Bekukan</button></div></td>
-                    </tr>
-                    <tr data-role="Pembeli" data-status="Aktif">
-                        <td><div class="user-cell"><div class="user-avatar-sm" style="background:linear-gradient(135deg,#f39c12,#f1c40f);">D</div><div><div class="user-name-sm">Dinda Belanja</div><div class="user-email-sm">dinda@gmail.com</div></div></div></td>
-                        <td>@dinda.belanja</td><td><span class="badge blue">Pembeli</span></td>
-                        <td>Apr 2026</td><td>7 transaksi</td>
-                        <td><span class="badge green"><span class="badge-dot"></span>Aktif</span></td>
-                        <td><div class="action-row"><button class="btn-action view" onclick="showToast('Melihat profil Dinda Belanja')">Detail</button><button class="btn-action warn" onclick="showToast('Peringatan dikirim ke Dinda Belanja')">Peringatkan</button></div></td>
-                    </tr>
+                    <?php if(!empty($allUsers)): ?>
+                        <?php foreach($allUsers as $user): 
+                            $isPenjual = ($user['is_penjual'] == 1);
+                            $roleText = $isPenjual ? 'Penjual' : 'Pembeli';
+                            $roleClass = $isPenjual ? 'purple' : 'blue';
+                            
+                            $isAktif = (strtolower($user['status_akun']) !== 'dibekukan');
+                            $statusText = $isAktif ? 'Aktif' : 'Dibekukan';
+                            $statusClass = $isAktif ? 'green' : 'red';
+                        ?>
+                            <tr data-role="<?= $roleText; ?>" data-status="<?= $statusText; ?>">
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar-sm" style="background: linear-gradient(135deg, #886BC6, #a892e3);">
+                                            <?= strtoupper(substr($user['nama_lengkap'], 0, 1)); ?>
+                                        </div>
+                                        <div>
+                                            <div class="user-name-sm"><?= htmlspecialchars($user['nama_lengkap']); ?></div>
+                                            <div class="user-email-sm"><?= htmlspecialchars($user['email']); ?></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>@<?= htmlspecialchars($user['username']); ?></td>
+                                <td><span class="badge <?= $roleClass; ?>"><?= $roleText; ?></span></td>
+                                <td><?= $user['total_transaksi']; ?> transaksi</td>
+                                <td><span class="badge <?= $statusClass; ?>"><span class="badge-dot"></span><?= $statusText; ?></span></td>
+                                <td>
+                                    <div class="action-row">
+                                        <a href="userDetail.php?id=<?= $user['id_user']; ?>" class="btn-action view" style="text-decoration: none; display: inline-block;">
+                                            Detail
+                                        </a>
+                                        <?php if($isAktif): ?>
+                                            <button class="btn-action danger" onclick="toggleUserStatus(<?= $user['id_user']; ?>, 'freeze')">Bekukan</button>
+                                        <?php else: ?>
+                                            <button class="btn-action approve" onclick="toggleUserStatus(<?= $user['id_user']; ?>, 'activate')">Aktifkan</button>
+                                        <?php endif; ?>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr><td colspan="6" style="text-align:center;color:#888;padding:20px;">Tidak ada data pengguna.</td></tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
-
-            <div class="pagination">
-                <span>Menampilkan 7 dari 1,284 pengguna</span>
-                <div class="page-btns">
-                    <button class="page-btn">‹</button>
-                    <button class="page-btn active">1</button>
-                    <button class="page-btn">2</button>
-                    <button class="page-btn">3</button>
-                    <button class="page-btn">...</button>
-                    <button class="page-btn">128</button>
-                    <button class="page-btn">›</button>
-                </div>
-            </div>
         </div>
 
     </section>
 </div>
 
 <div class="toast" id="toast"></div>
-<script src="<?= SECONDIFY; ?>/assets/js/admin/adminDashboard.js"></script>
+<script src="<?= SECONDIFY; ?>/assets/js/admin/userManagement.js"></script>
 </body>
 </html>

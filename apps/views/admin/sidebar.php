@@ -1,12 +1,30 @@
 <?php
-// Tentukan halaman aktif berdasarkan file yang sedang dibuka
+// sidebar.php
 $currentPage = basename($_SERVER['PHP_SELF'], '.php');
+
+// Pastikan koneksi ke database sudah tersedia
+// Karena sidebar ini di-include ke dalam file view admin, kita buat fallback aman untuk $conn
+if (isset($conn)) {
+    // Hitung jumlah pengajuan penjual yang statusnya masih 'pending'
+    $queryPendingSeller = mysqli_query($conn, "SELECT COUNT(*) as total FROM seller_application WHERE status = 'pending'");
+    $rowPendingSeller = mysqli_fetch_assoc($queryPendingSeller);
+    $totalPendingSeller = $rowPendingSeller['total'];
+
+    // Hitung juga jumlah laporan moderasi barang yang aktif (untuk menu Moderasi & Laporan)
+    // Di sini kita set default 5 dulu atau disesuaikan dengan query tabel laporan lu nanti
+    $queryPendingReport = mysqli_query($conn, "SELECT COUNT(*) as total FROM laporan_barang"); // sesuaikan nama tabel jika sudah ada
+    $totalPendingReport = $queryPendingReport ? mysqli_fetch_assoc($queryPendingReport)['total'] : 5;
+} else {
+    // Fallback jika variabel $conn belum terdefinisi agar tidak memicu error
+    $totalPendingSeller = 3;
+    $totalPendingReport = 5;
+}
 ?>
 
 <aside class="sidebar">
     <a href="<?= SECONDIFY; ?>/apps/views/admin/adminDashboard.php" class="sidebar-brand">
         <div class="brand-icon">
-            <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1=\"3\" y1=\"6\" x2=\"21\" y2=\"6\"/><path d=\"M16 10a4 4 0 0 1-8 0\"/></svg>
         </div>
         <div>
             <div class="brand-text">Secondify</div>
@@ -35,7 +53,9 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
                 <path d="M20.618 5.984A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622C17.176 19.29 21 14.591 21 9a12.02 12.02 0 0 0-.382-3.016z"/>
             </svg>
             Verifikasi Penjual
-            <span class="badge-count">3</span>
+            <?php if ($totalPendingSeller > 0): ?>
+                <span class="badge-count"><?= $totalPendingSeller; ?></span>
+            <?php endif; ?>
         </a>
 
         <a href="<?= SECONDIFY; ?>/apps/views/admin/manajemenUser.php"
@@ -55,7 +75,9 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             </svg>
             Moderasi & Laporan
-            <span class="badge-count">5</span>
+            <?php if ($totalPendingReport > 0): ?>
+                <span class="badge-count"><?= $totalPendingReport; ?></span>
+            <?php endif; ?>
         </a>
 
         <div style="height:1px;background:#f0f0f5;margin:12px 0;"></div>
@@ -86,13 +108,13 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
                 <div class="sidebar-user-role">Super Admin</div>
             </div>
         </div>
-        <a href="<?= SECONDIFY; ?>/apps/controllers/user/dashboardController.php" class="sidebar-logout">
+        <a href="../../controllers/auth/logout.php" class="sidebar-logout">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
                 <polyline points="16 17 21 12 16 7"/>
                 <line x1="21" y1="12" x2="9" y2="12"/>
             </svg>
-            Kembali ke Marketplace
+            Log-Out
         </a>
     </div>
 </aside>

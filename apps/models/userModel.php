@@ -21,7 +21,7 @@ function getIdUserByUsername($conn, $username) {
 }
 
 function getDataUserbyEmail($conn, $email){
-    $query = $conn -> prepare("SELECT id_user, password, role, nama_lengkap FROM users WHERE email = ?");
+    $query = $conn -> prepare("SELECT id_user, password, role, nama_lengkap, status_akun FROM users WHERE email = ?");
     $query -> bind_param("s", $email);
     $query -> execute(); 
 
