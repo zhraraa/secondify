@@ -19,15 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.key === "Enter") {
                 const query = e.target.value.trim();
                 if (query) {
-                    const path = window.location.pathname;
                     const params = new URLSearchParams(window.location.search);
                     const sortParam = params.get('sort');
                     const sortQuery = sortParam ? `&sort=${encodeURIComponent(sortParam)}` : '';
-                    if (path.includes('/apps/views/user/kategori.php') || path.includes('/apps/controllers/user/kategoriController.php') || path.includes('/apps/views/user/detail.php')) {
-                        window.location.href = kategoriUrl(`?kat=semua&q=${encodeURIComponent(query)}${sortQuery}`);
-                    } else {
-                        window.location.href = dashboardUrl(`?q=${encodeURIComponent(query)}${sortQuery}`);
-                    }
+                    window.location.href = kategoriUrl(`?kat=semua&q=${encodeURIComponent(query)}${sortQuery}`);
                 }
             }
         });

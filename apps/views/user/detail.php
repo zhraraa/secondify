@@ -28,7 +28,7 @@
     <title><?= $title ?></title>
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/user/detail.css?v=20260528-4">
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/layouts/navbar.css">
-    <script src="<?= SECONDIFY; ?>/assets/js/layouts/navbar.js" defer></script>
+    <script src="<?= SECONDIFY; ?>/assets/js/layouts/navbar.js?v=20260529-1" defer></script>
 <body>
 
     <!-- NAVBAR -->
@@ -237,6 +237,6 @@
         window.SECONDIFY_PRODUCT_ID = <?= (int) ($idProduk ?? 0); ?>;
         window.SECONDIFY_CURRENT_USER_ID = <?= (int) ($dataUser['id_user'] ?? 0); ?>;
     </script>
-    <script src="<?= SECONDIFY; ?>/assets/js/user/detail.js?v=20260528-4"></script>
+    <script src="<?= SECONDIFY; ?>/assets/js/user/detail.js?v=20260529-1"></script>
 </body>
 </html>
