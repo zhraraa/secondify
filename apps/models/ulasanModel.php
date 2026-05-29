@@ -21,4 +21,32 @@ function getDataUlasan($conn, $id_penjual){
     return $daftarUlasan;
 }
 
+function buatKerangkaUlasan($conn, $id_penjual, $id_pembeli, $id_produk) {
+    $query = $conn->prepare("INSERT INTO reviews (id_penjual, id_pembeli, id_produk) VALUES (?, ?, ?)");
+    $query->bind_param("iii", $id_penjual, $id_pembeli, $id_produk);
+    $eksekusi = $query->execute();
+    
+    return $eksekusi;
+}
+
+function getUlasanKosong($conn, $id_pembeli) {
+    $query = $conn->prepare("SELECT 
+                                r.id_review, 
+                                r.id_produk,
+                                r.tgl_ulasan,
+                                p.nama_barang, 
+                                p.foto_barang,
+                                u.nama_toko AS nama_penjual
+                            FROM reviews r
+                            JOIN produk p ON r.id_produk = p.id_produk
+                            JOIN users u ON r.id_penjual = u.id_user
+                            WHERE r.id_pembeli = ? AND r.rating IS NULL
+                            ORDER BY r.tgl_ulasan DESC");
+                            
+    $query->bind_param("i", $id_pembeli);
+    $query->execute();
+    
+    $result = $query->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
 ?>

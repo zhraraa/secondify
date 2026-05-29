@@ -4,6 +4,8 @@ require_once '../../config/config.php';
 require_once '../../models/produkModel.php';
 require_once '../../models/pesanModel.php';
 require_once '../auth/auth_check.php';
+require_once '../../models/ulasanModel.php'; 
+require_once '../../models/userModel.php';
 
 $id_user = $_SESSION['id_user'];
 $dataProduk = getDataProdukById($conn, $id_user);
@@ -21,6 +23,12 @@ if (isset($_POST['tandaiTerjual'])){
     $update = updateStatusProduk($conn, $idProduk);
 
     if ($update){
+        if ($usernamePembeli !== 'luarAplikasi') {
+            $id_pembeli = getIdUserByUsername($conn, $usernamePembeli);
+            if ($id_pembeli !== null) {
+                $kerangka = buatKerangkaUlasan($conn, $id_user, $id_pembeli, $idProduk);
+            }
+        }
         echo "<script>alert('Produk berhasil ditandai sebagai terjual.'); window.location.href = '" . SECONDIFY . "/apps/controllers/penjual/kelolaBarang.php';</script>";
         exit();
     } else {
@@ -52,6 +60,8 @@ foreach ($dataProduk as $item){
         $barangTerjual[] = $item;
     }
 }
+
+
 
 // echo '<pre>';
 // var_dump($dataProduk); // Jika kamu pakai Cara 1 sebelumnya, ubah jadi var_dump($barangAktif)

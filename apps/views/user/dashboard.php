@@ -35,6 +35,38 @@
         </div>
     </section>
 
+    <?php if (!empty($daftarUlasanBelumDiisi)): ?>
+
+    <section class="dashboard-ulasan">
+        <h3>Gimana pengalaman kamu setelah berbelanja?</h3>
+        
+        <div class="dashboard-wadahUlasan">
+            
+            <?php foreach ($daftarUlasanBelumDiisi as $tagihan): ?>
+                <div class="dashboard-cardUlasan">
+                    
+                    <div class="card-header">
+                        <img src="<?= SECONDIFY ?>/assets/images/produk/<?= $tagihan['foto_barang'] ?>" alt="Foto Produk">
+                        <div class="info-singkat">
+                            <h4><?= htmlspecialchars($tagihan['nama_barang']) ?></h4>
+                            <span>Toko: <?= htmlspecialchars($tagihan['nama_penjual']) ?></span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-action">
+                        <a href="<?= SECONDIFY ?>/apps/controllers/user/formUlasanController.php?id_review=<?= $tagihan['id_review'] ?>" class="btn-ulasan">
+                            Beri Ulasan ⭐
+                        </a>
+                    </div>
+                    
+                </div>
+            <?php endforeach; ?>
+            
+        </div>
+    </section>
+
+<?php endif; ?>
+
 
     <!-- KATEGORI -->
     <section class="kategori">

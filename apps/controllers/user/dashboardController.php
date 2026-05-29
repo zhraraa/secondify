@@ -5,6 +5,7 @@ require_once '../../config/config.php';
 require_once '../../models/userModel.php';
 require_once '../../models/produkModel.php';
 require_once '../../models/kategoriModel.php';
+require_once '../../models/ulasanModel.php';
 
 $id_user = $_SESSION['id_user'];
 $dataUser = getDataUSer($conn, $id_user);
@@ -26,6 +27,9 @@ if ($currentKategori !== 'semua' && !in_array($currentKategori, $validKategoriSl
 $dataProdukMarketplace = formatProdukUntukJs(getAllProdukMarketplace($conn, $sort, 8, $searchQuery));
 $selectedSort = $sort;
 $searchValue = $searchQuery;
+
+$daftarUlasanBelumDiisi = getUlasanKosong($conn, $id_user);
+
 
 require_once '../../views/user/dashboard.php';
 ?>

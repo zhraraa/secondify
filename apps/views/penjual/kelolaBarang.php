@@ -248,6 +248,7 @@
                     <div class=opsiPembeli>
                         <input list="daftarPembeli" name="usnPembeli" id="usnPembeli" placeholder="Ketik username pembeli..." required>
                         <datalist id="daftarPembeli">
+                            <option value="luarAplikasi">Luar Sistem Secondify</option>
                             <?php foreach ($dropdownValue as $data) : ?>
                                 <option value="<?= $data['usename_pembeli'] ?>"><?= $data['pembeli'] ?></option>
                             <?php endforeach; ?>

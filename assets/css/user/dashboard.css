@@ -132,6 +132,99 @@ body {
 }
 
 
+.dashboard-ulasan {
+    margin-bottom: 30px;
+    padding: 0 30px; 
+}
+
+.dashboard-ulasan h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.dashboard-wadahUlasan {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px; /* jarak antar card */
+    padding-bottom: 15px; 
+    scroll-snap-type: x mandatory; 
+}
+
+.dashboard-wadahUlasan::-webkit-scrollbar {
+    height: 6px;
+}
+.dashboard-wadahUlasan::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 10px;
+}
+
+/* 2. CARD ULASAN (SATUAN) */
+.dashboard-cardUlasan {
+    flex: 0 0 auto; 
+    width: 280px; 
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+    scroll-snap-align: start;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+/* 3. ISI DALAM CARD */
+.card-header {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-header img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.info-singkat h4 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    color: #111;
+    /* potong teks jadi "..." kalau nama barangnya kepanjangan */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.info-singkat span {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.card-action .btn-ulasan {
+    display: block;
+    text-align: center;
+    background: #886BC6; 
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: 0.2s ease-in-out;
+}
+
+.card-action .btn-ulasan:hover {
+    background: #725aa6; 
+}
+
+
+
 /* ─── KATEGORI ──────────────────────────────────── */
 .kategori {
     padding: 0 30px;
