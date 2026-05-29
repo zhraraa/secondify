@@ -1,4 +1,8 @@
 <?php
+// Error handling
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require_once 'koneksi/koneksi.php';
 require_once 'apps/config/config.php';
 
