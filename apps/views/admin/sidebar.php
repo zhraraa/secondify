@@ -12,12 +12,18 @@ if (isset($conn)) {
 
     // Hitung juga jumlah laporan moderasi barang yang aktif (untuk menu Moderasi & Laporan)
     // Di sini kita set default 5 dulu atau disesuaikan dengan query tabel laporan lu nanti
-    $queryPendingReport = mysqli_query($conn, "SELECT COUNT(*) as total FROM laporan_barang"); // sesuaikan nama tabel jika sudah ada
-    $totalPendingReport = $queryPendingReport ? mysqli_fetch_assoc($queryPendingReport)['total'] : 5;
+    // FIX: hitung laporan_barang pending + bantuan yang belum selesai
+    $queryPendingReport = mysqli_query($conn, "
+        SELECT (
+            (SELECT COUNT(*) FROM laporan_barang WHERE status = 'pending') +
+            (SELECT COUNT(*) FROM bantuan WHERE status != 'selesai')
+        ) AS total
+    ");
+    $totalPendingReport = $queryPendingReport ? (int)mysqli_fetch_assoc($queryPendingReport)['total'] : 0;
 } else {
     // Fallback jika variabel $conn belum terdefinisi agar tidak memicu error
     $totalPendingSeller = 3;
-    $totalPendingReport = 5;
+    $totalPendingReport = 0; // fallback jika $conn belum tersedia
 }
 ?>
 
@@ -78,25 +84,6 @@ if (isset($conn)) {
             <?php if ($totalPendingReport > 0): ?>
                 <span class="badge-count"><?= $totalPendingReport; ?></span>
             <?php endif; ?>
-        </a>
-
-        <div style="height:1px;background:#f0f0f5;margin:12px 0;"></div>
-        <div class="sidebar-label" style="padding:0 0 6px;">Pengaturan</div>
-
-        <a href="#" class="nav-item" onclick="showToast('Fitur ini belum tersedia'); return false;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
-            </svg>
-            Pengaturan Sistem
-        </a>
-
-        <a href="#" class="nav-item" onclick="showToast('Fitur ini belum tersedia'); return false;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                <polyline points="17 6 23 6 23 12"/>
-            </svg>
-            Laporan & Analitik
         </a>
     </nav>
 
