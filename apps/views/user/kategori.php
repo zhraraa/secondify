@@ -11,6 +11,7 @@ if (!defined('SECONDIFY')) {
 
 /** @var array $dataUser */
 /** @var array $dataProdukMarketplace */
+$currentKategori = $currentKategori ?? 'semua';
 ?>
 
 <!DOCTYPE html>
