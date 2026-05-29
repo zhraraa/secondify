@@ -1,5 +1,18 @@
 <?php
+
+session_start();
+
+require_once '../../../koneksi/koneksi.php';
 require_once '../../config/config.php';
+require_once '../../models/userModel.php';
+
+$id_user = $_SESSION['id_user'];
+
+$id_produk = $_GET['id_produk'] ?? 0;
+$id_penjual = $_GET['id_penjual'] ?? 0;
+
+$dataUser = getDataUSer($conn,$id_user);
+
 ?>
 
 <!DOCTYPE html>

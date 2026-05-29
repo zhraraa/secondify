@@ -106,7 +106,11 @@
                         <div class="seller-name">rafi.collections</div>
                         <div class="seller-meta">Bergabung Jan 2024</div>
                     </div>
-                    <button class="seller-chat-btn">Chat Penjual</button>
+                    <a
+                        href="<?= SECONDIFY; ?>/apps/views/user/chat.php?id_produk=<?= $dataProdukDetail['id_produk'] ?>&id_penjual=<?= $dataProdukDetail['id_user'] ?>"
+                        class="seller-chat-btn">
+                        Chat Penjual
+                    </a>
                 </div>
             </div>
 
