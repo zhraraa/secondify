@@ -73,9 +73,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("chatTitle").innerText = "Chat Penjual";
 
+    loadChatList();
     loadMessages();
 
-    setInterval(loadMessages, 2000);
+    setInterval(loadMessages, 3000);
 
     const msgInput = document.getElementById("msgInput");
 
@@ -88,3 +89,38 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+function loadChatList(){
+
+    fetch(
+        `${SECONDIFY_BASE}/apps/controllers/user/loadChatList.php`
+    )
+    .then(res => res.json())
+    .then(data => {
+
+        const list = document.getElementById("chatList");
+
+        list.innerHTML = "";
+
+        data.forEach(user => {
+
+            list.innerHTML += `
+                <div class="chat-user"
+                    onclick="window.location='chat.php?id_produk=' + ID_PRODUK + '&id_penjual=' + user.id_user'">
+
+                    <div class="avatar">
+                        ${user.nama_user.charAt(0).toUpperCase()}
+                    </div>
+
+                    <div>
+                        <div class="name">
+                            ${user.nama_user}
+                        </div>
+                    </div>
+
+                </div>
+            `;
+        });
+
+    });
+
+}
