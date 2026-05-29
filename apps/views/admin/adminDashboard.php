@@ -211,57 +211,6 @@ $pageTitle = 'Dashboard Admin';
                 </div>
             </div>
         </div>
-        
-        <!-- RECENT ACTIVITY -->
-        <div class="card">
-            <div class="card-head">
-                <div><h3>Aktivitas Terkini</h3><p>Update sistem dalam 24 jam terakhir</p></div>
-                <button class="btn-action view" onclick="showToast('Melihat semua aktivitas...')">Lihat Semua</button>
-            </div>
-            <div class="activity-list">
-                <div class="activity-item">
-                    <div class="act-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div>
-                    <div class="act-info">
-                        <div class="act-title">Penjual baru diverifikasi — <strong>Toko Rizky</strong></div>
-                        <div class="act-sub">Diverifikasi oleh Admin · Bandar Lampung</div>
-                    </div>
-                    <div class="act-time">5 mnt lalu</div>
-                </div>
-                <div class="activity-item">
-                    <div class="act-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-                    <div class="act-info">
-                        <div class="act-title">Laporan baru masuk — <strong>Barang tidak sesuai deskripsi</strong></div>
-                        <div class="act-sub">Dilaporkan oleh: dinda.belanja</div>
-                    </div>
-                    <div class="act-time">32 mnt lalu</div>
-                </div>
-                <div class="activity-item">
-                    <div class="act-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-                    <div class="act-info">
-                        <div class="act-title">Pengguna baru daftar — <strong>maya.preloved</strong></div>
-                        <div class="act-sub">Email: maya@gmail.com · Rajabasa</div>
-                    </div>
-                    <div class="act-time">1 jam lalu</div>
-                </div>
-                <div class="activity-item">
-                    <div class="act-icon red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-                    <div class="act-info">
-                        <div class="act-title">Barang diturunkan — <strong>iPhone 13 Pro palsu</strong></div>
-                        <div class="act-sub">Konten melanggar kebijakan platform</div>
-                    </div>
-                    <div class="act-time">2 jam lalu</div>
-                </div>
-                <div class="activity-item">
-                    <div class="act-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
-                    <div class="act-info">
-                        <div class="act-title">Barang terjual — <strong>Sepatu Nike Air Max bekas</strong></div>
-                        <div class="act-sub">Toko Sepatu Keren → @andi.sneakers</div>
-                    </div>
-                    <div class="act-time">3 jam lalu</div>
-                </div>
-            </div>
-        </div>
-
     </section>
 </div>
 
