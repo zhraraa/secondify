@@ -1,11 +1,18 @@
-const SECONDIFY_BASE = `${window.location.origin}${window.location.pathname.split("/apps/")[0]}`;
+const SECONDIFY_BASE =
+`${window.location.origin}${window.location.pathname.split("/apps/")[0]}`;
 
+
+// =========================
+// KIRIM PESAN
+// =========================
 function sendMessage(){
 
     const input = document.getElementById("msgInput");
     const pesan = input.value.trim();
 
-    if(!pesan) return;
+    if(!pesan){
+        return;
+    }
 
     fetch(
         `${SECONDIFY_BASE}/apps/controllers/user/kirimPesan.php`,
@@ -23,20 +30,27 @@ function sendMessage(){
     .then(res => res.text())
     .then(data => {
 
+        console.log(data);
+
         if(data.trim() === "success"){
 
             input.value = "";
 
             loadMessages();
+            loadChatList();
+
         }
 
-    });
+    })
+    .catch(err => console.log(err));
 
 }
 
-function loadMessages(){
 
-    console.log("LOAD JALAN");
+// =========================
+// LOAD PESAN
+// =========================
+function loadMessages(){
 
     fetch(
         `${SECONDIFY_BASE}/apps/controllers/user/loadPesan.php?id_produk=${ID_PRODUK}&id_penjual=${ID_PENJUAL}`
@@ -60,6 +74,7 @@ function loadMessages(){
                     ${msg.isi_pesan}
                 </div>
             `;
+
         });
 
         box.scrollTop = box.scrollHeight;
@@ -69,16 +84,67 @@ function loadMessages(){
 
 }
 
+
+// =========================
+// LOAD LIST CHAT
+// =========================
+function loadChatList(){
+
+    fetch(
+        `${SECONDIFY_BASE}/apps/controllers/user/loadChatList.php`
+    )
+    .then(res => res.json())
+    .then(data => {
+
+        const chatList = document.getElementById("chatList");
+
+        chatList.innerHTML = "";
+
+        data.forEach(chat => {
+
+            chatList.innerHTML += `
+                <div class="chat-user"
+                    onclick="window.location.href='chat.php?id_produk=${chat.id_produk}&id_penjual=${chat.id_user}'">
+
+                    <div class="avatar">
+                        ${chat.nama_user.charAt(0).toUpperCase()}
+                    </div>
+
+                    <div>
+                        <div class="name">
+                            ${chat.nama_user}
+                        </div>
+                    </div>
+
+                </div>
+            `;
+
+        });
+
+    })
+    .catch(err => console.log(err));
+
+}
+
+
+// =========================
+// SAAT HALAMAN DIBUKA
+// =========================
 document.addEventListener("DOMContentLoaded", () => {
 
-    document.getElementById("chatTitle").innerText = "Chat Penjual";
+    console.log("ID_PRODUK =", ID_PRODUK);
+    console.log("ID_PENJUAL =", ID_PENJUAL);
+
+    document.getElementById("chatTitle").innerText =
+    "Chat Penjual";
 
     loadChatList();
     loadMessages();
 
     setInterval(loadMessages, 3000);
 
-    const msgInput = document.getElementById("msgInput");
+    const msgInput =
+    document.getElementById("msgInput");
 
     msgInput.addEventListener("keydown", function(e){
 
@@ -89,38 +155,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
-function loadChatList(){
-
-    fetch(
-        `${SECONDIFY_BASE}/apps/controllers/user/loadChatList.php`
-    )
-    .then(res => res.json())
-    .then(data => {
-
-        const list = document.getElementById("chatList");
-
-        list.innerHTML = "";
-
-        data.forEach(user => {
-
-            list.innerHTML += `
-                <div class="chat-user"
-                    onclick="window.location='chat.php?id_produk=' + ID_PRODUK + '&id_penjual=' + user.id_user'">
-
-                    <div class="avatar">
-                        ${user.nama_user.charAt(0).toUpperCase()}
-                    </div>
-
-                    <div>
-                        <div class="name">
-                            ${user.nama_user}
-                        </div>
-                    </div>
-
-                </div>
-            `;
-        });
-
-    });
-
-}

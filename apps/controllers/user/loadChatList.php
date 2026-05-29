@@ -8,6 +8,7 @@ $id_user = $_SESSION['id_user'];
 $query = $conn->prepare("
 SELECT DISTINCT
     u.id_user,
+    p.id_produk,
     COALESCE(u.nama_toko, u.nama_lengkap) AS nama_user
 FROM pesan p
 JOIN users u ON (
@@ -18,6 +19,7 @@ JOIN users u ON (
 ) = u.id_user
 WHERE p.id_pengirim = ?
 OR p.id_penerima = ?
+ORDER BY p.waktu_kirim DESC
 ");
 
 $query->bind_param(
