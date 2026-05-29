@@ -31,19 +31,7 @@ $pageTitle = 'Dashboard Admin';
             <div class="topbar-title">Dashboard Admin</div>
             <div class="topbar-breadcrumb">Admin / <span>Dashboard</span></div>
         </div>
-        <div class="topbar-right">
-            <button class="topbar-notif" onclick="showToast('Tidak ada notifikasi baru')">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                <div class="notif-dot"></div>
-            </button>
-            <div class="sidebar-user" style="padding:6px 10px;margin:0;">
-                <div class="sidebar-avatar" style="width:30px;height:30px;font-size:11px;">Y</div>
-                <div class="sidebar-user-info">
-                    <div class="sidebar-user-name">Yusuf</div>
-                    <div class="sidebar-user-role">Super Admin</div>
-                </div>
-            </div>
-        </div>
+
     </div>
 
     <!-- KONTEN -->
@@ -54,10 +42,7 @@ $pageTitle = 'Dashboard Admin';
                 <div class="section-title">Selamat datang, Yusuf 👋</div>
                 <div class="section-sub">Berikut ringkasan aktivitas Secondify hari ini.</div>
             </div>
-            <button class="btn-action primary" onclick="showToast('Laporan diunduh!')">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:14px;height:14px;display:inline;margin-right:6px;vertical-align:middle;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Unduh Laporan
-            </button>
+
         </div>
 
         <!-- STAT CARDS -->
