@@ -208,13 +208,38 @@ function renderProducts() {
 
     grid.innerHTML = pageProducts.map(p => cardHTML(p)).join("");
 
-    grid.querySelectorAll(".wishlist-btn").forEach(btn => {
-        btn.addEventListener("click", e => {
-            e.preventDefault();
-            e.stopPropagation();
-            btn.classList.toggle("active");
+   grid.querySelectorAll(".wishlist-btn").forEach(btn => {
+
+    btn.addEventListener("click", function(e){
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const idProduk = this.dataset.id;
+
+        fetch(`${SECONDIFY_BASE}/apps/controllers/user/toggleFavorit.php`,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/x-www-form-urlencoded"
+            },
+            body:`id_produk=${idProduk}`
+        })
+        .then(res => res.text())
+        .then(data => {
+
+            if(data === "added"){
+                this.classList.add("active");
+            }
+
+            if(data === "removed"){
+                this.classList.remove("active");
+            }
+
         });
+
     });
+
+});
 
     renderPagination(totalPages);
 }
@@ -330,8 +355,9 @@ function cardHTML(p) {
             <img src="${imageUrl(p.gambar)}" alt="${p.nama}" loading="lazy"
                 onerror="this.src='https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop'">
             <span class="card-badge ${badgeMap[p.kondisi]}">${badgeLabelMap[p.kondisi]}</span>
-            <button class="wishlist-btn" title="Simpan ke Wishlist">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <button class="wishlist-btn"
+            data-id="${p.id}"
+            title="Simpan ke Favorit">                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                 </svg>
             </button>

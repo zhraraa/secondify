@@ -1,5 +1,12 @@
 <?php
+session_start();
+
+require_once '../../../koneksi/koneksi.php';
 require_once '../../config/config.php';
+require_once '../../models/userModel.php';
+
+$id_user = $_SESSION['id_user'];
+$dataUser = getDataUSer($conn, $id_user);
 ?>
 
 <!DOCTYPE html>
