@@ -318,10 +318,11 @@ function bindEvents(product) {
         showToast("Laporan terkirim. Terima kasih! 🛡️");
     });
 
-    // Seller chat button
-    document.querySelector(".seller-chat-btn").addEventListener("click", () => {
-        showToast("Fitur chat segera hadir! 💬");
-    });
+    // Seller profile button
+    document.querySelector(".seller-chat-btn").addEventListener("click", event => {
+        event.stopImmediatePropagation();
+        window.location.href = `${SECONDIFY_BASE}/apps/controllers/user/profileController.php?id=${product.idUser}`;
+    }, true);
 
     fab.addEventListener("click", event => {
         event.stopImmediatePropagation();
@@ -329,11 +330,6 @@ function bindEvents(product) {
         fab.classList.toggle("active", added);
         showToast(added ? "Ditambahkan ke Favorit" : "Dihapus dari Favorit");
     }, true);
-
-    document.querySelector(".seller-chat-btn").addEventListener("click", event => {
-    event.stopImmediatePropagation();
-    window.location.href = chatUrl(product);
-    }, true);   
 
    document.getElementById("btnChat").addEventListener("click", event => {
     event.stopImmediatePropagation();
@@ -411,20 +407,42 @@ function bindReportModal(product) {
     });
 
     submitBtn.addEventListener("click", () => {
-        const reports = JSON.parse(localStorage.getItem("secondifyReports") || "[]");
-        reports.unshift({
-            id: `RPT-${Date.now()}`,
-            productId: product.id,
-            productName: product.nama,
-            seller: getSellerName(product),
-            reason: reason.value,
-            detail: detail.value.trim(),
-            createdAt: new Date().toISOString(),
+        const detailVal = detail.value.trim();
+        if (!detailVal) {
+            showToast("Harap isi detail laporan terlebih dahulu.");
+            return;
+        }
+
+        const alasanText = `${reason.value}: ${detailVal}`;
+        submitBtn.disabled = true;
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = "Mengirim...";
+
+        fetch(`${SECONDIFY_BASE}/apps/controllers/user/laporkanProduk.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `id_produk=${encodeURIComponent(product.id)}&alasan=${encodeURIComponent(alasanText)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+            if (data.status === "success") {
+                detail.value = "";
+                closeModal();
+                showToast("Laporan barang berhasil dikirim! 🛡️");
+            } else {
+                showToast(data.message || "Gagal mengirim laporan.");
+            }
+        })
+        .catch(error => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+            showToast("Terjadi kesalahan jaringan.");
+            console.error("Error submitting report:", error);
         });
-        localStorage.setItem("secondifyReports", JSON.stringify(reports));
-        detail.value = "";
-        closeModal();
-        showToast("Laporan barang berhasil dikirim");
     });
 }
 

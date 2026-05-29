@@ -132,7 +132,7 @@
                             <div class="seller-name"><?= htmlspecialchars($sellerName) ?></div>
                             <div class="seller-meta"><?= htmlspecialchars($product['nama_toko'] ? 'Toko Terverifikasi' : 'Penjual Secondify') ?></div>
                         </div>
-                        <a href="<?= $chatUrl ?>" class="seller-chat-btn">Chat Penjual</a>
+                        <a href="<?= SECONDIFY; ?>/apps/controllers/user/profileController.php?id=<?= $product['id_user'] ?>" class="seller-chat-btn">Profil Penjual</a>
                     </div>
                 </div>
 

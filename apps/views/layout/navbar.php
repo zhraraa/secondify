@@ -7,7 +7,13 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 require_once __DIR__ . '/../../../koneksi/koneksi.php';
+require_once __DIR__ . '/../../models/userModel.php';
 
+$loggedInUserId = $_SESSION['id_user'] ?? null;
+$navUser = null;
+if ($loggedInUserId) {
+    $navUser = getDataUSer($conn, $loggedInUserId);
+}
 ?>
 
 
@@ -46,32 +52,32 @@ require_once __DIR__ . '/../../../koneksi/koneksi.php';
         <div class="nav-divider"></div>
 
         <a href="<?= SECONDIFY ?>/apps/controllers/user/profileController.php" class="user" title="Profil">
-            <div class="avatar">
+            <div class="avatar" style="padding: 0; overflow: hidden; display: flex; align-items: center; justify-content: center;">
                 <?php 
-                    // Tampilkan inisial huruf pertama nama lengkap
-                    $inisial = "U";
-                    if (isset($row['nama_lengkap'])) {
-                        $inisial = strtoupper(substr($row['nama_lengkap'], 0, 1));
-                    } elseif (isset($_SESSION['nama_lengkap'])) {
-                        $inisial = strtoupper(substr($_SESSION['nama_lengkap'], 0, 1));
-                    }
-                    echo $inisial;
+                    $profilePict = $navUser['profile_pict'] ?? '';
+                    if (!empty($profilePict) && $profilePict !== 'default.png'): 
                 ?>
+                    <img src="<?= SECONDIFY; ?>/assets/images/<?= htmlspecialchars($profilePict) ?>" style="width: 100%; height: 100%; object-fit: cover;" alt="avatar">
+                <?php else: ?>
+                    <?php 
+                        $inisial = "U";
+                        if (!empty($navUser['nama_lengkap'])) {
+                            $inisial = strtoupper(substr($navUser['nama_lengkap'], 0, 1));
+                        }
+                        echo $inisial;
+                    ?>
+                <?php endif; ?>
             </div>
             <div class="user-info">
                 <span class="user-name">
-                    <?php if($dataUser['is_penjual'] == 1):?>
-                        <span class="user-name">
-                            <?= $dataUser['nama_toko'] ?>
-                        </span>
+                    <?php if(isset($navUser['is_penjual']) && $navUser['is_penjual'] == 1):?>
+                        <?= htmlspecialchars($navUser['nama_toko']) ?>
                     <?php else: ?>
-                        <span class="user-name">
-                            <?= $dataUser['nama_lengkap'] ?>
-                        </span>
+                        <?= htmlspecialchars($navUser['nama_lengkap'] ?? '') ?>
                     <?php endif; ?>
                 </span>
                 <?php 
-                if(isset($dataUser['is_penjual']) && $dataUser['is_penjual'] == 1){
+                if(isset($navUser['is_penjual']) && $navUser['is_penjual'] == 1){
                     echo "<span class=\"user-role\">Penjual</span>";
                 } else {
                     echo "<span class=\"user-role\">Member</span>";
