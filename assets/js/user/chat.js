@@ -97,19 +97,43 @@ function renderMessages() {
     box.scrollTop = box.scrollHeight;
 }
 
-function sendMessage() {
+function sendMessage(){
+
     const input = document.getElementById("msgInput");
-    const message = input.value.trim();
-    if (!message || !activeSeller) return;
+    const pesan = input.value.trim();
 
-    const chats = getChats();
-    chats[activeSeller] = chats[activeSeller] || defaultMessages();
-    chats[activeSeller].push({ from: "buyer", text: message });
-    saveChats(chats);
+    if(!pesan) return;
 
-    input.value = "";
-    renderChatList();
-    renderMessages();
+    fetch(
+        `${SECONDIFY_BASE}/apps/controllers/user/kirimPesan.php`,
+        {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/x-www-form-urlencoded"
+            },
+            body:
+                `id_produk=${ID_PRODUK}` +
+                `&id_penerima=${ID_PENJUAL}` +
+                `&pesan=${encodeURIComponent(pesan)}`
+        }
+    )
+    .then(res => res.text())
+    .then(data => {
+
+        if(data === "success"){
+
+            document.getElementById("messages").innerHTML += `
+                <div class="msg sender">${pesan}</div>
+            `;
+
+            input.value = "";
+
+            const box = document.getElementById("messages");
+            box.scrollTop = box.scrollHeight;
+        }
+
+    });
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -137,3 +161,34 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+function loadMessages(){
+
+    fetch(
+        `${SECONDIFY_BASE}/apps/controllers/user/loadPesan.php?id_produk=${ID_PRODUK}&id_penjual=${ID_PENJUAL}`
+    )
+    .then(res => res.json())
+    .then(data => {
+
+        const box = document.getElementById("messages");
+
+        box.innerHTML = "";
+
+        data.forEach(msg => {
+
+            const cls =
+                msg.id_pengirim == ID_PENJUAL
+                ? "receiver"
+                : "sender";
+
+            box.innerHTML += `
+                <div class="msg ${cls}">
+                    ${msg.isi_pesan}
+                </div>
+            `;
+        });
+
+        box.scrollTop = box.scrollHeight;
+
+    });
+
+}
