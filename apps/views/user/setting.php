@@ -68,7 +68,7 @@
                 <div class="content-area">
                     <!-- Informasi Profil -->
                     <div class="card">
-                        <form action="" method="POST">
+                        <form action="" method="POST" enctype="multipart/form-data" id="formUbahFoto">
                         <h2 class="card-title">Informasi Profil</h2>
 
                         <div class="avatar-row">
@@ -81,7 +81,6 @@
                                 <?php endif; ?>
                             </div>
                             <div class="avatar-info">
-                                <form action="" method="POST" enctype="multipart/form-data" id="formUbahFoto">
                                     <input type="file" name="foto_profil" id="inputFoto" 
                                         accept="image/png,image/jpeg" style="display:none">
                                     <button type="button" class="btn-ubah-foto" id="btnUbahFoto">
@@ -93,7 +92,6 @@
                                     </button>
                                     <button type="submit" name="ubah_foto" id="btnSimpanFoto" 
                                             style="display:none" class="btn-ubah-foto">Simpan Foto</button>
-                                </form>
                                 <p class="avatar-hint">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="12" height="12">
                                         <circle cx="12" cy="12" r="10"/>
@@ -295,28 +293,13 @@
                     <div class="card">
                         <h2 class="card-title">Pertanyaan Umum (FAQ)</h2>
                         <div class="faq-list">
+                        <?php while($faq = mysqli_fetch_assoc($dataFaq)) : ?>
                             <details class="faq-item">
-                                <summary>Bagaimana cara menjual barang di Secondify?</summary>
-                                <p>Klik tombol "Jual Barang" di dashboard, isi detail produk seperti nama, harga, kondisi, dan foto. Setelah diverifikasi, barangmu akan tampil di marketplace.</p>
+                                <summary><?= $faq['pertanyaan']; ?></summary>
+                                <p><?= $faq['jawaban']; ?></p>
                             </details>
-                            <details class="faq-item">
-                                <summary>Metode pembayaran apa yang tersedia?</summary>
-                                <p>Secondify mendukung transfer bank, dompet digital (GoPay, OVO, DANA), dan pembayaran tunai untuk transaksi tatap muka di Bandar Lampung.</p>
-                            </details>
-                            <details class="faq-item">
-                                <summary>Bagaimana jika barang yang diterima tidak sesuai?</summary>
-                                <p>Laporkan dalam 1×24 jam setelah barang diterima melalui menu "Laporkan Masalah" di halaman transaksi. Tim kami akan memediasi.</p>
-                            </details>
-                            <details class="faq-item">
-                                <summary>Apakah ada biaya untuk berjualan di Secondify?</summary>
-                                <p>Daftar dan pasang iklan gratis! Secondify mengambil komisi kecil hanya setelah transaksi berhasil dilakukan.</p>
-                            </details>
-                            <details class="faq-item">
-                                <summary>Bagaimana cara meningkatkan rating penjual?</summary>
-                                <p>Respons pembeli dengan cepat, kirim barang sesuai deskripsi, dan pastikan kondisi barang sesuai yang dijanjikan untuk mendapatkan ulasan positif.</p>
-                            </details>
+                        <?php endwhile; ?>
                         </div>
-                    </div>
                     <form method="POST">
                     <div class="card mt-16">
                         <h2 class="card-title">Kirim Pesan ke Tim Kami</h2>

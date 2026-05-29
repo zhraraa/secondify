@@ -56,6 +56,35 @@ $dataUser = getDataUSer($conn,$id_user);
 
 </div>
 
+<script>
+const ID_PRODUK = <?= (int)$id_produk ?>;
+const ID_PENJUAL = <?= (int)$id_penjual ?>;
+
+console.log("ID_PRODUK =", ID_PRODUK);
+console.log("ID_PENJUAL =", ID_PENJUAL);
+</script>
+
 <script src="<?= SECONDIFY; ?>/assets/js/user/chat.js?v=20260519-1"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

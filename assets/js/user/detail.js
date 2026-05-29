@@ -3,10 +3,8 @@ const SECONDIFY_BASE = `${window.location.origin}${window.location.pathname.spli
 const IMAGE_VERSION = "20260511-2";
 const detailUrl = (product) => `${SECONDIFY_BASE}/apps/controllers/user/detailController.php?id=${encodeURIComponent(product.id)}`;
 const kategoriUrl = (params = "") => `${SECONDIFY_BASE}/apps/controllers/user/kategoriController.php${params}`;
-const chatUrl = (sellerName, message = "") => {
-    const params = new URLSearchParams({ seller: sellerName });
-    if (message) params.set("message", message);
-    return `${SECONDIFY_BASE}/apps/views/user/chat.php?${params.toString()}`;
+const chatUrl = (product) => {
+    return `${SECONDIFY_BASE}/apps/views/user/chat.php?id_produk=${product.id}&id_penjual=${product.idUser}`;
 };
 const imageUrl = (src) => {
     if (!src || src.startsWith("http") || src.startsWith("/")) return src;
@@ -332,15 +330,15 @@ function bindEvents(product) {
         showToast(added ? "Ditambahkan ke Favorit" : "Dihapus dari Favorit");
     }, true);
 
-    document.getElementById("btnChat").addEventListener("click", event => {
-        event.stopImmediatePropagation();
-        window.location.href = chatUrl(getSellerName(product), "Pembeli mengajukan COD");
-    }, true);
-
     document.querySelector(".seller-chat-btn").addEventListener("click", event => {
-        event.stopImmediatePropagation();
-        window.location.href = chatUrl(getSellerName(product));
-    }, true);
+    event.stopImmediatePropagation();
+    window.location.href = chatUrl(product);
+    }, true);   
+
+   document.getElementById("btnChat").addEventListener("click", event => {
+    event.stopImmediatePropagation();
+    window.location.href = chatUrl(product);
+}, true);
 
     bindReportModal(product);
 }

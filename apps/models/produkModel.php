@@ -52,7 +52,7 @@ function hapusProduk($conn, $id_produk){
     return $hapus;
 }
 
-function getAllProdukMarketplace($conn, $sort = 'terbaru', $limit = null, $search = null){
+function getAllProdukMarketplace($conn, $sort = 'terbaru', $limit = null, $search = null, $kategoriId = null){
     $allowedSort = [
         'terbaru' => 'produk.tgl_dibuat DESC, produk.id_produk DESC',
         'termurah' => 'produk.harga ASC, produk.tgl_dibuat DESC',
@@ -89,6 +89,12 @@ function getAllProdukMarketplace($conn, $sort = 'terbaru', $limit = null, $searc
         $sql .= " WHERE produk.nama_barang LIKE ? OR produk.deskripsi LIKE ? OR kategori.nama_kategori LIKE ? OR users.nama_lengkap LIKE ? OR users.username LIKE ? OR users.nama_toko LIKE ?";
         $types .= 'ssssss';
         $params = [$searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm];
+    }
+
+    if ($kategoriId !== null && is_numeric($kategoriId)) {
+        $sql .= ($search !== null && trim($search) !== '') ? " AND produk.id_kategori = ?" : " WHERE produk.id_kategori = ?";
+        $types .= 'i';
+        $params[] = $kategoriId;
     }
 
     $sql .= " ORDER BY {$orderBy}";
