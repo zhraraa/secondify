@@ -14,6 +14,9 @@ $dataProdukMarketplace = formatProdukUntukJs(getAllProdukMarketplace($conn));
 $dataProdukDetail = $id_produk > 0 ? getProdukMarketplaceById($conn, $id_produk) : null;
 
 $product = $dataProdukDetail;
+if ($product) {
+    $product['nama'] = $product['nama_barang'] ?? '';
+}
 $notFound = $product === null;
 $fotoProduk = $product ? resolveFotoProdukPath($product['foto_barang'] ?? '') : 'produk/produk.png';
 $kategoriSlug = $product ? slugKategori($product['nama_kategori']) : 'semua';
