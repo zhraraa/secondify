@@ -2,6 +2,8 @@
 /** @var array $dataUser */
 /** @var array $dataProduk */
 /** @var array $totalProduk */
+/** @var array $is_own_profile */
+/** @var array $daftarUlasan */
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +31,7 @@
                     <div class="isiProfile">
                         <?php 
                         $profile = $dataUser['profile_pict'];
+                        
                         if($profile == NULL || $profile == ""){
                             $tampilkanProfile = "default.png";
                         } else {
@@ -36,6 +39,7 @@
                         }
                         ?>
                         <img src="<?= SECONDIFY; ?>/assets/images/<?= $tampilkanProfile ?>" alt="" class="profilePic">
+                        <?php if($is_own_profile): ?>
                         <div class="buttonArea">
                             <a href="<?= SECONDIFY ?>/apps/controllers/user/daftarPenjualController.php" class="btnToko">
                                 <div  class="profile-button">
@@ -50,6 +54,7 @@
                                 </div>
                             </a>
                         </div>
+                        <?php endif; ?>
                         <div class="dataProfile">
                             <div class="usn">
                                 <?php if($dataUser['is_penjual'] == 1):?>
@@ -73,7 +78,7 @@
                                     <?=$dataUser['lokasi'] . ", Bandar Lampung"?>
                                 </p>
                             </div>
-
+                            <p><?= $dataUser['bio'] ?></p>
 
                         </div>
                     </div>
@@ -113,32 +118,32 @@
                 </div>
                 <!-- ULASAN YA--------------------^^ -->
                 <div class="hidden" id="wadahUlasan">
+                    <?php foreach($daftarUlasan as $ulasan): ?>
                     <div class="cardUlasan">
                         <div class="rowUlasan">
                             <img src="<?= SECONDIFY; ?>/assets/images/profile.jpg" alt="" class="ppUlasan">
                             <div class="namaUlasan">
-                                <span>Rara</span>
-                                <span>12 April 2026</span>
+                                <span><?= $ulasan['nama_pembeli'] ?></span>
+                                <span><?= $ulasan['tgl_ulasan'] ?></span>
                             </div>
                         </div>
                         <div class="bintang">
+                            <?php for ($i = 1; $i <= $ulasan['rating']; $i++):  ?>
                             <i data-lucide="star" class="icon" style="fill: #886BC6; stroke-width: 0; width: 18px;"></i>
-                            <i data-lucide="star" class="icon" style="fill: #886BC6; stroke-width: 0; width: 18px;"></i>
-                            <i data-lucide="star" class="icon" style="fill: #886BC6; stroke-width: 0; width: 18px;"></i>
-                            <i data-lucide="star" class="icon" style="fill: #886BC6; stroke-width: 0; width: 18px;"></i>
-                            <i data-lucide="star" class="icon" style="fill: #886BC6; stroke-width: 0; width: 18px;"></i>
+                            <?php endfor; ?>
                         </div>
                         <div class="produkUlasan">
                             <span>Produk dibeli:</span>
                             <div class="rowProduk">
-                            <img src="<?= SECONDIFY; ?>/assets/images/produk/produk.png" alt="">
-                                <span>Vaseline Gluta-Hya</span>
+                            <img src="<?= SECONDIFY; ?>/assets/images/produk/<?= $ulasan['foto_barang'] ?>" alt="">
+                                <span><?= $ulasan['nama_barang'] ?></span>
                             </div>
                         </div>
                         <span class="teksUlasan">
-                            Bagusss, penjualnya ramahh banget + dapet freebies, thank uu kakk
+                            <?= $ulasan['komentar'] ?>
                         </span>
                     </div>
+                    <?php endforeach; ?>
                     <div class="cardUlasan">
                         <div class="rowUlasan">
                             <img src="<?= SECONDIFY; ?>/assets/images/produk/produk.png" alt="" class="ppUlasan">

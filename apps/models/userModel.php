@@ -9,6 +9,16 @@ function getDataUSer($conn, $id_user){
     return $dataUser;
 };
 
+function getIdUserByUsername($conn, $username) {
+    $query = $conn->prepare("SELECT id_user FROM users WHERE username = ?");
+    $query->bind_param("s", $username);
+    $query->execute();
+    $result = $query->get_result();
+    
+    if ($row = $result->fetch_assoc()) {
+        return $row['id_user'];
+    }
+}
 
 function getDataUserbyEmail($conn, $email){
     $query = $conn -> prepare("SELECT id_user, password, role, nama_lengkap FROM users WHERE email = ?");
