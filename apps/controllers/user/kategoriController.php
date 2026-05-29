@@ -18,15 +18,17 @@ if ($currentKategori !== 'semua' && !in_array($currentKategori, $validKategoriSl
     $currentKategori = 'semua';
 }
 
+$currentKategoriId = null;
 $currentKategoriName = 'Semua';
 foreach ($dataKategori as $kategori) {
     if (slugKategori($kategori['nama_kategori']) === $currentKategori) {
         $currentKategoriName = $kategori['nama_kategori'];
+        $currentKategoriId = $kategori['id_kategori'];
         break;
     }
 }
 
-$dataProdukMarketplace = formatProdukUntukJs(getAllProdukMarketplace($conn, 'terbaru', null, $searchQuery));
+$dataProdukMarketplace = formatProdukUntukJs(getAllProdukMarketplace($conn, 'terbaru', null, $searchQuery, $currentKategoriId));
 
 require_once '../../views/user/kategori.php';
 ?>

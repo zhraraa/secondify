@@ -83,4 +83,16 @@ function updateFotoProfil($conn, $id_user, $nama_file) {
     return $query->execute();
 }
 
+function getAllFaq($conn)
+{
+    $query = mysqli_query($conn, "
+        SELECT *
+        FROM faq
+        WHERE is_active = 1
+        ORDER BY urutan ASC
+    ");
+
+    return $query;
+}
+
 ?>

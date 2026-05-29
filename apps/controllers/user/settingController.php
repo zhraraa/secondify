@@ -5,6 +5,7 @@ require_once '../../config/config.php';
 require_once '../../models/userModel.php';
 
 $id_user = $_SESSION['id_user'];
+$dataFaq = getAllFaq($conn);
 
 if (isset($_POST['ubah_foto'])) {
     $file = $_FILES['foto_profil'];
