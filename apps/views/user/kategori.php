@@ -26,7 +26,7 @@ $currentKategori = $currentKategori ?? 'semua';
 <body>
 
     <!-- NAVBAR -->
-    <?php include __DIR__ . '/../layout/navbar.php'; ?>
+    <?php include __DIR__ . '/../../controllers/layout/navbarController.php'; ?>
 
 
     <?php $categoryTitle = htmlspecialchars($currentKategoriName ?? 'Semua'); ?>

@@ -17,7 +17,7 @@
 <body>
 
     <!-- NAVBAR -->
-    <?php include __DIR__ . '/../layout/navbar.php'; ?>
+    <?php include __DIR__ . '/../../controllers/layout/navbarController.php'; ?>
 
 
     <!-- HERO -->
@@ -54,7 +54,7 @@
                     </div>
                     
                     <div class="card-action">
-                        <a href="<?= SECONDIFY ?>/apps/controllers/user/formUlasanController.php?id_review=<?= $tagihan['id_review'] ?>" class="btn-ulasan">
+                        <a href="<?= SECONDIFY ?>/apps/controllers/user/ulasanController.php?id_review=<?= $tagihan['id_review'] ?>" class="btn-ulasan">
                             Beri Ulasan ⭐
                         </a>
                     </div>

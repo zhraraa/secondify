@@ -105,3 +105,5 @@ if (isset($conn)) {
         </a>
     </div>
 </aside>
+<script>const SECONDIFY = "<?= SECONDIFY; ?>" </script>
+<script src="<?= SECONDIFY; ?>/assets/js/auto-logout.js"></script>

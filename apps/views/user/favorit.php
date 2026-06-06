@@ -24,7 +24,7 @@ $dataUser = getDataUSer($conn, $id_user);
 <body>
 
 <!-- NAVBAR -->
-<?php include __DIR__ . '/../layout/navbar.php'; ?>
+<?php include __DIR__ . '/../../controllers/layout/navbarController.php'; ?>
 
 <div class="container">
     <h2>Barang Favorit ❤️</h2>

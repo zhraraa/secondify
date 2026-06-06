@@ -20,7 +20,7 @@
 </head>
 <body>
     <!-- NAVBAR -->
-    <?php include __DIR__ . '/../layout/navbar.php'; ?>
+    <?php include __DIR__ . '/../../controllers/layout/navbarController.php'; ?>
 
     <section>
         <div class="main">
@@ -144,32 +144,6 @@
                         </span>
                     </div>
                     <?php endforeach; ?>
-                    <div class="cardUlasan">
-                        <div class="rowUlasan">
-                            <img src="<?= SECONDIFY; ?>/assets/images/produk/produk.png" alt="" class="ppUlasan">
-                            <div class="namaUlasan">
-                                <span>Rara</span>
-                                <span>12 April 2026</span>
-                            </div>
-                        </div>
-                        <div class="bintang">
-                            <i data-lucide="star" class="icon" style="fill: #886BC6; stroke-width: 0; width: 18px;"></i>
-                            <i data-lucide="star" class="icon" style="fill: #886BC6; stroke-width: 0; width: 18px;"></i>
-                            <i data-lucide="star" class="icon" style="fill: #886BC6; stroke-width: 0; width: 18px;"></i>
-                            <i data-lucide="star" class="icon" style="fill: #886BC6; stroke-width: 0; width: 18px;"></i>
-                            <i data-lucide="star" class="icon" style="fill: #886BC6; stroke-width: 0; width: 18px;"></i>
-                        </div>
-                        <div class="produkUlasan">
-                            <span>Produk dibeli:</span>
-                            <div class="rowProduk">
-                                <img src="<?= SECONDIFY; ?>/assets/images/produk/produk.png" alt="">
-                                <span>Vaseline Gluta-Hya</span>
-                            </div>
-                        </div>
-                        <span class="teksUlasan">
-                            Bagusss, penjualnya ramahh banget + dapet freebies, thank uu kakk
-                        </span>
-                    </div>
                 </div>
 
             </div>

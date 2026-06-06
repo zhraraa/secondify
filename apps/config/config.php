@@ -1,5 +1,5 @@
 <?php
-$lifetime = 3600;
+$lifetime = 86400; //set waktu keseluruhan server bertahan hanya 24 jam saat buka halaman maupun tidak
 
 if (session_status() === PHP_SESSION_NONE) {
     session_set_cookie_params($lifetime);

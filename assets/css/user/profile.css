@@ -277,6 +277,9 @@ p{
 .profile-namaBarang{
     text-align: left;
     width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .detailBarang .harga{

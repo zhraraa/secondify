@@ -372,5 +372,7 @@
 </div>
 
 <script src="<?= SECONDIFY; ?>/assets/js/user/setting.js?v=20260518-3"></script>
+<script>const SECONDIFY = "<?= SECONDIFY; ?>" </script>
+<script src="<?= SECONDIFY; ?>/assets/js/auto-logout.js"></script>
 </body>
 </html>

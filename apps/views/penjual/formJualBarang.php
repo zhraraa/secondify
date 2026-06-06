@@ -17,14 +17,14 @@ require_once '../../config/config.php';
 </head>
 <body>
     <!-- NAVBAR -->
-    <?php include __DIR__ . '/../layout/navbar.php'; ?>
+    <?php include __DIR__ . '/../../controllers/layout/navbarController.php'; ?>
 
     <section>
         <div class="bungkus">
-            <div class="tombol-kembali">
+            <a class="tombol-kembali" href="<?= SECONDIFY; ?>/apps/controllers/penjual/kelolaBarang.php">
                 <i data-lucide="arrow-left" class="icon"></i>
-                <span class="text">Kembali ke Profil</span>
-            </div>
+                <span class="text">Kembali</span>
+            </a>
             <div class="cardForm">
                 <div class="judulCard">
                     <h2>Tambah Barang Baru</h2>

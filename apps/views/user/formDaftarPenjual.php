@@ -14,7 +14,7 @@
     <script src="<?= SECONDIFY; ?>/assets/js/layouts/navbar.js" defer></script>
 </head>
 <body>
-    <?php include __DIR__ . '/../layout/navbar.php'; ?>
+    <?php include __DIR__ . '/../../controllers/layout/navbarController.php'; ?>
 
     <section>
         <div class="content">
@@ -66,7 +66,7 @@
                 <?php else: ?>
                     <form action="<?= SECONDIFY ?>/apps/controllers/user/daftarPenjualController.php" method="POST" enctype="multipart/form-data">
                         <div class="input-group">
-                            <label>Nama Toko</label>
+                            <label>Nama Toko (Max 30 karakter)</label>
                             <input type="text" placeholder="Contoh: Toko Ara" name="nama_toko" maxlength="30" minlength="5" required>
                         </div>
 

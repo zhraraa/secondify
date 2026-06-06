@@ -36,19 +36,17 @@ if ($loggedInUserId) {
             </svg>
         </a>
 
-        <!-- Notification -->
-        <a href="<?= SECONDIFY ?>/apps/views/user/chat.php" class="nav-icon-btn" title="Notifikasi" style="text-decoration: none; color: inherit;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-            </svg>
-        </a>
-
         <!-- Chat -->
         <a href="<?= SECONDIFY ?>/apps/views/user/chat.php" class="msgButton" style="text-decoration: none; color: inherit;">
             <i data-lucide="message-square" class="chatIcon"></i>    
         </a>
 
+        <?php if ($penjual): ?>
+        <a href="<?= SECONDIFY ?>/apps/controllers/penjual/jualBarangController.php" class="navbar-btnTambah">
+                <i data-lucide="plus" class="icon"></i>
+                Tambah Barang
+        </a>
+        <?php endif; ?>
         <div class="nav-divider"></div>
 
         <a href="<?= SECONDIFY ?>/apps/controllers/user/profileController.php" class="user" title="Profil">
@@ -98,3 +96,6 @@ if ($loggedInUserId) {
 
     <script src="https://unpkg.com/lucide@latest"></script>
 </nav>
+
+<script>const SECONDIFY = "<?= SECONDIFY; ?>" </script>
+<script src="<?= SECONDIFY; ?>/assets/js/auto-logout.js"></script>

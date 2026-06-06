@@ -26,13 +26,13 @@
 
 <body>
     <!-- NAVBAR -->
-    <?php include __DIR__ . '/../layout/navbar.php'; ?>
+    <?php include __DIR__ . '/../../controllers/layout/navbarController.php'; ?>
 
     <section>
         <div class="header">
             <div class="title">
                 <span>Barang Saya</span>
-                <span>Kelola daftar barang dagang saya</span>
+                <span>Kelola daftar barang yang dijual</span>
             </div>
 
             <a href="<?= SECONDIFY ?>/apps/controllers/penjual/jualBarangController.php" class="btn-tambah">
