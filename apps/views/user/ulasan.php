@@ -13,11 +13,11 @@ require_once '../../config/config.php';
 <title>Ulasan — Secondify</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/user/ulasan.css">
+<link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
 <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/layouts/navbar.css">
 <script src="<?= SECONDIFY; ?>/assets/js/layouts/navbar.js" defer></script>
 
-<body>
+<body class="ulasanPage">
 
 <!-- NAVBAR -->
 <?php include __DIR__ . '/../../controllers/layout/navbarController.php'; ?>

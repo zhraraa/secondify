@@ -42,9 +42,8 @@ if ($loggedInUserId) {
         </a>
 
         <?php if ($penjual): ?>
-        <a href="<?= SECONDIFY ?>/apps/controllers/penjual/jualBarangController.php" class="navbar-btnTambah">
-                <i data-lucide="plus" class="icon"></i>
-                Tambah Barang
+        <a href="<?= SECONDIFY ?>/apps/controllers/penjual/kelolaBarang.php" class="navbar-btnTambah">
+                Kelola Barang
         </a>
         <?php endif; ?>
         <div class="nav-divider"></div>

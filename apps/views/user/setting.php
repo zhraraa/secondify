@@ -8,9 +8,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Setting — Secondify</title>
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/user/setting.css">
 </head>
-<body>
+<body class="settingPage">
 
 <div class="layout">
 

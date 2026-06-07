@@ -26,10 +26,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?></title>
-    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/user/detail.css?v=20260528-4">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/layouts/navbar.css">
     <script src="<?= SECONDIFY; ?>/assets/js/layouts/navbar.js?v=20260529-1" defer></script>
-<body>
+<body class="detailProduk">
 
     <!-- NAVBAR -->
     <?php include __DIR__ . '/../../controllers/layout/navbarController.php'; ?>

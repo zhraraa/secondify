@@ -12,13 +12,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile - Secondify</title>
-    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/user/profile.css">
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/layouts/navbar.css">
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="<?= SECONDIFY; ?>/assets/js/layouts/navbar.js" defer></script>
 </head>
-<body>
+<body class="profilPage">
     <!-- NAVBAR -->
     <?php include __DIR__ . '/../../controllers/layout/navbarController.php'; ?>
 

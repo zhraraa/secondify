@@ -9,13 +9,12 @@ require_once '../../config/config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secondify - Jual Barang</title>
-    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/penjual/formJualBarang.css">
-    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/layouts/navbar.css">
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/layouts/navbar.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="<?= SECONDIFY; ?>/assets/js/layouts/navbar.js" defer></script>
 </head>
-<body>
+<body class="jualBarang">
     <!-- NAVBAR -->
     <?php include __DIR__ . '/../../controllers/layout/navbarController.php'; ?>
 
