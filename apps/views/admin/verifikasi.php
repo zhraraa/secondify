@@ -1,10 +1,8 @@
 <?php
 require_once '../../config/config.php';
-// Panggil file controller barunya di sini, bre
 require_once '../../controllers/admin/SellerVerificationController.php';
 
-// Ambil array data matang dari controller
-$verifData = getVerificationData();
+
 ?>
 
 <!DOCTYPE html>

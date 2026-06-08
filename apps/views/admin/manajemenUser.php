@@ -2,9 +2,6 @@
 require_once '../../config/config.php';
 // Panggil controller user
 require_once '../../controllers/admin/UserController.php';
-
-$allUsers = getAllUsersData();
-$totalTampil = count($allUsers);
 ?>
 
 <!DOCTYPE html>

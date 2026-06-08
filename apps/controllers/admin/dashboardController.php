@@ -3,6 +3,10 @@
 
 require_once '../../../koneksi/koneksi.php';
 
+$pageTitle = 'Dashboard Admin';
+$stats = getDashboardStats($conn); 
+$pageTitle = 'Dashboard Admin';
+
 function getDashboardStats() {
     global $conn; 
 

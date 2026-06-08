@@ -3,13 +3,6 @@ session_start();
 require_once '../../config/config.php';
 require_once '../../controllers/admin/moderasiController.php';
 
-$laporanMasuk      = getLaporanByStatus('menunggu');
-$laporanSelesai    = getLaporanByStatus('selesai');
-$totalLaporanAktif = count($laporanMasuk);
-
-// Ambil flash message dari session (hasil redirect controller)
-$flashMsg = $_SESSION['flash'] ?? '';
-unset($_SESSION['flash']);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -44,7 +37,7 @@ unset($_SESSION['flash']);
                 <div class="section-title">Moderasi & Laporan</div>
                 <div class="section-sub">Tinjau barang yang dilaporkan dan kelola konten platform</div>
             </div>
-            <span class="badge red" style="font-size:13px;padding:6px 14px;"><?= $totalLaporanAktif; ?> Laporan Aktif</span>
+            <!-- <span class="badge red" style="font-size:13px;padding:6px 14px;"><?= $totalLaporanAktif; ?> Laporan Aktif</span> -->
         </div>
 
         <div class="tab-nav" id="mod-tabs">
