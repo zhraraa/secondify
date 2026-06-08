@@ -39,10 +39,7 @@ if (searchInput) {
         if (e.key === "Enter") {
             const query = e.target.value.trim();
             if (query) {
-                const targetUrl = new URL(dashboardUrl());
-                targetUrl.searchParams.set('q', query);
-                targetUrl.searchParams.set('sort', currentSort);
-                window.location.href = targetUrl.toString();
+                window.location.href = kategoriUrl(`?kat=semua&q=${encodeURIComponent(query)}`);
             }
         }
     });

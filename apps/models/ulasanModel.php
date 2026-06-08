@@ -29,6 +29,23 @@ function buatKerangkaUlasan($conn, $id_penjual, $id_pembeli, $id_produk) {
     return $eksekusi;
 }
 
+function getDataUlasanbyId($conn, $id_ulasan){
+    $query = $conn->prepare("SELECT 
+                                r.*, 
+                                p.nama_barang, 
+                                p.foto_barang,
+                                u.nama_toko 
+                            FROM reviews r 
+                            JOIN produk p ON r.id_produk = p.id_produk 
+                            JOIN users u ON r.id_penjual = u.id_user 
+                            WHERE r.id_review = ?");
+    $query->bind_param("i", $id_ulasan);
+    $query->execute();
+    $result = $query->get_result();
+    $daftarUlasan = $result->fetch_all(MYSQLI_ASSOC);
+    return $daftarUlasan;
+}
+
 function getUlasanKosong($conn, $id_pembeli) {
     $query = $conn->prepare("SELECT 
                                 r.id_review, 
@@ -49,4 +66,11 @@ function getUlasanKosong($conn, $id_pembeli) {
     $result = $query->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
 }
+
+function kirimUlasan($conn, $id_review, $rating, $komentar){
+    $query = $conn->prepare("UPDATE reviews SET rating = ?, komentar = ?, tgl_ulasan = NOW() WHERE id_review = ?");
+    $query->bind_param("isi", $rating, $komentar, $id_review);
+    return $query->execute();
+}
+
 ?>

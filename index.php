@@ -27,11 +27,10 @@ if (isset($_SESSION['status']) && $_SESSION['status'] === 'login') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secondify - Login</title>
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
-    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/login.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
-<body>
+<body class="loginPage">
     <div>
         <div class="card">
             <div class="left-area">

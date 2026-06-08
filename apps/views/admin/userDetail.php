@@ -9,7 +9,7 @@ require_once '../../controllers/admin/userDetailController'
 <head>
     <meta charset="UTF-8">
     <title>Detail User - <?= $user['nama_lengkap']; ?></title>
-    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/admin/adminDashboard.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
     <style>
         .detail-card { background: #fff; padding: 30px; border-radius: 12px; max-width: 600px; margin: 50px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .detail-item { margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
@@ -18,7 +18,7 @@ require_once '../../controllers/admin/userDetailController'
         .btn-back { display: inline-block; padding: 10px 20px; background: #6c757d; color: #fff; text-decoration: none; border-radius: 8px; margin-top: 20px; }
     </style>
 </head>
-<body>
+<body class="adminPage">
     <div class="detail-card">
         <h2>Detail Informasi Pengguna</h2>
         <hr>

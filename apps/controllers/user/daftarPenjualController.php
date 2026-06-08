@@ -5,7 +5,6 @@ require_once '../../config/config.php';
 require_once '../../models/sellerApplicationModel.php';
 
 $id_user = $_SESSION['id_user'];
-// Menangkap pesan dari URL jika ada (setelah proses redirect)
 $pesan = $_GET['pesan'] ?? "";
 
 $dataPengajuanPenjual = getPengajuanPenjual($conn, $id_user);
@@ -20,7 +19,7 @@ if(isset($_POST['kirim_pengajuan'])){
     $nama_toko = trim($_POST['nama_toko']);
     $catatan_tambahan = trim($_POST['catatan_tambahan']);
 
-    // Ambil info file
+    // ambil info file
     $foto_name = $_FILES['foto_ktp']['name'];
     $foto_tmp  = $_FILES['foto_ktp']['tmp_name'];
     $foto_size = $_FILES['foto_ktp']['size'];

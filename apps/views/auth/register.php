@@ -10,7 +10,6 @@ require_once '../../config/config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar — Secondify</title>
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
-    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/auth/register.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 

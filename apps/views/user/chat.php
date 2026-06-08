@@ -23,14 +23,14 @@ $dataUser = getDataUSer($conn,$id_user);
 <title>Chat — Secondify</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/user/chat.css">
+<link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
 <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/layouts/navbar.css">
 <script src="<?= SECONDIFY; ?>/assets/js/layouts/navbar.js" defer></script>
 
-<body>
+<body class="chatPage">
 
 <!-- NAVBAR -->
-<?php include __DIR__ . '/../layout/navbar.php'; ?>
+<?php include __DIR__ . '/../../controllers/layout/navbarController.php'; ?>
 
 <div class="chat-container">
 

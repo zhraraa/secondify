@@ -9,22 +9,21 @@ require_once '../../config/config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secondify - Jual Barang</title>
-    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/penjual/formJualBarang.css">
-    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/layouts/navbar.css">
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/layouts/navbar.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="<?= SECONDIFY; ?>/assets/js/layouts/navbar.js" defer></script>
 </head>
-<body>
+<body class="jualBarang">
     <!-- NAVBAR -->
-    <?php include __DIR__ . '/../layout/navbar.php'; ?>
+    <?php include __DIR__ . '/../../controllers/layout/navbarController.php'; ?>
 
     <section>
         <div class="bungkus">
-            <div class="tombol-kembali">
+            <a class="tombol-kembali" href="<?= SECONDIFY; ?>/apps/controllers/penjual/kelolaBarang.php">
                 <i data-lucide="arrow-left" class="icon"></i>
-                <span class="text">Kembali ke Profil</span>
-            </div>
+                <span class="text">Kembali</span>
+            </a>
             <div class="cardForm">
                 <div class="judulCard">
                     <h2>Tambah Barang Baru</h2>

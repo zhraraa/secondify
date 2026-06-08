@@ -80,3 +80,5 @@ require_once '../../controllers/admin/sidebarController.php'
         </a>
     </div>
 </aside>
+<script>const SECONDIFY = "<?= SECONDIFY; ?>" </script>
+<script src="<?= SECONDIFY; ?>/assets/js/auto-logout.js"></script>

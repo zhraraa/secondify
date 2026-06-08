@@ -11,13 +11,13 @@ require_once '../../controllers/admin/moderasiController.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bantuan & Laporan — Secondify</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/admin/adminDashboard.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
     <style>
         .tab-content { display: none; }
         .tab-content.active { display: block; }
     </style>
 </head>
-<body>
+<body class="adminPage">
 
 <?php include 'sidebar.php'; ?>
 

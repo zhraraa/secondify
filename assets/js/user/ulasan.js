@@ -3,9 +3,18 @@ let rating = 0;
 function setRating(value) {
     rating = value;
 
+    // Masukkan nilai bintang ke dalam input hidden form
+    document.getElementById("ratingInput").value = value;
+
     const stars = document.querySelectorAll("#stars span");
     stars.forEach((star, index) => {
-        star.classList.toggle("active", index < value);
+        if (index < value) {
+            star.classList.add("active");
+            star.textContent = "★"; // Bintang penuh
+        } else {
+            star.classList.remove("active");
+            star.textContent = "☆"; // Bintang kosong
+        }
     });
 }
 

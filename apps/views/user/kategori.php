@@ -20,13 +20,13 @@ $currentKategori = $currentKategori ?? 'semua';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kategori — Secondify</title>
-    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/user/kategori.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/layouts/navbar.css">
-    <script src="<?= SECONDIFY; ?>/assets/js/layouts/navbar.js" defer></script>
-<body>
+    <script src="<?= SECONDIFY; ?>/assets/js/layouts/navbar.js?v=20260529-1" defer></script>
+<body class="kategoriPage">
 
     <!-- NAVBAR -->
-    <?php include __DIR__ . '/../layout/navbar.php'; ?>
+    <?php include __DIR__ . '/../../controllers/layout/navbarController.php'; ?>
 
 
     <?php $categoryTitle = htmlspecialchars($currentKategoriName ?? 'Semua'); ?>
@@ -166,6 +166,6 @@ $currentKategori = $currentKategori ?? 'semua';
     <script>
         window.SECONDIFY_PRODUCTS = <?= json_encode($dataProdukMarketplace ?? [], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>;
     </script>
-    <script src="<?= SECONDIFY; ?>/assets/js/user/kategori.js?v=20260528-2"></script>
+    <script src="<?= SECONDIFY; ?>/assets/js/user/kategori.js?v=20260529-1"></script>
 </body>
 </html>

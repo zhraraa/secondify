@@ -7,14 +7,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/user/formDaftarPenjual.css">
-    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/layouts/navbar.css">
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/layouts/navbar.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="<?= SECONDIFY; ?>/assets/js/layouts/navbar.js" defer></script>
 </head>
-<body>
-    <?php include __DIR__ . '/../layout/navbar.php'; ?>
+<body class="daftarPenjual">
+    <?php include __DIR__ . '/../../controllers/layout/navbarController.php'; ?>
 
     <section>
         <div class="content">
@@ -66,7 +65,7 @@
                 <?php else: ?>
                     <form action="<?= SECONDIFY ?>/apps/controllers/user/daftarPenjualController.php" method="POST" enctype="multipart/form-data">
                         <div class="input-group">
-                            <label>Nama Toko</label>
+                            <label>Nama Toko (Max 30 karakter)</label>
                             <input type="text" placeholder="Contoh: Toko Ara" name="nama_toko" maxlength="30" minlength="5" required>
                         </div>
 
