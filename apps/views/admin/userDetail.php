@@ -1,23 +1,7 @@
 <?php
 require_once '../../config/config.php';
 require_once '../../../koneksi/koneksi.php';
-
-// Ambil ID dari URL
-$id_user = isset($_GET['id']) ? intval($_GET['id']) : 0;
-
-// Query ambil data user
-$query = "SELECT * FROM users WHERE id_user = ?";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("i", $id_user);
-$stmt->execute();
-$result = $stmt->get_result();
-$user = $result->fetch_assoc();
-
-// Kalau user gak ketemu
-if (!$user) {
-    echo "<script>alert('User tidak ditemukan!'); window.location='manajemenUser.php';</script>";
-    exit;
-}
+require_once '../../controllers/admin/userDetailController'
 ?>
 
 <!DOCTYPE html>

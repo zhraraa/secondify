@@ -3,6 +3,7 @@
 
 require_once '../../../koneksi/koneksi.php';
 
+$verifData = getVerificationData();
 function getVerificationData() {
     global $conn;
 

@@ -1,30 +1,5 @@
 <?php
-// sidebar.php
-$currentPage = basename($_SERVER['PHP_SELF'], '.php');
-
-// Pastikan koneksi ke database sudah tersedia
-// Karena sidebar ini di-include ke dalam file view admin, kita buat fallback aman untuk $conn
-if (isset($conn)) {
-    // Hitung jumlah pengajuan penjual yang statusnya masih 'pending'
-    $queryPendingSeller = mysqli_query($conn, "SELECT COUNT(*) as total FROM seller_application WHERE status = 'pending'");
-    $rowPendingSeller = mysqli_fetch_assoc($queryPendingSeller);
-    $totalPendingSeller = $rowPendingSeller['total'];
-
-    // Hitung juga jumlah laporan moderasi barang yang aktif (untuk menu Moderasi & Laporan)
-    // Di sini kita set default 5 dulu atau disesuaikan dengan query tabel laporan lu nanti
-    // FIX: hitung laporan_barang pending + bantuan yang belum selesai
-    $queryPendingReport = mysqli_query($conn, "
-        SELECT (
-            (SELECT COUNT(*) FROM laporan_barang WHERE status = 'pending') +
-            (SELECT COUNT(*) FROM bantuan WHERE status != 'selesai')
-        ) AS total
-    ");
-    $totalPendingReport = $queryPendingReport ? (int)mysqli_fetch_assoc($queryPendingReport)['total'] : 0;
-} else {
-    // Fallback jika variabel $conn belum terdefinisi agar tidak memicu error
-    $totalPendingSeller = 3;
-    $totalPendingReport = 0; // fallback jika $conn belum tersedia
-}
+require_once '../../controllers/admin/sidebarController.php'
 ?>
 
 <aside class="sidebar">

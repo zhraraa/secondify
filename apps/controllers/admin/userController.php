@@ -3,6 +3,9 @@
 
 require_once '../../../koneksi/koneksi.php';
 
+$allUsers = getAllUsersData();
+$totalTampil = count($allUsers);
+
 function getAllUsersData() {
     global $conn;
 

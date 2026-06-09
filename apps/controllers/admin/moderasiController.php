@@ -1,11 +1,14 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/secondify/koneksi/koneksi.php';
 
-/**
- * FUNGSI AMBIL DATA GABUNGAN
- * FIX: status laporan_barang pakai 'pending'/'resolved' sesuai skema DB
- * FIX: status bantuan pakai 'menunggu'/'selesai' sesuai skema DB
- */
+
+$laporanMasuk      = getLaporanByStatus('menunggu');
+$laporanSelesai    = getLaporanByStatus('selesai');
+$totalLaporanAktif = count($laporanMasuk);
+
+$flashMsg = $_SESSION['flash'] ?? '';
+unset($_SESSION['flash']);
+
 function getLaporanByStatus($status) {
     global $conn;
 
