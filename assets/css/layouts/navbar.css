@@ -1,0 +1,248 @@
+/* ─── NAVBAR ─────────────────────────────────── */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 40px;
+    background: #fff;
+    border-bottom: 1px solid #ebebf0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar .logo {
+    width: 120px;
+}
+
+.navbar .search-box {
+    position: relative;
+    flex: 1;
+    max-width: 480px;
+    margin: 0 30px;
+}
+
+.navbar .search-box input {
+    width: 100%;
+    padding: 10px 18px;
+    border-radius: 24px;
+    border: 1.5px solid #e8e8f0;
+    background: #f8f8fc;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.navbar .search-box input:focus {
+    border-color: #886BC6;
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+    background: #fff;
+}
+
+.navbar .search-box input::placeholder {
+    color: #aaa;
+}
+
+.navbar .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.navbar .nav-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    border-radius: 50%;
+    transition: background 0.2s, color 0.2s;
+}
+
+.navbar .nav-icon-btn:hover {
+    background: #f0eeff;
+    color: #886BC6;
+}
+
+.navbar .nav-icon-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.navbar .navbar-btnTambah {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: white;
+    color: #222;
+    border: none;
+    padding: 10px 10px;
+    border: 1px solid #886BC6;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.navbar .navbar-btnTambah .icon {
+    width: 16px;
+    height: 16px;
+}
+
+.navbar .nav-divider {
+    width: 1px;
+    height: 22px;
+    background: #e0e0e8;
+}
+
+.navbar .msgButton {
+    display: flex;
+    justify-content: center;
+    border: 0;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    border-radius: 50%;
+    color: #222;
+    transition: background 0.2s, color 0.2s;
+}
+
+.navbar .msgButton:hover {
+    background: #f0eeff;
+    color: #886BC6;
+}
+
+.navbar .chatIcon {
+    width: 18px;
+    color: #222;
+}
+
+.navbar .user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 12px;
+    transition: background 0.2s;
+}
+
+.navbar .user:hover {
+    background: #f3f0ff;
+}
+
+.navbar .avatar {
+    width: 34px;
+    height: 34px;
+    background: #886BC6;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.navbar .user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar .user-info .user-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #222;
+    line-height: 1.2;
+}
+
+.navbar .user-info .user-role {
+    font-size: 11px;
+    color: #999;
+}
+
+.navbar .logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+.navbar .logout-btn:hover {
+    background: #fff0f0;
+    color: #e74c3c;
+}
+
+.navbar .logout-btn svg {
+    width: 15px;
+    height: 15px;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 15px; 
+        flex-wrap: wrap; /* Mengizinkan elemen turun baris */
+        gap: 12px;
+    }
+
+    .navbar .logo {
+        width: 90px; /* Ukuran disesuaikan agar tidak terlalu dominan */
+        object-fit: scale-down;
+    }
+
+    /* TRIK UTAMA: Dorong kotak pencarian ke bawah dan lebarkan 100% */
+    .navbar .search-box {
+        order: 3; 
+        max-width: 100%;
+        margin: 0; 
+        flex-basis: 100%; 
+    }
+
+    .navbar .nav-right {
+        gap: 6px; /* Rapatkan jarak antar tombol/ikon di kanan */
+    }
+
+    /* --- SEMBUNYIKAN ELEMEN YANG BIKIN PENUH DI BARIS ATAS --- */
+    .navbar .user-info,
+    .navbar .nav-divider {
+        display: none !important; /* Sekarang hanya teks nama dan garis abu-abu yang dihilangkan */
+    }
+
+    /* --- KOREKSI TOMBOL KELOLA PRODUK --- */
+    .navbar .navbar-btnTambah {
+        padding: 5px 8px; /* Perkecil area padding */
+        font-size: 10px;  /* Perkecil teksnya agar muat */
+        gap: 3px;
+    }
+
+    .navbar .avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+
+    /* --- KOREKSI TOMBOL LOGOUT (Hanya sisakan ikon) --- */
+    .navbar .logout-btn {
+        padding: 4px; /* Perkecil kotaknya */
+    }
+
+    /* Asumsi teks logout-mu dibungkus tag span atau langsung di dalam tag a/button.
+       Aturan ini akan menyembunyikan teksnya dan menyisakan SVG/ikon-nya saja */
+    .navbar .logout-btn span,
+    .navbar .logout-btn p {
+        display: none !important;
+    }
+}

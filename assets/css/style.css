@@ -25,11 +25,26 @@ a{
 
 
 /* ini bagian regist */
+.registPage * {
+    box-sizing: border-box; 
+}
+    
+.registPage .row-group {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    width: 100%;
+}
+
+.registPage .row-group .input-group {
+    flex: 1;
+}
+
 .registPage .card {
     display: flex;
     flex-direction: row;
     width: 1100px;
-    min-height: 750px;
+    max-height: 600px;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -51,7 +66,7 @@ a{
     flex-direction: column;
     justify-content: space-between;
     width: 50%;
-    padding: 50px;
+    padding: 20px 50px;
     border-radius: 20px;
     color: #F6F2FF;
 }
@@ -61,7 +76,7 @@ a{
     flex-direction: column;
     justify-content: center;
     width: 50%;
-    padding: 50px;
+    padding: 20px 50px;
     gap: 20px;
     overflow-y: auto;
     max-height: 750px;
@@ -123,6 +138,7 @@ a{
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .registPage .input-form {
@@ -199,32 +215,6 @@ a{
     text-decoration: underline;
 }
 
-/* Responsive design */
-@media (max-width: 968px) {
-    .registPage .card {
-        width: 90%;
-        min-height: auto;
-        flex-direction: column;
-    }
-
-    .registPage .left-area,
-    .registPage .right-area {
-        width: 100%;
-    }
-
-    .registPage .left-area {
-        padding: 30px;
-    }
-
-    .registPage .right-area {
-        padding: 30px;
-    }
-
-    .registPage .textTengah h1 {
-        font-size: 32px;
-    }
-}
-
 .registPage select.input-form {
     background: white;
     cursor: pointer;
@@ -280,21 +270,45 @@ a{
     opacity: 0.9;
 }
 
-@media (max-width: 1000px) {
+/* flexibel bagian regist */
+@media (max-width: 968px) {
+    
+    /* WADAH UTAMA (CARD) */
     .registPage .card {
-        width: 95%;
-        flex-direction: column;
+        width: 95%; 
+        min-height: auto;
+        flex-direction: column; 
+        max-width: 500px; 
     }
 
-    .registPage .left-area,
+    .registPage .header-login h1 {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+
+    .registPage .header-login p {
+        display: none !important;
+    }
+
+    .registPage .left-area {
+        display: none !important;
+    }
+
+    /* AREA KANAN (bagian form Input) */
     .registPage .right-area {
         width: 100%;
+        padding: 20px; 
+        max-height: none; 
+        overflow-y: visible; 
     }
 
-    .registPage .textTengah h1 {
-        font-size: 32px;
+    /* BARIS INPUT YANG SEBELAHAN (.row-group) */
+    .registPage .input-password {
+        flex-direction: column;
+        gap: 12px;
     }
 }
+
 
 /* ini bagian login */
 .loginPage {
@@ -303,13 +317,14 @@ a{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .loginPage .card {
     display: flex;
     flex-direction: row;
     width: 1030px;
+    min-height: 550px;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -321,6 +336,7 @@ a{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: start;
     width: 50%;
     padding: 50px;
     border-radius: 20px;
@@ -331,6 +347,7 @@ a{
     display: flex;
     flex-direction: column;
     align-items: start;
+    justify-content: center;
     width: 50%;
     padding: 50px;
     gap: 25px;
@@ -345,11 +362,7 @@ a{
 }
 
 .loginPage .ingatSaya {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-    font-size: 13px;
+    display: none !important;
 }
 
 .loginPage .lupaPw {
@@ -409,7 +422,15 @@ a{
     border-radius: 8px;
     padding: 10px;
     font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
+
+.loginPage .buttonMasuk:hover {
+    transform: translateY(-2px);
+    background: #7155a6;
+}
+
 
 .loginPage .input-form {
     width: 100%;
@@ -418,6 +439,10 @@ a{
     border: 0;
     border-radius: 8px;
     box-shadow:  0 0 3px  rgba(0, 0, 0, 0.3);
+}
+
+.loginPage .input-form:focus {
+    box-shadow: 0 0 5px rgba(136, 107, 198, 0.5);
 }
 
 .loginPage form {
@@ -433,8 +458,120 @@ a{
     font-weight: 600;
 }
 
+.loginPage .input-email .input-wrapper,
+.loginPage .input-password .input-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+}
 
-/* bagian profile page */
+.loginPage .input-email .input-wrapper i,
+.loginPage .input-email .input-wrapper svg,
+.loginPage .input-password .input-wrapper i[data-lucide="lock"],
+.loginPage .input-password .input-wrapper svg.lucide-lock {
+    width: 18px;
+    height: 18px;
+    color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    margin-left: 8px;
+    align-self: center;
+}
+
+.loginPage .input-password .input-wrapper i[data-lucide="eye"],
+.loginPage .input-password .input-wrapper svg.lucide-eye {
+    width: 16px;
+    height: 16px;
+    color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    align-self: center;
+    right: 13px;
+    cursor: pointer;
+}
+
+.loginPage .input-email .input-form,
+.loginPage .input-password .input-form {
+    padding-left: 30px;
+}
+
+.loginPage .loginSalah.login-error {
+    width: 100%;
+}
+
+.loginPage .loginSalah.login-error i[data-lucide="alert-circle"],
+.loginPage .loginSalah.login-error svg.lucide-alert-circle {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: red;
+}
+
+.loginPage .loginSalah.account-suspended {
+    width: 100%;
+    background-color: #fdf2f2;
+    border: 1px solid #f8b4b4;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.loginPage .loginSalah.account-suspended i[data-lucide="alert-triangle"],
+.loginPage .loginSalah.account-suspended svg.lucide-alert-triangle {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #e02424;
+}
+
+.loginPage .loginSalah.account-suspended span {
+    color: #e02424;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* flexibel bagian login */
+@media (max-width: 768px) {
+    .loginPage .card {
+        width: 90%; 
+        display: flex;
+        flex-direction: column; 
+        max-width: 400px;
+        justify-content: center;
+        min-height: auto;
+        padding: 20px 0;
+    }
+
+    /* AREA KIRI (bagian warna ungu) */
+    .loginPage .left-area {
+        display: none !important;
+    }
+
+    /* AREA KANAN (Bagian Form Input) */
+    .loginPage .right-area {
+        width: 100%;
+        height: fit-content;
+        padding: 20px;
+    }
+
+    .loginPage h1 {
+        font-size: 24px;
+    }
+
+    /* BARIS LUPA PASSWORD & INGAT SAYA */
+    .loginPage .bwahForm {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .loginPage .lupaPw {
+        text-align: left;
+    }
+}
+
+
+/* ini bagian profile page */
 .profilPage {
     display: flex;
     flex-direction: column;
@@ -782,6 +919,116 @@ a{
     border: 2px solid #886BC6;
 }
 
+/* flexibel bagian profile */
+@media (max-width: 768px) {
+    
+    /* WADAH UTAMA + PROFIL */
+    .profilPage .main {
+        padding: 15px;
+    }
+
+    .profilPage .cardProfile {
+        padding: 15px;
+    }
+
+    .profilPage .bgProfile {
+        height: 100px;
+    }
+
+    .profilPage .profilePic {
+        width: 80px;
+        height: 80px;
+        top: 70px;
+        left: 30px; 
+        border-width: 3px;
+    }
+
+    .profilPage .isiProfile {
+        width: 100%; 
+        padding-left: 0;
+        padding-top: 45px; 
+    }
+
+    /* TOMBOL PROFIL */
+    .profilPage .profile-button {
+        width: 100%;
+        gap: 10px;
+    }
+
+    .profilPage .btnToko,
+    .profilPage .btnEdit {
+        width: 50%;
+        padding: 8px 10px;
+        font-size: 13px; 
+    }
+
+    /* SLIDER TAB JUALAN/ULASAN */
+    .profilPage .navJualan {
+        width: fit-content;
+        padding: 6px;
+    }
+
+    .profilPage .rowButton {
+        width: 100%;
+        gap: 0;
+    }
+
+    .profilPage .rowButton button {
+        flex: 1; 
+        padding: 10px 0;
+        font-size: 14px;
+    }
+
+    /* LAYOUT 2 KOLOM PRODUK */
+    .profilPage .wadahProduk {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 12px;
+        padding-top: 15px;
+    }
+
+    .profilPage .cardBarang {
+        width: 100%;
+        height: auto; 
+    }
+
+    .profilPage .cardBarang img {
+        height: 140px; 
+    }
+
+    .profilPage .profile-namaBarang {
+        font-size: 13px;
+    }
+
+    .profilPage .detailBarang .harga {
+        font-size: 14px;
+    }
+
+    /* CARD ULASAN */
+    .profilPage .cardUlasan {
+        padding: 15px 5px;
+    }
+
+    .profilPage .namaUlasan :nth-child(1) {
+        font-size: 15px; 
+    }
+
+    .profilPage .namaUlasan :nth-child(2) {
+        font-size: 12px;
+    }
+
+    .profilPage .produkUlasan {
+        padding: 8px; 
+    }
+
+    .profilPage .rowProduk img {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+
+
 
 /* ini bagian kelola barang penjual */
 .kelolaBarangPage * {
@@ -877,16 +1124,6 @@ a{
     text-align: center;
     padding: 2rem;
 }
-
-/* .kelolaBarangPage .opsi button.active {
-    color: white;
-} */
-
-/* .kelolaBarangPage .opsi button.buttonAktif{
-    background-color: #f6f2ff;
-    border: gray;
-    box-shadow: 0px 2px 3px #dbdbdb;
-} */
 
 .kelolaBarangPage .backgroundGeser {
     position: absolute;
@@ -1009,7 +1246,6 @@ a{
     width: 20px;
     height: 20px;
     color: #555;
-    /* Warna icon abu-abu gelap */
 }
 
 /* ---------------------- STYLING DROPDOWN MENU ----------------------- */
@@ -1017,29 +1253,23 @@ a{
 .kelolaBarangPage .kelolaBarang-wadahDropdown {
     position: relative;
     display: inline-block;
-    /* Supaya lebarnya menyesuaikan tombol titik tiga aja */
 }
 
-/* Kotak Dropdown-nya */
+/* kotak dropdown nya */
 .kelolaBarangPage .kelolaBarang-dropdown {
     position: absolute;
     top: 100%;
-    /* Jarak dari tombol titik tiga ke bawah */
     right: 0;
-    /* Rata kanan dengan tombol titik tiga */
     background-color: white;
     min-width: 150px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    /* Efek bayangan / floating yang soft */
     border: 1px solid #eaeaea;
     display: flex;
     flex-direction: column;
     padding: 8px 0;
     z-index: 10;
-    /* Biar selalu ada di depan elemen lain */
     animation: munculDropdown 0.2s ease-out;
-    /* Efek transisi halus */
 }
 
 @keyframes munculDropdown {
@@ -1316,6 +1546,59 @@ a{
     animation: modalMuncul 0.3s ease-out;
 }
 
+/* flexibel bagian kelola barang */
+@media (max-width: 768px) {
+    
+    /* JARAK HALAMAN UTAMA */
+    .kelolaBarangPage section {
+        padding: 20px 15px; 
+    }
+
+    /* HEADER (judul dan tombol tambah) */
+    .kelolaBarangPage .header {
+        flex-direction: column;
+        align-items: stretch; 
+        gap: 15px;
+    }
+
+    .kelolaBarangPage .btn-tambah {
+        justify-content: center; 
+        width: 100%;
+    }
+
+    /* 3. KOREKSI KARTU BARANG */
+    .kelolaBarangPage .barang-item {
+        padding: 15px;
+    }
+
+    .kelolaBarangPage .detail-barang {
+        gap: 12px;
+    }
+
+    .kelolaBarangPage .detail-barang img {
+        width: 70px; 
+        height: 70px;
+    }
+
+    .kelolaBarangPage .kelolaBarang-nama {
+        font-size: 16px;
+    }
+
+    /* INPUT MODAL UBAH BARANG */
+    .kelolaBarangPage .rowInput,
+    .kelolaBarangPage .rowInput2 {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* 5. KOREKSI SEMUA UKURAN MODAL */
+    .kelolaBarangPage .kelolaBarang-isiModalUbah,
+    .kelolaBarangPage .kelolaBarang-modalStatus,
+    .kelolaBarangPage .kelolaBarang-isiModalHapus {
+        padding: 20px;
+        width: 90%;
+    }
+}
 
 /* ini bagian form daftar penjual */
 .daftarPenjual * {
@@ -1522,6 +1805,37 @@ a{
     box-shadow: 0 4px 12px #cbcbcb;
 }
 
+/* flexibel bagian form daftar penjual */
+@media (max-width: 768px) {
+    
+    .daftarPenjual section {
+        padding: 20px 15px;
+    }
+
+    .daftarPenjual .container-form {
+        padding: 20px 15px; 
+        gap: 20px;
+    }
+
+    /* AREA UPLOAD FILE */
+    .daftarPenjual .upload-file {
+        padding: 15px 12px;
+        gap: 10px;
+    }
+
+    .daftarPenjual .input-checkbox {
+        align-items: flex-start;
+    }
+    
+    .daftarPenjual .input-checkbox input {
+        margin-top: 3px;
+    }
+
+    .daftarPenjual .penyetujuanAdmin {
+        padding: 30px 15px;
+    }
+}
+
 /* ini bagian jual barang */
 /* form tambah barang */
 .jualBarang .tombol-kembali {
@@ -1565,6 +1879,9 @@ a{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    /* Lebar penuh untuk wadah luar agar rapi di HP */
+    width: 100%; 
+    max-width: 900px; /* Batas maksimal lebar di laptop */
 }
 
 .jualBarang .judulCard {
@@ -1586,7 +1903,13 @@ a{
     gap: 20px;
     background-color: white;
     padding: 50px 30px;
-    width: 900px;
+    
+    /* Lebar asli untuk tampilan Laptop/Desktop */
+    width: 900px; 
+    
+    /* Penahan agar elemen tidak meluber ke luar border */
+    box-sizing: border-box; 
+    
     border-radius: 15px;
     box-shadow: 0 0 3px rgb(0, 0, 0, 0.4);
 }
@@ -1776,6 +2099,45 @@ a{
     background-color: #6b4db3;
 }
 
+/* flexibel bagian jual barang */
+@media (max-width: 768px) {
+    
+    /* LEBAR KARTU FORM */
+    .jualBarang .cardForm {
+        width: 100%;
+        padding: 30px 15px; 
+    }
+
+    /* INPUT HARGA & KONDISI */
+    .jualBarang .rowInput {
+        flex-direction: column; 
+        gap: 15px; 
+    }
+
+    .jualBarang .hargaBarang, 
+    .jualBarang .kondisiBarang {
+        width: 100%; 
+    }
+
+    /* INPUT KATEGORI & KECAMATAN */
+    .jualBarang .rowInput2 {
+        flex-direction: column; 
+        gap: 15px; 
+    }
+
+    .jualBarang .kategoriBarang, 
+    .jualBarang .kecamatanBarang {
+        width: 100%; 
+    }
+
+    /* button batal sama posting */
+    .jualBarang .rowButton {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 10px; 
+    }
+}
+
 /* ini bagian ulasan */
 .ulasanPage * {
     box-sizing: border-box;
@@ -1925,6 +2287,34 @@ a{
     border-radius: 8px;
 }
 
+/* flexibel bagian ulasan */
+@media (max-width: 768px) {
+    .ulasanPage .container {
+        margin: 20px 15px; 
+        padding: 25px 20px; 
+    }
+
+    .ulasanPage .stars span {
+        font-size: 32px;
+    }
+
+    .ulasanPage .ulasan-Penilaian {
+        width: 100%;
+        justify-content: space-between;
+        gap: 0; 
+        padding: 0 5px;
+    }
+
+    /* 4. KOREKSI INFO BARANG YANG DIULAS */
+    .ulasanPage .ulasan-namaBarang {
+        font-size: 13px;
+    }
+
+    .ulasanPage .ulasan-namaToko {
+        font-size: 11px;
+    }
+}
+
 
 /* ini bagian dashboard */
 .dashboardPage * {
@@ -2058,6 +2448,7 @@ a{
 }
 
 
+/* ─── ULASAN ────────────────────────────────────── */
 .dashboardPage .dashboard-ulasan {
     margin-bottom: 30px;
     padding: 0 30px; 
@@ -2084,7 +2475,7 @@ a{
     border-radius: 10px;
 }
 
-/* 2. CARD ULASAN (SATUAN) */
+/* CARD ULASAN (SATUAN) */
 .dashboardPage .dashboard-cardUlasan {
     flex: 0 0 auto; 
     width: 280px; 
@@ -2099,7 +2490,7 @@ a{
     justify-content: space-between; 
 }
 
-/* 3. ISI DALAM CARD */
+/* ISI DALAM CARD */
 .dashboardPage .card-header {
     display: flex;
     gap: 12px;
@@ -2464,6 +2855,84 @@ a{
     margin-top: 20px;
 }
 
+/* flexibel bagian dashboard */
+@media (max-width: 768px) {
+    .dashboardPage .dashboard-ulasan,
+    .dashboardPage .kategori,
+    .dashboardPage .rekomendasi {
+        padding: 0 20px; 
+    }
+
+    .dashboardPage .rekomendasi {
+        margin: 20px 0;
+    }
+
+    /* HERO SECTION */
+    .dashboardPage .hero {
+        margin: 15px 20px;
+        padding: 30px 20px;
+        border-radius: 16px;
+    }
+
+    .dashboardPage .hero h1 {
+        font-size: 24px;
+    }
+
+    .dashboardPage .hero p {
+        font-size: 13px;
+    }
+
+    .dashboardPage .hero-right {
+        display: none; 
+    }
+
+    /* KATEGORI */
+    .dashboardPage .kategori-item {
+        flex: 0 0 75px; 
+        padding: 12px 8px;
+        font-size: 11px;
+        border-radius: 12px;
+        gap: 6px;
+    }
+
+    .dashboardPage .kat-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
+    }
+
+    .dashboardPage .kat-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .dashboardPage .recommendation-grid {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 12px;
+    }
+
+    .dashboardPage .card-name {
+        font-size: 12px;
+    }
+
+    .dashboardPage .card-price {
+        font-size: 14px;
+    }
+
+    .dashboardPage .card-info {
+        padding: 10px;
+    }
+
+    /* HEADER REKOMENDASI */
+    .dashboardPage .rek-title {
+        font-size: 14px;
+    }
+
+    .dashboardPage .sort-wrapper select {
+        padding: 6px 28px 6px 26px;
+        font-size: 11px; 
+    }
+}
 /* ini bagian detail produk */
 .detailProduk * {
     margin: 0;
@@ -2477,7 +2946,6 @@ a{
     color: #1a1a2e;
 }
 
-/* ─── NAVBAR ──────────────────────────────────── */
 /* ─── BREADCRUMB ──────────────────────────────── */
 .detailProduk .breadcrumb {
     padding: 16px 40px 0;
@@ -3330,6 +3798,96 @@ a{
     text-decoration: none;
 }
 
+/* flexibel bagian detail produk */
+@media (max-width: 768px) {
+    .detailProduk .breadcrumb {
+        padding: 16px 20px 0;
+    }
+
+    .detailProduk .detail-layout {
+        flex-direction: column;
+        padding: 16px 20px 30px;
+        gap: 20px; 
+    }
+
+    .detailProduk .related-section {
+        padding: 0 20px 40px;
+    }
+
+    /* 2. KOREKSI GAMBAR PRODUK */
+    .detailProduk .gallery-section {
+        width: 100%;
+        position: relative; 
+        top: 0;
+    }
+
+    .detailProduk .thumb {
+        width: 60px; 
+        height: 60px;
+    }
+
+    /* KOTAK INFORMASI PRODUK */
+    .detailProduk .info-top,
+    .detailProduk .detail-box,
+    .detailProduk .seller-box,
+    .detailProduk .safety-box {
+        padding: 16px;
+    }
+
+    .detailProduk .product-name {
+        font-size: 18px;
+    }
+
+    .detailProduk .product-price {
+        font-size: 22px; 
+    }
+
+    .detailProduk .info-top-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* TOMBOL AKSI & MODAL REPORT */
+    .detailProduk .cta-row {
+        gap: 8px;
+    }
+
+    .detailProduk .btn-report {
+        padding: 12px;
+    }
+
+    .detailProduk .owner-actions {
+        flex-direction: column; 
+    }
+
+    .detailProduk .report-modal {
+        padding: 24px;
+    }
+
+    .detailProduk .report-actions {
+        flex-direction: column;
+    }
+
+    /* PRODUK TERKAIT */
+    .detailProduk .related-grid {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 12px;
+    }
+
+    .detailProduk .card-name {
+        font-size: 12px;
+    }
+
+    .detailProduk .card-price {
+        font-size: 14px;
+    }
+
+    .detailProduk .card-info {
+        padding: 10px;
+    }
+}
+
+
 /* ini bagian favorit */
 .favoritPage {
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -3404,6 +3962,44 @@ a{
     color: white;
     border-radius: 6px;
     cursor: pointer;
+}
+
+/* flexibel bagian favorit */
+@media (max-width: 768px) {
+    .favoritPage {
+        padding: 15px; 
+    }
+
+    .favoritPage .grid {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 12px;
+    }
+
+    /* UKURAN TEKS DAN PADDING DALAM CARD */
+    .favoritPage .card {
+        padding: 10px;
+    }
+
+    .favoritPage .card h3 {
+        font-size: 13px;
+        margin: 8px 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .favoritPage .card p {
+        font-size: 14px;
+    }
+
+    .favoritPage .favorite-meta {
+        font-size: 11px;
+    }
+
+    .favoritPage .card button {
+        padding: 6px;
+        font-size: 12px; 
+    }
 }
 
 /* ini bagian kategori */
@@ -3915,6 +4511,67 @@ a{
     color: #bbb;
     margin-top: 10px;
 }
+
+/* flexibel bagian kategori */
+@media (max-width: 768px) {
+    .kategoriPage .breadcrumb,
+    .kategoriPage .page-header {
+        padding-left: 15px; 
+        padding-right: 15px;
+    }
+
+    .kategoriPage .layout {
+        flex-direction: column; 
+        padding: 15px 15px 30px;
+        gap: 20px;
+    }
+
+    /* SIDEBAR FILTER */
+    .kategoriPage .filter-sidebar {
+        width: 100%;
+        position: relative;
+        top: 0;
+        padding: 15px;
+    }
+
+    /* BARISAN ATAS KONTEN (Hasil Pencarian & Sortir) */
+    .kategoriPage .content-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .kategoriPage .sort-wrapper {
+        width: 100%; 
+    }
+
+    .kategoriPage .sort-wrapper select {
+        width: 100%; 
+    }
+
+    /*  GRID PRODUK (jadi 2 Kolom) */
+    .kategoriPage .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .kategoriPage .card-info {
+        padding: 10px;
+    }
+
+    .kategoriPage .card-name {
+        font-size: 12px;
+    }
+
+    .kategoriPage .card-price {
+        font-size: 14px;
+    }
+}
+
+
+
+
+
 
 /* ini bagian setting */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');

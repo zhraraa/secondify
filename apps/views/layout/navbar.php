@@ -43,7 +43,7 @@ if ($loggedInUserId) {
 
         <?php if ($penjual): ?>
         <a href="<?= SECONDIFY ?>/apps/controllers/penjual/kelolaBarang.php" class="navbar-btnTambah">
-                Kelola Barang
+                Kelola
         </a>
         <?php endif; ?>
         <div class="nav-divider"></div>
@@ -89,7 +89,6 @@ if ($loggedInUserId) {
                 <polyline points="16 17 21 12 16 7"/>
                 <line x1="21" y1="12" x2="9" y2="12"/>
             </svg>
-            Keluar
         </a>
     </div>
 
