@@ -8,18 +8,19 @@ $id_user = $_SESSION['id_user'];
 $query = $conn->prepare("
 SELECT DISTINCT
     u.id_user,
-    p.id_produk,
-    COALESCE(u.nama_toko, u.nama_lengkap) AS nama_user
+    COALESCE(u.nama_toko,u.nama_lengkap) AS nama_user
 FROM pesan p
-JOIN users u ON (
+JOIN users u
+ON (
     CASE
-        WHEN p.id_pengirim = ? THEN p.id_penerima
+        WHEN p.id_pengirim = ?
+        THEN p.id_penerima
         ELSE p.id_pengirim
     END
-) = u.id_user
-WHERE p.id_pengirim = ?
-OR p.id_penerima = ?
-ORDER BY p.waktu_kirim DESC
+)=u.id_user
+WHERE
+    p.id_pengirim = ?
+    OR p.id_penerima = ?
 ");
 
 $query->bind_param(

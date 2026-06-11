@@ -2,13 +2,16 @@ const SECONDIFY_BASE =
 `${window.location.origin}${window.location.pathname.split("/apps/")[0]}`;
 
 
-// =========================
+// ====================
 // KIRIM PESAN
-// =========================
+// ====================
 function sendMessage(){
 
-    const input = document.getElementById("msgInput");
-    const pesan = input.value.trim();
+    const input =
+    document.getElementById("msgInput");
+
+    const pesan =
+    input.value.trim();
 
     if(!pesan){
         return;
@@ -30,44 +33,46 @@ function sendMessage(){
     .then(res => res.text())
     .then(data => {
 
-        console.log(data);
-
         if(data.trim() === "success"){
 
             input.value = "";
 
             loadMessages();
-            loadChatList();
 
         }
 
-    })
-    .catch(err => console.log(err));
+    });
 
 }
 
 
-// =========================
-// LOAD PESAN
-// =========================
+
+// ====================
+// LOAD CHAT
+// ====================
 function loadMessages(){
 
     fetch(
-        `${SECONDIFY_BASE}/apps/controllers/user/loadPesan.php?id_produk=${ID_PRODUK}&id_penjual=${ID_PENJUAL}`
+        `${SECONDIFY_BASE}/apps/controllers/user/loadPesan.php?id_penjual=${ID_PENJUAL}`
     )
     .then(res => res.json())
     .then(data => {
 
-        const box = document.getElementById("messages");
+        const box =
+        document.getElementById("messages");
 
         box.innerHTML = "";
 
         data.forEach(msg => {
 
             const cls =
-                Number(msg.id_pengirim) === Number(ID_PENJUAL)
-                ? "receiver"
-                : "sender";
+            Number(msg.id_pengirim)
+            ===
+            Number(ID_PENJUAL)
+            ?
+            "receiver"
+            :
+            "sender";
 
             box.innerHTML += `
                 <div class="msg ${cls}">
@@ -77,17 +82,18 @@ function loadMessages(){
 
         });
 
-        box.scrollTop = box.scrollHeight;
+        box.scrollTop =
+        box.scrollHeight;
 
-    })
-    .catch(err => console.log(err));
+    });
 
 }
 
 
-// =========================
-// LOAD LIST CHAT
-// =========================
+
+// ====================
+// SIDEBAR CHAT
+// ====================
 function loadChatList(){
 
     fetch(
@@ -96,15 +102,16 @@ function loadChatList(){
     .then(res => res.json())
     .then(data => {
 
-        const chatList = document.getElementById("chatList");
+        const list =
+        document.getElementById("chatList");
 
-        chatList.innerHTML = "";
+        list.innerHTML = "";
 
         data.forEach(chat => {
 
-            chatList.innerHTML += `
+            list.innerHTML += `
                 <div class="chat-user"
-                    onclick="window.location.href='chat.php?id_produk=${chat.id_produk}&id_penjual=${chat.id_user}'">
+                onclick="window.location.href='chat.php?id_penjual=${chat.id_user}'">
 
                     <div class="avatar">
                         ${chat.nama_user.charAt(0).toUpperCase()}
@@ -121,37 +128,44 @@ function loadChatList(){
 
         });
 
-    })
-    .catch(err => console.log(err));
+    });
 
 }
 
 
-// =========================
-// SAAT HALAMAN DIBUKA
-// =========================
+
+// ====================
+// LOAD
+// ====================
 document.addEventListener("DOMContentLoaded", () => {
 
-    console.log("ID_PRODUK =", ID_PRODUK);
-    console.log("ID_PENJUAL =", ID_PENJUAL);
-
-    document.getElementById("chatTitle").innerText =
-    "Chat Penjual";
-
     loadChatList();
-    loadMessages();
 
-    setInterval(loadMessages, 3000);
+    if(ID_PENJUAL > 0){
 
-    const msgInput =
+        loadMessages();
+
+        setInterval(
+            loadMessages,
+            3000
+        );
+
+    }
+
+    const input =
     document.getElementById("msgInput");
 
-    msgInput.addEventListener("keydown", function(e){
+    input.addEventListener(
+        "keydown",
+        function(e){
 
-        if(e.key === "Enter"){
-            sendMessage();
+            if(e.key === "Enter"){
+
+                sendMessage();
+
+            }
+
         }
-
-    });
+    );
 
 });
