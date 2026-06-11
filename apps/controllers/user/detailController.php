@@ -15,6 +15,17 @@ $dataProdukDetail = $id_produk > 0 ? getProdukMarketplaceById($conn, $id_produk)
 
 $product = $dataProdukDetail;
 if ($product) {
+    $found = false;
+    foreach ($dataProdukMarketplace as $p) {
+        if ($p['id'] == $product['id_produk']) {
+            $found = true;
+            break;
+        }
+    }
+    if (!$found) {
+        $formattedDetail = formatProdukUntukJs([$product]);
+        $dataProdukMarketplace = array_merge($dataProdukMarketplace, $formattedDetail);
+    }
     $product['nama'] = $product['nama_barang'] ?? '';
 }
 $notFound = $product === null;

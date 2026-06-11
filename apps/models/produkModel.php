@@ -79,20 +79,21 @@ function getAllProdukMarketplace($conn, $sort = 'terbaru', $limit = null, $searc
             users.is_penjual
         FROM produk
         JOIN kategori ON produk.id_kategori = kategori.id_kategori
-        JOIN users ON produk.id_user = users.id_user";
+        JOIN users ON produk.id_user = users.id_user
+        WHERE produk.status = 'available'";
 
     $types = '';
     $params = [];
 
     if ($search !== null && trim($search) !== '') {
         $searchTerm = '%' . $search . '%';
-        $sql .= " WHERE produk.nama_barang LIKE ? OR produk.deskripsi LIKE ? OR kategori.nama_kategori LIKE ? OR users.nama_lengkap LIKE ? OR users.username LIKE ? OR users.nama_toko LIKE ?";
+        $sql .= " AND (produk.nama_barang LIKE ? OR produk.deskripsi LIKE ? OR kategori.nama_kategori LIKE ? OR users.nama_lengkap LIKE ? OR users.username LIKE ? OR users.nama_toko LIKE ?)";
         $types .= 'ssssss';
         $params = [$searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm];
     }
 
     if ($kategoriId !== null && is_numeric($kategoriId)) {
-        $sql .= ($search !== null && trim($search) !== '') ? " AND produk.id_kategori = ?" : " WHERE produk.id_kategori = ?";
+        $sql .= " AND produk.id_kategori = ?";
         $types .= 'i';
         $params[] = $kategoriId;
     }
