@@ -72,7 +72,7 @@ require_once '../../config/config.php';
                         <label class="konfirm">Konfirmasi Password</label>
                         <div>
                             <i data-lucide="lock" style="width: 14px; color:rgba(0, 0, 0, 0.7); position: absolute; margin-left: 10px;"></i>
-                            <input type="password" id="confirm" name="confirm" class="input-form" placeholder="Ulangi Password" style="padding-left: 32px;" required>
+                            <input type="password" id="confirm" name="konfirmasi_password" class="input-form" placeholder="Ulangi Password" style="padding-left: 32px;" required>
                         </div>
                     </div>
                 </div>
