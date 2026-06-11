@@ -2,84 +2,19 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+echo "CONTROLLER JALAN <br>";
+
 require_once '../../../koneksi/koneksi.php';
+
+echo "KONEKSI OK <br>";
+
 require_once '../../config/config.php';
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+
+echo "CONFIG OK <br>";
 
 if(isset($_POST['daftar'])){
-
-    $nama       = trim($_POST['nama']);
-    $username   = trim($_POST['username']);
-    $email      = trim($_POST['email']);
-    $password   = trim($_POST['password']);
-    $konfirmasi = trim($_POST['konfirmasi_password']);
-    $lokasi     = trim($_POST['lokasi']);
-
-    // Validasi password
-    if($password != $konfirmasi){
-        $error = "Password dan konfirmasi password tidak sama!";
-    }else{
-
-        // Cek email
-        $cek_email = $conn->prepare("SELECT id_user FROM users WHERE email = ?");
-        $cek_email->bind_param("s", $email);
-        $cek_email->execute();
-        $cek_email->store_result();
-
-        // Cek username
-        $cek_username = $conn->prepare("SELECT id_user FROM users WHERE username = ?");
-        $cek_username->bind_param("s", $username);
-        $cek_username->execute();
-        $cek_username->store_result();
-
-        if($cek_email->num_rows > 0){
-
-            $error = "Email sudah digunakan!";
-
-        }elseif($cek_username->num_rows > 0){
-
-            $error = "Username sudah digunakan!";
-
-        }else{
-
-            $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-
-            $query = $conn->prepare("
-                INSERT INTO users
-                (
-                    nama_lengkap,
-                    username,
-                    password,
-                    email,
-                    lokasi
-                )
-                VALUES
-                (
-                    ?, ?, ?, ?, ?
-                )
-            ");
-
-            $query->bind_param(
-                "sssss",
-                $nama,
-                $username,
-                $passwordHash,
-                $email,
-                $lokasi
-            );
-
-           if($query->execute()){
-
-    echo "REGISTER BERHASIL";
-    exit;
-
+    echo "POST MASUK <br>";
 }else{
-
-    die("MYSQL ERROR : " . $query->error);
-
-}
-        }
-    }
+    echo "POST TIDAK MASUK <br>";
 }
 ?>
