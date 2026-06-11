@@ -9,11 +9,6 @@ ini_set('display_errors', 1);
 
 if(isset($_POST['daftar'])){
 
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
-    exit;
-
     $nama       = trim($_POST['nama']);
     $username   = trim($_POST['username']);
     $email      = trim($_POST['email']);
@@ -74,21 +69,16 @@ if(isset($_POST['daftar'])){
                 $lokasi
             );
 
-            if($query->execute()){
+           if($query->execute()){
 
-                echo "
-                <script>
-                    alert('Registrasi berhasil!');
-                    window.location='".SECONDIFY."/index.php';
-                </script>
-                ";
-                exit();
+    echo "REGISTER BERHASIL";
+    exit;
 
-            }else{
+}else{
 
-                die("Gagal Register : " . $query->error);
+    die("MYSQL ERROR : " . $query->error);
 
-            }
+}
         }
     }
 }
