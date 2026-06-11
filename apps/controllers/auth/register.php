@@ -1,11 +1,18 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require_once '../../../koneksi/koneksi.php';
 require_once '../../config/config.php';
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 if(isset($_POST['daftar'])){
+
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
+    exit;
 
     $nama       = trim($_POST['nama']);
     $username   = trim($_POST['username']);
