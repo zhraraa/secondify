@@ -53,14 +53,28 @@ if (isset($_SESSION['status']) && $_SESSION['status'] === 'login') {
                     </div>
                 </div>
                 <div class="input-password">
-                    <label for="">Password</label>
+                    <label>Password</label>
+
                     <div class="input-wrapper">
-                        <i data-lucide="lock"></i> 
-                        <input name="password" type="password" class="input-form" placeholder="Masukkan password" required>
-                        <i data-lucide="eye"></i> 
+                        <i data-lucide="lock"></i>
+
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            class="input-form"
+                            placeholder="Masukkan password"
+                            required>
+
+                        <i
+                            data-lucide="eye"
+                            id="togglePassword"
+                            style="cursor:pointer;">
+                        </i>
+
                     </div>
                 </div>
-                
+                                
                 <?php if (isset($_GET['error']) && $_GET['error'] == "loginError") : ?>
                     <div class="loginSalah login-error">
                         <i data-lucide="alert-circle"></i>
@@ -96,24 +110,6 @@ if (isset($_SESSION['status']) && $_SESSION['status'] === 'login') {
         </div>
     
     <script src="<?= SECONDIFY; ?>/assets/js/global.js">
-        
-document.addEventListener("DOMContentLoaded", function() {
-
-    const passwordInput = document.querySelector('input[name="password"]');
-    const eyeIcon = document.querySelector('[data-lucide="eye"]');
-
-    eyeIcon.style.cursor = "pointer";
-
-    eyeIcon.addEventListener("click", function() {
-
-        passwordInput.type =
-            passwordInput.type === "password"
-            ? "text"
-            : "password";
-
-    });
-
-});
 </script>
 </body>
 
