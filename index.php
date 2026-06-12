@@ -97,10 +97,6 @@ if (isset($_SESSION['status']) && $_SESSION['status'] === 'login') {
     
     <script src="<?= SECONDIFY; ?>/assets/js/global.js">
         
-    </script>
-</body>
-
-<script>
 document.addEventListener("DOMContentLoaded", function() {
 
     const passwordInput = document.querySelector('input[name="password"]');
@@ -123,5 +119,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 </script>
+</body>
+
 
 </html>
