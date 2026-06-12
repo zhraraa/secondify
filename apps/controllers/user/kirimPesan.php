@@ -3,6 +3,9 @@
 session_start();
 require_once '../../../koneksi/koneksi.php';
 
+echo "SESSION = ";
+print_r($_SESSION);
+
 $id_pengirim = $_SESSION['id_user'];
 
 $id_produk = $_POST['id_produk'];

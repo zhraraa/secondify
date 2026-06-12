@@ -3,13 +3,10 @@
 session_start();
 require_once '../../../koneksi/koneksi.php';
 
+header('Content-Type: application/json');
+
 $id_user = $_SESSION['id_user'];
 $id_penjual = (int)($_GET['id_penjual'] ?? 0);
-
-echo "USER=".$id_user;
-echo "<br>";
-echo "PENJUAL=".$id_penjual;
-exit;
 
 $query = $conn->prepare("
 SELECT *
@@ -46,3 +43,4 @@ while($row = $result->fetch_assoc()){
 }
 
 echo json_encode($data);
+exit;
