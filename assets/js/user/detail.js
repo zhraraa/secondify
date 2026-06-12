@@ -460,3 +460,17 @@ function showToast(msg) {
 
 document.addEventListener("DOMContentLoaded", init);
 
+// CHAT PENJUAL
+document.getElementById("btnChat").addEventListener("click", function () {
+
+    window.location.href =
+        `${SECONDIFY_BASE}/apps/views/user/chat.php?id_produk=${product.id}&id_penjual=${product.idUser}`;
+
+});
+
+// AJUKAN COD
+document.getElementById("btnCOD").addEventListener("click", function () {
+
+    showToast("Fitur COD segera hadir 🚚");
+
+});
