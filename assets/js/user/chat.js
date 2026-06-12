@@ -24,10 +24,10 @@ function sendMessage(){
             headers:{
                 "Content-Type":"application/x-www-form-urlencoded"
             },
-            body:
-                `id_produk=${ID_PRODUK}` +
-                `&id_penerima=${ID_PENJUAL}` +
-                `&pesan=${encodeURIComponent(pesan)}`
+           body:
+    `id_produk=${ID_PRODUK || ''}` +
+    `&id_penerima=${ID_PENJUAL}` +
+    `&pesan=${encodeURIComponent(pesan)}`
         }
     )
     .then(res => res.text())

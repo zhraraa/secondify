@@ -5,13 +5,12 @@ require_once '../../../koneksi/koneksi.php';
 
 $id_pengirim = $_SESSION['id_user'];
 
-$id_produk   = (int)($_POST['id_produk'] ?? 0);
-$id_penerima = (int)($_POST['id_penerima'] ?? 0);
-$pesan       = trim($_POST['pesan'] ?? '');
+$id_produk = !empty($_POST['id_produk'])
+    ? (int)$_POST['id_produk']
+    : null;
 
-if($id_penerima <= 0 || empty($pesan)){
-    exit("error");
-}
+$id_penerima = (int)$_POST['id_penerima'];
+$pesan = trim($_POST['pesan']);
 
 $query = $conn->prepare("
 INSERT INTO pesan
@@ -27,28 +26,8 @@ $query->bind_param(
     $pesan
 );
 
-try {
-
-    $query = $conn->prepare("
-        INSERT INTO pesan
-        (id_produk,id_pengirim,id_penerima,isi_pesan)
-        VALUES (?,?,?,?)
-    ");
-
-    $query->bind_param(
-        "iiis",
-        $id_produk,
-        $id_pengirim,
-        $id_penerima,
-        $pesan
-    );
-
-    $query->execute();
-
+if($query->execute()){
     echo "success";
-
-} catch(Exception $e){
-
-    echo $e->getMessage();
-
+}else{
+    echo $query->error;
 }
