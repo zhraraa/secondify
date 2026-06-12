@@ -1,4 +1,5 @@
 <?php
+echo "LOGIN USER = ".$_SESSION['id_user'];
 
 session_start();
 
