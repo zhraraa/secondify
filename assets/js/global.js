@@ -1,20 +1,64 @@
 lucide.createIcons();
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
 
-    const passwordInput = document.querySelector('input[name="password"]');
-    const eyeIcon = document.querySelector('[data-lucide="eye"]');
+    // LOGIN
+    const loginPassword =
+        document.querySelector('input[name="password"]');
 
-    if (passwordInput && eyeIcon) {
+    const loginEye =
+        document.querySelector('[data-lucide="eye"]');
 
-        eyeIcon.style.cursor = "pointer";
+    if(loginPassword && loginEye){
 
-        eyeIcon.addEventListener("click", function() {
+        loginEye.style.cursor = "pointer";
 
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-            } else {
-                passwordInput.type = "password";
+        loginEye.addEventListener("click", function(){
+
+            loginPassword.type =
+                loginPassword.type === "password"
+                ? "text"
+                : "password";
+
+        });
+
+    }
+
+    // REGISTER
+    const registerForm =
+        document.querySelector('form');
+
+    const password =
+        document.querySelector('#password');
+
+    const confirmPassword =
+        document.querySelector('#confirmPassword');
+
+    if(registerForm && password){
+
+        registerForm.addEventListener("submit", function(e){
+
+            const regex =
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$/;
+
+            if(!regex.test(password.value)){
+
+                alert(
+                    "Password minimal 6 karakter dan harus mengandung huruf besar, huruf kecil, serta angka."
+                );
+
+                e.preventDefault();
+                return;
+            }
+
+            if(
+                confirmPassword &&
+                password.value !== confirmPassword.value
+            ){
+
+                alert("Konfirmasi password tidak sama.");
+
+                e.preventDefault();
             }
 
         });

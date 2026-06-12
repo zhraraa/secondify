@@ -68,7 +68,24 @@ if(isset($_POST['daftar'])){
         exit();
 
     }
+    // Password minimal 6 karakter,
+// harus ada huruf besar, huruf kecil dan angka
 
+if(
+    strlen($password) < 6 ||
+    !preg_match('/[A-Z]/', $password) ||
+    !preg_match('/[a-z]/', $password) ||
+    !preg_match('/[0-9]/', $password)
+){
+
+    echo "
+    <script>
+        alert('Password minimal 6 karakter dan harus mengandung huruf besar, huruf kecil, dan angka!');
+        history.back();
+    </script>
+    ";
+    exit();
+}
     // Hash password
     $passwordHash = password_hash(
         $password,

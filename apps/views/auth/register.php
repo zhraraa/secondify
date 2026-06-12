@@ -118,13 +118,20 @@ require_once '../../config/config.php';
                            style="width:14px;position:absolute;margin-left:10px;">
                         </i>
 
-                        <input
-                            type="password"
-                            name="password"
-                            class="input-form"
-                            placeholder="Password"
-                            style="padding-left:32px;"
-                            required>
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        class="input-form"
+                        placeholder="Password"
+                        style="padding-left:32px;padding-right:40px;"
+                        minlength="6"
+                        required>
+
+                    <span id="togglePassword"
+                        style="position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;">
+                        👁️
+                    </span>
                     </div>
 
                 </div>
@@ -138,13 +145,20 @@ require_once '../../config/config.php';
                            style="width:14px;position:absolute;margin-left:10px;">
                         </i>
 
-                        <input
+                       <input
+                            id="confirmPassword"
                             type="password"
                             name="konfirmasi_password"
                             class="input-form"
                             placeholder="Ulangi Password"
-                            style="padding-left:32px;"
+                            style="padding-left:32px;padding-right:40px;"
+                            minlength="6"
                             required>
+
+                        <span id="toggleConfirmPassword"
+                            style="position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;">
+                            👁️
+                        </span>
                     </div>
 
                 </div>
