@@ -27,8 +27,28 @@ $query->bind_param(
     $pesan
 );
 
-if($query->execute()){
+try {
+
+    $query = $conn->prepare("
+        INSERT INTO pesan
+        (id_produk,id_pengirim,id_penerima,isi_pesan)
+        VALUES (?,?,?,?)
+    ");
+
+    $query->bind_param(
+        "iiis",
+        $id_produk,
+        $id_pengirim,
+        $id_penerima,
+        $pesan
+    );
+
+    $query->execute();
+
     echo "success";
-}else{
-    echo "error";
+
+} catch(Exception $e){
+
+    echo $e->getMessage();
+
 }
