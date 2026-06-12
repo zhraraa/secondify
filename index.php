@@ -100,4 +100,28 @@ if (isset($_SESSION['status']) && $_SESSION['status'] === 'login') {
     </script>
 </body>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    const passwordInput = document.querySelector('input[name="password"]');
+    const eyeIcon = document.querySelector('[data-lucide="eye"]');
+
+    eyeIcon.addEventListener("click", function() {
+
+        if(passwordInput.type === "password"){
+            passwordInput.type = "text";
+
+            eyeIcon.setAttribute("data-lucide", "eye-off");
+        } else {
+            passwordInput.type = "password";
+
+            eyeIcon.setAttribute("data-lucide", "eye");
+        }
+
+        lucide.createIcons();
+    });
+
+});
+</script>
+
 </html>
