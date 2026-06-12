@@ -159,22 +159,36 @@
                     </ul>
                 </div>
 
-                <div class="cta-row">
-                    <button class="btn-chat-now" id="btnChat">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                        </svg>
-                        Ajukan COD
-                    </button>
-                    <button class="btn-report" id="btnReport">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <line x1="12" y1="8" x2="12" y2="12"/>
-                            <line x1="12" y1="16" x2="12.01" y2="16"/>
-                        </svg>
-                        Laporkan Barang
-                    </button>
-                </div>
+<div class="cta-row">
+
+    <!-- CHAT PENJUAL -->
+    <button class="btn-chat-now" id="btnChat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        Chat Penjual
+    </button>
+
+    <!-- AJUKAN COD -->
+    <button class="btn-cod" id="btnCOD">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14"/>
+            <path d="M12 5l7 7-7 7"/>
+        </svg>
+        Ajukan COD
+    </button>
+
+    <!-- LAPORKAN -->
+    <button class="btn-report" id="btnReport">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        Laporkan Barang
+    </button>
+
+</div>
             </div>
         </div>
 

@@ -4,7 +4,7 @@ session_start();
 require_once '../../../koneksi/koneksi.php';
 
 $id_user = $_SESSION['id_user'];
-$id_penjual = (int)$_GET['id_penjual'];
+$id_penjual = (int)($_GET['id_penjual'] ?? 0);
 
 $query = $conn->prepare("
 SELECT *
