@@ -234,6 +234,36 @@ require_once '../../config/config.php';
 </div>
 
 <script>
+document.addEventListener("DOMContentLoaded", function(){
+
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirmPassword");
+
+    const togglePassword = document.getElementById("togglePassword");
+    const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+
+    togglePassword.addEventListener("click", function(){
+
+        password.type =
+            password.type === "password"
+            ? "text"
+            : "password";
+
+    });
+
+    toggleConfirmPassword.addEventListener("click", function(){
+
+        confirmPassword.type =
+            confirmPassword.type === "password"
+            ? "text"
+            : "password";
+
+    });
+
+});
+</script>
+
+<script>
     lucide.createIcons();
 </script>
 
