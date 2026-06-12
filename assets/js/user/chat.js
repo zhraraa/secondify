@@ -58,6 +58,8 @@ function loadMessages(){
     .then(res => res.json())
     .then(data => {
 
+        console.log("DATA CHAT =", data);
+        console.log(data[0]);
         const box =
         document.getElementById("messages");
 
@@ -65,30 +67,32 @@ function loadMessages(){
 
         data.forEach(msg => {
 
-            const cls =
-            Number(msg.id_pengirim)
-            ===
-            Number(ID_PENJUAL)
-            ?
-            "receiver"
-            :
-            "sender";
+            let cls = "sender";
 
-            box.innerHTML += `
-                <div class="msg ${cls}">
-                    ${msg.isi_pesan}
-                </div>
-            `;
+            if(Number(msg.id_pengirim) === Number(ID_PENJUAL)){
+                cls = "receiver";
+            }
+
+            const div =
+            document.createElement("div");
+
+            div.className =
+            `msg ${cls}`;
+
+            div.textContent =
+            msg.isi_pesan;
+
+            box.appendChild(div);
 
         });
 
         box.scrollTop =
         box.scrollHeight;
 
-    });
+    })
+    .catch(err => console.log(err));
 
 }
-
 
 
 // ====================
