@@ -6,6 +6,11 @@ require_once '../../../koneksi/koneksi.php';
 $id_user = $_SESSION['id_user'];
 $id_penjual = (int)($_GET['id_penjual'] ?? 0);
 
+echo "USER=".$id_user;
+echo "<br>";
+echo "PENJUAL=".$id_penjual;
+exit;
+
 $query = $conn->prepare("
 SELECT *
 FROM pesan
