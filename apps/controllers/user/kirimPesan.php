@@ -3,14 +3,15 @@
 session_start();
 require_once '../../../koneksi/koneksi.php';
 
-echo "SESSION = ";
-print_r($_SESSION);
-
 $id_pengirim = $_SESSION['id_user'];
 
-$id_produk = $_POST['id_produk'];
-$id_penerima = $_POST['id_penerima'];
-$pesan = trim($_POST['pesan']);
+$id_produk   = (int)($_POST['id_produk'] ?? 0);
+$id_penerima = (int)($_POST['id_penerima'] ?? 0);
+$pesan       = trim($_POST['pesan'] ?? '');
+
+if($id_penerima <= 0 || empty($pesan)){
+    exit("error");
+}
 
 $query = $conn->prepare("
 INSERT INTO pesan
@@ -26,6 +27,8 @@ $query->bind_param(
     $pesan
 );
 
-$query->execute();
-
-echo "success";
+if($query->execute()){
+    echo "success";
+}else{
+    echo "error";
+}

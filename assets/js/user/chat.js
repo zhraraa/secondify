@@ -31,18 +31,20 @@ function sendMessage(){
         }
     )
     .then(res => res.text())
-    .then(data => {
+   .then(data => {
 
-        if(data.trim() === "success"){
+    console.log("KIRIM =", data);
 
-            input.value = "";
+    if(data.trim() === "success"){
 
-            loadMessages();
+        input.value = "";
 
-        }
+        loadMessages();
+        loadChatList();
 
-    });
+    }
 
+});
 }
 
 
