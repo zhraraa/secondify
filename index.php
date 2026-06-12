@@ -102,19 +102,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const passwordInput = document.querySelector('input[name="password"]');
     const eyeIcon = document.querySelector('[data-lucide="eye"]');
 
+    eyeIcon.style.cursor = "pointer";
+
     eyeIcon.addEventListener("click", function() {
 
-        if(passwordInput.type === "password"){
-            passwordInput.type = "text";
+        passwordInput.type =
+            passwordInput.type === "password"
+            ? "text"
+            : "password";
 
-            eyeIcon.setAttribute("data-lucide", "eye-off");
-        } else {
-            passwordInput.type = "password";
-
-            eyeIcon.setAttribute("data-lucide", "eye");
-        }
-
-        lucide.createIcons();
     });
 
 });
