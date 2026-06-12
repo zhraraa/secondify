@@ -300,41 +300,42 @@ function bindEvents(product) {
 
     // Wishlist FAB
     const fab = document.getElementById("wishlistFab");
-    fab.classList.toggle("active", isWishlisted(product.id));
-    fab.addEventListener("click", () => {
-        fab.classList.toggle("active");
-        showToast(fab.classList.contains("active")
-            ? "Ditambahkan ke Wishlist ❤️"
-            : "Dihapus dari Wishlist");
-    });
+    if (fab) {
+        fab.classList.toggle("active", isWishlisted(product.id));
+        fab.addEventListener("click", event => {
+            event.stopImmediatePropagation();
+            const added = toggleWishlist(product);
+            fab.classList.toggle("active", added);
+            showToast(added ? "Ditambahkan ke Favorit ❤️" : "Dihapus dari Favorit");
+        }, true);
+    }
 
-    // Chat / COD button
-    document.getElementById("btnChat").addEventListener("click", () => {
-        showToast("Fitur COD segera hadir! 🚚");
-    });
+    // Chat button
+    const btnChat = document.getElementById("btnChat");
+    if (btnChat) {
+        btnChat.addEventListener("click", event => {
+            event.stopImmediatePropagation();
+            window.location.href = chatUrl(product);
+        }, true);
+    }
 
-    // Report button
-    document.getElementById("btnReport").addEventListener("click", () => {
-        showToast("Laporan terkirim. Terima kasih! 🛡️");
-    });
+    // COD button
+    const btnCOD = document.getElementById("btnCOD");
+    if (btnCOD) {
+        btnCOD.addEventListener("click", event => {
+            event.stopImmediatePropagation();
+            showToast("Fitur COD segera hadir! 🚚");
+        }, true);
+    }
 
     // Seller profile button
-    document.querySelector(".seller-chat-btn").addEventListener("click", event => {
-        event.stopImmediatePropagation();
-        window.location.href = `${SECONDIFY_BASE}/apps/controllers/user/profileController.php?id=${product.idUser}`;
-    }, true);
-
-    fab.addEventListener("click", event => {
-        event.stopImmediatePropagation();
-        const added = toggleWishlist(product);
-        fab.classList.toggle("active", added);
-        showToast(added ? "Ditambahkan ke Favorit" : "Dihapus dari Favorit");
-    }, true);
-
-   document.getElementById("btnChat").addEventListener("click", event => {
-    event.stopImmediatePropagation();
-    window.location.href = chatUrl(product);
-}, true);
+    const sellerChatBtn = document.querySelector(".seller-chat-btn");
+    if (sellerChatBtn) {
+        sellerChatBtn.addEventListener("click", event => {
+            event.stopImmediatePropagation();
+            window.location.href = `${SECONDIFY_BASE}/apps/controllers/user/profileController.php?id=${product.idUser}`;
+        }, true);
+    }
 
     bindReportModal(product);
 }
@@ -399,78 +400,69 @@ function bindReportModal(product) {
         overlay.setAttribute("aria-hidden", "true");
     };
 
-    openBtn.addEventListener("click", openModal, true);
-    closeBtn.addEventListener("click", closeModal);
-    cancelBtn.addEventListener("click", closeModal);
-    overlay.addEventListener("click", event => {
-        if (event.target === overlay) closeModal();
-    });
-
-    submitBtn.addEventListener("click", () => {
-        const detailVal = detail.value.trim();
-        if (!detailVal) {
-            showToast("Harap isi detail laporan terlebih dahulu.");
-            return;
-        }
-
-        const alasanText = `${reason.value}: ${detailVal}`;
-        submitBtn.disabled = true;
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = "Mengirim...";
-
-        fetch(`${SECONDIFY_BASE}/apps/controllers/user/laporkanProduk.php`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `id_produk=${encodeURIComponent(product.id)}&alasan=${encodeURIComponent(alasanText)}`
-        })
-        .then(response => response.json())
-        .then(data => {
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
-            if (data.status === "success") {
-                detail.value = "";
-                closeModal();
-                showToast("Laporan barang berhasil dikirim! 🛡️");
-            } else {
-                showToast(data.message || "Gagal mengirim laporan.");
-            }
-        })
-        .catch(error => {
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
-            showToast("Terjadi kesalahan jaringan.");
-            console.error("Error submitting report:", error);
+    if (openBtn) openBtn.addEventListener("click", openModal, true);
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+    if (cancelBtn) cancelBtn.addEventListener("click", closeModal);
+    if (overlay) {
+        overlay.addEventListener("click", event => {
+            if (event.target === overlay) closeModal();
         });
-    });
+    }
+
+    if (submitBtn) {
+        submitBtn.addEventListener("click", () => {
+            const detailVal = detail.value.trim();
+            if (!detailVal) {
+                showToast("Harap isi detail laporan terlebih dahulu.");
+                return;
+            }
+
+            const alasanText = `${reason.value}: ${detailVal}`;
+            submitBtn.disabled = true;
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = "Mengirim...";
+
+            fetch(`${SECONDIFY_BASE}/apps/controllers/user/laporkanProduk.php`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `id_produk=${encodeURIComponent(product.id)}&alasan=${encodeURIComponent(alasanText)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+                if (data.status === "success") {
+                    detail.value = "";
+                    closeModal();
+                    showToast("Laporan barang berhasil dikirim! 🛡️");
+                } else {
+                    showToast(data.message || "Gagal mengirim laporan.");
+                }
+            })
+            .catch(error => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+                showToast("Terjadi kesalahan jaringan.");
+                console.error("Error submitting report:", error);
+            });
+        });
+    }
 }
 
 // ─── TOAST ────────────────────────────────────────────────────────────────────
 let toastTimer = null;
 function showToast(msg) {
     const toast = document.getElementById("toast");
-    toast.textContent = msg;
-    toast.classList.add("show");
-    if (toastTimer) clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => {
-        toast.classList.remove("show");
-    }, 2500);
+    if (toast) {
+        toast.textContent = msg;
+        toast.classList.add("show");
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+            toast.classList.remove("show");
+        }, 2500);
+    }
 }
 
 document.addEventListener("DOMContentLoaded", init);
-
-// CHAT PENJUAL
-document.getElementById("btnChat").addEventListener("click", function () {
-
-    window.location.href =
-        `${SECONDIFY_BASE}/apps/views/user/chat.php?id_produk=${product.id}&id_penjual=${product.idUser}`;
-
-});
-
-// AJUKAN COD
-document.getElementById("btnCOD").addEventListener("click", function () {
-
-    showToast("Fitur COD segera hadir 🚚");
-
-});

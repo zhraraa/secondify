@@ -3371,11 +3371,13 @@ a{
 /* ─── CTA BUTTONS ─────────────────────────────── */
 .detailProduk .cta-row {
     display: flex;
+    flex-direction: column;
     gap: 12px;
 }
 
-.detailProduk .btn-chat-now {
-    flex: 1;
+.detailProduk .btn-chat-now,
+.detailProduk .btn-cod {
+    width: 100%;
     padding: 13px 20px;
     background: #886BC6;
     color: white;
@@ -3392,10 +3394,20 @@ a{
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-.detailProduk .btn-chat-now:hover { opacity: 0.9; transform: translateY(-1px); }
-.detailProduk .btn-chat-now svg { width: 16px; height: 16px; }
+.detailProduk .btn-chat-now:hover,
+.detailProduk .btn-cod:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.detailProduk .btn-chat-now svg,
+.detailProduk .btn-cod svg {
+    width: 16px;
+    height: 16px;
+}
 
 .detailProduk .btn-report {
+    width: 100%;
     padding: 13px 18px;
     background: white;
     color: #e74c3c;
@@ -3406,6 +3418,7 @@ a{
     cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
     transition: background 0.2s;
     font-family: 'Plus Jakarta Sans', sans-serif;
