@@ -26,7 +26,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?></title>
-    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/style.css?v=20260612">
     <link rel="stylesheet" href="<?= SECONDIFY; ?>/assets/css/layouts/navbar.css">
     <script src="<?= SECONDIFY; ?>/assets/js/layouts/navbar.js?v=20260529-1" defer></script>
 <body class="detailProduk">
@@ -161,22 +161,24 @@
 
 <div class="cta-row">
 
-    <!-- CHAT PENJUAL -->
-    <button class="btn-chat-now" id="btnChat">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-        </svg>
-        Chat Penjual
-    </button>
+    <div class="main-actions">
+        <!-- CHAT PENJUAL -->
+        <button class="btn-chat-now" id="btnChat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            Chat Penjual
+        </button>
 
-    <!-- AJUKAN COD -->
-    <button class="btn-cod" id="btnCOD">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14"/>
-            <path d="M12 5l7 7-7 7"/>
-        </svg>
-        Ajukan COD
-    </button>
+        <!-- AJUKAN COD -->
+        <button class="btn-cod" id="btnCOD">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14"/>
+                <path d="M12 5l7 7-7 7"/>
+            </svg>
+            Ajukan COD
+        </button>
+    </div>
 
     <!-- LAPORKAN -->
     <button class="btn-report" id="btnReport">
